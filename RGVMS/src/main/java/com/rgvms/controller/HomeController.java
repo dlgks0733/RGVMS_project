@@ -54,7 +54,7 @@ public class HomeController {
 	public void loginGET(@ModelAttribute("dto") LoginDTO dto) throws Exception {
 
 		logger.info("login Page........");
-		
+
 	}
 
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
@@ -68,6 +68,21 @@ public class HomeController {
 			rttr.addFlashAttribute("msg", "FAIL");
 			return "redirect:/login";
 		}
+
+//		switch (vo.getAutority()) {
+//		case "0": {
+//
+//			break;
+//		}
+//
+//		case "1": {
+//
+//			break;
+//		}
+//
+//		default:
+//			break;
+//		}
 
 		model.addAttribute("userVO", vo);
 
