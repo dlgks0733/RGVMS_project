@@ -7,7 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="/loginPost" method="post">
 학번 : <input type="text" name="userNo"> <br><br>
 비밀번호 : <input type="password" name="userPw">
+<input type="submit" value="로그인">
+</form>
 </body>
 </html>

@@ -5,13 +5,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.rgvms.mapper.UserMapper">
 
-<select id="login" resultType="com.rgvms.domain.UserVO">
+	<select id="login" resultType="com.rgvms.domain.UserVO">
 
-	SELECT user_No, user_Pw
-	  FROM TBL_USER
-	 WHERE user_No = #{user_No}
-	   AND user_Pw = #{user_Pw}
+		SELECT USER_NO
+			 , USER_PW
+		FROM
+		TBL_USER
+		WHERE USER_NO = #{userNo}
+		AND USER_PW = #{userPw}
 
-</select>
+	</select>
 
 </mapper>

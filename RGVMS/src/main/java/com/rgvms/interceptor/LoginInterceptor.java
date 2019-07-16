@@ -34,7 +34,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
          // 사용자가 로그인 전에 보고 있던 경로 = dest
          Object dest = session.getAttribute("dest");
 
-         response.sendRedirect(dest != null ? (String) dest : "/review/list");
+         response.sendRedirect(dest != null ? (String) dest : "/");
       }
    }
 

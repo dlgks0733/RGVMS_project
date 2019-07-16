@@ -27,42 +27,5 @@ public class UserController {
 
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void loginGET(@ModelAttribute("dto") LoginDTO dto) throws Exception {
-
-	}
-
-	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
-	public String loginPost(LoginDTO dto, HttpSession session, Model model, RedirectAttributes rttr) throws Exception {
-
-		UserVO vo = service.login(dto);
-
-		logger.info("UserVO : " + dto.toString());
-		
-		if (vo == null) {
-			rttr.addFlashAttribute("msg", "FAIL");
-			return "redirect:/user/login";
-		}
-
-		model.addAttribute("userVO", vo);
-		
-		return "/user/loginPost";
-	}
-
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
-		
-		Object obj = session.getAttribute("login");
-		
-		if(obj != null) {
-			logger.info("logout: session.invalidate() ");
-			
-			session.removeAttribute("login");
-			session.invalidate();
-			
-		}
-		
-		return "redirect:/board/list";
-	}
 	
 }
