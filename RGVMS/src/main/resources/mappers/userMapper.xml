@@ -4,15 +4,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.rgvms.mapper.UserMapper">
-	
+
 	<select id="login" resultType="com.rgvms.domain.UserVO">
 
 		SELECT USER_NO
 			 , USER_PW
-		FROM
-		TBL_USER
+			 , USER_NAME
+			 , REG_NUM
+			 , STATE
+			 , GRADE
+			 , AUTHORITY
+		FROM TBL_USER
 		WHERE USER_NO = #{userNo}
 		AND USER_PW = #{userPw}
+
 
 	</select>
 
