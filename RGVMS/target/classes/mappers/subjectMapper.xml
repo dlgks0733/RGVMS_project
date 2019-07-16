@@ -46,5 +46,7 @@
 		DELETE FROM TBL_SUBJECT
 		WHERE sub_No = #{subNo}
 	</delete>
+	
+	<!-- 6. 검색 -->
 
 </mapper>
