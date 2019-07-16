@@ -2,37 +2,28 @@ package com.rgvms.dto;
 
 public class LoginDTO {
 
-	private String usid;
-	private String upw;
-	private boolean useCookie;
+	private int userNo;
+	private String userPw;
 
-	public String getUsid() {
-		return usid;
+	public int getUserNo() {
+		return userNo;
 	}
 
-	public void setUsid(String usid) {
-		this.usid = usid;
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
-	public String getUpw() {
-		return upw;
+	public String getUserPw() {
+		return userPw;
 	}
 
-	public void setUpw(String upw) {
-		this.upw = upw;
-	}
-
-	public boolean isUseCookie() {
-		return useCookie;
-	}
-
-	public void setUseCookie(boolean useCookie) {
-		this.useCookie = useCookie;
+	public void setUserPw(String userPw) {
+		this.userPw = userPw;
 	}
 
 	@Override
 	public String toString() {
-		return "LoginDTO [usid=" + usid + ", upw=" + upw + ", useCookie=" + useCookie + "]";
+		return "LoginDTO [userNo=" + userNo + ", userPw=" + userPw + "]";
 	}
 
 }
