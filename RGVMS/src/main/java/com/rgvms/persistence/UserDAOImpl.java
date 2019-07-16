@@ -79,4 +79,10 @@ public class UserDAOImpl implements UserDAO {
 		
 	}
 
+	@Override
+	public List<TotalDTO> esList(int userNo) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
