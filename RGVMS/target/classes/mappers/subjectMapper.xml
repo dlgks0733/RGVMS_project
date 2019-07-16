@@ -30,3 +30,19 @@
 		TBL_SUBJECT
 		WHERE sub_No = #{sub_No}
 	</select>
+	
+	<!-- 4. 인증항목 수정(관리자) -->
+	<select id="update">
+		UPDATE TBL_SUBJECT
+		SET categ = #{categ}, area = #{area}, sub_Name = #{sub_Name},
+			score = #{score}, guide = #{guide}, publication = #{publication}
+		WHERE sub_No = #{sub_No}
+	</select>
+	
+	<!-- 5. 인증항목 삭제(관리자)-->
+	<delete id="delete">
+		DELETE FROM TBL_SUBJECT
+		WHERE sub_No = #{sub_No}
+	</delete>
+
+</mapper>
