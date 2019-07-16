@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "htp://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rgvms.mapper.SubjectMapper">
+	
+	<!-- 1. 인증항목 목록(관리자) -->
+	<select id="list">
+		SELECT
+		sub_No, categ, area, sub_Name, score, publication
+		FROM
+		TBL_SUBJECT
+		WHERE sub_No > 0
+		ORDER BY categ DESC
+		<!-- 필수, 선택 순으로 정렬 -->
+	</select>
+	
+	<!-- 2. 인증항목 등록(관리자) -->
+	<insert id="insert">
+		INSERT INTO
+		TBL_SUBJECT (sub_No, categ, area, sub_Name, score, publication, guide)
+		VALUES(seq_subject.nextval, #{categ}, #{area}, #{sub_Name}, #{score}, #{publication}, #{guide})
+	</insert>
+	
+	<!-- 3. 인증항목 조회(관리자) -->
+	<select id="select">
+		SELECT
+		categ, area, sub_Name, score, guide, publication
+		FROM
+		TBL_SUBJECT
+		WHERE sub_No = #{sub_No}
+	</select>
