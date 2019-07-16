@@ -6,12 +6,14 @@
 	
 	<!-- 1. 인증항목 목록(관리자) -->
 	<select id="list">
+	<![CDATA[
 		SELECT
 		sub_No, categ, area, sub_Name, score, publication
 		FROM
 		TBL_SUBJECT
 		WHERE sub_No > 0
 		ORDER BY categ DESC
+	]]>
 		<!-- 필수, 선택 순으로 정렬 -->
 	</select>
 	
@@ -19,7 +21,7 @@
 	<insert id="insert">
 		INSERT INTO
 		TBL_SUBJECT (sub_No, categ, area, sub_Name, score, publication, guide)
-		VALUES(seq_subject.nextval, #{categ}, #{area}, #{sub_Name}, #{score}, #{publication}, #{guide})
+		VALUES(seq_sub.nextval, #{categ}, #{area}, #{subName}, #{score}, #{publication}, #{guide})
 	</insert>
 	
 	<!-- 3. 인증항목 조회(관리자) -->
@@ -28,21 +30,21 @@
 		categ, area, sub_Name, score, guide, publication
 		FROM
 		TBL_SUBJECT
-		WHERE sub_No = #{sub_No}
+		WHERE sub_No = #{subNo}
 	</select>
 	
 	<!-- 4. 인증항목 수정(관리자) -->
 	<select id="update">
 		UPDATE TBL_SUBJECT
-		SET categ = #{categ}, area = #{area}, sub_Name = #{sub_Name},
+		SET categ = #{categ}, area = #{area}, sub_Name = #{subName},
 			score = #{score}, guide = #{guide}, publication = #{publication}
-		WHERE sub_No = #{sub_No}
+		WHERE sub_No = #{subNo}
 	</select>
 	
 	<!-- 5. 인증항목 삭제(관리자)-->
 	<delete id="delete">
 		DELETE FROM TBL_SUBJECT
-		WHERE sub_No = #{sub_No}
+		WHERE sub_No = #{subNo}
 	</delete>
 
 </mapper>
