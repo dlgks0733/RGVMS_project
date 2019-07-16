@@ -3,9 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mis.mapper.UserMapper">
+<mapper namespace="com.rgvms.mapper.UserMapper">
 
-<select id="login" resultType="com.mis.domain.UserVO">
+<select id="login" resultType="com.rgvms.domain.UserVO">
 
 	SELECT user_No, user_Pw
 	  FROM TBL_USER
