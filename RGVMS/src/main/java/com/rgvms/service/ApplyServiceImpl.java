@@ -2,19 +2,25 @@ package com.rgvms.service;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
 import com.rgvms.domain.ApplyVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
+import com.rgvms.persistence.ApplyDAO;
 
 @Service
 public class ApplyServiceImpl implements ApplyService {
 
+	@Inject
+	ApplyDAO dao;
+	
 	@Override
 	public SubjectVO searchSub(String subName) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.searchSub(subName);
 	}
 
 	@Override
@@ -64,5 +70,13 @@ public class ApplyServiceImpl implements ApplyService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public List<SubjectVO> subList() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.subList();
+	}
+	
+	
 
 }

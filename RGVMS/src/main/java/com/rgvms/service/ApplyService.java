@@ -35,4 +35,7 @@ public interface ApplyService {
 	// 9. 관리자 :: 졸업인증신청 관리 - 거절
 	public void deny(int applyNo) throws Exception;
 
+	// 10. 학생 :: 졸업인증신청 관리 - 졸업인증항목 목록
+	public List<SubjectVO> subList() throws Exception;
+
 }

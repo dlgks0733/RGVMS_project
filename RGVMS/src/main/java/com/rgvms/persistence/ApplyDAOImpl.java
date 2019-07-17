@@ -2,6 +2,9 @@ package com.rgvms.persistence;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.rgvms.domain.ApplyVO;
@@ -11,10 +14,16 @@ import com.rgvms.domain.SubjectVO;
 @Repository
 public class ApplyDAOImpl implements ApplyDAO {
 
+	@Inject
+	private SqlSession session;
+	
+	private static String namespace = "com.rgvms.mapper.ApplyMapper";
+	
+	
 	@Override
 	public SubjectVO searchSub(String subName) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return session.selectOne(namespace+".searchSub", subName);
 	}
 
 	@Override
@@ -69,6 +78,12 @@ public class ApplyDAOImpl implements ApplyDAO {
 	public void deny(int applyNo) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<SubjectVO> subList() throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".subList");
 	}
 
 	
