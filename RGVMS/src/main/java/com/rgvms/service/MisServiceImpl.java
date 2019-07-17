@@ -2,47 +2,49 @@ package com.rgvms.service;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Service;
 
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
+import com.rgvms.persistence.MisDAO;
 
 @Service
 public class MisServiceImpl implements MisService {
 
+	@Inject
+	private MisDAO dao;
+	
 	@Override
 	public void register(MisVO mVo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		dao.insert(mVo);
 	}
 
 	@Override
 	public List<MisVO> list(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.list(cri);
 	}
 
 	@Override
 	public int listSearchCount(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.listSearchCount(cri);
 	}
 
 	@Override
 	public void remove(int misNo) throws Exception {
-		// TODO Auto-generated method stub
+		dao.delete(misNo);
 		
 	}
 
 	@Override
 	public MisVO read(int misNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.select(misNo);
 	}
 
 	@Override
 	public void modify(MisVO mVo) throws Exception {
-		// TODO Auto-generated method stub
+		dao.update(mVo);
 		
 	}
 

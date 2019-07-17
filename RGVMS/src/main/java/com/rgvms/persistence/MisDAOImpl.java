@@ -2,48 +2,51 @@ package com.rgvms.persistence;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 
 @Repository
-public class MisDAOImpl implements MisDAO{
+public class MisDAOImpl implements MisDAO {
+
+	@Inject
+	private SqlSession session;
+	
+	private static String namespace = "com.rgvms.mapper.MisMapper";
 
 	@Override
 	public void insert(MisVO mVo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		session.insert(namespace +  ".insert", mVo);
+
 	}
 
 	@Override
 	public List<MisVO> list(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectList(namespace + ".list", cri);
 	}
 
 	@Override
 	public int listSearchCount(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return session.selectOne(namespace + ".listSearchCount", cri);
 	}
 
 	@Override
 	public void delete(int misNo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		session.delete(namespace + ".delete", misNo);
 	}
 
 	@Override
 	public MisVO select(int misNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne(namespace + ".select", misNo);
 	}
 
 	@Override
 	public void update(MisVO mVo) throws Exception {
-		// TODO Auto-generated method stub
-		
+		session.update(namespace + ".update", mVo);
 	}
 
 }
