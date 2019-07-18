@@ -48,4 +48,9 @@ public class MisServiceImpl implements MisService {
 		
 	}
 
+	@Override
+	public MisVO read(MisVO mvo) throws Exception {	
+		return dao.read(mvo);
+	}
+
 }

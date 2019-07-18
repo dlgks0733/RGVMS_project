@@ -14,10 +14,10 @@ public interface MisAttDAO {
 	public void insert(MisAttVO mVo) throws Exception;
 
 	// 2. MIS 출결관리 - 출결 내역 목록
-	public List<MisAttVO> list(int misNo) throws Exception;
+	public List<MisAttVO> list(int misAttNo) throws Exception;
 
 	// 3. MIS 출결관리 - 출결 내역 삭제 --> 수정할 경우 원래 출결 내역 지우는 것을 말함
-	public void deleteAtt(int misNo) throws Exception;
+	public void delete(int misAttNo) throws Exception;
 
 	// 4. 내 점수 MIS 출결 상세
 	public List<MisAttVO> myMisList(int userNo) throws Exception;

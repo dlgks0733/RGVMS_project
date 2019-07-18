@@ -1,9 +1,12 @@
 package com.rgvms.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,16 +14,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.PageMaker;
 import com.rgvms.domain.SearchCriteria;
+import com.rgvms.domain.UserVO;
+import com.rgvms.service.MisAttService;
 import com.rgvms.service.MisService;
 
+@Controller
+@RequestMapping("/admin/mis/*")
 public class MisController {
 
+	// inject 서비스마다 각각 하나씩 해줘야됨
 	@Inject
 	private MisService service;
+
+	@Inject
+	private MisAttService attService;
 
 	private static final Logger logger = LoggerFactory.getLogger(MisController.class);
 
@@ -44,8 +54,13 @@ public class MisController {
 
 	// 글 등록 화면
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void registerGET() throws Exception {
+	public void registerGET(UserVO uVo, Model model) throws Exception {
 		logger.info("register get..");
+		
+		List<UserVO> stuList = attService.stuList();
+		model.addAttribute("stuList", stuList);
+		
+		
 
 	}
 
@@ -63,16 +78,15 @@ public class MisController {
 
 	// 삭제하기
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public String removePage(@RequestParam("misNo") int misNo, Criteria cri, RedirectAttributes rttr) throws Exception {
+	public String removePage(@RequestParam("misNo") int misNo, SearchCriteria cri, RedirectAttributes rttr)
+			throws Exception {
 
 		service.remove(misNo);
 
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-		/*
-		 * rttr.addAttribute("searchType", cri.getSearchType());
-		 * rttr.addAttribute("keyword", cri.getKeyword());
-		 */
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
@@ -105,4 +119,11 @@ public class MisController {
 		return "redirect:/admin/mis/list";
 	}
 
+	// 상세보기
+	@RequestMapping(value = "/read", method = RequestMethod.GET)
+	public void read(@RequestParam("misNo") SearchCriteria cri, int misNo, Model model) throws Exception {
+
+		model.addAttribute(service.read(misNo));
+
+	}
 }

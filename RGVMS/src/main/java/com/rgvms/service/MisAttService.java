@@ -13,7 +13,7 @@ public interface MisAttService {
 	// 1. MIS 출결관리 - 출결 등록 --> 수정할 경우에도 사용 됨
 	public void register(MisAttVO mVo) throws Exception;
 
-	// 2. MIS 출결관리 - 출결 내역 목록
+	// 2. MIS 출결관리 - 출결 학생 목록
 	public List<MisAttVO> list(int misNo) throws Exception;
 
 	// 3. MIS 출결관리 - 출결 내역 삭제 --> 수정할 경우 원래 출결 내역 지우는 것을 말함

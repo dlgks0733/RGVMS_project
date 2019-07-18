@@ -49,4 +49,10 @@ public class MisDAOImpl implements MisDAO {
 		session.update(namespace + ".update", mVo);
 	}
 
+	@Override
+	public MisVO read(MisVO mvo) throws Exception {
+		return session.selectOne(namespace + ".read", mvo);
+		
+	}
+
 }

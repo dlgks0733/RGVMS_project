@@ -20,31 +20,28 @@ public class MisAttDAOImpl implements MisAttDAO {
 	
 	@Override
 	public List<UserVO> stuList() throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectList(namespace + ".list");
+		return session.selectList(namespace + ".stuList");
 	}
 
 	@Override
 	public void insert(MisAttVO mVo) throws Exception {
-		session.insert(namespace +  ".insert", mVo);
+		session.insert(namespace +".insert", mVo);
 
 	}
 
 	@Override
-	public List<MisAttVO> list(int misNo) throws Exception {
-		// TODO Auto-generated method stub
+	public List<MisAttVO> list(int misAttNo) throws Exception {
 		return session.selectList(namespace + ".list");
 	}
 
 	@Override
-	public void deleteAtt(int misNo) throws Exception {
-		session.delete(namespace + ".delete", misNo);
+	public void delete(int misAttNo) throws Exception {
+		session.delete(namespace + ".delete", misAttNo);
 
 	}
 
 	@Override
 	public List<MisAttVO> myMisList(int userNo) throws Exception {
-		// TODO Auto-generated method stub
 		return session.selectList(namespace + ".list");
 	}
 

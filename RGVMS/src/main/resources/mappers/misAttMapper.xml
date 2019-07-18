@@ -5,50 +5,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.rgvms.mapper.MisAttMapper">
 
-	<!-- mis 출결 등록 -->
-	<select id="insert" resultType="com.rgvms.domain.MisAttVO">
-		INSERT INTO TBL_MIS(misAttNo,
-		misAttDate, userNo, misNo)
-		VALUES (seq_mis_Att.nextval, ? , ?, ?)
-	</select>
-
 	<!-- mis 출결 리스트 조회  -->
-	<select id="List">
+	<select id="List" resultType="com.rgvms.domain.MisAttVO">
 	<![CDATA[
 		SELECT
-		misAttNo, misAttDate, userNo, misNo
+			MIS_ATT_NO, 
+			MIS_ATT_DATE, 
+			USER_NO, 
+			MIS_NO
 		FROM
-		TBL_MIS_ATT
-		WHERE misAttNo > 0
-		ORDER BY misAttNo DESC misAttDate DESC
+			TBL_MIS_ATT
+		
 	]]>
 	</select>
 	
+	<!-- mis 출결 등록 -->
+	<insert id="insert">
+		INSERT INTO TBL_MIS_ATT
+			(MIS_ATT_NO, MIS_ATT_DATE, USER_NO, MIS_NO)
+		VALUES 
+			(SEQ_MIS_ATT.NEXTVAL, #{misAttDate} , #{userNo}, #{misNo})
+	</insert>
+	
+	
 	<!-- mis 출결 학생 리스트 조회  -->
-	<select id="stuList">
+	<select id="stuList" resultType="com.rgvms.domain.UserVO">
 	<![CDATA[
 		SELECT
-		misAttNo, misAttDate, userNo, misNo
+			USER_NO,
+			GRADE,
+			USER_NAME
 		FROM
-		TBL_MIS_ATT
-		WHERE misAttNo > 0
-		ORDER BY misAttNo DESC misAttDate DESC
+			TBL_USER
+	
 	]]>
 	</select>
 	
 	<!-- mis 출결 삭제(학생 삭제) -->
-	<delete id="deleteAtt">
+	<delete id="delete">
 		DELETE FROM TBL_MIS_ATT
-		WHERE misAttNo = #{misAttNo}
+		WHERE MIS_ATT_NO = #{misAttNo}
 	</delete>
 	
 	<!-- mis 내 점수 상세 조회 -->
 	<select id="myMisList">
 		SELECT
-		rowNum, m.times, m.title, a.misAttDate
+			ROWNUM, 
+			M.TIMES, 
+			M.TITLE, 
+			A.MIS_ATT_DATE
 		FROM
-		TBL_MIS m, TBL_MIS_ATT a
-		WHERE m.misNo = #{a.misNo}
+			TBL_MIS M, 
+			TBL_MIS_ATT A
+		WHERE M.MIS_NO = #{A.misNo}
 	</select>
 	
 </mapper>

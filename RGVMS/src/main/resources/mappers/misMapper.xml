@@ -5,50 +5,78 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.rgvms.mapper.MisMapper">
 
-	<!-- mis 게시물 등록 -->
-	<select id="insert" resultType="com.rgvms.domain.MisVO">
-		INSERT INTO TBL_MIS(misNo, times, title)
-		VALUES (seq_mis.nextval, ? , ?)
-	</select>
-
-	<!-- mis 게시물 리스트  조회 -->
-	<select id="list">
+	<!-- mis 게시물 리스트 조회 -->
+	<select id="list" resultType="com.rgvms.domain.MisVO">
 	<![CDATA[
 		SELECT
-		misNo, times, title, misRegdate
+			MIS_NO,
+			TIMES, 
+			TITLE, 
+			MIS_REGDATE
 		FROM
-		TBL_MIS
-		WHERE misNo > 0
-		ORDER BY misNo DESC misRegdate DESC
+			TBL_MIS
+		WHERE MIS_NO > 0
+		ORDER BY MIS_NO DESC MIS_REGDATE DESC
 	]]>
 	</select>
 
+	<!-- mis 게시물 등록 -->
+	<insert id="insert">
+		INSERT INTO TBL_MIS
+		(MIS_NO,
+		TIMES, TITLE)
+		VALUES
+		(SEQ_MIS.NEXTVAL, #{times} , #{title})
+	</insert>
+
+
 	<!-- mis 검색할 때 전체 카운트 가져오기 -->
-	<select id="listSearchCount">
+	<select id="listSearchCount" resultType="int">
+		<![CDATA[  
+ 		 SELECT COUNT(MIS_NO) 
+ 		 FROM TBL_MIS 
+  		WHERE MIS_NO > 0 
+		]]>
 
 
 	</select>
+
 
 	<!-- mis 게시물 삭제 -->
 	<delete id="delete">
 		DELETE FROM TBL_MIS
-		WHERE misNo = #{misNo}
+		WHERE MIS_NO = #{misNo}
 	</delete>
-	
+
+
 	<!-- mis 상세 조회 -->
 	<select id="select">
 		SELECT
-		times, title
+		TIMES,
+		TITLE
 		FROM
 		TBL_MIS
-		WHERE misNo = #{misNo}
+		WHERE MIS_NO = #{misNo}
 	</select>
 
+
 	<!-- mis 수정 -->
-	<select id="update">
+	<update id="update">
 		UPDATE TBL_MIS
-		SET times = #{times}, title = #{title}
-		WHERE misNo = #{misNo}
-	</select>
+		SET TIMES = #{times}, TITLE = #{title}
+		WHERE MIS_NO = #{misNo}
+	</update>
+
+
+	<!-- 제목 검색 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and TITLE like '%' || #{keyword} || '%'
+			</if>
+		</if>
+	</sql>
+
+
 
 </mapper>

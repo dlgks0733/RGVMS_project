@@ -18,27 +18,27 @@ public class MisAttServiceImpl implements MisAttService {
 
 	@Override
 	public List<UserVO> stuList() throws Exception {
-		return null;
+		return dao.stuList();
 	}
 
 	@Override
 	public void register(MisAttVO mVo) throws Exception {
-
+		dao.insert(mVo);
 	}
 
 	@Override
 	public List<MisAttVO> list(int misNo) throws Exception {
-		return null;
+		return dao.list(misNo);
 	}
 
 	@Override
 	public void removeAtt(int misNo) throws Exception {
-
+		dao.delete(misNo);
 	}
 
 	@Override
 	public List<MisAttVO> myMisList(int userNo) throws Exception {
-		return null;
+		return dao.myMisList(userNo);
 	}
 
 }

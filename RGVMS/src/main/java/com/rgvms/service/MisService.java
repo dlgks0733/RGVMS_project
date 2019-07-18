@@ -25,4 +25,6 @@ public interface MisService {
 	// 6. MIS 출결관리 - MIS 게시물 수정
 	public void modify(MisVO mVo) throws Exception;
 
+	//7. MIS 출결관리 - 상세정보
+	public MisVO read(MisVO mvo) throws Exception;
 }
