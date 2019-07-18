@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/*")
 public class AdminMainController {
 
-	private static Logger logger = LoggerFactory.getLogger(ApplyContorller.class);
+	private static Logger logger = LoggerFactory.getLogger(AdminApplyContorller.class);
 	
 	@RequestMapping("/main")
 	public void main() throws Exception {

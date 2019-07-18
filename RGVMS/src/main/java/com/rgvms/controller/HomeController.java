@@ -42,17 +42,17 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
-		Date date = new Date();
+		/*Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
 		String formattedDate = dateFormat.format(date);
 
-		model.addAttribute("serverTime", formattedDate);
+		model.addAttribute("serverTime", formattedDate);*/
 
 		return "home";
 	}
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(@RequestParam("auth") int auth) throws Exception {
 
 		if (auth == 1) {// 관리자 이동
@@ -67,7 +67,7 @@ public class HomeController {
 			return "user/NewFile";
 		}
 
-	}
+	}*/
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void loginGET(@ModelAttribute("dto") LoginDTO dto) throws Exception {
@@ -107,7 +107,7 @@ public class HomeController {
 
 		}
 
-		return "redirect:/login";
+		return "redirect:/";
 	}
 
 //	@RequestMapping(value = "/loginAuth", method = RequestMethod.GET)
@@ -127,7 +127,7 @@ public class HomeController {
 //
 //	}
 	
-	@RequestMapping(value = "/loginAuth", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/loginAuth", method = RequestMethod.GET)
 	public String usermain(@ModelAttribute("userVO") UserVO uVo) {
 		logger.info("UserMain");
 		logger.info(uVo.toString());
@@ -143,6 +143,6 @@ public class HomeController {
 			return "usermain";
 		}
 
-	}
+	}*/
 
 }

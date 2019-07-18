@@ -18,13 +18,13 @@ import com.rgvms.domain.SubjectVO;
 import com.rgvms.service.ApplyService;
 
 @Controller
-@RequestMapping("/apply/*")
-public class ApplyContorller {
+@RequestMapping("admin/apply/*")
+public class AdminApplyContorller {
 
 	@Inject
 	private ApplyService service;
 	
-	private static Logger logger = LoggerFactory.getLogger(ApplyContorller.class);
+	private static Logger logger = LoggerFactory.getLogger(AdminApplyContorller.class);
 	
 	
 	// 학생 :: 졸업인증신청 관리 - 신청 - 항목 명 검색 팝업 + 졸업인증항목리스트
