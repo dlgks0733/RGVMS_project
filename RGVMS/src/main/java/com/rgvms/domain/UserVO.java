@@ -20,67 +20,55 @@ public class UserVO {
 	private String state;
 	private int grade;
 	private String authority;
-
+	
 	public int getUserNo() {
 		return userNo;
 	}
-
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;
 	}
-
 	public String getUserPw() {
 		return userPw;
 	}
-
 	public void setUserPw(String userPw) {
 		this.userPw = userPw;
 	}
-
 	public String getUserName() {
 		return userName;
 	}
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 	public int getRegNum() {
 		return regNum;
 	}
-
 	public void setRegNum(int regNum) {
 		this.regNum = regNum;
 	}
-
 	public String getState() {
 		return state;
 	}
-
 	public void setState(String state) {
 		this.state = state;
 	}
-
 	public int getGrade() {
 		return grade;
 	}
-
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-
 	public String getAuthority() {
 		return authority;
 	}
-
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "UserVO [userNo=" + userNo + ", userPw=" + userPw + ", userName=" + userName + ", regNum=" + regNum
 				+ ", state=" + state + ", grade=" + grade + ", authority=" + authority + "]";
 	}
 
+	
 }

@@ -51,16 +51,18 @@ public class SubjectController {
 	@RequestMapping(value = "/list", method=RequestMethod.GET)
 	public void listGET(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		
+		logger.info("subject listGET..................");
 		logger.info(cri.toString());
 		
 		System.out.println("***********" + cri.toString());
 		model.addAttribute("list", service.listSearchCount(cri));
 	}
 	
-	//4. 인증항목 상세보기
+	//4. 인증항목 상세내역
 	@RequestMapping(value = "/read", method=RequestMethod.GET)
 	public void read(@RequestParam("subNo") int subNo, Model model) throws Exception {
 		
+		logger.info("subject readGET..................");
 		model.addAttribute(service.read(subNo));
 	}
 	
@@ -76,7 +78,9 @@ public class SubjectController {
 	@RequestMapping(value = "/modify", method=RequestMethod.POST)
 	public String modifyPOST(SubjectVO sVo, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 		
+		logger.info("subject modifyPOST.............");
 		logger.info(cri.toString());
+		
 		service.modify(sVo);
 		
 		rttr.addAttribute("searchType", cri.getSearchType());
@@ -92,6 +96,8 @@ public class SubjectController {
 	//7. 인증항목 삭제
 	@RequestMapping(value = "/remove", method=RequestMethod.POST)
 	public String remove(@RequestParam("subNo") int subNo, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+		
+		logger.info("subject removePOST..............");
 		
 		service.remove(subNo);
 		

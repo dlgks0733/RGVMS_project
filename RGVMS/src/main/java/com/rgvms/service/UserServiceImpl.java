@@ -25,33 +25,44 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	//1. 사용자(학생) 등록
 	public void register(UserVO uVo) throws Exception {
 		// TODO Auto-generated method stub
-		
+		dao.insert(uVo);
 	}
 
 	@Override
+	//2. 사용자(학생) 전체목록
 	public List<UserVO> list(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.list(cri);
 	}
 
 	@Override
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return dao.listSearchCount(cri);
 	}
 
 	@Override
+	//3. 사용자(학생) 상세내역
+	public UserVO read(int userNo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.read(userNo);
+	}
+	
+	@Override
+	//3. 사용자(학생) 수정
 	public void modify(UserVO uVo) throws Exception {
 		// TODO Auto-generated method stub
-		
+		dao.update(uVo);
 	}
 
 	@Override
+	//4. 사용자(학생) 삭제
 	public void remove(int userNo) throws Exception {
 		// TODO Auto-generated method stub
-		
+		dao.delete(userNo);
 	}
 
 	@Override
@@ -77,6 +88,7 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 	
 
