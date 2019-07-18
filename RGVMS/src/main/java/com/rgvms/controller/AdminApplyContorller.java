@@ -27,14 +27,6 @@ public class AdminApplyContorller {
 	private static Logger logger = LoggerFactory.getLogger(AdminApplyContorller.class);
 	
 	
-	// 학생 :: 졸업인증신청 관리 - 신청 - 항목 명 검색 팝업 + 졸업인증항목리스트
-	@RequestMapping(value = "/searchPopup", method=RequestMethod.GET)
-	public void searchPopup(Model model) throws Exception {
-		logger.info("saerchPopup......");
-		List<SubjectVO> subList = service.subList();
-		model.addAttribute("subList", subList);
-		
-	}
 	
 	
 	// 학생 :: 졸업인증신청 관리 - 신청 - 항목 명 검색
