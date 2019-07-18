@@ -25301,8 +25301,8 @@ function ($) {
      * Select the option based on saved config
     */
    RightBar.prototype._selectOptionsFromConfig = function() {
-        /*var config = $.App.getLayoutConfig();*/
-        var config = 'detached';
+       /* var config = $.App.getLayoutConfig();*/
+        var config = 'vertical';
         if (config) {
             switch (config.layout) {
                 case 'vertical':
@@ -25501,7 +25501,7 @@ function ($) {
     var SIDEBAR_THEME_DARK = 'dark';
 
     var DEFAULT_CONFIG = {
-        layout: LAYOUT_DETACHED,
+        layout: LAYOUT_VERTICAL,
         sideBarTheme: SIDEBAR_THEME_DEFAULT,
         isBoxed: false,
         isCondensed: false,
@@ -25512,17 +25512,16 @@ function ($) {
     var LayoutThemeApp = function () {
         this.body = $('body'),
         this.window = $(window),
-
-        this.detachedTopbarPH = $('#detached-topbar-placeholder');
-        this.detachedSidebarPH = $('#detached-sidebar-placeholder');
+        this.verticalSidebarPH = $('#vertical-sidebar-placeholder');
+        this.verticalTopbarPH = $('#vertical-topbar-placeholder');
 
 
         this._partials = {
-            DETAHCED_TOPBAR: '/resources/dist/partials/topbar-dark.html',
-            DETAHCED_SIDEBAR: '/resources/dist/partials/detached-left-sidebar.html',
+            VERTICAL_SIDEBAR: '/resources/dist/partials/left-sidebar.html',
+            VERTICAL_TOPBAR: '/resources/dist/partials/topbar.html',
         };
 
-        this.currentlyActivatedLayout = LAYOUT_DETACHED;
+        this.currentlyActivatedLayout = LAYOUT_VERTICAL;
 
         this._config = {};
     };
@@ -25531,17 +25530,21 @@ function ($) {
     * Reset the menu content
     */
     LayoutThemeApp.prototype._resetMenuContent = function() {
-       /* this.detachedTopbarPH.html('');
-        this.detachedSidebarPH.html('');*/
+        /*this.verticalSidebarPH.html('');
+        this.verticalTopbarPH.html('');
+        this.detachedTopbarPH.html('');
+        this.detachedSidebarPH.html('');
+        this.horizontalTopbarPH.html('');*/
     },
 
     /**
     * Reset the layout
     */
     LayoutThemeApp.prototype._resetLayout = function() {
+    	
     	this.body.removeAttr('data-layout');
-    	this.body.attr('data-layout', 'detached');
-        /*this.body.removeAttr('data-layout');
+    	this.body.attr('data-layout', 'vertical');
+       /* this.body.removeAttr('data-layout');
         this.body.removeAttr('data-layout-mode');*/
     },
 
@@ -25571,8 +25574,8 @@ function ($) {
         // getting the saved config if available
         this._config = this._getStoredConfig();
 
-        /*self._resetMenuContent();
-        self._resetLayout();*/
+        self._resetMenuContent();
+        self._resetLayout();
 
         function _applyOther() {
             // sets the theme
@@ -25605,12 +25608,20 @@ function ($) {
 
         // sets the layout
         switch (self._config.layout) {
+            case LAYOUT_VERTICAL: {
+                self.activateVertical(_applyOther);
+                break;
+            }
+            case LAYOUT_HORIZONTAL: {
+                self.activateHorizontal(_applyOther);
+                break;
+            }
             case LAYOUT_DETACHED: {
                 self.activateDetached(_applyOther);
                 break;
             }
             default: {
-                self.activateDetached(_applyOther);
+                self.activateVertical(_applyOther);
                 break;
             }
         }
@@ -25705,24 +25716,19 @@ function ($) {
         var self = this;
         self._resetMenuContent();
         self._resetLayout();
-
-        // get the layout and load
+        
         $.when(
-            $.get(self._partials['DETAHCED_TOPBAR'], function(content) {
-                self.detachedTopbarPH.append(content);
+            $.get(self._partials['VERTICAL_SIDEBAR'], function(content) {
+                self.verticalSidebarPH.append(content);
             }),
             // get the topbar
-            $.get(self._partials['DETAHCED_SIDEBAR'], function(topContent) {
-                self.detachedSidebarPH.append(topContent);
+            $.get(self._partials['VERTICAL_TOPBAR'], function(topContent) {
+                self.verticalTopbarPH.append(topContent);
             })
         ).then(function () {
             // init the menu
-            self.body.attr('data-layout', 'detached');
-            $.LeftSidebar.initMenu();
-            self._saveConfig({
-                layout: LAYOUT_DETACHED,
-                isBoxed: false
-              });
+            $.LeftSidebar.init();
+            self._saveConfig({ layout: LAYOUT_VERTICAL });
             if (callBack) callBack();
         });
     },

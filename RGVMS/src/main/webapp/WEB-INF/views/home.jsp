@@ -41,17 +41,17 @@
                                     <h4 class="text-dark-50 text-center mt-0 font-weight-bold">로그인</h4>
                                 </div>
 
-                                <form action="#">
+                                <form action="/loginPost" method="post" onsubmit="return loginCheck()">
 
                                     <div class="form-group">
                                         <label for="emailaddress">학번</label>
-                                        <input class="form-control" type="text" id="userNo" required="" placeholder="학번을 입력해주세요.">
+                                        <input class="form-control" type="text" id="userNo" name="userNo" required="" placeholder="학번을 입력해주세요.">
                                     </div>
 
                                     <div class="form-group">
                                         <!-- <a href="pages-recoverpw.html" class="text-muted float-right"><small>Forgot your password?</small></a> -->
                                         <label for="password">비밀번호</label>
-                                        <input class="form-control" type="password" required="" id="userPw" placeholder="비밀번호를 입력해주세요.">
+                                        <input class="form-control" type="password" required="" id="userPw" name="userPw" placeholder="비밀번호를 입력해주세요.">
                                     </div>
 
                                     <!-- <div class="form-group mb-3">
@@ -92,4 +92,28 @@
         <!-- App js -->
         <script src="../../resources/dist/assets/js/app.min.js"></script>
     </body>
+<script>
+var msg;
+
+if(msg == fail){
+	alert("학번 또는 비밀번호가 일치하지 않습니다.");
+}
+
+function loginCheck(){
+	var userNo = $("#userNo").val();
+	var userPw = $("#userPw").val();
+	
+	if(userNo == ""){
+		alert("학번을 입력해주세요.");
+		document.getElementById("userNo").focus();
+		return false;
+	}
+	if(userPw == ""){
+		alert("비밀번호를 입력해주세요.");
+		document.getElementById("userPw").focus();
+		return false;
+	}
+	
+}
+</script>s
 </html>

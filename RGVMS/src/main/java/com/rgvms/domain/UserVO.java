@@ -19,7 +19,7 @@ public class UserVO {
 	private int regNum;
 	private String state;
 	private int grade;
-	private String autority;
+	private String authority;
 
 	public int getUserNo() {
 		return userNo;
@@ -69,18 +69,18 @@ public class UserVO {
 		this.grade = grade;
 	}
 
-	public String getAutority() {
-		return autority;
+	public String getAuthority() {
+		return authority;
 	}
 
-	public void setAutority(String autority) {
-		this.autority = autority;
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
 	@Override
 	public String toString() {
 		return "UserVO [userNo=" + userNo + ", userPw=" + userPw + ", userName=" + userName + ", regNum=" + regNum
-				+ ", state=" + state + ", grade=" + grade + ", autority=" + autority + "]";
+				+ ", state=" + state + ", grade=" + grade + ", authority=" + authority + "]";
 	}
 
 }

@@ -19,7 +19,7 @@ import com.rgvms.dto.LoginDTO;
 import com.rgvms.service.UserService;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/user/*")
 public class UserController {
 
 	@Inject
@@ -27,5 +27,6 @@ public class UserController {
 
 	private static Logger logger = LoggerFactory.getLogger(UserController.class);
 	
+
 	
 }

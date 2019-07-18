@@ -25,7 +25,8 @@ public class ApplyContorller {
 	private ApplyService service;
 	
 	private static Logger logger = LoggerFactory.getLogger(ApplyContorller.class);
-
+	
+	
 	// 학생 :: 졸업인증신청 관리 - 신청 - 항목 명 검색 팝업 + 졸업인증항목리스트
 	@RequestMapping(value = "/searchPopup", method=RequestMethod.GET)
 	public void searchPopup(Model model) throws Exception {
@@ -58,9 +59,11 @@ public class ApplyContorller {
 
 	// 학생 :: 졸업인증신청 관리 - 한 학생의 신청 내역 목록 화면
 	@RequestMapping(value = "/stuApplyList", method = RequestMethod.GET)
-	public void stuApplyList(@RequestParam("userNo") int userNo, @ModelAttribute("cri") SearchCriteria cri)
+	public String stuApplyList(@RequestParam("userNo") int userNo, @ModelAttribute("cri") SearchCriteria cri)
 			throws Exception {
 		logger.info("stuApplyList Form.....");
+		
+		return "/user/stuApplyList";
 		
 	}
 

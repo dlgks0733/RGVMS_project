@@ -25301,8 +25301,7 @@ function ($) {
      * Select the option based on saved config
     */
    RightBar.prototype._selectOptionsFromConfig = function() {
-        /*var config = $.App.getLayoutConfig();*/
-        var config = 'detached';
+        var config = $.App.getLayoutConfig();
         if (config) {
             switch (config.layout) {
                 case 'vertical':
@@ -25512,14 +25511,20 @@ function ($) {
     var LayoutThemeApp = function () {
         this.body = $('body'),
         this.window = $(window),
+        this.verticalSidebarPH = $('#vertical-sidebar-placeholder');
+        this.verticalTopbarPH = $('#vertical-topbar-placeholder');
 
         this.detachedTopbarPH = $('#detached-topbar-placeholder');
         this.detachedSidebarPH = $('#detached-sidebar-placeholder');
 
+        this.horizontalTopbarPH = $('#horizontal-topbar-placeholder');
 
         this._partials = {
+            VERTICAL_SIDEBAR: '/resources/dist/partials/left-sidebar.html',
+            VERTICAL_TOPBAR: '/resources/dist/partials/topbar.html',
             DETAHCED_TOPBAR: '/resources/dist/partials/topbar-dark.html',
             DETAHCED_SIDEBAR: '/resources/dist/partials/detached-left-sidebar.html',
+            HORIZONTAL_TOPBAR: '/resources/dist/partials/horizontal-nav.html',
         };
 
         this.currentlyActivatedLayout = LAYOUT_DETACHED;
@@ -25531,18 +25536,19 @@ function ($) {
     * Reset the menu content
     */
     LayoutThemeApp.prototype._resetMenuContent = function() {
-       /* this.detachedTopbarPH.html('');
-        this.detachedSidebarPH.html('');*/
+        this.verticalSidebarPH.html('');
+        this.verticalTopbarPH.html('');
+        this.detachedTopbarPH.html('');
+        this.detachedSidebarPH.html('');
+        this.horizontalTopbarPH.html('');
     },
 
     /**
     * Reset the layout
     */
     LayoutThemeApp.prototype._resetLayout = function() {
-    	this.body.removeAttr('data-layout');
-    	this.body.attr('data-layout', 'detached');
-        /*this.body.removeAttr('data-layout');
-        this.body.removeAttr('data-layout-mode');*/
+        this.body.removeAttr('data-layout');
+        this.body.removeAttr('data-layout-mode');
     },
 
     /**
@@ -25571,8 +25577,8 @@ function ($) {
         // getting the saved config if available
         this._config = this._getStoredConfig();
 
-        /*self._resetMenuContent();
-        self._resetLayout();*/
+        self._resetMenuContent();
+        self._resetLayout();
 
         function _applyOther() {
             // sets the theme
@@ -25605,12 +25611,20 @@ function ($) {
 
         // sets the layout
         switch (self._config.layout) {
+            case LAYOUT_VERTICAL: {
+                self.activateVertical(_applyOther);
+                break;
+            }
+            case LAYOUT_HORIZONTAL: {
+                self.activateHorizontal(_applyOther);
+                break;
+            }
             case LAYOUT_DETACHED: {
                 self.activateDetached(_applyOther);
                 break;
             }
             default: {
-                self.activateDetached(_applyOther);
+                self.activateVertical(_applyOther);
                 break;
             }
         }

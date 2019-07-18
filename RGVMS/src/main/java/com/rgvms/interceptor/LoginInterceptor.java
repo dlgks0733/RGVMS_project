@@ -10,49 +10,62 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.rgvms.domain.UserVO;
+
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
-   private static final String LOGIN = "login";
-   private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
+	private static final String LOGIN = "login";
+	private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
-   // UserVO 객체 확인(로그인 가능한지 아닌지) 후 HttpSession 저장   
-   @Override
-   public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-         ModelAndView modelAndView) throws Exception {
+	// UserVO 객체 확인(로그인 가능한지 아닌지) 후 HttpSession 저장
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
 
-      HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 
-      ModelMap modelMap = modelAndView.getModelMap();
-      Object userVO = modelMap.get("userVO");
+		ModelMap modelMap = modelAndView.getModelMap();
+		Object userVO = modelMap.get("uVo");
 
-      if (userVO != null) {
+		if (userVO != null) {
 
-         logger.info("new login success");
-         session.setAttribute(LOGIN, userVO);
-         // response.sendRedirect("/");
+			logger.info("new login success");
+			session.setAttribute(LOGIN, userVO);
 
-         // 사용자가 로그인 전에 보고 있던 경로 = dest
-         Object dest = session.getAttribute("dest");
+			UserVO checkAuth = (UserVO) userVO;
+			// response.sendRedirect("/");
+			if (checkAuth.getAuthority().equals("1"))// 관리자
+			{
+				logger.info("adminmain...........");
 
-         response.sendRedirect(dest != null ? (String) dest : "/");
-      }
-   }
+				response.sendRedirect("/admin/main");
 
-   // HttpSession 초기화
-   @Override
-   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-         throws Exception {
+			} else {// 사용자
+				logger.info("usermain...........");
+				response.sendRedirect("/user/main");
 
-      HttpSession session = request.getSession();
+			}
+			/*
+			 * // 사용자가 로그인 전에 보고 있던 경로 = dest Object dest = session.getAttribute("dest");
+			 * 
+			 * response.sendRedirect(dest != null ? (String) dest : "/");
+			 */
+		}
+	}
 
-      if (session.getAttribute(LOGIN) != null) {
-         logger.info("clear login data before");
-         session.removeAttribute(LOGIN);
-      }
+	// HttpSession 초기화
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 
-      return true;
-   }
+		HttpSession session = request.getSession();
 
-   
+		if (session.getAttribute(LOGIN) != null) {
+			logger.info("clear login data before");
+			session.removeAttribute(LOGIN);
+		}
+
+		return true;
+	}
 
 }
