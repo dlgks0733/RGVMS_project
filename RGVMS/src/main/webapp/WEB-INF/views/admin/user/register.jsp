@@ -296,6 +296,15 @@
 	<div class="rightbar-overlay"></div>
 	<!-- /Right-bar -->
 
+	<script>
+    
+    var result = '${user}';
+    
+    if(result == 'SUCCESS'){
+    	alert("학생등록이 완료되었습니다.");
+    }
+    
+    </script>
 
 
 	<!-- App js -->

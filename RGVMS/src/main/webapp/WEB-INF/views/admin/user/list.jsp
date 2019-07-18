@@ -18,7 +18,7 @@
         <!-- App css -->
         <link href="../../../../resources/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="../../../../resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" id="main-style-container" />
-
+		
     </head>
 
     <body class="loading">
@@ -89,22 +89,23 @@
                                                     <div class="form-group mb-2">
                                                         <label for="inputPassword2" class="sr-only">Search</label>
                                                         <input type="search" class="form-control" name="keyword" value="${cri.keyword}" placeholder="검색어를 입력하세요.">
-                                                        <button type="button" class="btn btn-light mb-2">검색</button>
+                                                        <button type="button" class="btn btn-light mb-2" style="vertical-align: bottom;">검색</button>
                                                     </div>
                                                 </form>                            
                                             </div><!-- end col-->
                                         </div>
-                
+                					
+                					<form role="form" method="post">
                                         <div class="table-responsive">
                                             <table class="table table-centered mb-0">
                                                 <thead class="thead-light">
                                                     <tr>
-                                                        <th style="width: 20px;">
+                                                        <!-- <th style="width: 20px;">
                                                             <div class="custom-control custom-checkbox">
                                                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                                                                 <label class="custom-control-label" for="customCheck1">&nbsp;</label>
                                                             </div>
-                                                        </th>
+                                                        </th> -->
                                                         <th>NO</th>
                                                         <th>학번</th>
                                                         <th>학년</th>
@@ -119,33 +120,65 @@
                                                 <!-- 리스트 내용 -->
                                                 <c:forEach items="${list}" var="userVO">
                                                     <tr>
-                                                        <td>
+                                                        <!-- <td>
                                                             <div class="custom-control custom-checkbox">
                                                                 <input type="checkbox" class="custom-control-input" id="customCheck2">
                                                                 <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                                             </div>
-                                                        </td>
-                                                        <td>${userVO.rnum }</td>
-                                                        <td>${userVO.userNo }</td>
-                                                        <td>${userVO.grade }</td>
-                                                        <td>${userVO.userName }</td>
-                                                        <td>${userVO.state }</td>
+                                                        </td> -->
+                                                        <td>${userVO.regNum}</td>
+                                                        <td>${userVO.userNo}</td>
+                                                        <td>${userVO.grade}</td>
+                                                        <td>${userVO.userName}</td>
+                                                        <td>${userVO.state}</td>
                                                         <td>
-                                                            <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i>수정</a>
-                                                            <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i>삭제</a>
+                                                            <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                                            <a id="remove" class="action-icon"> <i class="mdi mdi-delete"></i></a>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
+                                      
+                                        
+                                        <!-- 페이징처리 -->
+						 				<div class="box-footer">
+											<div class="text-center">
+                                               <ul class="pagination" style="text-align:center;">
+                                                   <li class="page-item">
+                                                       <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                           <span aria-hidden="true">&laquo;</span>
+                                                           <span class="sr-only">Previous</span>
+                                                       </a>
+                                                   </li>
+                                                   <li class="page-item"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                                   <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                                   <li class="page-item active"><a class="page-link" href="javascript: void(0);">3</a></li>
+                                                   <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
+                                                   <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                                   <li class="page-item">
+                                                       <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                           <span aria-hidden="true">&raquo;</span>
+                                                           <span class="sr-only">Next</span>
+                                                       </a>
+                                                   </li>
+                                               </ul>
+											</div>
+										</div> <!-- 페이징처리 -->
+										
+										<div style="text-align:right;">
+											<button type="button" id="register"class="btn btn-light mb-2">학생등록</button>
+										</div>
+									</form>	<!-- form -->
+									
                                     </div> <!-- end card-body-->
                                 </div> <!-- end card-->
                             </div> <!-- end col -->
                         </div>
                         <!-- end row --> 
-                        
                     </div> <!-- container -->
+ 
 
                 </div> <!-- content -->
 
@@ -290,9 +323,33 @@
         <div class="rightbar-overlay"></div>
         <!-- /Right-bar -->
 
-
-
         <!-- App js -->
         <script src="../../../../resources/dist/assets/js/app.min.js"></script>
+        
+        <!-- button script -->
+        <script>
+        	$(document).ready(
+        			function() {
+        				
+   				var formObj = $("form[role='form']");
+        				
+        				$('#register').on("click", function(evt) {
+        					
+        					formObj.attr("method", "get");
+        					formObj.attr("action", "/admin/user/register");
+        					/* self.location = "register"; */
+        					
+        				});
+        				
+        				$('#remove').on("click", function(evt) {
+							
+        					formObj.attr("method", "post");
+        					formObj.attr("action", "/admin/user/remove");
+        					/* self.location = "remove"; */
+        					
+        				});
+        		});
+        
+        </script>
     </body>
 </html>

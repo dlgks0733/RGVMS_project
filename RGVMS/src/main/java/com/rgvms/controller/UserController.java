@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rgvms.domain.PageMaker;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
 import com.rgvms.service.UserService;
 
 @Controller
-@RequestMapping("admin/user")
+@RequestMapping("admin/user/*")
 public class UserController {
 
 	@Inject
@@ -43,7 +44,7 @@ public class UserController {
 		
 		rttr.addAttribute("user", "SUCCESS");
 		
-		return "redirect:/user/list";
+		return "redirect:/admin/user/list";
 	}
 	
 	//3. 사용자(학생)목록
@@ -55,6 +56,13 @@ public class UserController {
 		
 		System.out.println("***********" + cri.toString());
 		model.addAttribute("list", service.list(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCount(service.listSearchCount(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
 	}
 	
 	//4. 사용자(학생) 수정폼으로 이동
@@ -72,9 +80,15 @@ public class UserController {
 		logger.info("user modifyPOST..............");
 		
 		service.modify(uVo);
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		
 		rttr.addFlashAttribute("user", "SUCCESS");
 		
-		return "redirect:/user/list";
+		return "redirect:/admin/user/list";
 	}
 	
 	//6. 사용자(학생) 삭제
@@ -85,11 +99,13 @@ public class UserController {
 		
 		service.remove(userNo);
 		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("SearchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		
 		rttr.addFlashAttribute("user", "SUCCESS");
 		
-		return "redirect:/user/list";
+		return "redirect:/admin/user/list";
 	}
 }

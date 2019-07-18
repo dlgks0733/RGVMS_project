@@ -5,7 +5,7 @@
 <mapper namespace="com.rgvms.mapper.SubjectMapper">
 	
 	<!-- 1. 인증항목 목록(관리자) -->
-	<select id="list">
+	<select id="list" resultType="com.rgvms.domain.SubjectVO">
 	<![CDATA[
 		SELECT
 		sub_No, categ, area, sub_Name, score, publication
@@ -24,8 +24,8 @@
 		VALUES(seq_sub.nextval, #{categ}, #{area}, #{subName}, #{score}, #{publication}, #{guide})
 	</insert>
 	
-	<!-- 3. 인증항목 조회(관리자) -->
-	<select id="select">
+	<!-- 3. 인증항목 상세내역조회(관리자) -->
+	<select id="select" resultType="com.rgvms.domain.SubjectVO">
 		SELECT
 		categ, area, sub_Name, score, guide, publication
 		FROM

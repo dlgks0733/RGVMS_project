@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.rgvms.domain.Criteria;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
 import com.rgvms.dto.LoginDTO;
@@ -36,12 +37,6 @@ public class UserServiceImpl implements UserService {
 	public List<UserVO> list(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.list(cri);
-	}
-
-	@Override
-	public int listSearchCount(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return dao.listSearchCount(cri);
 	}
 
 	@Override
@@ -89,7 +84,28 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public List<UserVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listCriteria(cri);
+	}
 
-	
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countPaging(cri);
+	}
+
+	@Override
+	public List<UserVO> listSearch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearch(cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearchCount(cri);
+	}
 
 }

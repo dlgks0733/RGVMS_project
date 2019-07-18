@@ -27,15 +27,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 2. 사용자(학생) 목록(관리자) -->
-	<select id="list">
-	<![CDATA[
+	<select id="list" resultType="com.rgvms.domain.UserVO">
 		SELECT
-		user_No, grade, user_Name, state
+		reg_num, user_No, grade, user_Name, state
 		FROM
 		TBL_USER
-		WHERE user_No > 0
-		OREDER BY user_No DESC, grade DESC;
-	]]>
+		WHERE authority = 0
+		ORDER BY user_No DESC, grade DESC
 	</select>
 	
 	<!-- 3. 사용자(학생) 수정(관리자) -->

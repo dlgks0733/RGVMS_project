@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.rgvms.domain.Criteria;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
 import com.rgvms.dto.LoginDTO;
@@ -39,12 +40,6 @@ public class UserDAOImpl implements UserDAO {
 	public List<UserVO> list(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + ".list", cri);
-	}
-
-	@Override
-	public int listSearchCount(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return session.selectOne(namespace + ".listSearchCount", cri);
 	}
 
 	//3. 사용자(학생) 상세내역
@@ -96,6 +91,33 @@ public class UserDAOImpl implements UserDAO {
 	public List<TotalDTO> esList(int userNo) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	
+	// 11. 페이징처리
+	@Override
+	public List<UserVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + ".listCriteria", cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".countPaging", cri);
+	}
+	
+	// 12. 검색처리
+	@Override
+	public List<UserVO> listSearch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + ".listSearch", cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".listSearchCount", cri);
 	}
 
 }
