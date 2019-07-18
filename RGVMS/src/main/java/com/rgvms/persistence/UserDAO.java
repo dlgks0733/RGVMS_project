@@ -19,26 +19,29 @@ public interface UserDAO {
 
 	// 4. 리스트 카운트
 	public int listSearchCount(SearchCriteria cri) throws Exception;
+	
+	// 5. 관리자 :: 기초정보관리 - 학생상세내역
+	public UserVO read(int userNo) throws Exception;
 
-	// 5. 관리자 :: 기초정보관리 - 학생 수정
+	// 6. 관리자 :: 기초정보관리 - 학생 수정
 	public void update(UserVO uVo) throws Exception;
 
-	// 6. 관리자 :: 기초정보관리 - 학생 삭제
+	// 7. 관리자 :: 기초정보관리 - 학생 삭제
 	public void delete(int userNo) throws Exception;
 
-	// 7. MY PAGE - 내 점수(MIS 총점)
+	// 8. MY PAGE - 내 점수(MIS 총점)
 	public TotalDTO misTotal(int userNo) throws Exception;
 
-	// 8. MY PAGE - 내 점수(인증항목 총점)
+	// 9. MY PAGE - 내 점수(인증항목 총점)
 	public TotalDTO subTotal(int userNo) throws Exception;
 
-	// 9. MY PAGE - 내 정보
+	// 10. MY PAGE - 내 정보
 	public UserVO myInfo(int userNo) throws Exception;
 
-	// 10 . MY PAGE - 내 정보 수정
+	// 11 . MY PAGE - 내 정보 수정
 	public void myInfoUpdate(UserVO uVo) throws Exception;
 
-	// 11. 관리자 :: 졸업인증평가 관리 - 목록
+	// 12. 관리자 :: 졸업인증평가 관리 - 목록
 	public List<TotalDTO> esList(int userNo) throws Exception;
 
 }

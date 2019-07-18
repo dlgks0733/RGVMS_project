@@ -35,7 +35,8 @@
 	
 	<!-- 4. 인증항목 수정(관리자) -->
 	<select id="update">
-		UPDATE TBL_SUBJECT
+		UPDATE
+		TBL_SUBJECT
 		SET categ = #{categ}, area = #{area}, sub_Name = #{subName},
 			score = #{score}, guide = #{guide}, publication = #{publication}
 		WHERE sub_No = #{subNo}
@@ -47,6 +48,63 @@
 		WHERE sub_No = #{subNo}
 	</delete>
 	
+	<!-- 사용자 대쉬보드 -> applyMapper로 이동 -->
+	<select id="stuApplyList">
+		SELECT
+		rownum rnum, s.categ, s.area, s.sub_Name, s.publication, s.score, a.ac_Date
+		FROM
+		TBL_SUBJECT s, TBL_APPLY s
+		WHERE s.sub_No = a.sub_No AND a.applyState IN('승인');
+	</select>
+	
 	<!-- 6. 검색 -->
+	<!-- 인증항목 분류/영역/항목명/발행처로 키워드검색가능 -->
+	<sql id="search">
+		<if test="searchType != null">
+				<if test="searchType == 'c'.toString()">and categ like '%' || #{keyword} || '%' </if>
+				<if test="searchType == 'a'.toString()">and area like '%' || #{keyword} || '%' </if>
+				<if test="searchType == 'sn'.toString()">and sub_Name like '%' || #{keyword} || '%' </if>
+				<if test="searchType == 'p'.toString()">and publication like '%' || #{keyword} || '%' </if>
+		</if>
+	</sql>
+	
+	<!-- 키워드로 검색된 리스트 목록 불러오기 -->
+	<select id="listSearch" resultType="com.rgvms.domain.SubjectVO">
+		<![CDATA[  
+		SELECT
+		*
+		FROM(
+			SELECT rownum rnum, sub_No, categ, area, sub_Name, score, publication 
+			FROM (
+				SELECT 
+				sub_No, categ, area, sub_Name, score, publication 
+				FROM 
+				TBL_SUBJECT
+				WHERE sub_No > 0 
+		]]>
+		
+		<!-- search에 대한 SQL문을 삽입 -->
+		<include refid="search" />
+				ORDER BY sub_No DESC, categ DESC
+			
+		<![CDATA[    
+				)) WHERE (rnum >= #{pageStart} AND rnum <= #{pageEnd}) 
+			ORDER BY sub_No DESC
+		]]>
+	</select>
+	
+	<!-- 페이징처리를 위한 검색된 리스트 목록의 ROW의 수 계산 -->
+	<!-- <select id="listSearchCount" resultType="int">
+		<![CDATA[  
+		  SELECT
+		  count(sub_No) 
+		  FROM
+		  TBL_SUBJECT 
+		  WHERE
+		  sub_No > 0 
+		]]>
+		<include refid="search" />
+	</select> -->
+	
 
 </mapper>
