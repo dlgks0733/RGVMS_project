@@ -1,5 +1,6 @@
 package com.rgvms.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rgvms.domain.MisAttVO;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.PageMaker;
 import com.rgvms.domain.SearchCriteria;
@@ -41,7 +43,7 @@ public class MisController {
 		logger.info(cri.toString());
 
 		System.out.println("=====" + cri.toString());
-		model.addAttribute("list", service.listSearchCount(cri));
+		model.addAttribute("list", service.list(cri));
 
 		PageMaker pageMaker = new PageMaker();
 
@@ -54,23 +56,33 @@ public class MisController {
 
 	// 글 등록 화면
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void registerGET(UserVO uVo, Model model) throws Exception {
+	public void registerGET(Model model) throws Exception {
 		logger.info("register get..");
 		
 		List<UserVO> stuList = attService.stuList();
 		model.addAttribute("stuList", stuList);
-		
 		
 
 	}
 
 	// 글 등록
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerPOST(MisVO mis, RedirectAttributes rttr) throws Exception {
+	public String registerPOST(MisVO mis, MisAttVO aVo, @RequestParam("misAttDate") Date attDate, 
+			 RedirectAttributes rttr) throws Exception {
 		logger.info("register post...");
 		logger.info(mis.toString());
-
-		service.register(mis);
+		logger.info(attDate.toString());
+		Integer misNo = service.register(mis);
+		logger.info("misAttNo : " + misNo);
+		aVo.setMisNo(misNo);
+		logger.info("misAttNo : " + misNo);
+		attService.register(aVo);
+		
+		logger.info(mis.toString());
+		
+//		service.register(mis);
+//		attService.register(att);
+		
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
 		return "redirect:/admin/mis/list";

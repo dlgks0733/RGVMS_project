@@ -17,8 +17,8 @@ public class MisServiceImpl implements MisService {
 	private MisDAO dao;
 	
 	@Override
-	public void register(MisVO mVo) throws Exception {
-		dao.insert(mVo);
+	public Integer register(MisVO mVo) throws Exception {
+		return dao.insert(mVo);
 	}
 
 	@Override

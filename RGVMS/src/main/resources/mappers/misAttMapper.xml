@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 			MIS_ATT_NO, 
 			MIS_ATT_DATE, 
-			USER_NO, 
+			USER_NO,
 			MIS_NO
 		FROM
 			TBL_MIS_ATT
@@ -21,24 +21,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- mis 출결 등록 -->
 	<insert id="insert">
+	  	 <selectKey keyProperty="misAttNo" resultType="Integer" order="BEFORE">
+	  	select SEQ_MIS_ATT.NEXTVAL from dual
+	  </selectKey>
 		INSERT INTO TBL_MIS_ATT
 			(MIS_ATT_NO, MIS_ATT_DATE, USER_NO, MIS_NO)
 		VALUES 
-			(SEQ_MIS_ATT.NEXTVAL, #{misAttDate} , #{userNo}, #{misNo})
+			(#{misAttNo}, #{misAttDate} , #{userNo}, #{misNo})
 	</insert>
 	
 	
 	<!-- mis 출결 학생 리스트 조회  -->
 	<select id="stuList" resultType="com.rgvms.domain.UserVO">
-	<![CDATA[
-		SELECT
-			USER_NO,
-			GRADE,
-			USER_NAME
-		FROM
-			TBL_USER
 	
-	]]>
+		SELECT 
+			USER_NO, 
+			USER_NAME,
+			GRADE 
+		FROM 
+			TBL_USER 
+		WHERE STATE = '재학'
+	
 	</select>
 	
 	<!-- mis 출결 삭제(학생 삭제) -->

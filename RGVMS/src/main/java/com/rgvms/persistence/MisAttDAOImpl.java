@@ -26,7 +26,6 @@ public class MisAttDAOImpl implements MisAttDAO {
 	@Override
 	public void insert(MisAttVO mVo) throws Exception {
 		session.insert(namespace +".insert", mVo);
-
 	}
 
 	@Override

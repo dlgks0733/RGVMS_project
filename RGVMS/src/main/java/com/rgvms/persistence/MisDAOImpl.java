@@ -19,9 +19,9 @@ public class MisDAOImpl implements MisDAO {
 	private static String namespace = "com.rgvms.mapper.MisMapper";
 
 	@Override
-	public void insert(MisVO mVo) throws Exception {
+	public Integer insert(MisVO mVo) throws Exception {
 		session.insert(namespace +  ".insert", mVo);
-
+		return mVo.getMisNo();
 	}
 
 	@Override

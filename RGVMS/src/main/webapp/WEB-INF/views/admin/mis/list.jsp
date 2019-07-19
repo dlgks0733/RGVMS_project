@@ -90,13 +90,11 @@ body.loading {
 														</tr>
 													</thead>
 													<tbody>
-														<%-- <c:forEach items="${list}" var="MisVO"> --%>
-														<tr>
+														<c:forEach items="${list}" var="MisVO">														<tr>
 															<td>${MisVO.misNo}</td>
 															<td>제 ${MisVO.timse}회 MISDAY ${MisVO.title}</td>
 															<td>${MisVO.misRegdate}</td>
-														</tr>
-														<%-- </c:forEach> --%>
+														</c:forEach> 
 													</tbody>
 												</table>
 											</div>

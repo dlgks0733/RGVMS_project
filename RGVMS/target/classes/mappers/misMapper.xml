@@ -15,18 +15,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			MIS_REGDATE
 		FROM
 			TBL_MIS
-		WHERE MIS_NO > 0
-		ORDER BY MIS_NO DESC MIS_REGDATE DESC
+		WHERE MIS_NO >= 0 
+		ORDER BY MIS_NO DESC
 	]]>
 	</select>
 
 	<!-- mis 게시물 등록 -->
 	<insert id="insert">
+	
+	  <selectKey keyProperty="misNo" resultType="Integer" order="BEFORE">
+	  	select SEQ_MIS.NEXTVAL from dual
+	  </selectKey>
 		INSERT INTO TBL_MIS
 		(MIS_NO,
 		TIMES, TITLE)
 		VALUES
-		(SEQ_MIS.NEXTVAL, #{times} , #{title})
+		(#{misNo}, #{times} , #{title})
 	</insert>
 
 

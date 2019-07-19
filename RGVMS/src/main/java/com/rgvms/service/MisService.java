@@ -8,7 +8,7 @@ import com.rgvms.domain.SearchCriteria;
 public interface MisService {
 
 	// 1. MIS 출결 관리 - MIS 게시물 등록
-	public void register(MisVO mVo) throws Exception;
+	public Integer register(MisVO mVo) throws Exception;
 
 	// 2. MIS 출결 관리 - MIS 게시물 목록
 	public List<MisVO> list(SearchCriteria cri) throws Exception;
