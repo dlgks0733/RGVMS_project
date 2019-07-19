@@ -11,7 +11,7 @@
 		sub_No, categ, area, sub_Name, score, publication
 		FROM
 		TBL_SUBJECT
-		WHERE sub_No > 0
+		WHERE sub_No >= 0
 		ORDER BY categ DESC
 	]]>
 		<!-- 필수, 선택 순으로 정렬 -->

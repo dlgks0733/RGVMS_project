@@ -36,6 +36,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY user_No DESC, grade DESC
 	</select>
 	
+	<select id="read" resultType="com.rgvms.domain.UserVO">
+		SELECT
+		reg_num, user_No, grade, user_Name, state
+		FROM
+		TBL_USER
+		WHERE user_No = #{userNo}
+	</select>
+	
 	<!-- 3. 사용자(학생) 수정(관리자) -->
 	<update id="update">
 		UPDATE

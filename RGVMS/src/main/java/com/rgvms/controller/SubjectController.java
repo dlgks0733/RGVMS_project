@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rgvms.domain.PageMaker;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
 import com.rgvms.service.SubjectService;
 
 @Controller
-@RequestMapping("/subject/*")
+@RequestMapping("admin/subject/*")
 public class SubjectController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SubjectController.class);
@@ -55,7 +56,8 @@ public class SubjectController {
 		logger.info(cri.toString());
 		
 		System.out.println("***********" + cri.toString());
-		model.addAttribute("list", service.listSearchCount(cri));
+		model.addAttribute("list", service.list(cri));
+		
 	}
 	
 	//4. 인증항목 상세내역

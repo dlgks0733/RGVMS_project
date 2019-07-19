@@ -67,7 +67,7 @@ public class UserController {
 	
 	//4. 사용자(학생) 수정폼으로 이동
 	@RequestMapping(value = "/modify", method=RequestMethod.GET)
-	public void modifyGET(@RequestParam("userNo") int userNo, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	public void modifyGET(@RequestParam("userNo") int userNo, Model model) throws Exception {
 		
 		logger.info("user modifyGET...............");
 		model.addAttribute(service.read(userNo));
