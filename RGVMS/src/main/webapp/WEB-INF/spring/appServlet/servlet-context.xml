@@ -53,4 +53,12 @@
 	</interceptors>
 
 
+<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<beans:property name="maxUploadSize" value="10485760"></beans:property>
+</beans:bean>
+
+<beans:bean id="uploadPath" class="java.lang.String">
+	<beans:constructor-arg value="D:\\resources\\upload"></beans:constructor-arg>
+</beans:bean>
+
 </beans:beans>

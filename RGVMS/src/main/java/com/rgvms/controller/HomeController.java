@@ -83,7 +83,7 @@ public class HomeController {
 
 		if (uVo == null) {
 			rttr.addFlashAttribute("msg", "fail");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 
 		logger.info("UserVO : " + uVo.toString());

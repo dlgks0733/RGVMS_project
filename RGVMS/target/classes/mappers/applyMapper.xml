@@ -21,7 +21,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <!-- 항목 명 검색하여 인증항목정보 가져오기 -->
 <select id="searchSub" resultType="com.rgvms.domain.SubjectVO">
-
 	SELECT SUB_NO
 		 , SUB_NAME
 		 , SCORE
@@ -30,10 +29,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 , PUBLICATION
 		 , GUIDE
 	  FROM TBL_SUBJECT
-	 WHERE SUB_NAME = #{subName}
-
+	 <!-- WHERE SUB_NAME = #{subName} -->
+	 <trim prefix="WHERE"> 
+	        SUB_NAME LIKE '%'||#{subName}||'%'
+ 	 </trim>
+ 	 
 </select>
 
 
+<!-- 학생:: 신청 등록 -->
+<insert id="insert">
+	
+	<selectKey keyProperty="applyNo" resultType="int" order="BEFORE">
+       SELECT SEQ_APPLY.NEXTVAL FROM DUAL
+    </selectKey>
+    
+    INSERT INTO TBL_APPLY(APPLY_NO
+    					, USER_NO
+    					, SUB_NO
+    					, AC_SCORE
+    					<if test="serialNum != null">, SERIAL_NUM</if>
+    					<if test="acDate != null">, AC_DATE</if>
+    					<if test="content != null">, CONTENT</if>)
+    VALUES(#{applyNo}
+    	 , #{userNo}
+    	 , #{subNo}
+    	 , #{acScore}
+    	 <if test="serialNum != null">, #{serialNum}</if>
+    	 <if test="acDate != null">, #{acDate}</if>
+    	 <if test="content != null">, #{content}</if>)
+	
+</insert>
+
+<insert id="insertFiles">
+
+	INSERT INTO TBL_FILE(FILE_NO
+					   , FILE_NAME
+					   , APPLY_NO)
+	VALUES(SEQ_FILE.NEXTVAL
+		, #{fileName}
+		, #{applyNo})
+	
+</insert>
 
 </mapper>

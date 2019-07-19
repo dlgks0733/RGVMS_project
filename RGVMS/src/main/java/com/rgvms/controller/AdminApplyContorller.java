@@ -28,35 +28,4 @@ public class AdminApplyContorller {
 	
 	
 	
-	
-	// 학생 :: 졸업인증신청 관리 - 신청 - 항목 명 검색
-	@RequestMapping(value = "/searchSub", method = RequestMethod.POST)
-	public SubjectVO searchSub(@RequestParam("subName") String subName) throws Exception {
-		SubjectVO sVo = new SubjectVO();
-		
-		sVo = service.searchSub(subName);
-		
-		logger.info("searchSub : " + sVo.toString());
-		
-		return sVo; 
-	}
-	
-	
-	// 학생 :: 졸업인증신청 관리 - 신청 등록 화면
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public void register() throws Exception {
-		logger.info("Apply Register Form.....");
-	}
-	
-
-	// 학생 :: 졸업인증신청 관리 - 한 학생의 신청 내역 목록 화면
-	@RequestMapping(value = "/stuApplyList", method = RequestMethod.GET)
-	public String stuApplyList(@RequestParam("userNo") int userNo, @ModelAttribute("cri") SearchCriteria cri)
-			throws Exception {
-		logger.info("stuApplyList Form.....");
-		
-		return "/user/stuApplyList";
-		
-	}
-
 }

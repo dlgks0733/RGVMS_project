@@ -1,5 +1,6 @@
 package com.rgvms.domain;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /*CREATE TABLE TBL_APPLY
@@ -26,6 +27,8 @@ public class ApplyVO {
 	private Date acDate;
 	private Date applyDate;
 	private String content;
+	private int acScore;
+	private String[] files;
 
 	public int getApplyNo() {
 		return applyNo;
@@ -99,11 +102,27 @@ public class ApplyVO {
 		this.content = content;
 	}
 
+	public int getAcScore() {
+		return acScore;
+	}
+
+	public void setAcScore(int acScore) {
+		this.acScore = acScore;
+	}
+
+	public String[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(String[] files) {
+		this.files = files;
+	}
+
 	@Override
 	public String toString() {
 		return "ApplyVO [applyNo=" + applyNo + ", userNo=" + userNo + ", subNo=" + subNo + ", applyState=" + applyState
 				+ ", reason=" + reason + ", serialNum=" + serialNum + ", acDate=" + acDate + ", applyDate=" + applyDate
-				+ ", content=" + content + "]";
+				+ ", content=" + content + ", acScore=" + acScore + ", files=" + Arrays.toString(files) + "]";
 	}
 
 }

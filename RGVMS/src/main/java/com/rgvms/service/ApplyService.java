@@ -9,7 +9,7 @@ import com.rgvms.domain.SubjectVO;
 public interface ApplyService {
 
 	// 1. 학생 :: 졸업인증신청 관리 - 항목 명 검색
-	public SubjectVO searchSub(String subName) throws Exception;
+	public List<SubjectVO> searchSub(String subName) throws Exception;
 
 	// 2. 학생 :: 졸업인증신청 관리 - 신청 등록
 	public void register(ApplyVO aVo) throws Exception;

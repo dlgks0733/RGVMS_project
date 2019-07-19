@@ -95,7 +95,7 @@
 <script>
 var msg;
 
-if(msg == fail){
+if(msg == "fail"){
 	alert("학번 또는 비밀번호가 일치하지 않습니다.");
 }
 
@@ -115,5 +115,5 @@ function loginCheck(){
 	}
 	
 }
-</script>s
+</script>
 </html>

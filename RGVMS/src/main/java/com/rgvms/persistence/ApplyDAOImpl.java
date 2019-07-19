@@ -21,15 +21,16 @@ public class ApplyDAOImpl implements ApplyDAO {
 	
 	
 	@Override
-	public SubjectVO searchSub(String subName) throws Exception {
+	public List<SubjectVO> searchSub(String subName) throws Exception {
 		
-		return session.selectOne(namespace+".searchSub", subName);
+		return session.selectList(namespace+".searchSub", subName);
 	}
 
 	@Override
-	public void insert(ApplyVO aVo) throws Exception {
-		// TODO Auto-generated method stub
+	public int insert(ApplyVO aVo) throws Exception {
+		session.insert(namespace+".insert", aVo);
 		
+		return aVo.getApplyNo();
 	}
 
 	@Override

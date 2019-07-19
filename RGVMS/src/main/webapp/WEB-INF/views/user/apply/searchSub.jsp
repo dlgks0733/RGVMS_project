@@ -57,7 +57,7 @@
 											<div class="form-row col-md-12">
 												<div class="form-group col-md-12">
 													<label for="inputEmail4" class="col-form-label">항목명</label>
-														<form action="searchSub" method="get">
+														<form method="get">
 														<div class="input-group">
 															<input type="text" class="form-control" id="subName" name="subName" placeholder="항목명을 검색해주세요.">
 															<div class="input-group-append">
@@ -76,7 +76,7 @@
                                         <div class="row">
 											<div class="form-row col-md-12">
 												<div class="form-group col-md-12">
-													<label for="inputEmail4" class="col-form-label">전체 항목리스트</label>
+													<label for="inputEmail4" class="col-form-label">검색된 항목리스트</label>
 													<div class="table-responsive">
 			                                            <table class="table table-centered mb-0">
 			                                                <thead class="thead-light">
@@ -89,7 +89,7 @@
 			                                                    </tr>
 			                                                </thead>
 			                                                <tbody>
-			                                                    <c:forEach items="${subList}" var="sVo" varStatus="listStat">
+			                                                    <c:forEach items="${searchSubList}" var="sVo" varStatus="listStat">
 			                                                    <tr>
 			                                                    	<td>
 			                                                    	${listStat.count}
@@ -148,7 +148,7 @@
   
 <script>
 
-// 부모창으로 정보 보내기
+//부모창으로 정보 보내기
 function sendData(subNo, categ, area, subName, score, guide){
 	var subNo = subNo;
 	var categ = categ;
