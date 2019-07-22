@@ -1,11 +1,15 @@
 package com.rgvms.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.rgvms.domain.FileVO;
+
+import oracle.net.aso.s;
 
 @Repository
 public class FileDAOImpl implements FileDAO {
@@ -24,6 +28,12 @@ public class FileDAOImpl implements FileDAO {
 	public void delete(FileVO fVo) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<FileVO> list(int applyNo) throws Exception {
+		
+		return session.selectList(namespace+".fileList", applyNo);
 	}
 
 }

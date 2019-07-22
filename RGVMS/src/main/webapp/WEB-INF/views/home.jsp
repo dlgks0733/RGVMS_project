@@ -41,7 +41,7 @@
                                     <h4 class="text-dark-50 text-center mt-0 font-weight-bold">로그인</h4>
                                 </div>
 
-                                <form action="/loginPost" method="post" onsubmit="return loginCheck()">
+                                <form action="/loginPost" method="post" onsubmit="return loginCheck();">
 
                                     <div class="form-group">
                                         <label for="emailaddress">학번</label>

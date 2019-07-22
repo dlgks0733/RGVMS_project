@@ -1,5 +1,6 @@
 package com.rgvms.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.rgvms.domain.ApplyVO;
@@ -33,10 +34,10 @@ public interface ApplyDAO {
 	public ApplyVO adApplySelect(int applyNo) throws Exception;
 	
 	// 8. 관리자 :: 졸업인증신청 관리 - 신청
-	public void accept(int applyNo) throws Exception;
+	public void accept(int applyNo, String reason) throws Exception;
 	
 	// 9. 관리자 :: 졸업인증신청 관리 - 거절
-	public void deny(int applyNo) throws Exception;
+	public void deny(int applyNo, String reason) throws Exception;
 	
 	// 10. 학생 :: 졸업인증신청 관리 - 졸업인증항목 목록
 	public List<SubjectVO> subList() throws Exception;

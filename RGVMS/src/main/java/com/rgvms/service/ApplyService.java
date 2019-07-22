@@ -1,8 +1,10 @@
 package com.rgvms.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.rgvms.domain.ApplyVO;
+import com.rgvms.domain.FileVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
 
@@ -30,12 +32,18 @@ public interface ApplyService {
 	public ApplyVO adApplyRead(int applyNo) throws Exception;
 
 	// 8. 관리자 :: 졸업인증신청 관리 - 신청
-	public void accept(int applyNo) throws Exception;
+	public void accept(int applyNo, String reason) throws Exception;
 
 	// 9. 관리자 :: 졸업인증신청 관리 - 거절
-	public void deny(int applyNo) throws Exception;
+	public void deny(int applyNo, String reason) throws Exception;
 
 	// 10. 학생 :: 졸업인증신청 관리 - 졸업인증항목 목록
 	public List<SubjectVO> subList() throws Exception;
+	
+	// 관리자 :: 졸업인증신청 관리 - 신청 승인 대기 리스트
+	public List<ApplyVO> waitList(SearchCriteria cri) throws Exception;
+	
+	// 졸업인증신청관리 - 해당하는 신청내역의 파일 리스트
+	public List<FileVO> fileList(int applyNo) throws Exception;
 
 }

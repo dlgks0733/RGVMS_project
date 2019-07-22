@@ -1,5 +1,6 @@
 package com.rgvms.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -60,43 +61,43 @@ public class ApplyServiceImpl implements ApplyService {
 
 	@Override
 	public List<ApplyVO> stuApplyList(int userNo, SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return dao.stuApplyList(userNo, cri);
 	}
 
 	@Override
 	public int listSearchCount(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return dao.listSearchCount(cri);
 	}
 
 	@Override
 	public ApplyVO stuApplyRead(int applyNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+
+		return dao.stuApplySelect(applyNo);
 	}
 
 	@Override
 	public List<ApplyVO> adApplyList(SearchCriteria cri) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+
+		return dao.adApplyList(cri);
 	}
 
 	@Override
 	public ApplyVO adApplyRead(int applyNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return dao.adApplySelect(applyNo);
 	}
 
 	@Override
-	public void accept(int applyNo) throws Exception {
-		// TODO Auto-generated method stub
+	public void accept(int applyNo, String reason) throws Exception {
+		dao.accept(applyNo, reason);
 		
 	}
 
 	@Override
-	public void deny(int applyNo) throws Exception {
-		// TODO Auto-generated method stub
+	public void deny(int applyNo, String reason) throws Exception {
+		dao.deny(applyNo, reason);
 		
 	}
 
@@ -104,6 +105,18 @@ public class ApplyServiceImpl implements ApplyService {
 	public List<SubjectVO> subList() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.subList();
+	}
+
+	@Override
+	public List<ApplyVO> waitList(SearchCriteria cri) throws Exception {
+		
+		return dao.waitList(cri);
+	}
+
+	@Override
+	public List<FileVO> fileList(int applyNo) throws Exception {
+		
+		return fDao.list(applyNo);
 	}
 	
 	

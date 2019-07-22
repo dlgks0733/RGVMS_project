@@ -16,11 +16,11 @@
 <!-- App favicon -->
 <link rel="shortcut icon"
 	href="/resources/dist/assets/images/favicon.ico">
-
 <style>
-#fileUpload {
-	display:none;
-}
+ul{
+   list-style:none;
+   padding-left:0px;
+   }
 </style>
 <!-- END File Upload Style -->
 
@@ -78,7 +78,7 @@
 									<h4 class="header-title">졸업인증신청</h4>
 									<p class="text-muted font-13">신청 후에 수정과 삭제는 불가합니다.</p>
 
-									<form name="frm" method="post" role="form">
+									<form name="frm" method="post" role="form" onsubmit="return validate();">
 									<input type="hidden" name="subNo" id="subNo">
 									<input type="hidden" name="userNo" id="userNo" value="${login.userNo}">
 										<div class="form-row">
@@ -155,31 +155,28 @@
 										
 										
 										
-										
-										<div class="form-group">
-						                  <label for="exampleInputEmail1" class="col-sm-2 control-label">첨부파일<span class="must-mark">*</span></label>
-						                </div>
-						                   
-						                   
-						               <div class="dropzone" id='mydropzone'>
-						                   <!-- <label for="fileUpload">여기</label>를 클릭해주세요-->
-                                           <input  type="file" id="fileUpload" class="filedropzone"/>
-						                        
-						               <div class="fileDrop" >
-						               <input type="hidden" id="uploadCount">
-						               <div class="dz-message needsclick">
+                              <div class="form-group">
+                                    <label for="exampleInputEmail1" class="col-sm-2 control-label">첨부파일<span class="must-mark">*</span></label>
+                                  </div>
+                                     
+                                 <div id='mydropzone' class="dropzone">
+                                    <!-- <label for="fileUpload">여기</label> -->
+                                  <input type="file" id="fileUpload" name="fileUpload" style="visibility:hidden;"/>
+                                          
+                                 <div class="fileDrop" >
+                                 <input type="hidden" id="uploadCount">
+                                 <div class="dz-message needsclick">
                                             <i class="h1 text-muted dripicons-cloud-upload"></i>
                                             <h3>Drop files here or click to upload.</h3>
                                             <span class="text-muted font-13">첨부파일을 업로드하려면 여기에 첨부파일 파일을 끌어 넣거나 클릭해주세요</span>
                                         </div>
-						                           
-						                        <div>
-						                           <ul class="mailbox-attachments clearfix uploadedList">
-						                           </ul>
-						                        </div>
-						                  </div>
-						                  </div>
-						                  
+                                    </div>
+                                    </div>
+                                    <div>
+                                             <ul class="dropzone-previews clearfix uploadedList">
+                                             </ul>
+                                    </div>		
+                                    				                   
 										<div style="text-align: right;">
 										<button type="submit" class="btn btn-primary">신청</button>
 										</div>
@@ -251,67 +248,52 @@ $("#subPopup").click(function(){
 
 // 신청 등록 유효성 검사 
 function validate(){
+	var subNo = $("#subNo").val();
+	var userNo = $("#userNo").val();
+	var acScore = $("#acScore").val();
 	
+	if(subNo == ""){
+		alert("오류 :: 다시 시도해주세요.");
+		return false;
+	}
+	if(userNo == ""){
+		alert("오류 :: 다시 시도해주세요.");
+		return false;
+	}
+	if(acScore == ""){
+		alert("취득 점수를 입력해주세요.");
+		return false;
+	}
 	
 }
-
-// 파일 업로드 jquery - 파일 드롭
-/* $(".fileDrop").on("dragenter dragover", function(event){
-	event.preventDefault();
-});
-
-$(".fileDrop").on("drop", function(event){
-	event.preventDefault();
-	
-	var files = event.originalEvent.dataTransfer.files;
-	
-	var file = files[0];
-	
-// 	console.log(file);
-
-	var formData = new FormData();
-	
-	formData.append("file", file);
-	
-	$.ajax({
-		url: 'uploadAjax',
-		data: formData,
-		dataType: 'text',
-		processData: false,
-		contentType: false,
-		type: 'POST',
-		success: function(data){
-			alert(data);
-		}
-	});
-	
-}); */
 
 </script>
 
 <!-- SD PROJECT JS -->
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/dist/assets/js/upload.js"></script>
-<script type="text/javascript" src="/resources/dist/assets/js/jquery-2.2.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <script id="template" type="text/x-handlebars-template">
-<li>
-  <div class="mailbox-attachment-info">
-   <a href="/downloadFile?fileName={{fullName}}" class="mailbox-attachment-name">{{fileName}}</a>
-   <a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
-   </span>
-  </div>
-</li>                       
+<li class="dropzone-previews mt-3">
+<div class="card mt-1 mb-0 shadow-none border dz-processing dz-image-preview dz-success dz-complete">
+<div class="p-2">
+<div class="row align-items-center">
+ <div class="col-auto">
+	 <img data-dz-thumbnail="" class="avatar-sm rounded bg-light" src="{{imgsrc}}">
+ </div>
+ <div class="col pl-0">
+   <a href="/displayFile?fileName={{fullName}}" text-muted font-weight-bold" data-dz-name="">{{fileName}}</a>
+ </div>
+ <div class="col-auto">
+   <a href="{{fullName}}" class="btn btn-default btn-xs pull-right delbtn"><i class="dripicons-cross"></i></a>
+ </div>
+</div>
+</div>
+</div>
+</li>
 </script>
-<!--     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
-    <script>
-      $("#mydropzone").on("click", function() {
-         setTimeout(function() {
-              $(".filedropzone").trigger("click");
-            }, 1000);
-         
-      });
-    </script> -->
+
 <script>
    $(document)
          .ready(
@@ -356,9 +338,10 @@ $(".fileDrop").on("drop", function(event){
    
 	
 
-	$("#mydropzone").on("click", function() {
-		//$("#filedropzone").attr("for").click();
-		$("#"+$(this).children("label").attr("for")).click();
+	$('#mydropzone').click(function(event) {
+		
+		document.frm.fileUpload.click();
+		
 	});
 
 	var template = Handlebars.compile($("#template").html());

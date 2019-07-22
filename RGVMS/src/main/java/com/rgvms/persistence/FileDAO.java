@@ -1,15 +1,18 @@
 package com.rgvms.persistence;
 
+import java.util.List;
+
 import com.rgvms.domain.FileVO;
 
 public interface FileDAO {
 
-	// 1. ÆÄÀÏ ¾÷·Îµå
+	// 1. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½
 	public void insert(FileVO fVo) throws Exception;
 	
-	// 2. ÆÄÀÏ »èÁ¦
+	// 2. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public void delete(FileVO fVo) throws Exception;
 	
-	// 3. ÆÄÀÏ ´Ù¿î·Îµå
+	// 3. íŒŒì¼ ëª©ë¡
+	public List<FileVO> list(int applyNo) throws Exception;
 	
 }

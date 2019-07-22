@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.rgvms.mapper.ApplyMapper">
 
-<!-- 항목 전체 리스트 -->
+<!-- 학생 :: 팝업 - 항목 전체 리스트 -->
 <select id="subList" resultType="com.rgvms.domain.SubjectVO">
 
 	SELECT SUB_NO
@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 </select>
 
-<!-- 항목 명 검색하여 인증항목정보 가져오기 -->
+<!-- 학생 :: 팝업 - 항목 명 검색-->
 <select id="searchSub" resultType="com.rgvms.domain.SubjectVO">
 	SELECT SUB_NO
 		 , SUB_NAME
@@ -61,6 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 </insert>
 
+<!-- 학생 :: 다중 파일 등록 -->
 <insert id="insertFiles">
 
 	INSERT INTO TBL_FILE(FILE_NO
@@ -72,4 +73,219 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 </insert>
 
+
+<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and PRODUCT_NAME like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 'g'.toString()">
+				and GOOD_THING like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 'b'.toString()">
+				and BAD_THING like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 'gb'.toString()">
+				and ( GOOD_THING like '%' || #{keyword} || '%' OR BAD_THING like
+				'%' ||
+				#{keyword} || '%')
+			</if>
+			<!-- <if test="searchType == 'cw'.toString()">
+				and ( content like '%' || #{keyword} || '%' OR writer
+				like '%' ||
+				#{keyword} || '%')
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and ( title like '%' || #{keyword} || '%'
+				OR
+				content like
+				'%' || #{keyword} || '%'
+				OR
+				writer like '%' || #{keyword} || '%')
+			</if> -->
+		</if>
+	</sql>
+
+<!-- 학생 :: 신청 내역 목록 -->
+<select id="stuApplyList" resultType="com.rgvms.domain.ApplyVO">
+<![CDATA[  
+SELECT * FROM(
+  SELECT ROWNUM RNUM
+  	   , APPLY_NO
+  	   , SUB_NAME
+  	   , APPLY_DATE
+  	   , APPLY_STATE
+   FROM (
+  SELECT A.APPLY_NO
+  	   , S.SUB_NAME
+  	   , A.APPLY_DATE
+  	   , A.APPLY_STATE
+  FROM TBL_APPLY A
+     , TBL_SUBJECT S
+ WHERE A.SUB_NO = S.SUB_NO
+   AND A.APPLY_NO > 0 
+   AND A.USER_NO = #{userNo}
+]]>
+		<include refid="search"></include>
+
+		ORDER BY A.APPLY_NO DESC, A.APPLY_DATE DESC
+  
+<![CDATA[    
+ )) WHERE (RNUM >= 1 AND RNUM <= 10) 
+ORDER BY APPLY_NO DESC, APPLY_DATE DESC
+]]>
+
+</select>
+
+<select id="listSearchCount" resultType="int">
+<![CDATA[  
+  SELECT COUNT(APPLY_NO) 
+    FROM TBL_APPLY 
+   WHERE APPLY_NO > 0
+]]>
+		<include refid="search"></include>
+
+</select>
+
+<!-- 학생 :: 신청 내역 상세조회 -->
+<select id="stuApplySelect" resultType="com.rgvms.domain.ApplyVO">
+	SELECT A.APPLY_NO
+     	 , A.APPLY_STATE
+     	 , S.CATEG
+     	 , S.AREA
+     	 , S.SUB_NAME
+     	 , S.PUBLICATION
+     	 , A.AC_SCORE
+     	 , A.APPLY_DATE
+     	 , NVL(A.CONTENT, '-') AS CONTENT
+     	 <!-- , NVL(TO_CHAR(A.AC_DATE), '-') AS AC_DATE -->
+     	 , A.AC_DATE
+     	 , NVL(A.SERIAL_NUM, '-') AS SERIAL_NUM
+     	 , A.REASON
+  	  FROM TBL_APPLY A
+     	 , TBL_SUBJECT S
+	 WHERE A.SUB_NO = S.SUB_NO
+	   AND A.APPLY_NO = #{applyNo}
+</select>
+
+<!-- 관리자 :: 신청 내역 목록 -->
+<select id="adApplyList" resultType="com.rgvms.domain.ApplyVO">
+<![CDATA[  
+SELECT * FROM(
+  SELECT ROWNUM RNUM
+  	   , APPLY_NO
+       , USER_NO
+       , USER_NAME
+  	   , SUB_NAME
+  	   , APPLY_DATE
+  	   , APPLY_STATE
+   FROM (
+  SELECT A.APPLY_NO
+       , A.USER_NO
+       , U.USER_NAME
+  	   , S.SUB_NAME
+  	   , A.APPLY_DATE
+  	   , A.APPLY_STATE
+  FROM TBL_APPLY A
+     , TBL_SUBJECT S
+     , TBL_USER U
+ WHERE A.SUB_NO = S.SUB_NO
+   AND U.USER_NO = A.USER_NO
+   AND A.APPLY_NO > 0
+]]>
+		<include refid="search"></include>
+
+		ORDER BY A.APPLY_NO DESC, A.APPLY_DATE DESC
+  
+<![CDATA[    
+ )) WHERE (RNUM >= 1 AND RNUM <= 10) 
+ORDER BY APPLY_NO DESC, APPLY_DATE DESC
+]]>
+
+</select>
+
+<select id="waitList" resultType="com.rgvms.domain.ApplyVO">
+<![CDATA[  
+SELECT * FROM(
+  SELECT ROWNUM RNUM
+  	   , APPLY_NO
+       , USER_NO
+       , USER_NAME
+  	   , SUB_NAME
+  	   , APPLY_DATE
+  	   , APPLY_STATE
+   FROM (
+  SELECT A.APPLY_NO
+       , A.USER_NO
+       , U.USER_NAME
+  	   , S.SUB_NAME
+  	   , A.APPLY_DATE
+  	   , A.APPLY_STATE
+  FROM TBL_APPLY A
+     , TBL_SUBJECT S
+     , TBL_USER U
+ WHERE A.SUB_NO = S.SUB_NO
+   AND U.USER_NO = A.USER_NO
+   AND A.APPLY_NO > 0
+   AND A.APPLY_STATE = '승인대기'
+]]>
+		<include refid="search"></include>
+
+		ORDER BY A.APPLY_NO DESC, A.APPLY_DATE DESC
+  
+<![CDATA[    
+ )) WHERE (RNUM >= 1 AND RNUM <= 10) 
+ORDER BY APPLY_NO DESC, APPLY_DATE DESC
+]]>
+
+</select>
+
+<!-- 관리자 :: 졸업인증신청 관리 - 신청 상세조회 -->
+<select id="adApplySelect" resultType="com.rgvms.domain.ApplyVO">
+SELECT A.APPLY_NO
+     , U.USER_NO
+     , U.USER_NAME
+     , S.CATEG
+     , S.AREA
+     , S.SUB_NAME
+     , A.AC_SCORE
+     , NVL(A.SERIAL_NUM, '-') AS SERIAL_NUM
+     , A.AC_DATE
+     , A.APPLY_STATE
+     , A.APPLY_DATE
+     , NVL(A.CONTENT, '-') AS CONTENT
+     , A.REASON
+  FROM TBL_APPLY A
+     , TBL_SUBJECT S
+     , TBL_USER U
+ WHERE A.SUB_NO = S.SUB_NO
+   AND A.USER_NO = U.USER_NO
+   AND A.APPLY_NO = #{applyNo}
+</select>
+
+<!-- 파일 목록 -->
+<select id="fileList" resultType="com.rgvms.domain.FileVO">
+SELECT FILE_NO
+	 , SUBSTR(FILE_NAME, 50) AS FILE_NAME
+	 , FILE_NAME AS FILE_LOCATION
+	 , APPLY_NO
+  FROM TBL_FILE
+ WHERE APPLY_NO = #{applyNo}
+</select>
+
+<!-- 관리자 :: 졸업인증신청 관리 - 신청 승인 -->
+<update id="accept">
+UPDATE TBL_APPLY
+   SET APPLY_STATE = '승인'
+     , REASON = #{reason}
+ WHERE APPLY_NO = #{applyNo}
+</update>
+
+<!-- 관리자 :: 졸업인증신청 관리 - 신청 거절 -->
+<update id="deny">
+UPDATE TBL_APPLY
+   SET APPLY_STATE = '거절'
+     , REASON = #{reason}
+ WHERE APPLY_NO = #{applyNo}
+</update>
 </mapper>

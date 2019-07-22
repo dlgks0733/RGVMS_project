@@ -57,7 +57,7 @@
 											<div class="form-row col-md-12">
 												<div class="form-group col-md-12">
 													<label for="inputEmail4" class="col-form-label">항목명</label>
-														<form method="get">
+														<form method="get" onsubmit="return searchCheck();">
 														<div class="input-group">
 															<input type="text" class="form-control" id="subName" name="subName" placeholder="항목명을 검색해주세요.">
 															<div class="input-group-append">
@@ -158,7 +158,7 @@ function sendData(subNo, categ, area, subName, score, guide){
 	var guide = guide;
 	
 	if(score == 0){
-		$("#acScore", opener.document).attr('disabled', false);
+		$("#acScore", opener.document).attr('readonly', false);
 		opener.document.frm.subNo.value = subNo;
 		opener.document.frm.categ.value = categ;
 		opener.document.frm.area.value = area;
@@ -166,7 +166,7 @@ function sendData(subNo, categ, area, subName, score, guide){
 		opener.document.frm.guide.value = guide;
 		
 	} else if(score > 0){
-		$("#acScore", opener.document).attr('disabled', true);
+		$("#acScore", opener.document).attr('readonly', true);
 		opener.document.frm.subNo.value = subNo;
 		opener.document.frm.categ.value = categ;
 		opener.document.frm.area.value = area;
@@ -178,6 +178,17 @@ function sendData(subNo, categ, area, subName, score, guide){
 	
 	window.close();
 	
+}
+
+// 항목 명 유효성 검사
+function searchCheck(){
+	var subName = $("#subName").val();
+	
+	if(subName == ""){
+		alert("항목 명을 입력해주세요");
+		document.getElementById("subName").focus();
+		return false;
+	}
 }
 
 </script> 

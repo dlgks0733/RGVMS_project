@@ -25,7 +25,7 @@ function getFileInfo(fullName){
 		
 	}else{
 		
-		imgsrc ="/resources/dist/img/file.png";
+		imgsrc ="/resources/dist/assets/images/file.svg";
 		fileLink = fullName.substr(12);
 		getLink = "/displayFile?fileName="+fullName;
 		deleteLink ="/deleteFile?fileName="+front + end;

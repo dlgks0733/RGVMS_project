@@ -1,5 +1,6 @@
 package com.rgvms.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -16,7 +17,7 @@ import java.util.Date;
 	CONTENT              VARCHAR2(3000) NULL 
 );*/
 
-public class ApplyVO {
+public class ApplyVO extends SubjectVO {
 
 	private int applyNo;
 	private int userNo;
@@ -29,6 +30,10 @@ public class ApplyVO {
 	private String content;
 	private int acScore;
 	private String[] files;
+	private String userName;
+
+	//상세보기 file 여러개 가져오기
+	private ArrayList<FileVO> fileList;
 
 	public int getApplyNo() {
 		return applyNo;
@@ -118,11 +123,28 @@ public class ApplyVO {
 		this.files = files;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public ArrayList<FileVO> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(ArrayList<FileVO> fileList) {
+		this.fileList = fileList;
+	}
+
 	@Override
 	public String toString() {
 		return "ApplyVO [applyNo=" + applyNo + ", userNo=" + userNo + ", subNo=" + subNo + ", applyState=" + applyState
 				+ ", reason=" + reason + ", serialNum=" + serialNum + ", acDate=" + acDate + ", applyDate=" + applyDate
-				+ ", content=" + content + ", acScore=" + acScore + ", files=" + Arrays.toString(files) + "]";
+				+ ", content=" + content + ", acScore=" + acScore + ", files=" + Arrays.toString(files) + ", userName="
+				+ userName + ", fileList=" + fileList + "]";
 	}
-
+	
 }

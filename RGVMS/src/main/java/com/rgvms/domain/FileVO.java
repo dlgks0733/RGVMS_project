@@ -12,6 +12,7 @@ public class FileVO {
 	private int fileNo;
 	private int applyNo;
 	private String fileName;
+	private String fileLocation;
 
 	public int getFileNo() {
 		return fileNo;
@@ -37,9 +38,19 @@ public class FileVO {
 		this.fileName = fileName;
 	}
 
+	public String getFileLocation() {
+		return fileLocation;
+	}
+
+	public void setFileLocation(String fileLocation) {
+		this.fileLocation = fileLocation;
+	}
+
 	@Override
 	public String toString() {
-		return "FileVO [fileNo=" + fileNo + ", applyNo=" + applyNo + ", fileName=" + fileName + "]";
+		return "FileVO [fileNo=" + fileNo + ", applyNo=" + applyNo + ", fileName=" + fileName + ", fileLocation="
+				+ fileLocation + "]";
 	}
+
 
 }
