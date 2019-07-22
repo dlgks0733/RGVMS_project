@@ -137,7 +137,7 @@ input.form-control[readonly], textarea.form-control[readonly] {
 														<label for="score">평가점수 <span
 															class="text-danger">*</span></label>
 														<input class="form-control" type="text" name="score"
-															value="${subjectVO.score }" />
+															value="${subjectVO.score}" />
 													</div>
 												</div>
 												<div class="col-md-2">
@@ -154,7 +154,7 @@ input.form-control[readonly], textarea.form-control[readonly] {
 														<label for="publication">발행처 <span
 															class="text-danger">*</span></label>
 														<input class="form-control" type="text"
-															name="publication" value="${subjectVO.publication }"/>
+															name="publication" value="${subjectVO.publication}"/>
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -169,8 +169,6 @@ input.form-control[readonly], textarea.form-control[readonly] {
 														<label for="example-textarea">추가 안내사항</label>
 														<textarea class="form-control" name="guide" id="example-textarea"
 															rows="3">${subjectVO.guide}</textarea>
-															
-														<input type="hidden" class="form-control" name="regdate" value="${subjectVO.regdate }">
 														<input type="hidden" class="form-control" name="subNo" value="${subjectVO.subNo }">
 													</div>
 												</div>
@@ -195,8 +193,9 @@ input.form-control[readonly], textarea.form-control[readonly] {
 												<!-- end col -->
 											</div>
 											<!-- end row -->
-										</form>
+											</form>
 									</div>
+									
 									<!-- end card-body-->
 								</div>
 								<!-- end card-->
