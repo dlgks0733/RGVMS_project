@@ -92,10 +92,10 @@ public class UserController {
 	}
 	
 	//6. 사용자(학생) 삭제
-	@RequestMapping(value = "/remove", method=RequestMethod.POST)
+	@RequestMapping(value = "/remove", method=RequestMethod.GET)
 	public String remove(@RequestParam("userNo") int userNo, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 		
-		logger.info("user removePOST..............");
+		logger.info("user removeGET..............");
 		
 		service.remove(userNo);
 		

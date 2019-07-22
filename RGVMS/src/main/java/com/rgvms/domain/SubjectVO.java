@@ -94,5 +94,4 @@ public class SubjectVO {
 		return "SubjectVO [subNo=" + subNo + ", subName=" + subName + ", score=" + score + ", categ=" + categ
 				+ ", area=" + area + ", publication=" + publication + ", regdate=" + regdate + ", guide=" + guide + "]";
 	}
-
 }

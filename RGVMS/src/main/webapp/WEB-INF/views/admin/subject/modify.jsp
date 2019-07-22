@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -18,11 +17,14 @@
 	href="/resources/dist/assets/images/favicon.ico">
 
 <!-- inline style to handle loading of various element-->
+<!-- page CSS -->
 <style>
 body.loading {
 	visibility: hidden;
 }
-
+input.form-control[readonly], textarea.form-control[readonly] { 
+  background-color: #fff;
+}
 </style>
 
 <!-- third party css -->
@@ -63,8 +65,6 @@ body.loading {
 									<ol class="breadcrumb m-0">
 										<li class="breadcrumb-item"><a
 											href="javascript: void(0);">인증항목관리</a></li>
-										<!-- <li class="breadcrumb-item"><a
-											href="javascript: void(0);"></a></li> -->
 										<li class="breadcrumb-item active">인증항목등록</li>
 									</ol>
 								</div>
@@ -81,35 +81,43 @@ body.loading {
 									<div class="card-body">
 										<!-- <h4 class="header-title mb-3">항목정보입력란</h4> -->
 
-										<form action="/admin/subject/register" method="post">
+										<form role="form">
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
 														<label for="categ">분류 <span
 															class="text-danger">*</span></label>
-														<select data-toggle="select2" name="categ">
-															<option>선택하세요..</option>
-															<option value="필수">필수</option>
-															<option value="선택">선택</option>
+														<select data-toggle="select2" name="categ" id="categSelect">
+															<option value="필수"
+															<c:out value="${subjectVO.categ eq '필수'?'selected':'' }"/>>필수</option>
+															<option value="선택"
+															<c:out value="${subjectVO.categ eq '선택'?'selected':'' }"/>>선택</option>
 														</select>
 														<div class="invalid-feedback">인증항목 분류을 선택해주세요.</div>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="area">영역 <span
-															class="text-danger">*</span></label> 
-														<select data-toggle="select2" name="area">
-															<option>선택하세요..</option>
-															<option value="외국어">외국어</option>
-															<option value="학생활동봉사">학생활동/봉사</option>
-															<option value="정보화">정보화</option>
-															<option value="금융회계">금융/회계</option>
-															<option value="교육">교육</option>
-															<option value="취업진학">취업/진학</option>
-															<option value="공모전기타">공모전/기타</option>
-														</select>
-														<div class="invalid-feedback">인증항목 영역을 선택해주세요.</div>
+														<label for="billing-last-name">영역 <span
+															class="text-danger">*</span></label>
+															
+															<select data-toggle="select2" name="area" id="areaSelect">
+																<option value="외국어"
+																<c:out value="${subjectVO.area eq '외국어'?'selected':'' }"/>>외국어</option>
+																<option value="학생활동봉사"
+																<c:out value="${subjectVO.area eq '학생활동봉사'?'selected':'' }"/>>학생활동/봉사</option>
+																<option value="정보화"
+																<c:out value="${subjectVO.area eq '정보화'?'selected':'' }"/>>정보화</option>
+																<option value="금융회계"
+																<c:out value="${subjectVO.area eq '금융회계'?'selected':'' }"/>>금융/회계</option>
+																<option value="교육"
+																<c:out value="${subjectVO.area eq '교육'?'selected':'' }"/>>교육</option>
+																<option value="취업진학"
+																<c:out value="${subjectVO.area eq '취업진학'?'selected':'' }"/>>취업/진학</option>
+																<option value="공모전기타"
+																<c:out value="${subjectVO.area eq '공모전기타'?'selected':'' }"/>>공모전/기타</option>
+															</select>
+															<div class="invalid-feedback">인증항목 영역을 선택해주세요.</div>
 													</div>
 												</div>
 											</div>
@@ -121,14 +129,15 @@ body.loading {
 														<label for="sub-Name">평가항목 <span
 															class="text-danger">*</span></label>
 														<input class="form-control" type="text"
-															placeholder="평가항목을 입력하세요. 예)TOEIC, 정보처리기사 1급" name="subName">
+															name="subName" value="${subjectVO.subName}">
 													</div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
 														<label for="score">평가점수 <span
 															class="text-danger">*</span></label>
-														<input class="form-control" type="text" name="score"/>
+														<input class="form-control" type="text" name="score"
+															value="${subjectVO.score }" />
 													</div>
 												</div>
 												<div class="col-md-2">
@@ -144,8 +153,8 @@ body.loading {
 													<div class="form-group">
 														<label for="publication">발행처 <span
 															class="text-danger">*</span></label>
-														<input class="form-control" type="text" placeholder="예)한국산업인력공단, 한국토익위원회"
-															name="publication"/>
+														<input class="form-control" type="text"
+															name="publication" value="${subjectVO.publication }"/>
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -157,9 +166,12 @@ body.loading {
 											<div class="row">
 												<div class="col-12">
 													<div class="form-group mt-3">
-														<label for="guide">추가 안내사항</label>
-														<textarea class="form-control" name="guide"
-															rows="5" placeholder="안내사항을 적어주세요."></textarea>
+														<label for="example-textarea">추가 안내사항</label>
+														<textarea class="form-control" name="guide" id="example-textarea"
+															rows="3">${subjectVO.guide}</textarea>
+															
+														<input type="hidden" class="form-control" name="regdate" value="${subjectVO.regdate }">
+														<input type="hidden" class="form-control" name="subNo" value="${subjectVO.subNo }">
 													</div>
 												</div>
 											</div>
@@ -167,7 +179,8 @@ body.loading {
 
 											<div class="row mt-4">
 												<div class="col-sm-6">
-													<a href="/admin/subject/list"
+													<a href="/admin/subject/list?page=${cri.page}&perPageNum=${cri.perPageNum}&
+															searchType=${cri.searchType}&keyword=${cri.keyword}"
 														class="btn text-muted d-none d-sm-inline-block btn-link font-weight-semibold">
 														<i class="mdi mdi-arrow-left"></i> 목록으로 돌아가기
 													</a>
@@ -175,7 +188,8 @@ body.loading {
 												<!-- end col -->
 												<div class="col-sm-6">
 													<div class="text-sm-right">
-														<button class="btn btn-primary" type="submit">등록</button>
+														<button class="btn btn-danger" type="button">삭제</button>
+														<button class="btn btn-primary" type="button" >수정</button>
 													</div>
 												</div>
 												<!-- end col -->
@@ -240,20 +254,29 @@ body.loading {
 	<script src="/resources/dist/assets/js/pages/demo.calendar.js"></script>
 	<!-- end demo js-->
 
-
-	<!-- <script>
-		$(document).ready(function() {
-	  		$("#detached-check input:radio").click(function() {
-
-	    			alert("clicked");
-	    
-	   		});
-	  
-	 		 $("input:radio:first").prop("checked", true).trigger("click");
-	  
-			});
-
-	</script>
- -->
 </body>
+
+<script>
+	$(document).ready(function() {
+
+		var formObj = $("form[role='form']");
+
+		console.log(formObj);
+		
+		/* 삭제버튼 */
+		$(".btn-danger").on("click", function() {
+			formObj.attr("action", "/admin/subject/remove");
+			formObj.attr("method", "post");
+			formObj.submit();
+		});
+		
+		/* 수정버튼 */
+		$(".btn-primary").on("click", function() {
+			formObj.attr("action", "/admin/subject/modify");
+			formObj.attr("method", "post");
+			formObj.submit();
+		});
+
+	});
+	</script>
 </html>

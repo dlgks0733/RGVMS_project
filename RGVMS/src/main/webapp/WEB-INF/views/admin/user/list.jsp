@@ -43,17 +43,12 @@ function userRegister() {
 </script>
 
 <script type="text/javascript">
-$(document).ready(function() {
-
-	var formObj = $("form[role='form']");
-
-	console.log(formObj);
-
-	$(".btn-remove").on("click", function() {
-		formObj.attr("action", "/admin/user/remove");
-		formObj.submit();
-	});
-});
+function postRemove() {
+	
+	var formObject = document.contents;
+	
+	formObject.method = 'post';
+}
 </script>
 </head>
 
@@ -132,7 +127,7 @@ $(document).ready(function() {
 										<!-- end col-->
 									</div>
 
-									<form id="form" method="post">
+									<form id="form" method="post" name="contents">
 										<div class="table-responsive">
 											<table class="table table-centered mb-0">
 												<thead class="thead-light">
@@ -155,7 +150,7 @@ $(document).ready(function() {
 
 												<tbody>
 													<!-- 리스트 내용 -->
-													<c:forEach items="${list}" var="userVO">
+													<c:forEach items="${list}" var="userVO" varStatus="status">
 														<tr>
 															<!-- <td>
                                                             <div class="custom-control custom-checkbox">
@@ -163,7 +158,7 @@ $(document).ready(function() {
                                                                 <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                                             </div>
                                                         </td> -->
-															<td>${userVO.regNum}</td>
+															<td>${status.count}</td>
 															<td>${userVO.userNo}</td>
 															<td>${userVO.grade}</td>
 															<td>${userVO.userName}</td>
@@ -171,9 +166,8 @@ $(document).ready(function() {
 															<td><a class="action-icon"
 																href='/admin/user/modify${pageMaker.makeSearch(pageMaker.cri.page) }&userNo=${userVO.userNo}'>
 																	<i class="mdi mdi-square-edit-outline"></i>
-															</a> <a class="action-icon btn-remove"
-																href="javascript:void(0);"><i
-																	class="mdi mdi-delete"></i></a></td>
+															</a> <a class="action-icon" href="/admin/user/remove&userNo=${userVO.userNo}">
+																	<i class="mdi mdi-delete"></i></a></td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -207,7 +201,7 @@ $(document).ready(function() {
 											</div>
 										</div>
 										<!-- 페이징처리 -->
-
+										
 										<div style="text-align: right;">
 											<button type="button" class="btn btn-light mb-2"
 												onclick="userRegister()">학생등록</button>
@@ -249,16 +243,7 @@ $(document).ready(function() {
 	</footer>
 	<!-- end Footer -->
 
-	</div>
-
-	<!-- ============================================================== -->
-	<!-- End Page content -->
-	<!-- ============================================================== -->
-
-
-	</div>
 	<!-- END wrapper -->
-
 
 	<!-- App js -->
 	<script src="/resources/dist/assets/js/app_admin.js"></script>
@@ -271,21 +256,6 @@ $(document).ready(function() {
 	<!-- demo app -->
 	<script src="/resources/dist/assets/js/pages/demo.calendar.js"></script>
 	<!-- end demo js-->
-
-
-	<script>
-	$(document).ready(function() {
-		  $("#detached-check input:radio").click(function() {
 	
-		    alert("clicked");
-		    
-		   });
-		  
-		  $("input:radio:first").prop("checked", true).trigger("click");
-		  
-	});
-
-</script>
-
 </body>
 </html>
