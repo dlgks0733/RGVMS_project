@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT
 			MIS_NO,
 			TIMES, 
+			MIS_DATE,
 			TITLE, 
 			MIS_REGDATE
 		FROM
@@ -27,20 +28,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	select SEQ_MIS.NEXTVAL from dual
 	  </selectKey>
 		INSERT INTO TBL_MIS
-		(MIS_NO,
-		TIMES, TITLE)
+		(MIS_NO, 
+		TIMES, MIS_DATE, TITLE)
 		VALUES
-		(#{misNo}, #{times} , #{title})
+		(#{misNo}, #{times}, #{misDate} , #{title})
 	</insert>
 
 
 	<!-- mis 검색할 때 전체 카운트 가져오기 -->
 	<select id="listSearchCount" resultType="int">
 		<![CDATA[  
- 		 SELECT COUNT(MIS_NO) 
- 		 FROM TBL_MIS 
-  		WHERE MIS_NO > 0 
+ 		 SELECT 
+ 		 	COUNT(MIS_NO) 
+ 		 FROM 
+ 		 	TBL_MIS 
+  		WHERE 
+  			MIS_NO > 0 
 		]]>
+		
+		<include refid="search"></include>
 
 
 	</select>
@@ -48,27 +54,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- mis 게시물 삭제 -->
 	<delete id="delete">
-		DELETE FROM TBL_MIS
-		WHERE MIS_NO = #{misNo}
+		DELETE FROM 
+			TBL_MIS
+		WHERE 
+			MIS_NO = #{misNo}
 	</delete>
 
 
 	<!-- mis 상세 조회 -->
-	<select id="select">
+	<select id="select" resultType="com.rgvms.domain.MisVO">
 		SELECT
-		TIMES,
-		TITLE
+			TIMES,
+			TITLE
 		FROM
-		TBL_MIS
+			TBL_MIS
 		WHERE MIS_NO = #{misNo}
 	</select>
 
 
 	<!-- mis 수정 -->
 	<update id="update">
-		UPDATE TBL_MIS
+		UPDATE 
+			TBL_MIS
 		SET TIMES = #{times}, TITLE = #{title}
-		WHERE MIS_NO = #{misNo}
+		WHERE
+			MIS_NO = #{misNo}
 	</update>
 
 
@@ -80,6 +90,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</if>
 	</sql>
+
+
+	<!-- 페이징 실행 구문 -->
+	 <!-- <select id="listCriteria" resultType="com.rgvms.domain.MisVO">
+ 		<![CDATA[
+		SELECT 
+			MIS_NO, 
+			TIMES,
+			TITLE,
+			MIS_REGDATE
+		FROM
+		 (
+		 SELECT 
+		  ROWNUM RNUM,
+		  MIS_NO,
+		  TIMES, 
+		  TITLE, 
+		  MIS_REGDATE 
+		 FROM 
+		   TBL_MIS WHERE MIS_NO > 0 ) 
+		 WHERE (RNUM >= #{pageStart} AND RNUM <= #{pageEnd})
+		 ORDER BY MIS_NO DESC, MIS_REGDATE DESC
+ 		]]>
+	</select>
+
+	전체 값 가져오기
+	<select id="countPaging" resultType="int">
+		 <![CDATA[
+		 SELECT 
+		   COUNT(MIS_NO) 
+		 FROME 
+		   TBL_MIS
+		 WHERE
+		   MIS_NO > 0 
+		 ]]>		
+	</select>  -->
 
 
 

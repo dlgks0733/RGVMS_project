@@ -29,8 +29,8 @@ public class MisAttDAOImpl implements MisAttDAO {
 	}
 
 	@Override
-	public List<MisAttVO> list(int misAttNo) throws Exception {
-		return session.selectList(namespace + ".list");
+	public List<MisAttVO> list(int misNo) throws Exception {
+		return session.selectList(namespace + ".list", misNo);
 	}
 
 	@Override
@@ -42,6 +42,11 @@ public class MisAttDAOImpl implements MisAttDAO {
 	@Override
 	public List<MisAttVO> myMisList(int userNo) throws Exception {
 		return session.selectList(namespace + ".list");
+	}
+
+	@Override
+	public List<UserVO> stuOtherList(int misNo) throws Exception {
+		return session.selectList(namespace + ".stuOtherList",misNo);
 	}
 
 }

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.persistence.MisDAO;
@@ -51,6 +52,16 @@ public class MisServiceImpl implements MisService {
 	@Override
 	public MisVO read(MisVO mvo) throws Exception {	
 		return dao.read(mvo);
+	}
+
+	@Override
+	public List<MisVO> listCriteria(Criteria cri) throws Exception {
+		return dao.listCriteria(cri);
+	}
+
+	@Override
+	public int listCountCriteria(Criteria cri) throws Exception {
+		return dao.countPaging(cri);
 	}
 
 }

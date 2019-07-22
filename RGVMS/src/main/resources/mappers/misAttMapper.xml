@@ -6,15 +6,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.rgvms.mapper.MisAttMapper">
 
 	<!-- mis 출결 리스트 조회  -->
-	<select id="List" resultType="com.rgvms.domain.MisAttVO">
+	<select id="list" resultType="com.rgvms.domain.MisAttVO">
 	<![CDATA[
 		SELECT
-			MIS_ATT_NO, 
-			MIS_ATT_DATE, 
-			USER_NO,
-			MIS_NO
+			M.MIS_ATT_NO, 
+			M.MIS_ATT_DATE, 
+			M.USER_NO,
+			M.MIS_NO,
+			U.GRADE,
+			U.USER_NAME
 		FROM
-			TBL_MIS_ATT
+			TBL_MIS_ATT M,
+			TBL_USER U
+		WHERE M.USER_NO = U.USER_NO
+		  AND M.MIS_NO = #{misNo}
 		
 	]]>
 	</select>
@@ -25,11 +30,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	select SEQ_MIS_ATT.NEXTVAL from dual
 	  </selectKey>
 		INSERT INTO TBL_MIS_ATT
-			(MIS_ATT_NO, MIS_ATT_DATE, USER_NO, MIS_NO)
+			(MIS_ATT_NO, USER_NO, MIS_ATT_DATE, MIS_NO)
 		VALUES 
-			(#{misAttNo}, #{misAttDate} , #{userNo}, #{misNo})
+			(#{misAttNo}, #{userNo}, #{misAttDate}, #{misNo})
 	</insert>
 	
+	<!-- mis 출결제외 한 학생 리스트 조회  -->
+	<select id="stuOtherList" resultType="com.rgvms.domain.UserVO">
+	
+		SELECT 
+			USER_NO, 
+			USER_NAME,
+			GRADE 
+		FROM 
+			TBL_USER U
+		WHERE STATE = '재학' AND USER_NO NOT IN(SELECT USER_NO FROM TBL_MIS_ATT where MIS_NO = #{misNo})
+	
+	</select>
+
 	
 	<!-- mis 출결 학생 리스트 조회  -->
 	<select id="stuList" resultType="com.rgvms.domain.UserVO">

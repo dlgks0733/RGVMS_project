@@ -2,6 +2,7 @@ package com.rgvms.persistence;
 
 import java.util.List;
 
+import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 
@@ -19,15 +20,19 @@ public interface MisDAO {
 	// 4. MIS 출결 관리 - MIS 게시물 삭제
 	public void delete(int misNo) throws Exception;
 	
-	// 5. MIS 출결관리 - MIS 게시물 상세조회
+	// 5. MIS 출결 관리 - MIS 게시물 상세조회
 	public MisVO select(int misNo) throws Exception;
 	
-	// 6. MIS 출결관리 - MIS 게시물 수정
+	// 6. MIS 출결 관리 - MIS 게시물 수정
 	public void update(MisVO mVo) throws Exception;
 	
-	//7. MIS 출결관리 - 상세정보
+	//7. MIS 출결 관리 - 상세정보
 	public MisVO read(MisVO mvo) throws Exception;
 	
+	//8. MIS 출결 관리 - 페이징
+	public List<MisVO> listCriteria(Criteria cri) throws Exception;
 	
+	//9. MIS 출결 관리 - 페이징
+	public int countPaging(Criteria cri) throws Exception;
 	
 }

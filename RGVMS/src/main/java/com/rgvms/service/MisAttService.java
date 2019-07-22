@@ -15,6 +15,9 @@ public interface MisAttService {
 
 	// 2. MIS 출결관리 - 출결 학생 목록
 	public List<MisAttVO> list(int misNo) throws Exception;
+	
+	// 2. MIS 출결관리 - 출결 제외(출석 등록 가능한 학생) 내역 목록
+	public List<UserVO> stuOtherList(int misNo) throws Exception;
 
 	// 3. MIS 출결관리 - 출결 내역 삭제 --> 수정할 경우 원래 출결 내역 지우는 것을 말함
 	public void removeAtt(int misNo) throws Exception;

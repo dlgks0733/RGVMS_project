@@ -13,9 +13,11 @@ import java.util.Date;
 public class MisAttVO {
 
 	private int misAttNo;
-	private Date misAttDate;
-	private int userNo;
+	private Date misAttDate; //등록일
+	private int userNo;//학번
 	private int misNo;
+	private int grade; // user의 grade를 받을 그릇
+	private String userName;
 
 	public int getMisAttNo() {
 		return misAttNo;
@@ -49,10 +51,26 @@ public class MisAttVO {
 		this.misNo = misNo;
 	}
 
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	@Override
 	public String toString() {
 		return "MisAttVO [misAttNo=" + misAttNo + ", misAttDate=" + misAttDate + ", userNo=" + userNo + ", misNo="
-				+ misNo + "]";
+				+ misNo + ", grade=" + grade + ", userName=" + userName + "]";
 	}
 
 }

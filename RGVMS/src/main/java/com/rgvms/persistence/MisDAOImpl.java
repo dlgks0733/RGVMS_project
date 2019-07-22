@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 
@@ -53,6 +54,16 @@ public class MisDAOImpl implements MisDAO {
 	public MisVO read(MisVO mvo) throws Exception {
 		return session.selectOne(namespace + ".read", mvo);
 		
+	}
+
+	@Override
+	public List<MisVO> listCriteria(Criteria cri) throws Exception {
+		return session.selectList(namespace + ".listCriteria", cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		return session.selectOne(namespace + ".countPaging", cri);
 	}
 
 }

@@ -41,4 +41,9 @@ public class MisAttServiceImpl implements MisAttService {
 		return dao.myMisList(userNo);
 	}
 
+	@Override
+	public List<UserVO> stuOtherList(int misNo) throws Exception {
+		return dao.stuOtherList(misNo);
+	}
+
 }

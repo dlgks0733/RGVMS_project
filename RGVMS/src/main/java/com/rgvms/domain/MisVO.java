@@ -14,6 +14,7 @@ public class MisVO {
 
 	private int misNo;
 	private int times;
+	private Date misDate;
 	private String title;
 	private Date misRegdate;
 
@@ -49,9 +50,19 @@ public class MisVO {
 		this.misRegdate = misRegdate;
 	}
 
-	@Override
-	public String toString() {
-		return "MisVO [misNo=" + misNo + ", times=" + times + ", title=" + title + ", misRegdate=" + misRegdate + "]";
+	public Date getMisDate() {
+		return misDate;
 	}
 
+	public void setMisDate(Date misDate) {
+		this.misDate = misDate;
+	}
+
+	@Override
+	public String toString() {
+		return "MisVO [misNo=" + misNo + ", times=" + times + ", misDate=" + misDate + ", title=" + title
+				+ ", misRegdate=" + misRegdate + "]";
+	}
+
+	
 }

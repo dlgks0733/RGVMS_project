@@ -65,46 +65,111 @@ body.loading {
 						<button id='searchBtn'>Search</button>
 
 
-							<div class="row">
-								<div class="col-12">
-									<div class="page-title-box">
+						<div class="row">
+							<div class="col-12">
+								<div class="page-title-box">
 
-										<h3 class="page-title">MIS 출결 관리</h3>
-									</div>
+									<h3 class="page-title">MIS 출결 관리</h3>
 								</div>
 							</div>
-							<!-- end page title -->
-							<div class="row">
-								<div class="col-xl-9">
-								
-									<div class="card">
-										<div class="card-body">
-											<div class="table-responsive-sm">
-												<table class="table table-centered mb-0">
-													<thead>
-														<tr>
-															<th>NO</th>
-															<th>제목</th>
-															<th>등록일</th>
+						</div>
+						<!-- end page title -->
+						<div class="row">
+							<div class="col-xl-9">
 
-														</tr>
-													</thead>
-													<tbody>
-														<c:forEach items="${list}" var="MisVO">														<tr>
+								<div class="card">
+									<div class="card-body">
+										<div class="table-responsive-sm">
+											<table class="table table-centered mb-0">
+												<thead>
+													<tr>
+														<th>NO</th>
+														<th>제목</th>
+														<th>시행일</th>
+														<th>등록일</th>
+
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items="${list}" var="MisVO">
+														<tr>
 															<td>${MisVO.misNo}</td>
-															<td>제 ${MisVO.timse}회 MISDAY ${MisVO.title}</td>
-															<td>${MisVO.misRegdate}</td>
-														</c:forEach> 
-													</tbody>
-												</table>
-											</div>
+															<td><a
+																href='read${pageMaker.makeSearch(pageMaker.cri.page)}&misNo=${MisVO.misNo}'>
+																제${MisVO.times}회 MISDAY ${MisVO.title}</a></td>
+															<td><fmt:formatDate pattern="yyyy-MM-dd" value ="${MisVO.misDate}" /></td>	
+															<td><fmt:formatDate pattern="yyyy-MM-dd" value ="${MisVO.misRegdate}" /></td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
 										</div>
+										
+										 <div class="box-footer">
+										 
+										 <br><br>
+						<div class="text-center">
+							<ul class="pagination">
+
+							<c:if test="${pageMaker.prev}">
+								<li><a
+									href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+							</c:if>
+
+							<c:forEach begin="${pageMaker.startPage }"
+								end="${pageMaker.endPage }" var="idx">
+								<li
+									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+									<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+								</li>
+							</c:forEach>
+
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li><a
+									href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+							</c:if>
+
+						</ul>
+					</div>
+
+				</div>
+										
 									</div>
-									<div style="text-align: right;">
-										<button type="button" onclick="location.href='register'"class="btn btn-primary">등록</button>
-										<a href=></a>
-									</div>
+								</div>
 								
+								<!-- <div style="text-align: center;">
+												 <nav>
+                                                    <ul class="pagination pagination-rounded">
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                                <span class="sr-only">Previous</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="page-item"><a class="page-link" href="javascript: void(0);">1</a></li>
+                                                        <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
+                                                        <li class="page-item active"><a class="page-link" href="javascript: void(0);">3</a></li>
+                                                        <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
+                                                        <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                                <span class="sr-only">Next</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                               </div>
+                                                -->
+                  
+				
+				
+                                                
+								<div style="text-align: right;">
+									<button type="button" onclick="location.href='register'"
+										class="btn btn-primary">등록</button>
+									</div>
+
 							</div>
 						</div>
 						<!-- end col-12 -->
