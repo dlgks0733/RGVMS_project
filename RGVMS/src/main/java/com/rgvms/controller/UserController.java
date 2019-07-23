@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rgvms.domain.Criteria;
 import com.rgvms.domain.PageMaker;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;

@@ -53,10 +53,10 @@
 											href="javascript: void(0);">학생관리</a></li>
 										<!-- <li class="breadcrumb-item"><a
 											href="javascript: void(0);"></a></li> -->
-										<li class="breadcrumb-item active">학생등록</li>
+										<li class="breadcrumb-item active">학생수정</li>
 									</ol>
 								</div>
-								<h4 class="page-title">학생등록</h4>
+								<h4 class="page-title">학생수정</h4>
 							</div>
 						</div>
 					</div>
@@ -68,10 +68,10 @@
 								<div class="card-body">
 									<h4 class="header-title mb-3">학생정보입력란</h4>
 
-									<form class="needs-validation" method="post">
+									<form class="needs-validation" role="form">
 										<div class="form-group mb-3">
 											<label for="userNo">학번</label> <input
-												type="text" class="form-control" name="userNo"
+												type="text" class="form-control" name="userNo" value="${userVO.userNo}"
 												placeholder="학번을 입력해주세요."/>
 											<div class="valid-feedback">확인!</div>
 										</div>
@@ -80,22 +80,28 @@
 											<div class="form-group mb-3">
 												<label for="grade">학년</label>
 												<select class="form-control select2" name="grade">
-	                                                    <option value="">선택</option>
-	                                                    <option value="4">4</option>
-	                                                    <option value="3">3</option>
-	                                                    <option value="2">2</option>
-	                                                    <option value="1">1</option>
+												<option value="4"
+													<c:out value="${userVO.grade eq '4'?'selected':'' }"/>>4</option>
+												<option value="3"
+													<c:out value="${userVO.grade eq '3'?'selected':'' }"/>>3</option>	
+												<option value="2"
+													<c:out value="${userVO.grade eq '2'?'selected':'' }"/>>2</option>
+												<option value="1"
+													<c:out value="${userVO.grade eq '1'?'selected':'' }"/>>1</option>		
 	                                            </select>
 												<div class="invalid-feedback">학년을 선택해주세요.</div>
 											</div>
 											<div class="form-group mb-3">
 												<label for="state">학적상태</label>
 												<select class="form-control select2" name="state">
-	                                                    <option value="">선택</option>
-	                                                    <option value="재학">재학</option>
-	                                                    <option value="휴학">휴학</option>
-	                                                    <option value="졸업">졸업</option>
-	                                                    <option value="수료">수료</option>
+                                                <option value="재학"
+													<c:out value="${userVO.state eq '재학'?'selected':'' }"/>>재학</option>
+												<option value="휴학"
+													<c:out value="${userVO.state eq '휴학'?'selected':'' }"/>>휴학</option>
+												<option value="졸업"
+													<c:out value="${userVO.state eq '졸업'?'selected':'' }"/>>졸업</option>
+												<option value="수료"
+													<c:out value="${userVO.state eq '수료'?'selected':'' }"/>>수료</option>	
 	                                            </select>
 												<div class="invalid-feedback">학년을 선택해주세요.</div>
 											</div>
@@ -103,16 +109,42 @@
 										
 										<div class="form-group mb-3">
 											<label for="userName">이름</label> <input
-												type="text" class="form-control" name="userName"
+												type="text" class="form-control" name="userName" value="${userVO.userName}"
 												placeholder="이름을 입력해주세요."/>
 											<div class="valid-feedback">확인!</div>
 										</div>
 
 										<input type="hidden" class="form-control" name="userPw" value="1234">
 										<input type="hidden" class="form-control" name="authority" value="0">
+										<input type="hidden" class="form-control" name="regNum" value="${userVO.regNum }">
 										
+										<!-- 페이징과 검색처리를 위한 파라미터값 -->
+										<%-- <input type='hidden' name='page' value="${cri.page}">
+										<input type='hidden' name='perPageNum' value="${cri.perPageNum}"> --%>
+										<input type='hidden' name='searchType' value="${cri.searchType}">
+										<input type='hidden' name='keyword' value="${cri.keyword}">
 										
-										<button class="btn btn-primary" type="submit">등록</button>
+										<div class="row mt-4">
+												<div class="col-sm-6">
+													<a href="/admin/user/list?
+															searchType=${cri.searchType}&keyword=${cri.keyword}"
+															class="btn text-muted d-none d-sm-inline-block btn-link font-weight-semibold">
+														<i class="mdi mdi-arrow-left"></i> 목록으로 돌아가기
+													</a>
+												
+												<!-- searchType=page=${cri.page}&perPageNum=${cri.perPageNum}
+															&searchType=${cri.searchType}&keyword=${cri.keyword} -->
+												
+												</div>
+												<!-- end col -->
+												<div class="col-sm-6">
+													<div class="text-sm-right">
+														<button class="btn btn-primary" type="button">수정</button>
+													</div>
+												</div>
+												<!-- end col -->
+											</div>
+										
 									</form>
 
 								</div>
@@ -168,7 +200,24 @@
 
         <!-- demo app -->
         <script src="/resources/dist/assets/js/pages/demo.calendar.js"></script>
-        <!-- end demo js--> 
+        <!-- end demo js-->
 
 </body>
+
+<script>
+	$(document).ready(function() {
+
+		var formObj = $("form[role='form']");
+
+		console.log(formObj);
+		
+		/* 수정버튼 */
+		$(".btn-primary").on("click", function() {
+			formObj.attr("action", "/admin/user/modify");
+			formObj.attr("method", "post");
+			formObj.submit();
+		});
+
+	});
+	</script>
 </html>

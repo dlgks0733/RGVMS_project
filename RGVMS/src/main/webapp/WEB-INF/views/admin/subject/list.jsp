@@ -41,6 +41,13 @@ body.loading {
 	}
 </script>
 
+<!-- 개정안 부칙 팝업창띄우기 -->
+<script type="text/javascript">
+	function subRevised() {
+		location.href="/admin/subject/revised";
+	}
+	
+</script>
 </head>
 
 <body class="loading">
@@ -161,9 +168,12 @@ body.loading {
 												</tbody>
 											</table>
 										</div>
-										<div style="text-align: right; margin-top:2%;">
-											<button type="button" class="btn btn-light mb-2"
-												onclick="subRegister()">인증항목등록</button>
+										
+										<div style="margin-top:2%;">
+											<button type="button" class="btn btn-outline-secondary mb-2" onclick="subRevised()">졸업인증제 개정안 부칙</button>
+										</div>
+										<div style="text-align: right;">
+											<button type="button" class="btn btn-primary mb-2" onclick="subRegister()">인증항목등록</button>
 										</div>
 									</form>
 									<!-- form -->

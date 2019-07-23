@@ -76,32 +76,26 @@ public class SubjectController {
 		model.addAttribute(service.read(subNo));
 	}
 
-//	// 6. 인증항목 수정
-//	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-//	public String modifyPOST(SubjectVO sVo, @ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rttr) throws Exception {
-//
-//		logger.info("subject modifyPOST.............");
-//		logger.info(cri.toString());
-//
-//		service.modify(sVo);
-//
-//		rttr.addAttribute("searchType", cri.getSearchType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
-//
-//		rttr.addFlashAttribute("msg", "SUCCESS");
-//
-//		logger.info(rttr.toString());
-//
-//		return "redirect:/admin/subject/list";
-//	}
+	//6. 인증항목 수정
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modifyPOST(SubjectVO sVo, @ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+
+		logger.info("subject modifyPOST.............");
+		logger.info(cri.toString());
+
+		service.modify(sVo);
+
+		rttr.addAttribute("searchType", cri.getSearchType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+
+		rttr.addFlashAttribute("msg", "SUCCESS");
+
+		logger.info(rttr.toString());
+
+		return "redirect:/admin/subject/list";
+	}
 	
-	// 6. 인증항목 수정
-		@RequestMapping(value = "/modify", method = RequestMethod.POST)
-		public void modifyPOST(SubjectVO sVo) throws Exception {
-
-			logger.info("subject modifyPOST.............");
-
-		}
+	
 
 	// 7. 인증항목 삭제
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)

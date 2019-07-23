@@ -38,7 +38,7 @@
 		UPDATE
 		TBL_SUBJECT
 		SET categ = #{categ}, area = #{area}, sub_Name = #{subName},
-			score = #{score}, guide = #{guide}, publication = #{publication}, regdate = #{regdate}
+			score = #{score}, guide = #{guide}, publication = #{publication}
 		WHERE sub_No = #{subNo}
 	</select>
 	

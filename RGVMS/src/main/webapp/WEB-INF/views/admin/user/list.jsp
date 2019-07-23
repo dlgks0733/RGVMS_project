@@ -127,7 +127,7 @@ function postRemove() {
 										<!-- end col-->
 									</div>
 
-									<form id="form" method="post" name="contents">
+									<form id="form" method="post">
 										<div class="table-responsive">
 											<table class="table table-centered mb-0">
 												<thead class="thead-light">
@@ -166,7 +166,7 @@ function postRemove() {
 															<td><a class="action-icon"
 																href='/admin/user/modify${pageMaker.makeSearch(pageMaker.cri.page) }&userNo=${userVO.userNo}'>
 																	<i class="mdi mdi-square-edit-outline"></i>
-															</a> <a class="action-icon" href="/admin/user/remove&userNo=${userVO.userNo}">
+															</a> <a class="action-icon" href="/admin/user/remove?userNo=${userVO.userNo}">
 																	<i class="mdi mdi-delete"></i></a></td>
 														</tr>
 													</c:forEach>
@@ -179,24 +179,27 @@ function postRemove() {
 										<div class="box-footer">
 											<div class="text-center">
 												<ul class="pagination" style="text-align: center;">
-													<li class="page-item"><a class="page-link"
-														href="javascript: void(0);" aria-label="Previous"> <span
-															aria-hidden="true">&laquo;</span> <span class="sr-only">Previous</span>
-													</a></li>
-													<li class="page-item"><a class="page-link"
-														href="javascript: void(0);">1</a></li>
-													<li class="page-item"><a class="page-link"
-														href="javascript: void(0);">2</a></li>
-													<li class="page-item active"><a class="page-link"
-														href="javascript: void(0);">3</a></li>
-													<li class="page-item"><a class="page-link"
-														href="javascript: void(0);">4</a></li>
-													<li class="page-item"><a class="page-link"
-														href="javascript: void(0);">5</a></li>
-													<li class="page-item"><a class="page-link"
-														href="javascript: void(0);" aria-label="Next"> <span
-															aria-hidden="true">&raquo;</span> <span class="sr-only">Next</span>
-													</a></li>
+													<c:if test="${pageMaker.prev}">
+														<li class="page-item"><a class="page-link"
+															href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">
+															<span aria-hidden="true">&laquo;</span>
+															<span class="sr-only">Previous</span></a></li>
+													</c:if>
+						
+													<c:forEach begin="${pageMaker.startPage }"
+														end="${pageMaker.endPage }" var="idx">
+														<li class="page-item"
+															<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+															<a class="page-link" href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+														</li>
+													</c:forEach>
+						
+													<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+														<li class="page-item"><a class="page-link" aria-label="Next"
+															href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">
+															<span aria-hidden="true">&raquo;</span>
+															<span class="sr-only">Next</span></a></li>
+													</c:if>
 												</ul>
 											</div>
 										</div>

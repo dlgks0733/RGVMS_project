@@ -177,8 +177,7 @@ input.form-control[readonly], textarea.form-control[readonly] {
 
 											<div class="row mt-4">
 												<div class="col-sm-6">
-													<a href="/admin/subject/list?page=${cri.page}&perPageNum=${cri.perPageNum}&
-															searchType=${cri.searchType}&keyword=${cri.keyword}"
+													<a href="/admin/subject/list?searchType=${cri.searchType}&keyword=${cri.keyword}"
 														class="btn text-muted d-none d-sm-inline-block btn-link font-weight-semibold">
 														<i class="mdi mdi-arrow-left"></i> 목록으로 돌아가기
 													</a>
