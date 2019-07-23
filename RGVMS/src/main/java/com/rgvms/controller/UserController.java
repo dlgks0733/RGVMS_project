@@ -56,7 +56,9 @@ public class UserController {
 		logger.info(cri.toString());
 		
 		System.out.println("***********" + cri.toString());
-		model.addAttribute("list", service.list(cri));
+		logger.info("service.list(cri): " + service.list(cri).size());
+		
+		model.addAttribute("list", service.listSearch(cri));
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);

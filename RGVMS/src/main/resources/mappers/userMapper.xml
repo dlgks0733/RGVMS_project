@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		  FROM
 		  TBL_USER 
 		  WHERE
-		  user_No > 0 
+		  user_No > 0 AND authority = 0
 		]]>
 		<include refid="search" />
 	</select>
@@ -122,6 +122,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   		WHERE user_No > 0 ) 
 		 	WHERE (rnum >= #{pageStart} AND rnum <= #{pageEnd}) 
 		 	ORDER BY user_No DESC, grade DESC
+		 	limit #{pageStart}, #{perPageNum}
 		 ]]>
 	</select>
 

@@ -6,8 +6,10 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.rgvms.domain.Criteria;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
+import com.rgvms.domain.UserVO;
 import com.rgvms.persistence.SubjectDAO;
 
 @Service
@@ -55,6 +57,18 @@ public class SubjectServiceImpl implements SubjectService {
 	public void remove(int subNo) throws Exception {
 		// TODO Auto-generated method stub
 		dao.delete(subNo);
+	}
+
+	@Override
+	public List<UserVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listCriteria(cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countPaging(cri);
 	}
 
 }

@@ -94,29 +94,32 @@ body.loading {
 											<form class="form-inline">
 												<div class="form-group mx-sm-3 mb-2">
 													<label for="status-select" class="mr-2">분류</label> <select
-														class="custom-select" id="status-select">
+														class="custom-select" id="status-select" name="searchType">
 														<option value=""
 															<c:out value="${cri.searchType == null?'selected':''}"/>>
 															전체</option>
-														<option value="uno"
-															<c:out value="${cri.searchType eq 'uno'?'selected':''}"/>>
-															학번</option>
-														<option value="g"
-															<c:out value="${cri.searchType eq 'g'?'selected':''}"/>>
-															학년</option>
-														<option value="un"
-															<c:out value="${cri.searchType eq 'un'?'selected':''}"/>>
-															이름</option>
-														<option value="s"
-															<c:out value="${cri.searchType eq 's'?'selected':''}"/>>
-															학적상태</option>
+														<option value="c"
+															<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
+															분류</option>
+														<option value="a"
+															<c:out value="${cri.searchType eq 'a'?'selected':''}"/>>
+															영역</option>
+														<option value="sn"
+															<c:out value="${cri.searchType eq 'sn'?'selected':''}"/>>
+															항목</option>
+														<option value="sc"
+															<c:out value="${cri.searchType eq 'sc'?'selected':''}"/>>
+															평가점수</option>
+														<option value="p"
+															<c:out value="${cri.searchType eq 'p'?'selected':''}"/>>
+															발행처</option>
 													</select>
 												</div>
 												<div class="form-group mb-2">
 													<label for="inputPassword2" class="sr-only">Search</label>
-													<input type="search" class="form-control" name="keyword"
-														value="${cri.keyword}" placeholder="검색어를 입력하세요.">
-													<button type="button" class="btn btn-light mb-2"
+													<input type="text" class="form-control" name="keyword"
+														value="${cri.keyword}" placeholder="검색어를 입력하세요." id="keywordInput">
+													<button id="searchBtn" type="button" class="btn btn-light mb-2"
 														style="vertical-align: bottom;">검색</button>
 												</div>
 											</form>
@@ -155,7 +158,8 @@ body.loading {
                                                                 <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                                             </div>
                                                         </td> -->
-															<td>${status.count}</td>
+                                                        <td>${(pageMaker.totalCount - status.index) -  (pageMaker.cri.page-1) * 10}</td>
+															<%-- <td>${status.count}</td> --%>
 															<td>${subjectVO.categ}</td>
 															<td>${subjectVO.area}</td>
 															<td><a
@@ -168,6 +172,36 @@ body.loading {
 												</tbody>
 											</table>
 										</div>
+										
+										<!-- 페이징처리 -->
+										<div class="box-footer">
+											<div class="text-center">
+												<ul class="pagination" style="text-align: center;">
+													<c:if test="${pageMaker.prev}">
+														<li class="page-item"><a class="page-link"
+															href="/admin/subject/list${pageMaker.makeSearch(pageMaker.startPage - 1) }">
+															<span aria-hidden="true">&laquo;</span>
+															<span class="sr-only">Previous</span></a></li>
+													</c:if>
+						
+													<c:forEach begin="${pageMaker.startPage }"
+														end="${pageMaker.endPage }" var="idx">
+														<li class="page-item"
+															<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+															<a class="page-link" href="/admin/subject/list${pageMaker.makeSearch(idx)}">${idx}</a>
+														</li>
+													</c:forEach>
+						
+													<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+														<li class="page-item"><a class="page-link" aria-label="Next"
+															href="/admin/subject/list${pageMaker.makeSearch(pageMaker.endPage +1) }">
+															<span aria-hidden="true">&raquo;</span>
+															<span class="sr-only">Next</span></a></li>
+													</c:if>
+												</ul>
+											</div>
+										</div>
+										<!-- 페이징처리 -->
 										
 										<div style="margin-top:2%;">
 											<button type="button" class="btn btn-outline-secondary mb-2" onclick="subRevised()">졸업인증제 개정안 부칙</button>
@@ -251,8 +285,8 @@ body.loading {
 					"click",
 					function(event) {
 	
-						self.location = "list"
-								+ '${pageMaker.makeQuery(1)}'
+						self.location = "/admin/subject/list"
+							+ '${pageMaker.makeQuery(1)}'
 								+ "&searchType="
 								+ $("select option:selected").val()
 								+ "&keyword=" + $('#keywordInput').val();

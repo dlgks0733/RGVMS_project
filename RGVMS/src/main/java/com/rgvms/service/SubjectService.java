@@ -2,8 +2,10 @@ package com.rgvms.service;
 
 import java.util.List;
 
+import com.rgvms.domain.Criteria;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
+import com.rgvms.domain.UserVO;
 
 public interface SubjectService {
 
@@ -24,5 +26,10 @@ public interface SubjectService {
 	
 	// 6. 기초정보관리 - 인증항목 삭제
 	public void remove(int subNo) throws Exception;
+	
+	// 7. 페이징처리
+	public List<UserVO> listCriteria(Criteria cri) throws Exception;
+	
+	public int countPaging(Criteria cri) throws Exception;
 	
 }

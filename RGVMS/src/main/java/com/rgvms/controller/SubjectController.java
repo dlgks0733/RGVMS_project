@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rgvms.domain.PageMaker;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
 import com.rgvms.service.SubjectService;
@@ -56,10 +57,16 @@ public class SubjectController {
 
 		System.out.println("***********" + cri.toString());
 		model.addAttribute("list", service.list(cri));
-
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		
+		pageMaker.setTotalCount(service.listSearchCount(cri));
+		
+		model.addAttribute("pageMaker", pageMaker);
 	}
 
-	// 4. 인증항목 상세내역
+	// 4. 인증항목 상세내역 x
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public void read(@RequestParam("subNo") int subNo, Model model) throws Exception {
 

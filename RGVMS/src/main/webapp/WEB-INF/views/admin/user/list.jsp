@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -97,7 +96,7 @@ function postRemove() {
 											<form class="form-inline">
 												<div class="form-group mx-sm-3 mb-2">
 													<label for="status-select" class="mr-2">분류</label> <select
-														class="custom-select" id="status-select">
+														class="custom-select" id="status-select" name="searchType">
 														<option value=""
 															<c:out value="${cri.searchType == null?'selected':''}"/>>
 															전체</option>
@@ -117,9 +116,9 @@ function postRemove() {
 												</div>
 												<div class="form-group mb-2">
 													<label for="inputPassword2" class="sr-only">Search</label>
-													<input type="search" class="form-control" name="keyword"
-														value="${cri.keyword}" placeholder="검색어를 입력하세요.">
-													<button type="button" class="btn btn-light mb-2"
+													<input type="text" class="form-control" name="keyword"
+														value="${cri.keyword}" placeholder="검색어를 입력하세요." id="keywordInput">
+													<button id='searchBtn' type="button" class="btn btn-light mb-2"
 														style="vertical-align: bottom;">검색</button>
 												</div>
 											</form>
@@ -158,7 +157,8 @@ function postRemove() {
                                                                 <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                                             </div>
                                                         </td> -->
-															<td>${status.count}</td>
+                                                        <td>${(pageMaker.totalCount - status.index) -  (pageMaker.cri.page-1) * 10 }</td>
+											<%-- 				<td>${status.count}</td> --%>
 															<td>${userVO.userNo}</td>
 															<td>${userVO.grade}</td>
 															<td>${userVO.userName}</td>
@@ -181,7 +181,7 @@ function postRemove() {
 												<ul class="pagination" style="text-align: center;">
 													<c:if test="${pageMaker.prev}">
 														<li class="page-item"><a class="page-link"
-															href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">
+															href="/admin/user/list${pageMaker.makeSearch(pageMaker.startPage - 1) }">
 															<span aria-hidden="true">&laquo;</span>
 															<span class="sr-only">Previous</span></a></li>
 													</c:if>
@@ -190,13 +190,13 @@ function postRemove() {
 														end="${pageMaker.endPage }" var="idx">
 														<li class="page-item"
 															<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-															<a class="page-link" href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+															<a class="page-link" href="/admin/user/list${pageMaker.makeSearch(idx)}">${idx}</a>
 														</li>
 													</c:forEach>
 						
 													<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 														<li class="page-item"><a class="page-link" aria-label="Next"
-															href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">
+															href="/admin/user/list${pageMaker.makeSearch(pageMaker.endPage +1) }">
 															<span aria-hidden="true">&raquo;</span>
 															<span class="sr-only">Next</span></a></li>
 													</c:if>
@@ -261,4 +261,23 @@ function postRemove() {
 	<!-- end demo js-->
 	
 </body>
+
+<script>
+	$(document).ready(
+		function() {
+	
+		$('#searchBtn').on(
+			"click",
+			function(event) {
+
+			self.location = "/admin/user/list"
+					+ '${pageMaker.makeQuery(1)}'
+					+ "&searchType="
+					+ $("select option:selected").val()
+					+ "&keyword=" + $('#keywordInput').val();
+
+		});
+
+	});
+</script>
 </html>

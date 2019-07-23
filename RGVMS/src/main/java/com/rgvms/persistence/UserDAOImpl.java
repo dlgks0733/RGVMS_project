@@ -36,7 +36,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	//2. 검색과 페이징이 가능한 사용자(학생) 목록
+	//2. 사용자(학생) 목록
 	public List<UserVO> list(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + ".list", cri);
@@ -108,6 +108,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	// 12. 검색처리
+	// 검색과 페이징이 포함된 리스트 띄우기(SearchCriteria와 Criteria)
 	@Override
 	public List<UserVO> listSearch(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub

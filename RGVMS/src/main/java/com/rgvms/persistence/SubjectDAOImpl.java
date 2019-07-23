@@ -7,8 +7,10 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.rgvms.domain.Criteria;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
+import com.rgvms.domain.UserVO;
 
 @Repository
 public class SubjectDAOImpl implements SubjectDAO {
@@ -26,10 +28,10 @@ public class SubjectDAOImpl implements SubjectDAO {
 	}
 
 	@Override
-	//2. 검색과 페이징이 가능한 인증항목 전체목록
+	//2. 검색이 가능한 인증항목 전체목록
 	public List<SubjectVO> list(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace + ".list", cri);
+		return session.selectList(namespace + ".listSearch", cri);
 	}
 
 	@Override
@@ -57,6 +59,18 @@ public class SubjectDAOImpl implements SubjectDAO {
 	public void delete(int subNo) throws Exception {
 		// TODO Auto-generated method stub
 		session.delete(namespace + ".delete", subNo);
+	}
+
+	@Override
+	public List<UserVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + ".listCriteria", cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".countPaging", cri);
 	}
 
 	

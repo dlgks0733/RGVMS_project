@@ -2,8 +2,10 @@ package com.rgvms.persistence;
 
 import java.util.List;
 
+import com.rgvms.domain.Criteria;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
+import com.rgvms.domain.UserVO;
 
 public interface SubjectDAO {
 
@@ -24,5 +26,10 @@ public interface SubjectDAO {
    
    // 6. 기초정보관리 - 인증항목 삭제
    public void delete(int subNo) throws Exception;
+   
+   // 7. 페이징처리
+   public List<UserVO> listCriteria(Criteria cri) throws Exception;
+	
+   public int countPaging(Criteria cri) throws Exception;
    
 }
