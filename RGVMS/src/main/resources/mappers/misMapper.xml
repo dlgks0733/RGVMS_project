@@ -46,9 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   			MIS_NO > 0 
 		]]>
 		
-		<include refid="search"></include>
-
-
+		<include refid="search" />
 	</select>
 
 
@@ -65,7 +63,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select" resultType="com.rgvms.domain.MisVO">
 		SELECT
 			TIMES,
-			TITLE
+			TITLE,
+			MIS_NO,
+			MIS_DATE,
+			MIS_REGDATE
 		FROM
 			TBL_MIS
 		WHERE MIS_NO = #{misNo}
@@ -76,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update">
 		UPDATE 
 			TBL_MIS
-		SET TIMES = #{times}, TITLE = #{title}
+		SET TIMES = #{times}, TITLE = #{title}, MIS_DATE = #{misDate}
 		WHERE
 			MIS_NO = #{misNo}
 	</update>
@@ -85,48 +86,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 제목 검색 -->
 	<sql id="search">
 		<if test="searchType != null">
-			<if test="searchType == 't'.toString()">
-				and TITLE like '%' || #{keyword} || '%'
-			</if>
+			<if test="searchType == 't'.toString()"> and TITLE like '%' || #{keyword} || '%' </if>
+			<if test="searchType == 'm'.toString()"> and MIS_DATE like '%' || #{keyword} || '%' </if>
 		</if>
 	</sql>
 
-
-	<!-- 페이징 실행 구문 -->
-	 <!-- <select id="listCriteria" resultType="com.rgvms.domain.MisVO">
- 		<![CDATA[
-		SELECT 
-			MIS_NO, 
-			TIMES,
-			TITLE,
-			MIS_REGDATE
-		FROM
-		 (
-		 SELECT 
-		  ROWNUM RNUM,
-		  MIS_NO,
-		  TIMES, 
-		  TITLE, 
-		  MIS_REGDATE 
-		 FROM 
-		   TBL_MIS WHERE MIS_NO > 0 ) 
-		 WHERE (RNUM >= #{pageStart} AND RNUM <= #{pageEnd})
-		 ORDER BY MIS_NO DESC, MIS_REGDATE DESC
- 		]]>
+	<select id="listSearch" resultType="com.rgvms.domain.MisVO">
+		<![CDATA[  
+		SELECT
+		*
+		FROM(
+			SELECT 
+				ROWNUN RNUM,
+				MIS_NO,
+				TIMES,
+				TITLE,
+				MIS_DATE, 
+				MIS_REGDATE 
+			FROM (
+				SELECT 
+					MIS_NO,
+					TIMES, 
+					TITLE, 
+					MIS_DATE, 
+					MIS_REGDATE
+				FROM 
+					TBL_MIS
+				WHERE 
+					MIS_NO > 0 
+		]]>
+		<include refid="search" />
+				ORDER BY MIS_NO DESC, MIS_DATE DESC
+			
+		<![CDATA[    
+				)) WHERE (RNUM >= 1 AND RNUM <= 10) 
+			ORDER BY MIS_NO DESC, MIS_DATE DESC	
+		]]>
 	</select>
-
-	전체 값 가져오기
-	<select id="countPaging" resultType="int">
-		 <![CDATA[
-		 SELECT 
-		   COUNT(MIS_NO) 
-		 FROME 
-		   TBL_MIS
-		 WHERE
-		   MIS_NO > 0 
-		 ]]>		
-	</select>  -->
-
 
 
 </mapper>

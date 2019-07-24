@@ -54,14 +54,4 @@ public class MisServiceImpl implements MisService {
 		return dao.read(mvo);
 	}
 
-	@Override
-	public List<MisVO> listCriteria(Criteria cri) throws Exception {
-		return dao.listCriteria(cri);
-	}
-
-	@Override
-	public int listCountCriteria(Criteria cri) throws Exception {
-		return dao.countPaging(cri);
-	}
-
 }

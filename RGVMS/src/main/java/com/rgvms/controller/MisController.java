@@ -40,6 +40,7 @@ public class MisController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 
+		logger.info("MIS listGET...");
 		logger.info(cri.toString());
 
 		System.out.println("=====" + cri.toString());
@@ -58,41 +59,40 @@ public class MisController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void registerGET(Model model) throws Exception {
 		logger.info("register get..");
-		
+
 		List<UserVO> stuList = attService.stuList();
 		model.addAttribute("stuList", stuList);
-		
 
 	}
 
 	// 글 등록
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String registerPOST(MisVO mis, @RequestParam(value="arrayUser", required=true) List<Integer> userNos,
-			 RedirectAttributes rttr) throws Exception {
+	public String registerPOST(MisVO mis, @RequestParam(value = "arrayUser", required = true) List<Integer> userNos,
+			RedirectAttributes rttr) throws Exception {
+
 		logger.info("register post...");
 		logger.info(mis.toString());
-		
+
 		Integer misNo = service.register(mis);
-		
+
 		logger.info("misNo : " + misNo);
 		mis.setMisNo(misNo);
-		
+
 		logger.info(mis.toString());
-		
-		//출석 리스트 VO 설정하기, userNos=학생 여러명 넣기
-		 for(int i=0; i< userNos.size(); i++) {
-			 
-			 MisAttVO aVo = new MisAttVO();
-			 aVo.setMisNo(misNo);
-			 aVo.setUserNo(userNos.get(i));
-			 aVo.setMisAttDate(mis.getMisDate());
-			 
-			 logger.info("misAtt userNos: " + aVo.getUserNo());
-			 attService.register(aVo);
-		 }
-		
-		
-		rttr.addFlashAttribute("msg", "SUCCESS");
+
+		// 출석 리스트 VO 설정하기, userNos=학생 여러명 넣기
+		for (int i = 0; i < userNos.size(); i++) {
+
+			MisAttVO aVo = new MisAttVO();
+			aVo.setMisNo(misNo);
+			aVo.setUserNo(userNos.get(i));
+			aVo.setMisAttDate(mis.getMisDate());
+
+			logger.info("misAtt userNos: " + aVo.getUserNo());
+			attService.register(aVo);
+		}
+
+		rttr.addFlashAttribute("msg", "REGISTER");
 
 		return "redirect:/admin/mis/list";
 	}
@@ -103,61 +103,83 @@ public class MisController {
 			throws Exception {
 
 		service.remove(misNo);
+		attService.removeAtt(misNo);
 
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 
-		rttr.addFlashAttribute("msg", "SUCCESS");
+		rttr.addFlashAttribute("msg", "REMOVE");
 
 		return "redirect:/admin/mis/list";
 	}
 
 	// 수정하기
+	/*
+	 * @RequestMapping(value = "/read", method = RequestMethod.GET) public void
+	 * updateGET(@RequestParam("misNo") int misNo,
+	 * 
+	 * @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	 * 
+	 * List<UserVO> stuList = attService.stuList(); model.addAttribute("stuList",
+	 * stuList);
+	 * 
+	 * model.addAttribute(service.read(misNo)); model.addAttribute("attList",
+	 * attService.list(misNo));
+	 * 
+	 * 
+	 * }
+	 */
+
+	// 수정, 상세페이지
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public void updateGET(@RequestParam("misNo") int misNo, 
-			@RequestParam(value="arrayUser", required=true) List<Integer> userNos,
-			@ModelAttribute("cri") SearchCriteria cri, Model model)
-			throws Exception {
+	public void read(@RequestParam("misNo") int misNo, SearchCriteria cri, Model model) throws Exception {
 
-		model.addAttribute(service.read(misNo));
-		model.addAttribute("attList", attService.list(misNo));
+		logger.info("read..... misNo : " + misNo);
+
+		model.addAttribute("cri", cri); // cri
+		model.addAttribute(service.read(misNo)); // MIS VO
+		model.addAttribute("attList", attService.list(misNo));// 출석한 학생 LIST
+
+		logger.info("==================================");
+
+		model.addAttribute("stuOtherList", attService.stuOtherList(misNo));// 제외된 학생 LIST
+
 	}
-
+	
 	// 수정 유지해서 값 넘김
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
-	public String updatePOST(MisVO mis, MisAttVO mVo, SearchCriteria cri, 
-			@RequestParam(value="arrayUser", required=true) List<Integer> userNos,
-			RedirectAttributes rttr) throws Exception {
+	public String updatePOST(MisVO mis, SearchCriteria cri, RedirectAttributes rttr,
+			@RequestParam(value = "arrayUser", required = true) List<Integer> userNos) throws Exception {
 
-		logger.info(cri.toString());
+		logger.info("misVO============" + mis);
 		service.modify(mis);
-		
-		
+
+		// 기존 리스트 삭제
+		attService.removeAtt(mis.getMisNo());
+
+		// 새로등록
+		for (int i = 0; i < userNos.size(); i++) {
+
+			MisAttVO aVo = new MisAttVO();
+
+			aVo.setMisNo(mis.getMisNo());
+			aVo.setUserNo(userNos.get(i));
+			aVo.setMisAttDate(mis.getMisDate());
+
+			logger.info("misAtt userNos: " + aVo.getUserNo());
+			attService.register(aVo);
+
+		}
+
 		rttr.addAttribute("page", cri.getPage());
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-		rttr.addFlashAttribute("searchType", cri.getSearchType());
-
-		rttr.addFlashAttribute("msg", "SUCCESS");
-
-		logger.info(rttr.toString());
+		rttr.addAttribute("searchType", cri.getSearchType());
+		
+		rttr.addFlashAttribute("msg", "MODIFY");
 
 		return "redirect:/admin/mis/list";
-	}
-
-	// 상세보기
-	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public void read(@RequestParam("misNo") int misNo, Model model) throws Exception {
-		
-		logger.info("read..... misNo : " +misNo);
-		 
-		model.addAttribute(service.read(misNo)); //MIS VO
-		model.addAttribute("attList", attService.list(misNo));//출석한 학생 LIST
-		
-		logger.info("==================================");
-		
-		model.addAttribute("stuOtherList", attService.stuOtherList(misNo));//제외된 학생 LIST
 
 	}
 }

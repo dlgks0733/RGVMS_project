@@ -14,7 +14,7 @@ public interface MisDAO {
 	// 2. MIS 출결 관리 - MIS 게시물 목록
 	public List<MisVO> list(SearchCriteria cri) throws Exception;
 	
-	// 3. 리스트 카운트
+	// 3. 리스트 페이징, 카운트
 	public int listSearchCount(SearchCriteria cri) throws Exception;
 	
 	// 4. MIS 출결 관리 - MIS 게시물 삭제
@@ -28,11 +28,5 @@ public interface MisDAO {
 	
 	//7. MIS 출결 관리 - 상세정보
 	public MisVO read(MisVO mvo) throws Exception;
-	
-	//8. MIS 출결 관리 - 페이징
-	public List<MisVO> listCriteria(Criteria cri) throws Exception;
-	
-	//9. MIS 출결 관리 - 페이징
-	public int countPaging(Criteria cri) throws Exception;
 	
 }

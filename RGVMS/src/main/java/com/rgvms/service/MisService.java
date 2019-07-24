@@ -28,11 +28,5 @@ public interface MisService {
 
 	//7. MIS 출결 관리 - 상세정보
 	public MisVO read(MisVO mvo) throws Exception;
-	
-	//8. MIS 출결 관리 - 페이징
-	public List<MisVO> listCriteria(Criteria cri) throws Exception;
-	
-	//9. MIS 출결 관리 - 페이징
-	public int listCountCriteria(Criteria cri) throws Exception; 
-	
+	 
 }

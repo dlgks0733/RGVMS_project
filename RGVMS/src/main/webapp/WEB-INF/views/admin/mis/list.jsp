@@ -51,25 +51,41 @@ body.loading {
 				<div class="container-fluid">
 
 					<!-- start page title -->
-					<div class='box-body'>
-
-						<select name="searchType">
-							<option value="n"
-								<c:out value="${cri.searchType == null?'selected':''}"/>>
-								---</option>
-							<option value="t"
-								<c:out value="${cri.searchType eq 't'?'selected':''}"/>>제목
-							</option>
-						</select> <input type="text" name='keyword' id="keywordInput"
-							value='${cri.keyword }'>
-						<button id='searchBtn'>Search</button>
+					<div class='box-body'>			
+							<br><br>
+								<div class="row mb-2">
+										<div class="col-lg-8">
+											<form class="form-inline">
+												<div class="form-group mx-sm-3 mb-2">
+													<label for="status-select" class="mr-2">분류</label> 
+													<select name="searchType" class="custom-select" id="status-select">
+														<option value=""
+															<c:out value="${cri.searchType == null?'selected':''}"/>>
+															--</option>
+														<option value="t"
+															<c:out value="${cri.searchType eq 't'?'selected':''}"/>>제목
+														</option>
+														<option value="m"
+															<c:out value="${cri.searchType eq 'm'?'selected':''}"/>>시행일
+														</option>
+													</select>
+												</div>
+												<div class="form-group mb-2">
+													<label for="inputPassword2" class="sr-only">Search</label>
+													<input type="search" class="form-control" name="keyword" id="keywordInput" 
+													value="${cri.keyword}" placeholder="검색어를 입력하세요.">
+													<button type="button" id='searchBtn' class="btn btn-light">검색</button>
+												</div>
+											</form>
+										</div>
+										<!-- end col-->
+									</div>
+						
 
 
 						<div class="row">
 							<div class="col-12">
 								<div class="page-title-box">
-
-									<h3 class="page-title">MIS 출결 관리</h3>
 								</div>
 							</div>
 						</div>
@@ -91,14 +107,14 @@ body.loading {
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach items="${list}" var="MisVO">
+													<c:forEach items="${list}" var="misVO">
 														<tr>
-															<td>${MisVO.misNo}</td>
+															<td>${misVO.misNo}</td>
 															<td><a
-																href='read${pageMaker.makeSearch(pageMaker.cri.page)}&misNo=${MisVO.misNo}'>
-																제${MisVO.times}회 MISDAY ${MisVO.title}</a></td>
-															<td><fmt:formatDate pattern="yyyy-MM-dd" value ="${MisVO.misDate}" /></td>	
-															<td><fmt:formatDate pattern="yyyy-MM-dd" value ="${MisVO.misRegdate}" /></td>
+																href='modify${pageMaker.makeSearch(pageMaker.cri.page)}&misNo=${misVO.misNo}'>
+																제${misVO.times}회 MISDAY ${misVO.title}</a></td>
+															<td><fmt:formatDate pattern="yyyy-MM-dd" value ="${misVO.misDate}" /></td>	
+															<td><fmt:formatDate pattern="yyyy-MM-dd" value ="${misVO.misRegdate}" /></td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -108,12 +124,11 @@ body.loading {
 										 <div class="box-footer">
 										 
 										 <br><br>
-						<div class="text-center">
+						<%-- <div class="text-align: center;">
 							<ul class="pagination">
 
 							<c:if test="${pageMaker.prev}">
-								<li><a
-									href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+								<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
 							</c:if>
 
 							<c:forEach begin="${pageMaker.startPage }"
@@ -125,46 +140,57 @@ body.loading {
 							</c:forEach>
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a
-									href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+								<li><a href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 							</c:if>
 
 						</ul>
-					</div>
+					</div> --%>
 
-				</div>
-										
+
+						<!-- 페이징 -->
+						<div class="text-align: center;">
+							<ul class="pagination pagination-rounded">
+								<li class="page-item">
+                            	   <a class="page-link" href="javascript: void(0);" aria-label="Previous">
+                                   	<span aria-hidden="true">&laquo;</span>
+                                  	 <span class="sr-only">Previous</span>
+			                               </a>
+			                          		 </li>
+
+							<c:if test="${pageMaker.prev}">
+								<li class="page-item"><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }" 
+								class="page-link" >&laquo;</a></li>
+							</c:if>
+
+							<c:forEach begin="${pageMaker.startPage }"
+								end="${pageMaker.endPage }" var="idx">
+								<li class="page-item" 
+									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+									<a href="list${pageMaker.makeSearch(idx)}" 
+									class="page-link" >${idx}</a>
+								</li>
+							</c:forEach>
+
+							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+								<li class="page-item" >
+								<a href="list${pageMaker.makeSearch(pageMaker.endPage +1) }" 
+								class="page-link" >&raquo;</a></li>
+							</c:if>
+							
+							 <li class="page-item"><a class="page-link" href="javascript: void(0);" aria-label="Next">
+                                  <span aria-hidden="true">&raquo;</span>
+                                  <span class="sr-only">Next</span>
+                                                        	  </a>
+                                                          </li>
+													</ul>
+												</div>
+												
+											<!-- 페이징 div 끝 -->
+										</div>			
 									</div>
 								</div>
 								
-								<!-- <div style="text-align: center;">
-												 <nav>
-                                                    <ul class="pagination pagination-rounded">
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                                                <span aria-hidden="true">&laquo;</span>
-                                                                <span class="sr-only">Previous</span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="page-item"><a class="page-link" href="javascript: void(0);">1</a></li>
-                                                        <li class="page-item"><a class="page-link" href="javascript: void(0);">2</a></li>
-                                                        <li class="page-item active"><a class="page-link" href="javascript: void(0);">3</a></li>
-                                                        <li class="page-item"><a class="page-link" href="javascript: void(0);">4</a></li>
-                                                        <li class="page-item"><a class="page-link" href="javascript: void(0);">5</a></li>
-                                                        <li class="page-item">
-                                                            <a class="page-link" href="javascript: void(0);" aria-label="Next">
-                                                                <span aria-hidden="true">&raquo;</span>
-                                                                <span class="sr-only">Next</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </nav>
-                                               </div>
-                                                -->
-                  
-				
-				
-                                                
+								<!-- 버튼 div -->
 								<div style="text-align: right;">
 									<button type="button" onclick="location.href='register'"
 										class="btn btn-primary">등록</button>
@@ -226,11 +252,50 @@ body.loading {
 
 
 	<script>
+		var result = '${msg}';
+	
+		if (result == 'REGISTER') {
+			alert("등록 되었습니다.");
+		}
+		
+		var result = '${msg}';
+		
+		if (result == 'MODIFY') {
+			alert("수정 되었습니다.");
+		}
+		
+		var result = '${msg}';
+		
+		if (result == 'REMOVE') {
+			alert("삭제 되었습니다.");
+		}
+	</script>
+	
+	<script>
+		$(document).ready(
+				function() {
+	
+					$('#searchBtn').on(
+							"click",
+							function(event) {
+	
+								self.location = "list"
+										+ '${pageMaker.makeQuery(1)}'
+										+ "&searchType="
+										+ $("select option:selected").val()
+										+ "&keyword=" + $('#keywordInput').val();
+	
+							});
+	
+				});
+	</script>
+
+
+	<script>
 		$(document).ready(function() {
 			$("#detached-check input:radio").click(function() {
 
 				alert("clicked");
-
 			});
 
 			$("input:radio:first").prop("checked", true).trigger("click");

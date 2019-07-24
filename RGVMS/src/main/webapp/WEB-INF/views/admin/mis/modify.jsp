@@ -49,14 +49,14 @@ body.loading {
 				
 					<!-- Start Content-->
 					<div class="container-fluid">
-						<form class="form-horizontal" role="form" action="modify" method="post">
+					<form class="form-horizontal" role="form" action="modify" method="post">
 
 						<!-- start page title -->
 						<div class="row">
 							<div class="col-12">
 								<div class="page-title-box">
 
-									<h3 class="page-title">MIS 출결 수정</h3>
+									<h3 class="page-title">MIS 출결 관리</h3>
 								</div>
 							</div>
 						</div>
@@ -65,7 +65,6 @@ body.loading {
 						<div class="row">
 							<div class="col-xl-12">
 								<input type='hidden' name='misNo' value="${misVO.misNo}">
-								<input type='hidden' name='misRegdate' value="${misVO.misRegdate}">
 								<input type='hidden' name='page' value="${cri.page}"> 
 								<input type='hidden' name='perPageNum' value="${cri.perPageNum}"> 
 								<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -96,18 +95,24 @@ body.loading {
 
 										<div class="form-group row mb-3">
 											<label for="misDate" class="col-3 col-form-label">날짜
-												선택</label>
+												선택 </label>
 											<div class="col-2">
 												<input type="text" class="form-control date" id="misDate"
 													name="misDate" data-toggle="date-picker"
-													data-single-date-picker="true" value="${misVO.misDate}">
+													data-single-date-picker="true" 
+													value="<fmt:formatDate value="${misVO.misDate}" pattern="MM/dd/yyyy" />">
 											</div>
 										</div>
 
 										<div class="form-group row mb-3">
 											<label for="grade" class="col-3 col-form-label">학년</label>
-											<div class="col-1">
-												<select class="form-control" name="grade">
+											<div class="col-3">
+												<select class="form-control" name="grade" id="grade">
+													<option value="all"
+														<c:out value="${UserVO.grade eq '4'? 'selectes':''}"/>
+														<c:out value="${UserVO.grade eq '3'? 'selectes':''}"/>
+														<c:out value="${UserVO.grade eq '2'? 'selectes':''}"/>
+														<c:out value="${UserVO.grade eq '1'? 'selectes':''}"/> >전체보기</option>
 													<option value="4"
 														<c:out value="${UserVO.grade eq '4'? 'selectes':''}"/>>4</option>
 													<option value="3"
@@ -127,21 +132,20 @@ body.loading {
 													<div class="col-lg-6">
 														<h4 class="header-title">전체 학생 목록</h4>
 														<div style="text-align: right;">
-															<button type="button" class="btn btn-primary" id="add">추가</button>
+															<button type="button" class="btn btn-outline-primary" id="add">추가</button>
 														</div>
 
 														<br>
 														<div class="table-responsive-sm">
 															<table
 																class="table table-centered w-100 dt-responsive nowrap"
-																id="stuList">
+																id="stuOtherList">
 																<thead class="thead-light">
 																	<tr>
 																		<th class="all" style="width: 20px;">
 																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox" class="custom-control-input"
-																					id="customCheck1" name="check"> <label
-																					class="custom-control-label" for="customCheck1">&nbsp;</label>
+																				<input type="checkbox" id="check" name="check"> 
+																					
 																			</div>
 																		</th>
 																		<th class="all">NO</th>
@@ -155,11 +159,10 @@ body.loading {
 																<tbody>
 																	<c:forEach items="${stuOtherList}" var="uVo"
 																		varStatus="listStat">
-																		<tr>
-																			<td><input type="checkbox" name="check"
-																				value="${uVo.userNo}"></td>
+																		<tr class="stu${uVo.grade}">
+																			<td><input type="checkbox" name="check" value="${uVo.userNo}"  class="checkBox"></td>
 																			<td>${listStat.count}</td>
-																			<td>${uVo.grade}</td>
+																			<td class="tdGrade">${uVo.grade}</td>
 																			<td>${uVo.userNo}</td>
 																			<td>${uVo.userName}</td>
 																		</tr>
@@ -173,7 +176,7 @@ body.loading {
 														<h4 class="header-title">출결 학생 목록</h4>
 
 														<div style="text-align: right;">
-															<button type="button" class="btn btn-danger" id="delete">삭제</button>
+															<button type="button" class="btn btn-outline-danger" id="delete">삭제</button>
 														</div>
 
 														<br>
@@ -188,7 +191,7 @@ body.loading {
 																			<th class="all" style="width: 20px;">
 																				<div class="custom-control custom-checkbox">
 																					<input type="checkbox" class="custom-control-input"
-																						id="customCheck1" name="check2"> <label
+																						id="check2" name="check2"> <label
 																						class="custom-control-label" for="customCheck1">&nbsp;</label>
 																				</div>
 																			</th>
@@ -203,7 +206,7 @@ body.loading {
 																	<tbody>
 																	<c:forEach items="${attList}" var="attVo" varStatus="listStat">
 																		<tr>
-																			<td><input type="checkbox" name="checkBox2" value="${attVo.misAttNo}"></td>
+																			<td><input type="checkbox" class="checkBox2" name="check2" value="${attVo.userNo}"></td>
 																			<td>${listStat.count}</td>
 																			<td>${attVo.grade}</td>
 																			<td>${attVo.userNo}</td>
@@ -287,6 +290,7 @@ body.loading {
 	<!-- end demo js-->
 
 
+</body>
 	<script>
 		$(document).ready(function() {
 			$("#detached-check input:radio").click(function() {
@@ -306,8 +310,7 @@ body.loading {
 				checkbox
 						.each(function(i) {
 							/* var tr = checkbox.parent().parent().parent().eq(i); */
-							var tr = checkbox.parent().parent().eq(
-									i);
+							var tr = checkbox.parent().parent().eq(i);
 							var td = tr.children();
 							var userNo = $(this).val();
 							var cnt = td.eq(1).html();
@@ -328,7 +331,7 @@ body.loading {
 
 							// allcheck할 경우 숨긴 값의 체크박스도 체크되어서 class 값을 바꿈
 							$(this).attr("class", "hide");
-							tr.hide();
+							tr.remove();
 							$("#attList > tbody").append(row);
 									});
 						});
@@ -342,17 +345,16 @@ body.loading {
 				checkbox
 						.each(function(i) {
 							/* var tr = checkbox.parent().parent().parent().eq(i); */
-							var tr = checkbox.parent().parent().eq(
-									i);
+							var tr = checkbox.parent().parent().eq(i);
 							var td = tr.children();
 							var userNo = $(this).val();
 							var cnt = td.eq(1).html();
 							var grade = td.eq(2).text();
 							var id = td.eq(3).html();
 							var userName = td.eq(4).text();
-							var row = "<tr>"
+							var row = "<tr class=\"stu"+ grade+"\"> "
 									+ "<td>"
-									+ "<input type=\"checkbox\" class=\"checkBox2\" name=\"check\" value=\"" + userNo + "\"" + ">"
+									+ "<input type=\"checkbox\" class=\"checkBox\" name=\"check\" value=\"" + userNo + "\"" + ">"
 									+ "</td>" + "<td>" + cnt
 									+ "</td>" + "<td>" + grade
 									+ "</td>" + "<td>" + id
@@ -370,6 +372,7 @@ body.loading {
 						});
 	</script>
 	
+	
 	<script>
 	//submit 버튼
 		$(document).ready(function(){
@@ -380,7 +383,8 @@ body.loading {
 		
 				//삭제
 				$(".btn-danger").on("click",function() {
-							formObj.attr("action", "admin/list/remove");
+							formObj.attr("action", "/admin/mis/remove");
+							formObj.attr("method", "post");	
 							formObj.submit();
 							
 				});
@@ -407,7 +411,51 @@ body.loading {
 </script>
 
  
+<script>
 
+$("#grade").change(function(){
 	
-</body>
+	var search = $("#grade option:selected").val();
+	
+	var tr4 = $(".stu4");
+	var tr3 = $(".stu3");
+	var tr2 = $(".stu2");
+	var tr1 = $(".stu1");
+	
+	if(search == '4'){
+		tr4.show();
+		
+		//기존  3,2,1은 hide
+		tr3.hide();
+		tr2.hide();
+		tr1.hide();
+	}else if(search == '3'){
+		tr3.show();
+		
+		tr4.hide();
+		tr2.hide();
+		tr1.hide();
+	}else if(search == '2'){
+		tr2.show();
+		
+		tr4.hide();
+		tr3.hide();
+		tr1.hide();
+	}else if(search == '1'){
+		tr1.show();
+		
+		tr4.hide();
+		tr3.hide();
+		tr2.hide();
+	}else if(search == 'all'){
+		
+		tr4.show();
+		tr3.show();
+		tr2.show();
+		tr1.show();
+	}
+	
+});
+   </script>
+	
 </html>

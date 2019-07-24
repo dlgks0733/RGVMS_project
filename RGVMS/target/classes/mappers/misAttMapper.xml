@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- mis 출결 삭제(학생 삭제) -->
 	<delete id="delete">
 		DELETE FROM TBL_MIS_ATT
-		WHERE MIS_ATT_NO = #{misAttNo}
+		WHERE MIS_NO = #{misNo}
 	</delete>
 	
 	<!-- mis 내 점수 상세 조회 -->

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8");%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -99,13 +100,16 @@ body.loading {
 
 										<div class="form-group row mb-3">
 											<label for="grade" class="col-3 col-form-label">학년</label>
-											<div class="col-1">
-												<select class="form-control" name="grade">
+											<div class="col-3">
+											
+												<select class="form-control" name="grade" id="grade">
+													<option value="all">전체보기</option>
 													<option value="4">4</option>
 													<option value="3">3</option>
 													<option value="2">2</option>
 													<option value="1">1</option>
 												</select>
+											
 											</div>
 										</div>
 
@@ -117,7 +121,7 @@ body.loading {
 													<div class="col-lg-6">
 														<h4 class="header-title">전체 학생 목록</h4>
 														<div style="text-align: right;">
-															<button type="button" class="btn btn-primary" id="add">추가</button>
+															<button type="button" class="btn btn-outline-primary" id="add">추가</button>
 														</div>
 
 														<br>
@@ -142,14 +146,12 @@ body.loading {
 																<tbody>
 																	<c:forEach items="${stuList}" var="uVo"
 																		varStatus="listStat">
-																		<tr>
+																		<tr class="stu${uVo.grade}">
 																			<td>
-																			
-																				<input type="checkbox" name="check" value="${uVo.userNo}">
-																				
+																				<input type="checkbox" name="check" value="${uVo.userNo}" class="checkBox">
 																			</td>
 																			<td>${listStat.count}</td>
-																			<td>${uVo.grade}</td>
+																			<td class="tdGrade">${uVo.grade}</td>
 																			<td>${uVo.userNo}</td>
 																			<td>${uVo.userName}</td>
 																		</tr>
@@ -164,7 +166,7 @@ body.loading {
 														<h4 class="header-title">출결 학생 목록</h4>
 
 														<div style="text-align: right;">
-															<button type="button" class="btn btn-danger" id="delete">삭제</button>
+															<button type="button" class="btn btn-outline-danger" id="delete">삭제</button>
 														</div>
 
 														<br>
@@ -226,38 +228,6 @@ body.loading {
 		</div>
 	</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- Footer Start -->
 	<footer class="footer">
 		<div class="container-fluid">
@@ -274,15 +244,11 @@ body.loading {
 		</div>
 	</footer>
 	<!-- end Footer -->
-	</div>
+	
 
 	<!-- ============================================================== -->
 	<!-- End Page content -->
 	<!-- ============================================================== -->
-
-
-	</div>
-	<!-- END wrapper -->
 
 
 	<!-- App js -->
@@ -300,6 +266,8 @@ body.loading {
 		src="../../../../resources/dist/assets/js/pages/demo.calendar.js"></script>
 	<!-- end demo js-->
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+
+	
 <script>
 $(document).ready(
 	function() {
@@ -377,7 +345,7 @@ $(document).ready(
 
 										// allcheck할 경우 숨긴 값의 체크박스도 체크되어서 class 값을 바꿈
 										$(this).attr("class", "hide");
-										tr.hide();
+										tr.remove();
 										$("#attList > tbody").append(row);
 									});
 						});
@@ -391,17 +359,16 @@ $(document).ready(
 					checkbox
 							.each(function(i) {
 								/* var tr = checkbox.parent().parent().parent().eq(i); */
-								var tr = checkbox.parent().parent().eq(
-										i);
+								var tr = checkbox.parent().parent().eq(i);
 								var td = tr.children();
 								var userNo = $(this).val();
 								var cnt = td.eq(1).html();
 								var grade = td.eq(2).text();
 								var id = td.eq(3).html();
 								var userName = td.eq(4).text();
-								var row = "<tr>"
+								var row = "<tr class=\"stu"+ grade+"\"> "
 										+ "<td>"
-										+ "<input type=\"checkbox\" class=\"checkBox2\" name=\"check\" value=\"" + userNo + "\"" + ">"
+										+ "<input type=\"checkbox\" class=\"checkBox\" name=\"check\" value=\"" + userNo + "\"" + ">"
 										+ "</td>" + "<td>" + cnt
 										+ "</td>" + "<td>" + grade
 										+ "</td>" + "<td>" + id
@@ -410,7 +377,7 @@ $(document).ready(
 
 								// 숨긴 값의 체크박스를 false 상태로 바꿈
 								$(this).prop("checked", false);
-
+								
 								// allcheck할 경우 숨긴 값의 체크박스도 체크되어서 class 값을 바꿈
 								$(this).attr("class", "hide");
 								tr.hide();
@@ -420,7 +387,54 @@ $(document).ready(
 		
 	
 	</script>
-	
 	<script src="../../../../resources/dist/assets/js/vendor/dataTables.checkboxes.min.js"></script>
 </body>
+
+<!-- 학년 체크 -->
+<script>
+
+$("#grade").change(function(){
+	
+	var search = $("#grade option:selected").val();
+	
+	var tr4 = $(".stu4");
+	var tr3 = $(".stu3");
+	var tr2 = $(".stu2");
+	var tr1 = $(".stu1");
+	
+	if(search == '4'){
+		tr4.show();
+		
+		//기존  3,2,1은 hide
+		tr3.hide();
+		tr2.hide();
+		tr1.hide();
+	}else if(search == '3'){
+		tr3.show();
+		
+		tr4.hide();
+		tr2.hide();
+		tr1.hide();
+	}else if(search == '2'){
+		tr2.show();
+		
+		tr4.hide();
+		tr3.hide();
+		tr1.hide();
+	}else if(search == '1'){
+		tr1.show();
+		
+		tr4.hide();
+		tr3.hide();
+		tr2.hide();
+	}else if(search == 'all'){
+		
+		tr4.show();
+		tr3.show();
+		tr2.show();
+		tr1.show();
+	}
+	
+});
+   </script>
 </html>
