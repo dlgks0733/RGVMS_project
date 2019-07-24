@@ -136,4 +136,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			 user_No > 0 
 		]]>
 	</select>
+	
+<!-- 관리자 :: 대시보드 - 신청 건수 -->
+<select id="applyCount" resultType="int">
+SELECT COUNT(*) FROM TBL_APPLY WHERE APPLY_STATE = '승인대기'
+</select>
+
+<!-- 관리자 :: 대시보드 - 졸업예정자 수 -->
+<select id="graduateCount" resultType="int">
+SELECT COUNT(*) FROM TBL_USER WHERE STATE = '재학' AND GRADE = 4
+</select>
+	
 </mapper>

@@ -17,7 +17,7 @@ public interface UserService {
 
 	// 3. 관리자 :: 학생 목록
 	public List<UserVO> list(SearchCriteria cri) throws Exception;
-	
+
 	// 4. 관리자 :: 기초정보관리 - 학생상세내역
 	public UserVO read(int userNo) throws Exception;
 
@@ -38,15 +38,21 @@ public interface UserService {
 
 	// 10 . MY PAGE - 내 정보 수정
 	public void myInfoModify(UserVO uVo) throws Exception;
-	
+
 	// 11. 페이징처리
 	public List<UserVO> listCriteria(Criteria cri) throws Exception;
-	
+
 	public int countPaging(Criteria cri) throws Exception;
-	
+
 	// 12. 검색처리
 	public List<UserVO> listSearch(SearchCriteria cri) throws Exception;
-	
+
 	public int listSearchCount(SearchCriteria cri) throws Exception;
+
+	// 14. 관리자 :: 대시보드 - 신청 건수
+	public int applyCount() throws Exception;
+
+	// 15. 관리자 :: 대시보드 - 졸업예정자 수
+	public int graduateCount() throws Exception;
 
 }

@@ -108,4 +108,16 @@ public class UserServiceImpl implements UserService {
 		return dao.listSearchCount(cri);
 	}
 
+	@Override
+	public int applyCount() throws Exception {
+		
+		return dao.applyCount();
+	}
+
+	@Override
+	public int graduateCount() throws Exception {
+		// TODO Auto-generated method stub
+		return dao.graduateCount();
+	}
+
 }

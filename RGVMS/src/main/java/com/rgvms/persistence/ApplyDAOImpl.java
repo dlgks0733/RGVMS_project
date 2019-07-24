@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.rgvms.domain.ApplyVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
+import com.rgvms.dto.TotalDTO;
 
 @Repository
 public class ApplyDAOImpl implements ApplyDAO {
@@ -98,6 +99,36 @@ public class ApplyDAOImpl implements ApplyDAO {
 	public List<SubjectVO> subList() throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".subList");
+	}
+
+	@Override
+	public List<TotalDTO> esList(SearchCriteria cri) throws Exception {
+		
+		return session.selectList(namespace+".esList", cri);
+	}
+
+	@Override
+	public TotalDTO esSelect(int userNo) throws Exception {
+		
+		return session.selectOne(namespace+".esSelect", userNo);
+	}
+
+	@Override
+	public List<ApplyVO> acceptList(int userNo) throws Exception {
+		
+		return session.selectList(namespace+".acceptList", userNo);
+	}
+
+	@Override
+	public int esListCount(SearchCriteria cri) throws Exception {
+		
+		return session.selectOne(namespace+".esListConut", cri);
+	}
+
+	@Override
+	public List<TotalDTO> excelEsList() throws Exception {
+		
+		return session.selectList(namespace+".excelEsList");
 	}
 
 	

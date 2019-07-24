@@ -1,12 +1,16 @@
 package com.rgvms.dto;
 
-public class TotalDTO {
+import com.rgvms.domain.UserVO;
+
+public class TotalDTO extends UserVO {
 
 	private int userNo;
 	private String userName;
 	private int total;
 	private int misTotal;
 	private int subTotal;
+	private int grade;
+	private String state;
 
 	public int getUserNo() {
 		return userNo;
@@ -48,10 +52,26 @@ public class TotalDTO {
 		this.subTotal = subTotal;
 	}
 
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	@Override
 	public String toString() {
 		return "TotalDTO [userNo=" + userNo + ", userName=" + userName + ", total=" + total + ", misTotal=" + misTotal
-				+ ", subTotal=" + subTotal + "]";
+				+ ", subTotal=" + subTotal + ", grade=" + grade + ", state=" + state + "]";
 	}
 
 }

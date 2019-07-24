@@ -121,4 +121,16 @@ public class UserDAOImpl implements UserDAO {
 		return session.selectOne(namespace + ".listSearchCount", cri);
 	}
 
+	@Override
+	public int applyCount() throws Exception {
+		
+		return session.selectOne(namespace+".applyCount");
+	}
+
+	@Override
+	public int graduateCount() throws Exception {
+		
+		return session.selectOne(namespace+".graduateCount");
+	}
+
 }

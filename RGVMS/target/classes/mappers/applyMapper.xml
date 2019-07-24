@@ -74,6 +74,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 
 
+<sql id="searchEs">
+		<if test="searchType != null">
+			<if test="searchType == 'no'.toString()">
+				AND U.USER_NO  like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 'name'.toString()">
+				AND U.USER_NAME  like '%' || #{keyword} || '%'
+			</if>
+			<if test="searchType == 'nn'.toString()">
+				AND ( U.USER_NO like '%' || #{keyword} || '%' OR U.USER_NAME like #{keyword} || '%')
+			</if>
+		</if>
+	</sql>
+
 <sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">
@@ -288,4 +302,156 @@ UPDATE TBL_APPLY
      , REASON = #{reason}
  WHERE APPLY_NO = #{applyNo}
 </update>
+
+<!-- 관리자 :: 졸업인증평가 관리 - 평가 목록 -->
+<select id="esList" resultType="com.rgvms.dto.TotalDTO">
+<![CDATA[  
+SELECT * FROM(
+
+SELECT ROWNUM RNUM, U.USER_NO
+	 , U.USER_NAME
+	 , A.SUBTOTAL
+	 , A.MISTOTAL
+	 , (SUBTOTAL+MISTOTAL) AS TOTAL
+  FROM(
+SELECT USER_NO
+	 , SUM(SUBTOTAL) AS SUBTOTAL
+	 , SUM(MISTOTAL) AS MISTOTAL
+  FROM(
+SELECT USER_NO
+	 , 0 AS SUBTOTAL
+	 , COUNT(MIS_ATT_NO)*3 AS MISTOTAL
+  FROM TBL_MIS_ATT
+GROUP BY USER_NO
+UNION
+SELECT USER_NO
+	 , SUM(AC_SCORE) AS SUBTOTAL
+	 , 0 AS MISTOTAL  
+FROM TBL_APPLY
+GROUP BY USER_NO
+UNION
+SELECT USER_NO, 0 AS SUBTOTAL, 0 AS MISTOTAL 
+  FROM TBL_USER WHERE AUTHORITY != 1 GROUP BY USER_NO
+)
+GROUP BY USER_NO
+ORDER BY USER_NO ASC ) A
+	   , TBL_USER U
+WHERE A.USER_NO = U.USER_NO
+]]>
+<include refid="searchEs"></include>
+
+<![CDATA[ 
+) WHERE (RNUM >= 1 AND RNUM <= 10) 
+ORDER BY USER_NO ASC
+]]>
+</select>
+
+<!-- 관리자 :: 졸업인증평가 관리 - 평가 목록 -->
+<select id="esListConut" resultType="int">
+<![CDATA[  
+SELECT count(*) AS CNT
+  FROM(
+SELECT USER_NO
+	 , SUM(SUBTOTAL) AS SUBTOTAL
+	 , SUM(MISTOTAL) AS MISTOTAL
+  FROM(
+SELECT USER_NO
+	 , 0 AS SUBTOTAL
+	 , COUNT(MIS_ATT_NO)*3 AS MISTOTAL
+  FROM TBL_MIS_ATT
+GROUP BY USER_NO
+UNION
+SELECT USER_NO
+	 , SUM(AC_SCORE) AS SUBTOTAL
+	 , 0 AS MISTOTAL  
+FROM TBL_APPLY
+GROUP BY USER_NO
+UNION
+SELECT USER_NO, 0 AS SUBTOTAL, 0 AS MISTOTAL 
+  FROM TBL_USER WHERE AUTHORITY != 1 GROUP BY USER_NO
+)
+GROUP BY USER_NO) A
+	   , TBL_USER U
+WHERE A.USER_NO = U.USER_NO
+]]>
+<include refid="searchEs"></include>
+</select>
+
+
+<select id="esSelect" resultType="com.rgvms.dto.TotalDTO">
+SELECT U.USER_NO
+	 , U.USER_NAME
+	 , U.GRADE
+	 , U.STATE
+	 , A.SUBTOTAL
+	 , A.MISTOTAL
+	 , (SUBTOTAL+MISTOTAL) AS TOTAL
+  FROM(
+SELECT USER_NO
+	 , SUM(SUBTOTAL) AS SUBTOTAL
+	 , SUM(MISTOTAL) AS MISTOTAL
+  FROM(
+SELECT USER_NO
+	 , 0 AS SUBTOTAL
+	 , COUNT(MIS_ATT_NO)*3 AS MISTOTAL
+  FROM TBL_MIS_ATT
+GROUP BY USER_NO
+UNION
+SELECT USER_NO
+	 , SUM(AC_SCORE) AS SUBTOTAL
+	 , 0 AS MISTOTAL  
+FROM TBL_APPLY
+GROUP BY USER_NO
+UNION
+SELECT USER_NO, 0 AS SUBTOTAL, 0 AS MISTOTAL 
+  FROM TBL_USER WHERE AUTHORITY != 1 GROUP BY USER_NO
+)
+ WHERE USER_NO = #{userNo}
+GROUP BY USER_NO) A
+	   , TBL_USER U
+WHERE A.USER_NO = U.USER_NO
+</select>
+
+<!-- 관리자, 학생 :: 졸업인증평가 관리, 내 점수 - 해당하는 학생의 신청 승인된 신청 내역 리스트 가져오기 -->
+<select id="acceptList" resultType="com.rgvms.domain.ApplyVO">
+SELECT S.CATEG
+	 , S.AREA
+	 , S.SUB_NAME
+	 , A.AC_DATE
+	 , A.AC_SCORE
+  FROM TBL_SUBJECT S
+  	 , TBL_APPLY A
+ WHERE S.SUB_NO = A.SUB_NO
+   AND A.USER_NO = #{userNo}
+</select>
+
+
+<!-- 관리자 :: 액셀 다운용 esList -->
+<select id="excelEsList" resultType="com.rgvms.dto.TotalDTO">
+SELECT U.USER_NO
+	 , U.USER_NAME
+	 , A.SUBTOTAL
+	 , A.MISTOTAL
+	 , (SUBTOTAL+MISTOTAL) AS TOTAL 
+  FROM(
+SELECT USER_NO, SUM(SUBTOTAL) AS SUBTOTAL, SUM(MISTOTAL) AS MISTOTAL
+  FROM(
+SELECT USER_NO, 0 AS SUBTOTAL, COUNT(MIS_ATT_NO)*3 AS MISTOTAL
+  FROM TBL_MIS_ATT
+GROUP BY USER_NO
+UNION
+SELECT USER_NO, SUM(AC_SCORE) AS SUBTOTAL, 0 AS MISTOTAL 
+  FROM TBL_APPLY 
+GROUP BY USER_NO
+UNION
+SELECT USER_NO, 0 AS SUBTOTAL, 0 AS MISTOTAL 
+  FROM TBL_USER
+ WHERE AUTHORITY != 1 
+GROUP BY USER_NO)
+GROUP BY USER_NO) A, TBL_USER U
+ WHERE A.USER_NO = U.USER_NO
+ORDER BY U.USER_NO ASC
+</select>
+
+
 </mapper>

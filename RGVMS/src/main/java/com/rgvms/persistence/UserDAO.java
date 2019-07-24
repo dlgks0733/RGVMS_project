@@ -51,5 +51,11 @@ public interface UserDAO {
 	public List<UserVO> listSearch(SearchCriteria cri) throws Exception;
 	
 	public int listSearchCount(SearchCriteria cri) throws Exception;
+	
+	// 14. 관리자 :: 대시보드 - 신청 건수
+	public int applyCount() throws Exception;
+	
+	// 15. 관리자 :: 대시보드 - 졸업예정자 수
+	public int graduateCount() throws Exception;
 
 }

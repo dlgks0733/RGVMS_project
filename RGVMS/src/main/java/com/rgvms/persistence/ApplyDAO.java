@@ -6,6 +6,7 @@ import java.util.List;
 import com.rgvms.domain.ApplyVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
+import com.rgvms.dto.TotalDTO;
 
 public interface ApplyDAO {
 
@@ -42,5 +43,18 @@ public interface ApplyDAO {
 	// 10. 학생 :: 졸업인증신청 관리 - 졸업인증항목 목록
 	public List<SubjectVO> subList() throws Exception;
 	
+	// 관리자 :: 졸업인증평가 관리 - 졸업인증평가 목록
+	public List<TotalDTO> esList(SearchCriteria cri) throws Exception;
+	
+	// 관리자 :: 졸업인증평가 관리 - 졸업인증평가 상세조회
+	public TotalDTO esSelect(int userNo) throws Exception;
+	
+	// 관리자 또는 학생 :: 졸업인증평가 관리 또는 내 점수 - 해당하는 학생의 신청 승인된 신청 내역 리스트
+	public List<ApplyVO> acceptList(int userNo) throws Exception;
+	
+	public int esListCount(SearchCriteria cri) throws Exception;
+	
+	// 관리자 :: 액셀 다운용 esList
+	public List<TotalDTO> excelEsList() throws Exception;
 	
 }

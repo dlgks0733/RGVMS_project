@@ -11,6 +11,7 @@ import com.rgvms.domain.ApplyVO;
 import com.rgvms.domain.FileVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.SubjectVO;
+import com.rgvms.dto.TotalDTO;
 import com.rgvms.persistence.ApplyDAO;
 import com.rgvms.persistence.FileDAO;
 
@@ -117,6 +118,36 @@ public class ApplyServiceImpl implements ApplyService {
 	public List<FileVO> fileList(int applyNo) throws Exception {
 		
 		return fDao.list(applyNo);
+	}
+
+	@Override
+	public List<TotalDTO> esList(SearchCriteria cri) throws Exception {
+		
+		return dao.esList(cri);
+	}
+
+	@Override
+	public TotalDTO esSelect(int userNo) throws Exception {
+		
+		return dao.esSelect(userNo);
+	}
+
+	@Override
+	public List<ApplyVO> acceptList(int userNo) throws Exception {
+		
+		return dao.acceptList(userNo);
+	}
+
+	@Override
+	public int esListCount(SearchCriteria cri) throws Exception {
+		
+		return dao.esListCount(cri);
+	}
+
+	@Override
+	public List<TotalDTO> excelEsList() throws Exception {
+		
+		return dao.excelEsList();
 	}
 	
 	

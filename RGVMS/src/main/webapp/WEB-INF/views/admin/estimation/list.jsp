@@ -73,26 +73,26 @@ text-align: center;
                                     <div class="card-body">
                                         <div class="row mb-2">
                                             <div class="col-lg-8">
-                                                <form class="form-inline">
+                                            <form class="form-inline">
                                                     <div class="form-group mx-sm-3 mb-2">
-                                                        <label for="status-select" class="mr-2">Status</label>
-                                                        <select class="custom-select" id="status-select">
-                                                            <option selected="">Choose...</option>
-                                                            <option value="1">Paid</option>
-                                                            <option value="2">Awaiting Authorization</option>
-                                                            <option value="3">Payment failed</option>
-                                                            <option value="4">Cash On Delivery</option>
-                                                            <option value="5">Fulfilled</option>
-                                                            <option value="6">Unfulfilled</option>
+                                                        <select class="custom-select" id="status-select" name="searchType">
+                                                            <option value="no" <c:out value="${cri.searchType eq 'no'?'selected':''}"/>>학번</option>
+                                                            <option value="name" <c:out value="${cri.searchType eq 'name'?'selected':''}"/>>이름</option>
+                                                            <option value="nn" <c:out value="${cri.searchType eq 'nn'?'selected':''}"/>>학번 또는 이름</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group mb-2">
                                                         <label for="inputPassword2" class="sr-only">Search</label>
-                                                        <input type="search" class="form-control" id="inputPassword2" placeholder="Search...">
+                                                        <input type="text" name="keyword" class="form-control" id="keywordInput"  placeholder="키워드를 입력해주세요.">&nbsp;&nbsp;
+                                                        <input type="button" class="form-control btn-primary" id="searchBtn" value="검색">
                                                     </div>
-                                                </form>                            
+                                            </form>
                                             </div>
-                                            <!-- end col-->
+                                            <div class="col-lg-4">
+                                                <div class="text-lg-right">
+                                                    <button type="button" class="btn btn-success mb-2">Excel</button>
+                                                </div>
+                                            </div><!-- end col-->
                                         </div>
                 
                                         <div class="table-responsive">
@@ -106,7 +106,22 @@ text-align: center;
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                	
+                                                <c:if test="${!empty esList}">
+                                                <c:forEach items="${esList}" var="tVo" varStatus="status">
+                                                	<tr>
+                                                		<td>${status.count}</td>
+                                                		<td><a href='read${pageMaker.makeSearch(pageMaker.cri.page)}&userNo=${tVo.userNo}'>${tVo.userNo}</a>
+                                                		</td>
+                                                		<td>${tVo.userName}</td>
+                                                		<td>${tVo.total}</td>
+                                                	</tr>
+                                                </c:forEach>
+                                                </c:if>
+                                                <c:if test="${empty esList}">
+                                                	<tr>
+                                                		<td colspan="4">내역이 없습니다.</td>
+                                                	</tr>
+                                                </c:if>	
                                                 </tbody>
                                             </table>
                                         </div>
@@ -202,6 +217,33 @@ $(document).ready(function() {
 	  $("input:radio:first").prop("checked", true).trigger("click");
 	  
 	});
+
+
+$(document).ready(
+		function() {
+
+			$('#searchBtn').on(
+					"click",
+					function(event) {
+
+						self.location = "list"
+								+ '${pageMaker.makeQuery(1)}'
+								+ "&searchType="
+								+ $("select option:selected").val()
+								+ "&keyword=" + $('#keywordInput').val();
+
+					});
+			
+			$('.btn-success').on(
+					"click",
+					function(event) {
+
+						self.location = "/admin/estimation/excelEsListDown";
+
+					});
+
+
+		});	
 
 </script>       
 
