@@ -1,11 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
    	
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>사용자 페이지</title>
+        <title>RGVMS :: 대시보드</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -24,6 +25,13 @@
         <link href="/resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" id="main-style-container" />
 
     </head>
+
+<style>
+td, th{
+text-align: center;
+}
+
+</style>
 
     <body class="loading">
         <div id="detached-topbar-placeholder"></div>
@@ -47,136 +55,137 @@
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apps</a></li>
-                                            <li class="breadcrumb-item active">Calendar</li>
+                                            <li class="breadcrumb-item"><a href="/user/main">RGVMS</a></li>
+                                            <li class="breadcrumb-item active">Dashboard</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Calendar</h4>
+                                    <h4 class="page-title">Dashboard</h4>
                                 </div>
                             </div>
                         </div>     
                         <!-- end page title --> 
 
+						
                         <div class="row">
                             <div class="col-12">
-
+                                <div class="card widget-inline">
+                                    <div class="card-body p-0">
+                                        <div class="row no-gutters">
+                                            <div class="col-sm-12 col-xl-3">
+                                                <div class="card shadow-none m-0">
+                                                    <div class="card-body text-center">
+                                                        <i class="dripicons-user-group text-muted" style="font-size: 24px;"></i>
+                                                       <h3><span><a href="/user/mypage/myInfo">${totalDTO.userName}</a></span></h3>
+                                                        <p class="text-muted font-15 mb-0">학생정보</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                            <div class="col-sm-12 col-xl-3">
+                                                <div class="card shadow-none m-0 border-left">
+                                                    <div class="card-body text-center">
+                                                        <i class="dripicons-user-group text-muted" style="font-size: 24px;"></i>
+                                                        <h3><span><a href="/user/mypage/myScore">${totalDTO.subTotal}</a></span></h3>
+                                                        <p class="text-muted font-15 mb-0">인증항목 총점</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                
+                                            <div class="col-sm-12 col-xl-3">
+                                                <div class="card shadow-none m-0 border-left">
+                                                    <div class="card-body text-center">
+                                                    	<i class="mdi mdi-school" style="font-size: 24px;"></i>
+                                                        <h3><span><a href="/user/mypage/myScore">${totalDTO.misTotal}</a></span></h3>
+                                                        <p class="text-muted font-15 mb-0">MIS 총점</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-sm-12 col-xl-3">
+                                                <div class="card shadow-none m-0 border-left">
+                                                    <div class="card-body text-center">
+                                                    	<i class="mdi mdi-school" style="font-size: 24px;"></i>
+                                                        <h3><span><a href="/user/mypage/myScore">${totalDTO.total}</a></span></h3>
+                                                        <p class="text-muted font-15 mb-0">총점</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                
+                                        </div> <!-- end row -->
+                                        
+                                    </div>
+                                </div> 
+                                <!-- end card-box-->
+                            </div> <!-- end col-->
+                        </div> <!-- end row -->
+                        
+                        <div class="row">
+                            <div class="col-12">
+                               <div class="card widget-inline">
+                               </div>
+                            </div>
+                           </div>
+                        
+                        
+                        <div class="row">
+                            <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-lg-3">
-                                                <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-lg font-16 btn-primary btn-block  ">
-                                                    <i class="mdi mdi-plus-circle-outline"></i> Create New Event
-                                                </a>
-                                                <div id="external-events" class="m-t-20">
-                                                    <br>
-                                                    <p class="text-muted">Drag and drop your event or click in the calendar</p>
-                                                    <div class="external-event bg-success" data-class="bg-success">
-                                                        <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>New Theme Release
-                                                    </div>
-                                                    <div class="external-event bg-info" data-class="bg-info">
-                                                        <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>My Event
-                                                    </div>
-                                                    <div class="external-event bg-warning" data-class="bg-warning">
-                                                        <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>Meet manager
-                                                    </div>
-                                                    <div class="external-event bg-danger" data-class="bg-danger">
-                                                        <i class="mdi mdi-checkbox-blank-circle mr-2 vertical-middle"></i>Create New theme
-                                                    </div>
-                                                </div>
-    
-                                                <!-- checkbox -->
-                                                <div class="custom-control custom-checkbox mt-3">
-                                                    <input type="checkbox" class="custom-control-input" id="drop-remove">
-                                                    <label class="custom-control-label" for="drop-remove">Remove after drop</label>
-                                                </div>
-    
-                                                <div class="mt-5 d-none d-xl-block">
-                                                    <h5 class="text-center">How It Works ?</h5>
-    
-                                                    <ul class="pl-3">
-                                                        <li class="text-muted mb-3">
-                                                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                                        </li>
-                                                        <li class="text-muted mb-3">
-                                                            Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage.
-                                                        </li>
-                                                        <li class="text-muted mb-3">
-                                                            It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div> <!-- end col-->
-
-                                            <div class="col-lg-9">
-                                                <div id="calendar"></div>
-                                            </div> <!-- end col -->
-
-                                        </div>  <!-- end row -->
-                                    </div> <!-- end card body-->
-                                </div> <!-- end card -->
-
-                                <!-- Add New Event MODAL -->
-                                <div class="modal fade" id="event-modal" tabindex="-1">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header pr-4 pl-4 border-bottom-0 d-block">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">Add New Event</h4>
-                                            </div>
-                                            <div class="modal-body pt-3 pr-4 pl-4">
-                                            </div>
-                                            <div class="text-right pb-4 pr-4">
-                                                <button type="button" class="btn btn-light " data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-success save-event  ">Create event</button>
-                                                <button type="button" class="btn btn-danger delete-event  " data-dismiss="modal">Delete</button>
-                                            </div>
-                                        </div> <!-- end modal-content-->
-                                    </div> <!-- end modal dialog-->
+                                        <h4 class="header-title mb-3">졸업인증신청 내역</h4>
+                                        <div class="table-responsive">
+                                            <table class="table table-centered mb-0">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>NO</th>
+                                                        <th>항목명</th>
+                                                        <th>신청일</th>
+                                                        <th>신청상태</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                	<c:if test="${!empty mainApplyWaitList}">
+                                                    <c:forEach items="${mainApplyWaitList}" var="aVo" varStatus="listStat">
+	                                                    <tr>
+	                                                    	<td>${listStat.count}</td>
+	                                                    	<td><a href='/user/apply/read?applyNo=${aVo.applyNo}'>
+	                                                    	${aVo.subName}</a></td>
+	                                                    	<td>
+	                                                    	<fmt:formatDate pattern="yyyy-MM-dd" value="${aVo.applyDate}" />
+	                                                    	</td>
+	                                                    	<td>
+	                                                    	
+	                                                    	<c:if test="${aVo.applyState eq '승인' }">
+	                                                    	<span class="badge badge-success badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+	                                                    	<c:if test="${aVo.applyState eq '승인대기' }">
+	                                                    	<span class="badge badge-warning badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+	                                                    	<c:if test="${aVo.applyState eq '거절' }">
+	                                                    	<span class="badge badge-danger badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+	                                                    	
+	                                                    	</td>	
+	                                                    </tr>
+                                                    </c:forEach>
+                                                    </c:if>
+                                                    
+                                                    <c:if test="${empty mainApplyWaitList}">
+                                                    	<tr>
+                                                    		<td colspan="4">내역이 없습니다.</td>
+                                                    	</tr>
+                                                    </c:if>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div> <!-- end card-body-->
+                                    
                                 </div>
-                                <!-- end modal-->
-
-                                <!-- Modal Add Category -->
-                                <div class="modal fade" id="add-category" tabindex="-1">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header border-bottom-0 d-block">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">Add a category</h4>
-                                            </div>
-                                            <div class="modal-body p-4">
-                                                <form>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Category Name</label>
-                                                        <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Choose Category Color</label>
-                                                        <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
-                                                            <option value="primary">Primary</option>
-                                                            <option value="success">Success</option>
-                                                            <option value="danger">Danger</option>
-                                                            <option value="info">Info</option>
-                                                            <option value="warning">Warning</option>
-                                                            <option value="dark">Dark</option>
-                                                        </select>
-                                                    </div>
-
-                                                </form>
-
-                                                <div class="text-right">
-                                                    <button type="button" class="btn btn-light " data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary ml-1   save-category" data-dismiss="modal">Save</button>
-                                                </div>
-
-                                            </div> <!-- end modal-body-->
-                                        </div> <!-- end modal-content-->
-                                    </div> <!-- end modal dialog-->
-                                </div>
-                                <!-- end modal-->
                             </div>
                             <!-- end col-12 -->
-                        </div> <!-- end row -->
+                        </div>
+                        
                         
                     </div> <!-- container -->
 

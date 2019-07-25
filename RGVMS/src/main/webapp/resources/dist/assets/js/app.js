@@ -25518,8 +25518,8 @@ function ($) {
 
 
         this._partials = {
-            DETAHCED_TOPBAR: '/resources/dist/partials/topbar-dark.html',
-            DETAHCED_SIDEBAR: '/resources/dist/partials/detached-left-sidebar.html',
+            DETAHCED_TOPBAR: '/resources/dist/partials/topbar-dark.jsp',
+            DETAHCED_SIDEBAR: '/resources/dist/partials/detached-left-sidebar.jsp',
         };
 
         this.currentlyActivatedLayout = LAYOUT_DETACHED;

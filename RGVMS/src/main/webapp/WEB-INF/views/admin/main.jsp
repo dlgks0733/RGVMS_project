@@ -88,7 +88,7 @@
                                                 <div class="card shadow-none m-0 border-left">
                                                     <div class="card-body text-center">
                                                     	<i class="mdi mdi-school" style="font-size: 24px;"></i>
-                                                        <h3><span>${graduateToBeCount} 명</span></h3>
+                                                        <h3><span><a href="/admin/user/list">${graduateToBeCount} 명</a></span></h3>
                                                         <p class="text-muted font-15 mb-0">졸업대상자 수</p>
                                                     </div>
                                                 </div>
@@ -118,18 +118,23 @@
                                 <div class="card widget-inline">
                                     <div class="card-body p-0">
                                         <div class="row no-gutters">
+                                        	<c:if test="${!empty misList}">
                                         	<c:forEach items="${misList}" var="mVo">
                                             <div class="col-sm-12 col-xl-4">
-                                                <div class="card shadow-none m-0">
+                                                <div class="card shadow-none m-0 border-left">
                                                     <div class="card-body text-center">
                                                         <i class="mdi mdi-calendar-text-outline" style="font-size: 24px;"></i>
-                                                        <h5><a href="/admin/apply/waitList">제 ${mVo.times}회 MIS-DAY</a></h5>
+                                                        <h5><a href="/admin/mis/list">제 ${mVo.times}회 MIS-DAY</a></h5>
                                                         	${mVo.title}
-                                                        <h5><span>${mVo.cnt}</span></h5>
+                                                        <h5><span>${mVo.cnt} 명</span></h5>
                                                     </div>
                                                 </div>
                                             </div>
                                             </c:forEach>
+                                            </c:if>
+                                            
+                                            <c:if test="${empty misList}">
+                                            </c:if>
                 
                                             <!-- <div class="col-sm-12 col-xl-4">
                                                 <div class="card shadow-none m-0 border-left">
