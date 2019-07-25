@@ -97,7 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		*
 		FROM(
 			SELECT 
-				ROWNUN RNUM,
+				ROWNUM RNUM,
 				MIS_NO,
 				TIMES,
 				TITLE,
@@ -116,13 +116,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					MIS_NO > 0 
 		]]>
 		<include refid="search" />
-				ORDER BY MIS_NO DESC, MIS_DATE DESC
-			
+				ORDER BY MIS_NO DESC
 		<![CDATA[    
-				)) WHERE (RNUM >= 1 AND RNUM <= 10) 
-			ORDER BY MIS_NO DESC, MIS_DATE DESC	
+				)) WHERE (RNUM >= #{pageStart} AND RNUM <= #{pageEnd}) 
+			ORDER BY MIS_NO DESC
 		]]>
 	</select>
+	
+	<!-- 페이징 처리 -->
+	<select id="listCriteria" resultType="com.rgvms.domain.MisVO">
+		<![CDATA[
+			SELECT
+			*
+			FROM (
+		 		SELECT 
+		  		ROWNUM RNUM,
+				MIS_NO,
+				TIMES,
+				TITLE,
+				MIS_DATE, 
+				MIS_REGDATE
+		 	FROM 
+				TBL_MIS
+			WHERE 
+				MIS_NO > 0 
+		 	WHERE (
+		 		WHERE (RNUM >= 1 AND RNUM <= 10) 
+			ORDER BY MIS_NO DESC
+		 	LIMIT #{pageStart}, #{perPageNum}
+		 ]]>
+	</select>
 
-
+	<select id="countPaging" resultType="int">
+		<![CDATA[
+			 SELECT 
+			 	COUNT(MIS_NO) 
+			 FROM 
+			 	TBL_MIS
+			WHERE 
+				MIS_NO > 0  
+		]]>
+	</select>
+	
+	
 </mapper>

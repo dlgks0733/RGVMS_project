@@ -26,9 +26,11 @@ public class SearchCriteria extends Criteria {
 
 	@Override
 	public String toString() {
-		return "SearchCriteria [searchType=" + searchType + ", keyword=" + keyword + ", getPageEnd()=" + getPageEnd()
-				+ ", getPageStart()=" + getPageStart() + "]";
+		return "SearchCriteria [searchType=" + searchType + ", keyword=" + keyword
+				+ ", getPageStart()=" + getPageStart() +  ", getPageEnd()=" + getPageEnd() +"]";
 	}
+
+
 
 	
 }

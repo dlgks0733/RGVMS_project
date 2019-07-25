@@ -91,7 +91,7 @@ body.loading {
 										<div class="form-group row mb-3">
 											<label for="misDate" class="col-3 col-form-label">날짜
 												선택</label>
-											<div class="col-2">
+											<div class="col-3">
 												<input type="text" class="form-control date"
 													name="misDate" data-toggle="date-picker"
 													data-single-date-picker="true">
@@ -100,10 +100,10 @@ body.loading {
 
 										<div class="form-group row mb-3">
 											<label for="grade" class="col-3 col-form-label">학년</label>
-											<div class="col-3">
+											<div class="col-1">
 											
 												<select class="form-control" name="grade" id="grade">
-													<option value="all">전체보기</option>
+													<option value="all">전체</option>
 													<option value="4">4</option>
 													<option value="3">3</option>
 													<option value="2">2</option>
@@ -135,7 +135,7 @@ body.loading {
 																					<label class="custom-control-label" for="customCheck1">&nbsp;</label>
 																			</div>
 																		</th>
-																		<th class="all">NO</th>
+																		<!-- <th class="all">NO</th> -->
 																		<th>학년</th>
 																		<th>학번</th>
 																		<th>이름</th>
@@ -150,7 +150,7 @@ body.loading {
 																			<td>
 																				<input type="checkbox" name="check" value="${uVo.userNo}" class="checkBox">
 																			</td>
-																			<td>${listStat.count}</td>
+																			<%-- <td>${listStat.count}</td> --%>
 																			<td class="tdGrade">${uVo.grade}</td>
 																			<td>${uVo.userNo}</td>
 																			<td>${uVo.userName}</td>
@@ -183,7 +183,7 @@ body.loading {
 																						<label class="custom-control-label" for="customCheck1">&nbsp;</label>
 																				</div>
 																			</th>
-																			<th class="all">NO</th>
+																			<!-- <th class="all">NO</th> -->
 																			<th>학년</th>
 																			<th>학번</th>
 																			<th>이름</th>

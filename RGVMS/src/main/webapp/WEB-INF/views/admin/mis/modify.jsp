@@ -96,7 +96,7 @@ body.loading {
 										<div class="form-group row mb-3">
 											<label for="misDate" class="col-3 col-form-label">날짜
 												선택 </label>
-											<div class="col-2">
+											<div class="col-3">
 												<input type="text" class="form-control date" id="misDate"
 													name="misDate" data-toggle="date-picker"
 													data-single-date-picker="true" 
@@ -106,13 +106,13 @@ body.loading {
 
 										<div class="form-group row mb-3">
 											<label for="grade" class="col-3 col-form-label">학년</label>
-											<div class="col-3">
+											<div class="col-1">
 												<select class="form-control" name="grade" id="grade">
 													<option value="all"
 														<c:out value="${UserVO.grade eq '4'? 'selectes':''}"/>
 														<c:out value="${UserVO.grade eq '3'? 'selectes':''}"/>
 														<c:out value="${UserVO.grade eq '2'? 'selectes':''}"/>
-														<c:out value="${UserVO.grade eq '1'? 'selectes':''}"/> >전체보기</option>
+														<c:out value="${UserVO.grade eq '1'? 'selectes':''}"/> >전체</option>
 													<option value="4"
 														<c:out value="${UserVO.grade eq '4'? 'selectes':''}"/>>4</option>
 													<option value="3"
@@ -148,7 +148,7 @@ body.loading {
 																					
 																			</div>
 																		</th>
-																		<th class="all">NO</th>
+																		<!-- <th class="all">NO</th> -->
 																		<th>학년</th>
 																		<th>학번</th>
 																		<th>이름</th>
@@ -161,7 +161,7 @@ body.loading {
 																		varStatus="listStat">
 																		<tr class="stu${uVo.grade}">
 																			<td><input type="checkbox" name="check" value="${uVo.userNo}"  class="checkBox"></td>
-																			<td>${listStat.count}</td>
+																			<%-- <td>${listStat.count}</td> --%>
 																			<td class="tdGrade">${uVo.grade}</td>
 																			<td>${uVo.userNo}</td>
 																			<td>${uVo.userName}</td>
@@ -195,7 +195,7 @@ body.loading {
 																						class="custom-control-label" for="customCheck1">&nbsp;</label>
 																				</div>
 																			</th>
-																			<th class="all">NO</th>
+																			<!-- <th class="all">NO</th> -->
 																			<th>학년</th>
 																			<th>학번</th>
 																			<th>이름</th>
@@ -207,7 +207,7 @@ body.loading {
 																	<c:forEach items="${attList}" var="attVo" varStatus="listStat">
 																		<tr>
 																			<td><input type="checkbox" class="checkBox2" name="check2" value="${attVo.userNo}"></td>
-																			<td>${listStat.count}</td>
+																			<%-- <td>${listStat.count}</td> --%>
 																			<td>${attVo.grade}</td>
 																			<td>${attVo.userNo}</td>
 																			<td>${attVo.userName}</td>

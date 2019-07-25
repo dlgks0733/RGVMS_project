@@ -8,7 +8,6 @@ public class Criteria {
 	
 	public Criteria() {
 		this.page = 1;
-		
 		// 한 페이지에 기본적으로 10개씩 보여준다.
 		this.perPageNum = 10;
 	}
@@ -19,12 +18,15 @@ public class Criteria {
 	
 	// method for MyBatis SQL Mapper -
 	public int getPageEnd() {
+		System.out.println("getPageEnd: ");
 		
 		return this.startPage + 9;
 	}
 	
 	// method for MyBatis SQL Mapper -
 	public int getPageStart() {
+		
+		System.out.println("getPageStart: ");
 		
 // 시작페이지 = (페이지 인덱스 * 화면에 출력할 게시글 수) - 9	ex) (2페이지 * 10개 단위) - 9 = 2번째 인덱스 페이지 11번째부터 시작
 		this.startPage = (this.page * perPageNum) - 9;
@@ -33,6 +35,8 @@ public class Criteria {
 	}
 
 	public void setPage(int page) {
+		
+		System.out.println("setPage: "+ page);
 		
 		// 페이지는 0이나 마이너스 값이 나오지 못한다.(처리문)
 		if(page <= 0) {
@@ -63,6 +67,6 @@ public class Criteria {
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", startPage=" + startPage + "]";
 	}
-	
+
 	
 }

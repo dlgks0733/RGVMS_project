@@ -5,6 +5,7 @@ import java.util.List;
 import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
+import com.rgvms.domain.UserVO;
 
 public interface MisService {
 
@@ -27,6 +28,10 @@ public interface MisService {
 	public void modify(MisVO mVo) throws Exception;
 
 	//7. MIS 출결 관리 - 상세정보
-	public MisVO read(MisVO mvo) throws Exception;
+	public MisVO misList(int misNo) throws Exception;
 	 
+	//8. 페이징 처리
+	public List<MisVO> listCriteria(Criteria cri) throws Exception;
+	
+	public int countPaging(Criteria cri) throws Exception;
 }

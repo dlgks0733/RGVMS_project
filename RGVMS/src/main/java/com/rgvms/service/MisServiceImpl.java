@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
+import com.rgvms.domain.UserVO;
 import com.rgvms.persistence.MisDAO;
 
 @Service
@@ -49,9 +50,20 @@ public class MisServiceImpl implements MisService {
 		
 	}
 
+	//misList 리스트항목
 	@Override
-	public MisVO read(MisVO mvo) throws Exception {	
-		return dao.read(mvo);
+	public MisVO misList(int misNo) throws Exception {	
+		return dao.misList(misNo);
+	}
+
+	@Override
+	public List<MisVO> listCriteria(Criteria cri) throws Exception {
+		return dao.listCriteria(cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		return dao.countPaging(cri);
 	}
 
 }

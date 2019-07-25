@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
+import com.rgvms.domain.UserVO;
 
 @Repository
 public class MisDAOImpl implements MisDAO {
@@ -25,9 +26,10 @@ public class MisDAOImpl implements MisDAO {
 		return mVo.getMisNo();
 	}
 
+	//검색 가능한 페이징 목록
 	@Override
 	public List<MisVO> list(SearchCriteria cri) throws Exception {
-		return session.selectList(namespace + ".list", cri);
+		return session.selectList(namespace + ".listSearch", cri);
 	}
 
 	@Override
@@ -51,9 +53,19 @@ public class MisDAOImpl implements MisDAO {
 	}
 
 	@Override
-	public MisVO read(MisVO mvo) throws Exception {
-		return session.selectOne(namespace + ".read", mvo);
+	public MisVO misList(int misNo) throws Exception {
+		return session.selectOne(namespace + ".misList", misNo);
 		
+	}
+
+	@Override
+	public List<MisVO> listCriteria(Criteria cri) throws Exception {
+		return session.selectList(namespace + ".listCriteria", cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		return session.selectOne(namespace + ".countPaging", cri);
 	}
 
 }

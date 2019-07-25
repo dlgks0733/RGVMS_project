@@ -1,6 +1,5 @@
 package com.rgvms.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,13 +40,14 @@ public class MisController {
 	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 
 		logger.info("MIS listGET...");
-		logger.info(cri.toString());
-
+		System.out.println("=====" + cri.getPage());
 		System.out.println("=====" + cri.toString());
+		
 		model.addAttribute("list", service.list(cri));
+		
+		logger.info("list size: "+service.list(cri).size());
 
 		PageMaker pageMaker = new PageMaker();
-
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.listSearchCount(cri));
 
@@ -182,4 +182,5 @@ public class MisController {
 		return "redirect:/admin/mis/list";
 
 	}
+	
 }

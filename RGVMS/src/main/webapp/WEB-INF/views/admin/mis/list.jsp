@@ -107,9 +107,9 @@ body.loading {
 													</tr>
 												</thead>
 												<tbody>
-													<c:forEach items="${list}" var="misVO">
+													<c:forEach items="${list}" var="misVO" varStatus="status">
 														<tr>
-															<td>${misVO.misNo}</td>
+															<td>${(pageMaker.totalCount - status.index) -  (pageMaker.cri.page-1) * 10 }</td>
 															<td><a
 																href='modify${pageMaker.makeSearch(pageMaker.cri.page)}&misNo=${misVO.misNo}'>
 																제${misVO.times}회 MISDAY ${misVO.title}</a></td>
@@ -124,32 +124,10 @@ body.loading {
 										 <div class="box-footer">
 										 
 										 <br><br>
-						<%-- <div class="text-align: center;">
-							<ul class="pagination">
-
-							<c:if test="${pageMaker.prev}">
-								<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
-							</c:if>
-
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
-								<li
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
-								</li>
-							</c:forEach>
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li><a href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
-							</c:if>
-
-						</ul>
-					</div> --%>
-
-
+	
 						<!-- 페이징 -->
 						<div class="text-align: center;">
-							<ul class="pagination pagination-rounded">
+							<ul class="pagination pagination-rounded" style="text-align: center;">
 								<li class="page-item">
                             	   <a class="page-link" href="javascript: void(0);" aria-label="Previous">
                                    	<span aria-hidden="true">&laquo;</span>
@@ -158,22 +136,21 @@ body.loading {
 			                          		 </li>
 
 							<c:if test="${pageMaker.prev}">
-								<li class="page-item"><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }" 
+								<li class="page-item"><a href="/admin/mis/list${pageMaker.makeSearch(pageMaker.startPage - 1) }" 
 								class="page-link" >&laquo;</a></li>
 							</c:if>
 
-							<c:forEach begin="${pageMaker.startPage }"
-								end="${pageMaker.endPage }" var="idx">
+							<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 								<li class="page-item" 
 									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="list${pageMaker.makeSearch(idx)}" 
+									<a href="/admin/mis/list${pageMaker.makeSearch(idx)}" 
 									class="page-link" >${idx}</a>
 								</li>
 							</c:forEach>
 
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li class="page-item" >
-								<a href="list${pageMaker.makeSearch(pageMaker.endPage +1) }" 
+								<a href="/admin/mis/list${pageMaker.makeSearch(pageMaker.endPage +1) }" 
 								class="page-link" >&raquo;</a></li>
 							</c:if>
 							
@@ -185,7 +162,7 @@ body.loading {
 													</ul>
 												</div>
 												
-											<!-- 페이징 div 끝 -->
+											<!-- 페이징 끝 -->
 										</div>			
 									</div>
 								</div>
