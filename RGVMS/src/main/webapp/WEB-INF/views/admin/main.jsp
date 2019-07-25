@@ -118,18 +118,20 @@
                                 <div class="card widget-inline">
                                     <div class="card-body p-0">
                                         <div class="row no-gutters">
+                                        	<c:forEach items="${misList}" var="mVo">
                                             <div class="col-sm-12 col-xl-4">
                                                 <div class="card shadow-none m-0">
                                                     <div class="card-body text-center">
                                                         <i class="mdi mdi-calendar-text-outline" style="font-size: 24px;"></i>
-                                                        <h5><a href="/admin/apply/waitList">제 50회 MIS-DAY</a></h5>
-                                                        	이수아 강사의 운동 안 하는 법
-                                                        <h5><span>10명</span></h5>
+                                                        <h5><a href="/admin/apply/waitList">제 ${mVo.times}회 MIS-DAY</a></h5>
+                                                        	${mVo.title}
+                                                        <h5><span>${mVo.cnt}</span></h5>
                                                     </div>
                                                 </div>
                                             </div>
+                                            </c:forEach>
                 
-                                            <div class="col-sm-12 col-xl-4">
+                                            <!-- <div class="col-sm-12 col-xl-4">
                                                 <div class="card shadow-none m-0 border-left">
                                                    <div class="card-body text-center">
                                                         <i class="mdi mdi-calendar-text-outline" style="font-size: 24px;"></i>
@@ -138,9 +140,9 @@
                                                         <h5><span>10명</span></h5>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                 
-                                            <div class="col-sm-12 col-xl-4">
+                                            <!-- <div class="col-sm-12 col-xl-4">
                                                 <div class="card shadow-none m-0 border-left">
                                                    <div class="card-body text-center">
                                                         <i class="mdi mdi-calendar-text-outline" style="font-size: 24px;"></i>
@@ -149,7 +151,7 @@
                                                         <h5><span>10명</span></h5>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                 
                 
                                         </div> <!-- end row -->

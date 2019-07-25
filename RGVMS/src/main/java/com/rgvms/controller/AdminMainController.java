@@ -26,6 +26,8 @@ public class AdminMainController {
 		model.addAttribute("graduateCount", service.graduateCount());
 		model.addAttribute("graduateToBeCount", service.graduateToBeCount());
 		
+		model.addAttribute("misList", service.misInfo());
+		
 		
 	}
 	

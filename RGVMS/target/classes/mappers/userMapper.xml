@@ -181,7 +181,7 @@ ORDER BY U.USER_NO ASC
 </select>
 
 <!-- 관리자 :: 대시보드 - 최근 3개 MIS 정보 -->
-<select id="misInfo" resultType="com.rgvms.domain.MisVO">
+<select id="misInfo" resultType="com.rgvms.dto.MisInfoDTO">
 <![CDATA[
 SELECT * FROM
 (
