@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.rgvms.domain.ApplyVO;
 import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
@@ -133,6 +134,12 @@ public class UserServiceImpl implements UserService {
 	public List<MisVO> misInfo() throws Exception {
 		
 		return dao.misInfo();
+	}
+
+	@Override
+	public List<ApplyVO> mainApplyWaitList(int userNo) throws Exception {
+		
+		return dao.mainApplyWaitList(userNo);
 	}
 	
 	//7. 비밀번호 체크

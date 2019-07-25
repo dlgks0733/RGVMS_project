@@ -121,12 +121,12 @@ body.loading {
 											</table>
 										</div>
 										
-										 <div class="box-footer">
+										 <!-- <div class="box-footer"> -->
 										 
-										 <br><br>
+										 <!-- <br><br> -->
 	
 						<!-- 페이징 -->
-						<div class="text-align: center;">
+						<%-- <div class="text-align: center;">
 							<ul class="pagination pagination-rounded" style="text-align: center;">
 								<li class="page-item">
                             	   <a class="page-link" href="javascript: void(0);" aria-label="Previous">
@@ -160,18 +160,45 @@ body.loading {
                                                         	  </a>
                                                           </li>
 													</ul>
-												</div>
+												</div> --%>
+												
+						
 												
 											<!-- 페이징 끝 -->
-										</div>			
+										<!-- </div>	 -->		
+										
+										<div class="card-footer">
+                                    	<nav>
+											<ul class="pagination justify-content-center">
+												<c:if test="${pageMaker.prev}">
+													<li class="page-item"><a class="page-link" aria-label="Previous"
+														href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }"><span aria-hidden="true">«</span>
+                                                                <span class="sr-only">Previous</span></a></li>
+												</c:if>
+												<c:forEach begin="${pageMaker.startPage }"
+													end="${pageMaker.endPage }" var="idx">
+													<li class="page-item"
+														<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+														<a class="page-link" href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+													</li>
+												</c:forEach>
+												<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+													<li><a class="page-link"
+														href="list${pageMaker.makeSearch(pageMaker.endPage +1) }"><span aria-hidden="true">»</span>
+                                                                <span class="sr-only">Next</span></a></li>
+												</c:if>
+											</ul>
+										</nav>
+										
+										<div style="text-align: right;">
+										<button type="button" onclick="location.href='register'" class="btn btn-primary">등록</button>
+										</div>
+										
+                                    </div>
 									</div>
 								</div>
 								
-								<!-- 버튼 div -->
-								<div style="text-align: right;">
-									<button type="button" onclick="location.href='register'"
-										class="btn btn-primary">등록</button>
-									</div>
+								
 
 							</div>
 						</div>

@@ -194,5 +194,20 @@ ORDER BY TIMES DESC
 WHERE ROWNUM <= 3
 ]]>
 </select>
-	
+
+<select id="mainApplyWaitList" resultType="com.rgvms.domain.ApplyVO">
+<![CDATA[
+SELECT A.APPLY_NO
+	 , S.SUB_NAME
+	 , A.APPLY_DATE
+	 , A.APPLY_STATE 
+  FROM TBL_APPLY A, TBL_SUBJECT S
+ WHERE S.SUB_NO = A.SUB_NO
+   AND ROWNUM <= 3
+   AND A.APPLY_STATE = '승인대기'
+   AND A.USER_NO = #{applyNo}
+ORDER BY A.APPLY_NO DESC
+]]>
+</select>
+
 </mapper>

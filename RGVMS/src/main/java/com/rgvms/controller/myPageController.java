@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rgvms.domain.UserVO;
+import com.rgvms.service.ApplyService;
 import com.rgvms.service.UserService;
 
 @Controller
@@ -22,6 +23,9 @@ public class myPageController {
 
 	@Inject
 	private UserService service;
+	
+	@Inject
+	private ApplyService ApplyService;
 
 	private static Logger logger = LoggerFactory.getLogger(myPageController.class);
 	
@@ -65,4 +69,16 @@ public class myPageController {
 		
 		return "redirect:/";
 	}
+	
+	//4. 내 점수
+	@RequestMapping(value = "/myScore", method=RequestMethod.GET)
+	public void myScore(HttpServletRequest request, Model model) throws Exception {
+		HttpSession session = request.getSession();
+		UserVO uVo = (UserVO) session.getAttribute("login");
+		int userNo = uVo.getUserNo();
+		
+		model.addAttribute(ApplyService.esSelect(userNo));
+		model.addAttribute("acceptList", ApplyService.acceptList(userNo));
+	}
+	
 }

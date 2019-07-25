@@ -2,6 +2,7 @@ package com.rgvms.service;
 
 import java.util.List;
 
+import com.rgvms.domain.ApplyVO;
 import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
@@ -61,8 +62,11 @@ public interface UserService {
 
 	// 16. 관리자 :: 대시보드 - 졸업대상자 수
 	public int graduateToBeCount() throws Exception;
-	
+
 	// 17. 관리자 :: 대시보드 - 최근 MIS 3개 정보
 	public List<MisVO> misInfo() throws Exception;
+
+	// 18. 학생 :: 대시보드 - 최근 승인 대기 신청내역 3개 리스트
+	public List<ApplyVO> mainApplyWaitList(int userNo) throws Exception;
 
 }

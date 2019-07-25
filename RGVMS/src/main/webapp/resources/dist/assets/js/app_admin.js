@@ -25517,8 +25517,8 @@ function ($) {
 
 
         this._partials = {
-            VERTICAL_SIDEBAR: '/resources/dist/partials/left-sidebar.html',
-            VERTICAL_TOPBAR: '/resources/dist/partials/topbar.html',
+            VERTICAL_SIDEBAR: '/resources/dist/partials/left-sidebar.jsp',
+            VERTICAL_TOPBAR: '/resources/dist/partials/topbar.jsp',
         };
 
         this.currentlyActivatedLayout = LAYOUT_VERTICAL;
