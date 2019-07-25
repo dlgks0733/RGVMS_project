@@ -235,6 +235,7 @@ body.loading {
 									
 									<div class="card-footer">
 										<div style="text-align: right;">
+											<button type="button" class="btn btn-danger">삭제</button>
 											<button type="button" class="btn btn-primary" id="btn_submit">수정</button>
 											<button type="button" onclick="location.href='list'"
 												class="btn btn-light">취소</button>
