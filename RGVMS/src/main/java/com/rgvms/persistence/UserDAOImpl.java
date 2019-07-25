@@ -142,7 +142,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public int graduateToBeCount() throws Exception {
 		
-		return session.selectOne(namespace=".graduateToBeCount");
+		return session.selectOne(namespace+".graduateToBeCount");
 	}
 
 	@Override
