@@ -23,17 +23,18 @@ public class myPageController {
 	@Inject
 	private UserService service;
 
-	private static Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static Logger logger = LoggerFactory.getLogger(myPageController.class);
 	
 	//1. 내정보확인 페이지
 	@RequestMapping(value = "/myInfo", method=RequestMethod.GET)
-	public void registerGET(HttpServletRequest request, Model model) throws Exception {
+	public void myInfoGET(HttpServletRequest request, Model model) throws Exception {
 		
 		logger.info("user myPageGET..............");
 		
 		HttpSession session = request.getSession();
 	
 	    UserVO uVo = (UserVO) session.getAttribute("login");
+	    
 	    int userNo = uVo.getUserNo();
 	    System.out.println(userNo);
 	    
@@ -43,7 +44,7 @@ public class myPageController {
 	
 	//2. 내정보 수정폼으로 이동
 	@RequestMapping(value="/myInfoUpdate", method=RequestMethod.GET)
-	public void mpModifyGET(@RequestParam("userNo") int userNo, Model model) throws Exception {
+	public void myInfoUpdateGET(@RequestParam("userNo") int userNo, Model model) throws Exception {
 		
 		logger.info("user mpModifyGET...............");
 		
@@ -52,7 +53,7 @@ public class myPageController {
 	
 	//3. 내정보 수정
 	@RequestMapping(value="/myInfoUpdate", method=RequestMethod.POST)
-	public String mpModifyPOST(UserVO uVo, RedirectAttributes rttr, Model model) throws Exception {
+	public String myInfoUpdatePOST(UserVO uVo, RedirectAttributes rttr, Model model) throws Exception {
 
 		logger.info("user mpModifyPOST...............");
 		
@@ -60,6 +61,8 @@ public class myPageController {
 		
 		rttr.addFlashAttribute("user", "SUCCESS");
 		
-		return "redirect:/user/mypage/myInfo";
+		
+		
+		return "redirect:/";
 	}
 }

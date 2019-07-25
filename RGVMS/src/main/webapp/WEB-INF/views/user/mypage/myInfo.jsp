@@ -69,7 +69,7 @@ input.form-control[readonly], textarea.form-control[readonly] {
 						<div class="col-lg-7">
 							<div class="card">
 								<div class="card-body">
-									<form class="needs-validation" action="myInfoUpdate" method="get">
+									<form action="myInfoUpdate" method="get">
 										<div class="form-group mb-3">
 											<label for="userNo">학번</label>
 											<input type="text" class="form-control" name="userNo"

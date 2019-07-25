@@ -19,7 +19,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="myInfoUpdate">
 		UPDATE
 		TBL_USER
-		SET grade = #{grade},
+		SET 
+			grade = #{grade},
 			user_Name = #{userName},
 			state = #{state},
 			user_Pw = #{userPw}

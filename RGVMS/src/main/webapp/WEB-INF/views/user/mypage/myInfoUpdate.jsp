@@ -26,11 +26,11 @@
 <!-- javaScript validate() -->
 <script type="text/javascript">
 function validate() {
-	/* var userPw = document.getElementById("userPw");
-	var userPwCnf = document.getElementById("userPwCnf");
-	var grade = document.getElementById("grade");
-	var state = document.getElementById("state");
-	var userName = document.getElemeㅕntById("userName"); */
+
+	var con = confirm("수정할 경우 로그아웃이 됩니다.");
+	
+	//수정 후, 로그아웃
+	if(con){
 	
 	var userPw = $("#userPw").val();
 	var userPwCnf = $("#userPwCnf").val();
@@ -40,6 +40,7 @@ function validate() {
 	
 	// 패스워드가 적합한지 검사할 정규식
 	var re = /^[a-zA-Z0-9]{4,20}$/;
+	var reg_pwd = /^.*(?=.{4,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
 	
 	//학년 유효성 검사
 	/* if(grade.inter[0].checked == false &&
@@ -76,15 +77,23 @@ function validate() {
     }
 	
 	//비밀번호 길이 유효성 검사
-	if(userPw.length < 4 || userPw.legnth > 20
-			|| !check(re, userPw, "4자리 ~ 20자리 이내로 영문 대소문자와 숫자를 포함해주세요.") ) {
+	if(userPw.length < 4 || userPw.legnth > 20) {
 		
-		alert("4자리 ~ 20자리 이내로 입력해주세요.");
-		/* $("#userPw").value = "";
-		$("#userPw").focus(); */
+		alert("비밀번호를 4자리 ~ 20자리 이내로 입력해주세요.");
+		$("#userPw").value = "";
+		$("#userPwCnf").value = "";
+		$("#userPw").focus();
 		
 		return false;
 	}
+	
+	//비밀번호 영문 대소문자, 숫자 유효성 검사
+	/* if(!check(reg_pwd, userPw, "4자리 ~ 20자리 이내로 영문 대소문자와 숫자를 포함해주세요.")) {
+
+		$("#userPwCnf").value = "";
+		
+		return false;
+	} */
 	
 	//비밀번호 변경과 확인 유효성 검사
 	if(userPw != userPwCnf) {
@@ -97,17 +106,23 @@ function validate() {
 	}
 	
 	return true;
+	
+	} else{
+		
+		return false;
+	}
+	
 }
 
-function check(re, what, message) {
-    if(re.test(what.value)) {
+/* function check(reg_pwd, what, message) {
+    if(reg_pwd.test(what.value)) {
         return true;
     }
     alert(message);
     what.value = "";
     what.focus();
-    //return false;
-}
+    return false;
+} */
 </script>
 </head>
 
@@ -147,7 +162,7 @@ function check(re, what, message) {
 					<div class="row" style=" justify-content: center;">
 						<div class="col-lg-7">
 							<div class="card">
-								<div class="card-body"><!-- onsubmit="return validate();" -->
+								<div class="card-body">
 									<form action="myInfoUpdate" method="post" onsubmit="return validate();">
 										<div class="form-group mb-3">
 											<label for="userNo">학번</label>
