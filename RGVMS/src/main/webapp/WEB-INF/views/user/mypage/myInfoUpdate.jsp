@@ -23,6 +23,21 @@
 <link href="/resources/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 <link href="/resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" id="main-style-container" />
 
+<!-- password css -->
+<style type="text/css">
+div.main i{
+    position: absolute;
+    left: 75%;
+    top: 27px;
+    color: purple;
+  	font-size:20px;
+}
+
+div.mainPw input, i {
+	display: inline;
+}
+</style>
+
 <!-- javaScript validate() -->
 <script type="text/javascript">
 function validate() {
@@ -40,34 +55,7 @@ function validate() {
 	
 	// 패스워드가 적합한지 검사할 정규식
 	var re = /^[a-zA-Z0-9]{4,20}$/;
-	var reg_pwd = /^.*(?=.{4,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
-	
-	//학년 유효성 검사
-	/* if(grade.inter[0].checked == false &&
-	   grade.inter[1].checked == false &&
-	   grade.inter[2].checked == false &&
-	   grade.inter[3].checked == false &&
-	   grade.inter[4].checked == false
-	   ) {
-		
-		alert("학년을 선택해주세요.");
-		$("#grade").focus();
-		
-		return false;
-	} */
-	
-	//학적상태 유효성 검사
-	/* if(state.inter[0].checked == false &&
-	   state.inter[1].checked == false &&
-	   state.inter[2].checked == false &&
-	   state.inter[3].checked == false 
-	) {
-		
-		alert("학적상태를 입력해주세요.");
-		$("#state").focus();
-		
-		return false;
-	} */
+	/* var reg_pwd = /^.*(?=.{4,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/; */
 	
 	//이름 유효성 검사
     if(userName == ""){
@@ -80,7 +68,7 @@ function validate() {
 	//비밀번호 길이 유효성 검사
 	if(userPw.length < 4 || userPw.legnth > 20) {
 		
-		alert("비밀번호를 4자리 ~ 20자리 이내로 입력해주세요.");
+		alert("비밀번호를 6자리 ~ 20자리 이내로 입력해주세요.");
 		$("#userPw").value = "";
 		$("#userPwCnf").value = "";
 		$("#userPw").focus();
@@ -89,12 +77,22 @@ function validate() {
 	}
 	
 	//비밀번호 영문 대소문자, 숫자 유효성 검사
-	/* if(!check(reg_pwd, userPw, "4자리 ~ 20자리 이내로 영문 대소문자와 숫자를 포함해주세요.")) {
-
+	/* if(!check(re, userPw, "6자리 ~ 20자리 이내로 영문 대소문자와 숫자를 포함해주세요.")) {
+		
+		$("#userPw").value = "";
 		$("#userPwCnf").value = "";
 		
 		return false;
 	} */
+	
+	if(!/^(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/.test(userPw)){
+		
+		alert("6자리 ~ 20자리 이내로 영문 대소문자와 숫자를 포함해주세요.");
+		$("#userPw").value = "";
+		$("#userPwCnf").value = "";
+		
+		return false;
+	}
 	
 	//비밀번호 변경과 확인 유효성 검사
 	if(userPw != userPwCnf) {
@@ -115,8 +113,8 @@ function validate() {
 	
 }
 
-/* function check(reg_pwd, what, message) {
-    if(reg_pwd.test(what.value)) {
+/* function check(re, what, message) {
+    if(re.test(what.value)) {
         return true;
     }
     alert(message);
@@ -205,15 +203,19 @@ function validate() {
 											<input type="text" class="form-control" id="userName" name="userName" value="${userVO.userName}"/>
 										</div>
 										
-										<div class="form-group mb-3">
+										<div>
+										<div class="form-group mb-3 mainPw">
 											<label for="userPw">비밀번호변경</label><span class="text-danger">*</span>
-											<input type="text" class="form-control" id="userPw" name="userPw" value="${userVO.userPw}" placeholder="새 비밀번호를 입력하세요."/>
-											<h6> 4자리 ~ 20자리로 영문 대소문자와 숫자를 포함하여 만들어주세요.</h6>
+											<input type="password" class="form-control" id="userPw" name="userPw" style="width:95%;"
+											value="${userVO.userPw}" placeholder="새 비밀번호를 입력하세요."/><i class="mdi mdi-eye-circle mdi-24px"></i>
+											<h6> 6자리 ~ 20자리로 영문 대소문자와 숫자를 포함하여 만들어주세요.</h6>
 										</div>
 										
-										<div class="form-group mb-3">
+										<div class="form-group mb-3 mainPw">
 											<label for="userPwCnf">비밀번호확인</label><span class="text-danger">*</span>
-											<input type="text" class="form-control" id="userPwCnf" name="userPwCnf" placeholder="새 비밀번호 확인을 위해 다시 입력해주세요."/>
+											<input type="password" class="form-control" id="userPwCnf" name="userPwCnf"  style="width:95%;"
+											placeholder="새 비밀번호 확인을 위해 다시 입력해주세요."/><i class="mdi mdi-eye-circle mdi-24px"></i>
+										</div>
 										</div>
 
 										
@@ -284,5 +286,22 @@ var result = '${user}';
 if (result == 'SUCCESS') {
 	alert("정보가 수정되었습니다.");
 }
+</script>
+
+<!-- 비밀번호 보이기/숨기기 기능 -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.mainPw i').on('click',function(){
+        $('input').toggleClass('active');
+        if($('input').hasClass('active')){
+            $(this).attr('class',"mdi mdi-eye-circle-outline mdi-24px")
+            .prev('input').attr('type',"text");
+        }else{
+            $(this).attr('class',"mdi mdi-eye-circle mdi-24px")
+            .prev('input').attr('type','password');
+        }
+    });
+});
+
 </script>
 </html>
