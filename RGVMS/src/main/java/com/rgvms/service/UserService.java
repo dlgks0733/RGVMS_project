@@ -38,13 +38,16 @@ public interface UserService {
 
 	// 10 . MY PAGE - 내 정보 수정
 	public void myInfoModify(UserVO uVo) throws Exception;
+	
+	// 11. MY PAGE - 비밀번호 체크
+	//public boolean checkPw(int i, String userPw) throws Exception;
 
-	// 11. 페이징처리
+	// 12. 페이징처리
 	public List<UserVO> listCriteria(Criteria cri) throws Exception;
-
+	
 	public int countPaging(Criteria cri) throws Exception;
 
-	// 12. 검색처리
+	// 13. 검색처리
 	public List<UserVO> listSearch(SearchCriteria cri) throws Exception;
 
 	public int listSearchCount(SearchCriteria cri) throws Exception;

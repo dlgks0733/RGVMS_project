@@ -3,27 +3,34 @@
    	
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>사용자 페이지</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-        <meta content="Coderthemes" name="author" />
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="/resources/dist/assets/images/favicon.ico">
+<head>
+<meta charset="utf-8" />
+<title>사용자 페이지</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+<meta content="Coderthemes" name="author" />
+<!-- App favicon -->
+<link rel="shortcut icon" href="/resources/dist/assets/images/favicon.ico">
 
-        <!-- inline style to handle loading of various element-->
-        <style>body.loading {visibility: hidden;}</style>
+<!-- inline style to handle loading of various element-->
+<style>body.loading {visibility: hidden;}</style>
 
-        <!-- third party css -->
-        <link href="/resources/dist/assets/css/vendor/fullcalendar.min.css" rel="stylesheet" type="text/css" />
-        <!-- third party css end -->
+<!-- third party css -->
+<link href="/resources/dist/assets/css/vendor/fullcalendar.min.css" rel="stylesheet" type="text/css" />
+<!-- third party css end -->
 
-        <!-- App css -->
-        <link href="/resources/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="/resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" id="main-style-container" />
+<!-- App css -->
+<link href="/resources/dist/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" id="main-style-container" />
 
-    </head>
+<!-- input readonly -->
+<style type="text/css">
+input.form-control[readonly], textarea.form-control[readonly] { 
+  background-color: #fff;
+}
+</style>
+</style>
+</head>
 
     <body class="loading">
         <div id="detached-topbar-placeholder"></div>
@@ -46,13 +53,13 @@
 								<div class="page-title-right">
 									<ol class="breadcrumb m-0">
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">학생관리</a></li>
+											href="javascript: void(0);">MyPage</a></li>
 										<!-- <li class="breadcrumb-item"><a
 											href="javascript: void(0);"></a></li> -->
-										<li class="breadcrumb-item active">학생등록</li>
+										<li class="breadcrumb-item active">내정보</li>
 									</ol>
 								</div>
-								<h4 class="page-title">학생등록</h4>
+								<h4 class="page-title">내정보</h4>
 							</div>
 						</div>
 					</div>
@@ -62,53 +69,54 @@
 						<div class="col-lg-7">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="header-title mb-3">학생정보입력란</h4>
-
-									<form class="needs-validation" method="post">
+									<form class="needs-validation" action="myInfoUpdate" method="get">
 										<div class="form-group mb-3">
-											<label for="userNo">학번</label> <input
-												type="text" class="form-control" name="userNo"
-												placeholder="학번을 입력해주세요."/>
-											<div class="valid-feedback">확인!</div>
+											<label for="userNo">학번</label>
+											<input type="text" class="form-control" name="userNo"
+											value="${userVO.userNo}" readonly="readonly"/>
 										</div>
 										
 										<div class="box">
 											<div class="form-group mb-3">
 												<label for="grade">학년</label>
-												<select class="form-control select2" name="grade">
-	                                                    <option value="">선택</option>
-	                                                    <option value="4">4</option>
-	                                                    <option value="3">3</option>
-	                                                    <option value="2">2</option>
-	                                                    <option value="1">1</option>
+												<select class="form-control select2" name="grade" id="gradeSelect">
+													<option value="4"
+														<c:out value="${userVO.grade eq '4'?'selected':'' }"/>>4</option>
+	                                                <option value="3"
+														<c:out value="${userVO.grade eq '3'?'selected':'' }"/>>3</option>
+													<option value="2"
+														<c:out value="${userVO.grade eq '2'?'selected':'' }"/>>2</option>
+													<option value="1"
+														<c:out value="${userVO.grade eq '1'?'selected':'' }"/>>1</option>
 	                                            </select>
-												<div class="invalid-feedback">학년을 선택해주세요.</div>
 											</div>
 											<div class="form-group mb-3">
 												<label for="state">학적상태</label>
-												<select class="form-control select2" name="state">
-	                                                    <option value="">선택</option>
-	                                                    <option value="재학">재학</option>
-	                                                    <option value="휴학">휴학</option>
-	                                                    <option value="졸업">졸업</option>
-	                                                    <option value="수료">수료</option>
+												<select class="form-control select2" name="state" id="stateSelect">
+													<option value="재학"
+														<c:out value="${userVO.state eq '재학'?'selected':'' }"/>>재학</option>
+													<option value="휴학"
+														<c:out value="${userVO.state eq '휴학'?'selected':'' }"/>>휴학</option>
+													<option value="졸업"
+														<c:out value="${userVO.state eq '졸업'?'selected':'' }"/>>졸업</option>
+													<option value="수료"
+														<c:out value="${userVO.state eq '수료'?'selected':'' }"/>>수료</option>
 	                                            </select>
-												<div class="invalid-feedback">학년을 선택해주세요.</div>
 											</div>
 										</div>
 										
 										<div class="form-group mb-3">
 											<label for="userName">이름</label> <input
-												type="text" class="form-control" name="userName"
-												placeholder="이름을 입력해주세요."/>
-											<div class="valid-feedback">확인!</div>
+												type="text" class="form-control" name="userName" value="${userVO.userName }"
+												readonly="readonly"/>
 										</div>
 
 										<input type="hidden" class="form-control" name="userPw" value="1234">
 										<input type="hidden" class="form-control" name="authority" value="0">
 										
-										
-										<button class="btn btn-primary" type="submit">등록</button>
+										<div style="text-align: right;">
+											<button class="btn btn-primary" type="submit">내정보 수정하기</button>
+										</div>
 									</form>
 
 								</div>
@@ -164,9 +172,15 @@
         <!-- demo app -->
         <script src="/resources/dist/assets/js/pages/demo.calendar.js"></script>
         <!-- end demo js-->
-        
-        
-      
 
-  </body>
+</body>
+
+	<script>
+		$(document).ready(function() {
+			
+	  		$('#gradeSelect option').not(":selected").attr("disabled", "disabled");
+	  		$('#stateSelect option').not(":selected").attr("disabled", "disabled");
+		});
+
+	</script>
 </html>

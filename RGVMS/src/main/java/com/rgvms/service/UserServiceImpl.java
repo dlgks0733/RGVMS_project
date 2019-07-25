@@ -71,17 +71,19 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	//5. 내정보 확인하기
 	@Override
 	public UserVO myInfo(int userNo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.myInfo(userNo);
 	}
 
+	//6. 내정보 수정하기
 	@Override
 	public void myInfoModify(UserVO uVo) throws Exception {
 		// TODO Auto-generated method stub
-		
+		dao.myInfoUpdate(uVo);
 	}
 
 	@Override
@@ -119,5 +121,12 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return dao.graduateCount();
 	}
+	
+	//7. 비밀번호 체크
+	/*@Override
+	public boolean checkPw(int userNo, String userPw) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.checkPw(userNo, userPw);
+	}*/
 
 }

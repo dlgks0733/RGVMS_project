@@ -1,6 +1,8 @@
 package com.rgvms.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -20,6 +22,7 @@ public class UserDAOImpl implements UserDAO {
 	private SqlSession session;
 	
 	private static String namespace = "com.rgvms.mapper.UserMapper";
+	private static String namespaceMyPage = "com.rgvms.mapper.MyPageMapper";
 	
 	@Override
 	public UserVO login(LoginDTO dto) throws Exception {
@@ -74,17 +77,19 @@ public class UserDAOImpl implements UserDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	//8. 사용자 내정보 확인
 	@Override
 	public UserVO myInfo(int userNo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne(namespaceMyPage + ".myInfo", userNo);
 	}
-
+	
+	//9. 사용자 내정보 수정하기(비밀번호 수정가능)
 	@Override
 	public void myInfoUpdate(UserVO uVo) throws Exception {
 		// TODO Auto-generated method stub
-		
+		session.update(namespaceMyPage + ".myInforUpdate", uVo);
 	}
 
 	@Override
@@ -132,5 +137,23 @@ public class UserDAOImpl implements UserDAO {
 		
 		return session.selectOne(namespace+".graduateCount");
 	}
+	
+	// 13. 비밀번호 체크
+	/*@Override
+	public boolean checkPw(int userNo, String userPw) throws Exception {
+		// TODO Auto-generated method stub
+		
+		boolean result = false;
+		Map<Integer, String> map = new HashMap<Integer, String>();
+		map.put(userNo, "userNo");
+		map.put("userPw", userPw);
+		
+		int count = session.selectOne(namespace + ".checkPw");
+		if(count == 1) {
+			result = true;
+		}
+
+		return result;
+	}*/
 
 }

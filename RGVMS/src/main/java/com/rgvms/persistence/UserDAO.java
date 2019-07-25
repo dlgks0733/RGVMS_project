@@ -38,6 +38,9 @@ public interface UserDAO {
 
 	// 10 . MY PAGE - 내 정보 수정
 	public void myInfoUpdate(UserVO uVo) throws Exception;
+	
+	// 11. MY PAGE - 비밀번호 체크
+	//public boolean checkPw(int userNo, String userPw) throws Exception;
 
 	// 11. 관리자 :: 졸업인증평가 관리 - 목록
 	public List<TotalDTO> esList(int userNo) throws Exception;
