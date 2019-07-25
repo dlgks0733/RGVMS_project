@@ -48,8 +48,12 @@ function subRegister() {
 
 <!-- 개정안 부칙 팝업창띄우기 -->
 <script type="text/javascript">
-function subRevised() {
-	location.href="/admin/subject/revised.jsp";
+function popupOpen() {
+	var popUrl = "/admin/subject/revised.html";	//팝업창에 출력될 페이지 URL
+
+	var popOption = "width=450, height=360, resizable=no, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
+
+		window.open(popUrl,"",popOption);
 }
 </script>
 
@@ -222,7 +226,8 @@ function subRevised() {
 										<!-- 페이징처리 -->
 										
 										<div style="margin-top:2%;">
-											<a href="/admin/subject/revised.jsp" target="_blank">졸업인증제 개정안 부칙</a>
+											<a href="javascript:popupOpen();">
+											<button type="button" class="btn btn-outline-secondary mb-2">졸업인증제 개정안 부칙</button></a>
 										</div>
 										<div style="text-align: right;">
 											<button type="button" class="btn btn-primary mb-2" onclick="subRegister()">인증항목등록</button>

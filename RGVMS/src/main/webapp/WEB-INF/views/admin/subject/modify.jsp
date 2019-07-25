@@ -151,7 +151,7 @@ function validate(){
 									<div class="card-body">
 										<!-- <h4 class="header-title mb-3">항목정보입력란</h4> -->
 
-										<form role="form" onsubmit="return validate();">
+										<form name="frm" role="form" onsubmit="return validate();">
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
