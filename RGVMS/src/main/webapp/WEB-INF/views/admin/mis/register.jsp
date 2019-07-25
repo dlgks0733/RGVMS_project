@@ -56,8 +56,14 @@ body.loading {
 						<div class="row">
 							<div class="col-12">
 								<div class="page-title-box">
-
-									<h3 class="page-title">MIS 출결 관리</h3>
+									<div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/admin/main">RGVMS</a></li>
+                                            <li class="breadcrumb-item"><a href="/admin/mis/list">MIS 출결 관리</a></li>
+                                            <li class="breadcrumb-item active">MIS 출결 등록</li>
+                                        </ol>
+                                    </div>
+									<h3 class="page-title">MIS 출결 등록</h3>
 								</div>
 							</div>
 						</div>
@@ -100,7 +106,7 @@ body.loading {
 
 										<div class="form-group row mb-3">
 											<label for="grade" class="col-3 col-form-label">학년</label>
-											<div class="col-1">
+											<div class="col-2">
 											
 												<select class="form-control" name="grade" id="grade">
 													<option value="all">전체</option>
@@ -201,6 +207,13 @@ body.loading {
 										<!-- end table-responsive-->
 									</div>
 									<!-- end card body-->
+									<div class="card-footer">
+										<div style="text-align: right;">
+											<button type="submit" class="btn btn-primary" id="btn_submit">등록</button>
+											<button type="button" onclick="location.href='list'"
+												class="btn btn-light">취소</button>
+										</div>
+									</div>
 								</div>
 								<!-- end card -->
 							</div>
@@ -213,11 +226,6 @@ body.loading {
 
 
 						<!-- end card -->
-						<div style="text-align: right;">
-							<button type="submit" class="btn btn-primary" id="btn_submit">등록</button>
-							<button type="button" onclick="location.href='list'"
-								class="btn btn-light">취소</button>
-						</div>
 					</div>
 				</form>
 				<!-- end col -->

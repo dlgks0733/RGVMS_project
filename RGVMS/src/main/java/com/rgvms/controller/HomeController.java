@@ -42,36 +42,12 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
-		/*Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);*/
-
 		return "home";
 	}
 
-	/*@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test(@RequestParam("auth") int auth) throws Exception {
-
-		if (auth == 1) {// 관리자 이동
-
-			logger.info("user/NewFile2");
-			return "user/NewFile2";
-
-		} else {
-
-			// 기본 사용자 이동
-			logger.info("user/NewFile");
-			return "user/NewFile";
-		}
-
-	}*/
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void loginGET(@ModelAttribute("dto") LoginDTO dto) throws Exception {
-
 		logger.info("login Page........");
 
 	}
@@ -82,7 +58,7 @@ public class HomeController {
 		UserVO uVo = service.login(dto);
 
 		if (uVo == null) {
-			rttr.addFlashAttribute("msg", "fail");
+			rttr.addFlashAttribute("msg", "정보가 일치하지 않습니다.");
 			return "redirect:/";
 		}
 

@@ -55,8 +55,14 @@ body.loading {
 						<div class="row">
 							<div class="col-12">
 								<div class="page-title-box">
-
-									<h3 class="page-title">MIS 출결 관리</h3>
+									<div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/admin/main">RGVMS</a></li>
+                                            <li class="breadcrumb-item"><a href="/admin/mis/list">MIS 출결 관리</a></li>
+                                            <li class="breadcrumb-item active">MIS 출결 수정</li>
+                                        </ol>
+                                    </div>
+									<h3 class="page-title">MIS 출결 수정</h3>
 								</div>
 							</div>
 						</div>
@@ -226,6 +232,14 @@ body.loading {
 										</div>
 
 									</div>
+									
+									<div class="card-footer">
+										<div style="text-align: right;">
+											<button type="submit" class="btn btn-primary" id="btn_submit">등록</button>
+											<button type="button" onclick="location.href='list'"
+												class="btn btn-light">취소</button>
+										</div>
+									</div>
 									<!-- end card body-->
 								</div>
 								<!-- end card -->
@@ -236,11 +250,6 @@ body.loading {
 						</div>
 
 						<!-- end card -->
-						<div style="text-align: right;">
-							<button type="button" class="btn btn-danger">삭제</button>
-							<button type="button" class="btn btn-primary">수정</button>
-							<button type="button" class="btn btn-light" onclick="location.href='list'">취소</button>
-						</div>
 					</form>
 				</div>
 	

@@ -56,7 +56,7 @@ text-align: center;
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="/admin/main">RGVMS</a></li>
-                                            <li class="breadcrumb-item active">졸업인증신청 전체목록</li>
+                                            <li class="breadcrumb-item active">졸업인증신청 전체</li>
                                         </ol>
                                     </div>
                                     <h4 class="page-title">졸업인증신청</h4>

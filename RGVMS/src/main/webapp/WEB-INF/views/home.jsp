@@ -93,10 +93,10 @@
         <script src="../../resources/dist/assets/js/app.min.js"></script>
     </body>
 <script>
-var msg;
+var msg = "${msg}";
 
-if(msg == "fail"){
-	alert("학번 또는 비밀번호가 일치하지 않습니다.");
+if(msg != ""){
+	alert(msg);
 }
 
 function loginCheck(){

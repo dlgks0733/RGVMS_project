@@ -23,7 +23,6 @@ body.loading {
 	visibility: hidden;
 }
 </style>
-
 <!-- App css -->
 <link href="../../../../resources/dist/assets/css/icons.min.css"
 	rel="stylesheet" type="text/css" />
@@ -31,7 +30,11 @@ body.loading {
 	rel="stylesheet" type="text/css" id="main-style-container" />
 
 </head>
-
+<style>
+td, th{
+text-align: center;
+}
+</style>
 <body class="loading">
 	<!-- Begin page -->
 	<div class="wrapper">
@@ -49,17 +52,30 @@ body.loading {
 
 				<!-- Start Content-->
 				<div class="container-fluid">
-
 					<!-- start page title -->
-					<div class='box-body'>			
-							<br><br>
-								<div class="row mb-2">
-										<div class="col-lg-8">
-											<form class="form-inline">
-												<div class="form-group mx-sm-3 mb-2">
-													<label for="status-select" class="mr-2">분류</label> 
-													<select name="searchType" class="custom-select" id="status-select">
-														<option value=""
+					<div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="/admin/main">RGVMS</a></li>
+                                            <li class="breadcrumb-item active">MIS 출결 관리</li>
+                                        </ol>
+                                    </div>
+                                    <h4 class="page-title">MIS 출결 관리</h4>
+                                </div>
+                            </div>
+                        </div>     
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row mb-2">
+                                            <div class="col-lg-8">
+                                            <form class="form-inline">
+                                                    <div class="form-group mx-sm-3 mb-2">
+                                                        <select class="custom-select" id="status-select" name="searchType">
+                                                            <option value=""
 															<c:out value="${cri.searchType == null?'selected':''}"/>>
 															전체</option>
 														<option value="t"
@@ -68,42 +84,26 @@ body.loading {
 														<option value="m"
 															<c:out value="${cri.searchType eq 'm'?'selected':''}"/>>회차
 														</option>
-													</select>
-												</div>
-												<div class="form-group mb-2">
-													<label for="inputPassword2" class="sr-only">Search</label>
-													<input type="search" class="form-control" name="keyword" id="keywordInput" 
-													value="${cri.keyword}" placeholder="검색어를 입력하세요.">
-													<button type="button" id='searchBtn' class="btn btn-light">검색</button>
-												</div>
-											</form>
-										</div>
-										<!-- end col-->
-									</div>
-						
-
-
-						<div class="row">
-							<div class="col-12">
-								<div class="page-title-box">
-								</div>
-							</div>
-						</div>
-						<!-- end page title -->
-						<div class="row">
-							<div class="col-xl-9">
-
-								<div class="card">
-									<div class="card-body">
-										<div class="table-responsive-sm">
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <label for="inputPassword2" class="sr-only">Search</label>
+                                                        <input type="text" name="keyword" class="form-control" id="keywordInput"  placeholder="키워드를 입력해주세요.">&nbsp;&nbsp;
+                                                        <input type="button" class="form-control btn-primary" id="searchBtn" value="검색">
+                                                    </div>
+                                            </form>
+                                            </div>
+                                            <!-- end col-->
+                                        </div>
+									
+										<div class="table-responsive">
 											<table class="table table-centered mb-0">
-												<thead>
+												<thead class="thead-light">
 													<tr>
 														<th>NO</th>
 														<th>제목</th>
 														<th>시행일</th>
 														<th>등록일</th>
-
 													</tr>
 												</thead>
 												<tbody>
@@ -120,54 +120,8 @@ body.loading {
 												</tbody>
 											</table>
 										</div>
-										
-										 <!-- <div class="box-footer"> -->
-										 
-										 <!-- <br><br> -->
-	
-						<!-- 페이징 -->
-						<%-- <div class="text-align: center;">
-							<ul class="pagination pagination-rounded" style="text-align: center;">
-								<li class="page-item">
-                            	   <a class="page-link" href="javascript: void(0);" aria-label="Previous">
-                                   	<span aria-hidden="true">&laquo;</span>
-                                  	 <span class="sr-only">Previous</span>
-			                               </a>
-			                          		 </li>
-
-							<c:if test="${pageMaker.prev}">
-								<li class="page-item"><a href="/admin/mis/list${pageMaker.makeSearch(pageMaker.startPage - 1) }" 
-								class="page-link" >&laquo;</a></li>
-							</c:if>
-
-							<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-								<li class="page-item" 
-									<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-									<a href="/admin/mis/list${pageMaker.makeSearch(idx)}" 
-									class="page-link" >${idx}</a>
-								</li>
-							</c:forEach>
-
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li class="page-item" >
-								<a href="/admin/mis/list${pageMaker.makeSearch(pageMaker.endPage +1) }" 
-								class="page-link" >&raquo;</a></li>
-							</c:if>
-							
-							 <li class="page-item"><a class="page-link" href="javascript: void(0);" aria-label="Next">
-                                  <span aria-hidden="true">&raquo;</span>
-                                  <span class="sr-only">Next</span>
-                                                        	  </a>
-                                                          </li>
-													</ul>
-												</div> --%>
-												
-						
-												
-											<!-- 페이징 끝 -->
-										<!-- </div>	 -->		
-										
-										<div class="card-footer">
+									</div>
+									<div class="card-footer">
                                     	<nav>
 											<ul class="pagination justify-content-center">
 												<c:if test="${pageMaker.prev}">
@@ -189,25 +143,18 @@ body.loading {
 												</c:if>
 											</ul>
 										</nav>
-										
 										<div style="text-align: right;">
 										<button type="button" onclick="location.href='register'" class="btn btn-primary">등록</button>
 										</div>
 										
                                     </div>
-									</div>
 								</div>
-								
-								
-
 							</div>
 						</div>
 						<!-- end col-12 -->
-					</div>
 					<!-- end row -->
 				</div>
 				<!-- container -->
-
 			</div>
 			<!-- content -->
 
@@ -227,7 +174,6 @@ body.loading {
 				</div>
 			</footer>
 			<!-- end Footer -->
-
 		</div>
 
 		<!-- ============================================================== -->

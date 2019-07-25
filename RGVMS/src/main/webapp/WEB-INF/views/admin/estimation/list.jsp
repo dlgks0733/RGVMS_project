@@ -26,7 +26,10 @@
 
     </head>
 <style>
-td, th{
+td{
+text-align: center;
+}
+th{
 text-align: center;
 }
 
