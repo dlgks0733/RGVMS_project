@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			TBL_USER U
 		WHERE M.USER_NO = U.USER_NO
 		  AND M.MIS_NO = #{misNo}
+		ORDER BY GRADE
 		
 	]]>
 	</select>
@@ -44,7 +45,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			GRADE 
 		FROM 
 			TBL_USER U
-		WHERE STATE = '재학' AND USER_NO NOT IN(SELECT USER_NO FROM TBL_MIS_ATT where MIS_NO = #{misNo})
+		WHERE STATE = '재학' 
+		AND USER_NO NOT IN(SELECT USER_NO FROM TBL_MIS_ATT where MIS_NO = #{misNo})
+		ORDER BY GRADE
 	
 	</select>
 
@@ -59,6 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM 
 			TBL_USER 
 		WHERE STATE = '재학'
+		ORDER BY GRADE
 	
 	</select>
 	

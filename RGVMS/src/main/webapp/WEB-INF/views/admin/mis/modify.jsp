@@ -161,7 +161,6 @@ body.loading {
 																		varStatus="listStat">
 																		<tr class="stu${uVo.grade}">
 																			<td><input type="checkbox" name="check" value="${uVo.userNo}"  class="checkBox"></td>
-																			<%-- <td>${listStat.count}</td> --%>
 																			<td class="tdGrade">${uVo.grade}</td>
 																			<td>${uVo.userNo}</td>
 																			<td>${uVo.userName}</td>
@@ -276,6 +275,8 @@ body.loading {
 	
 	<!-- App js -->
 	<script src="../../../../resources/dist/assets/js/app_admin.js"></script>
+	
+		<script src="../../../../resources/dist/assets/js/jquery-2.2.4.min.js"></script>
 
 	<!-- third party js -->
 	<script
@@ -302,60 +303,57 @@ body.loading {
 		});
 
 		// 추가
-		$("#add")
-				.click(
-			function() {
+		
+		$("#add").click(function() {
 				var checkbox = $("input[name=check]:checked");
+				checkbox.each(function() {
+					
+					$(this).parent().parent();
+					var tr = $(this).parent().parent();
+					
+					var td = tr.children();
+					
+					var userNo = $(this).val();
+					var grade = td.eq(1).text();
+					var id = td.eq(2).html();
+					var userName = td.eq(3).text();
+					var row = "<tr>"
+							+ "<td>"
+							+ "<input type=\"checkbox\" class=\"checkBox2\" name=\"check2\" value=\"" + userNo + "\"" + ">"
+							+ "</td>" + "<td>" + grade
+							+ "</td>" + "<td>" + id
+							+ "</td>" + "<td>" + userName
+							+ "</td>" + "</tr>";
 
-				checkbox
-						.each(function(i) {
-							/* var tr = checkbox.parent().parent().parent().eq(i); */
-							var tr = checkbox.parent().parent().eq(i);
-							var td = tr.children();
-							var userNo = $(this).val();
-							var cnt = td.eq(1).html();
-							var grade = td.eq(2).text();
-							var id = td.eq(3).html();
-							var userName = td.eq(4).text();
-							var row = "<tr>"
-									+ "<td>"
-									+ "<input type=\"checkbox\" class=\"checkBox2\" name=\"check2\" value=\"" + userNo + "\"" + ">"
-									+ "</td>" + "<td>" + cnt
-									+ "</td>" + "<td>" + grade
-									+ "</td>" + "<td>" + id
-									+ "</td>" + "<td>" + userName
-									+ "</td>" + "</tr>";
-
-							// 숨긴 값의 체크박스를 false 상태로 바꿈
-							$(this).prop("checked", false);
-
-							// allcheck할 경우 숨긴 값의 체크박스도 체크되어서 class 값을 바꿈
-							$(this).attr("class", "hide");
-							tr.remove();
-							$("#attList > tbody").append(row);
-									});
-						});
-
+					// 숨긴 값의 체크박스를 false 상태로 바꿈
+					$(this).prop("checked", false);
+					tr.remove();
+					
+					$("#attList > tbody").append(row);
+					
+					
+					
+					
+				})
+				
+		
+		});
+		
 		//삭제
-		$("#delete")
-				.click(
-			function() {
-				var checkbox = $("input[name=check2]:checked");
-
-				checkbox
-						.each(function(i) {
-							/* var tr = checkbox.parent().parent().parent().eq(i); */
-							var tr = checkbox.parent().parent().eq(i);
+		$("#delete").click(function() {
+			var checkbox = $("input[name=check2]:checked");
+			checkbox.each(function() {
+				
+				$(this).parent().parent();
+				var tr = $(this).parent().parent();
 							var td = tr.children();
 							var userNo = $(this).val();
-							var cnt = td.eq(1).html();
-							var grade = td.eq(2).text();
-							var id = td.eq(3).html();
-							var userName = td.eq(4).text();
+							var grade = td.eq(1).text();
+							var id = td.eq(2).html();
+							var userName = td.eq(3).text();
 							var row = "<tr class=\"stu"+ grade+"\"> "
 									+ "<td>"
 									+ "<input type=\"checkbox\" class=\"checkBox\" name=\"check\" value=\"" + userNo + "\"" + ">"
-									+ "</td>" + "<td>" + cnt
 									+ "</td>" + "<td>" + grade
 									+ "</td>" + "<td>" + id
 									+ "</td>" + "<td>" + userName
@@ -363,15 +361,11 @@ body.loading {
 
 							// 숨긴 값의 체크박스를 false 상태로 바꿈
 							$(this).prop("checked", false);
-
-							// allcheck할 경우 숨긴 값의 체크박스도 체크되어서 class 값을 바꿈
-							$(this).attr("class", "hide");
-							tr.hide();
+							tr.remove();
 							$("#stuOtherList > tbody").append(row);
 							});
 						});
 	</script>
-	
 	
 	<script>
 	//submit 버튼
