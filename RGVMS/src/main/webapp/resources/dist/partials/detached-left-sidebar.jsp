@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- Topbar Start -->
 <div class="left-side-menu left-side-menu-detached">
-
+	
     <div class="leftbar-user">
         <a href="javascript: void(0);">
             <img src="/resources/dist/assets/images/users/avatar-1.jpg" alt="user-image" height="42" class="rounded-circle shadow-sm">
