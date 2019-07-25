@@ -33,50 +33,60 @@ public class AdminApplyContorller {
 
 	// 관리자 :: 졸업인증신청 관리 - 신청 목록
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void list(@ModelAttribute("cri") SearchCriteria cri, Model model)
-			throws Exception {
+	public void list(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		logger.info("Admin Apply List Form.....");
 		logger.info(cri.toString());
 		System.out.println("=====" + cri.toString());
-
-		model.addAttribute("waitList", service.waitList(cri));
 		model.addAttribute("allList", service.adApplyList(cri));
-
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-
-		pageMaker.setTotalCount(service.listSearchCount(cri));
+		pageMaker.setTotalCount(service.adApplyListSearchCount(cri));
 
 		model.addAttribute("pageMaker", pageMaker);
 
 	}
-	
+
 	// 관리자 :: 졸업인증신청 관리 - 신청 상세조회
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public void read(@RequestParam("applyNo") int applyNo, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+	public void read(@RequestParam("applyNo") int applyNo, @ModelAttribute("cri") SearchCriteria cri, Model model)
+			throws Exception {
 		logger.info("readPage.........");
 		model.addAttribute(service.adApplyRead(applyNo));
 		logger.info("readPage.fileVO: " + service.fileList(applyNo).size());
-		model.addAttribute("fileVO",service.fileList(applyNo));
-		
+		model.addAttribute("fileVO", service.fileList(applyNo));
+
 	}
-	
+
 	// 관리자 :: 졸업인증신청 관리 - 신청 승인
-	@RequestMapping(value ="/accept", method = RequestMethod.POST)
-	public String accept(@RequestParam("applyNo") int applyNo, @RequestParam("reason") String reason, @ModelAttribute("cri") SearchCriteria cri) throws Exception {
+	@RequestMapping(value = "/accept", method = RequestMethod.POST)
+	public String accept(@RequestParam("applyNo") int applyNo, @RequestParam("reason") String reason,
+			@ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 		logger.info("Accept Apply");
 		service.accept(applyNo, reason);
-		
-		return "redirect:/admin/apply/list";
+
+		rttr.addFlashAttribute("msg", "처리 완료되었습니다.");
+
+		return "redirect:/admin/apply/waitList";
 	}
-	
+
 	// 관리자 :: 졸업인증신청 관리 - 신청 거절
-		@RequestMapping(value ="/deny", method = RequestMethod.POST)
-		public String deny(@RequestParam("applyNo") int applyNo, @RequestParam("reason") String reason, @ModelAttribute("cri") SearchCriteria cri) throws Exception {
-			logger.info("Deny Apply");
-			service.deny(applyNo, reason);
-			
-			return "redirect:/admin/apply/list";
-		}
+	@RequestMapping(value = "/deny", method = RequestMethod.POST)
+	public String deny(@RequestParam("applyNo") int applyNo, @RequestParam("reason") String reason,
+			@ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+		logger.info("Deny Apply");
+		service.deny(applyNo, reason);
+
+		rttr.addFlashAttribute("msg", "처리 완료되었습니다.");
+
+		return "redirect:/admin/apply/waitList";
+	}
+
+	// 관리자 :: 졸업인증신청 관리 - 승인대기 신청내역 목록
+	@RequestMapping(value = "/waitList", method = RequestMethod.GET)
+	public void waitList(Model model) throws Exception {
+		logger.info("Admin Apply WaitList");
+		model.addAttribute("waitList", service.waitList());
+		
+	}
 
 }

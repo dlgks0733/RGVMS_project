@@ -70,29 +70,7 @@ text-align: center;
                                 <div class="card">
                                     
                                     <div class="card-body">
-                                        <div class="row mb-2">
-                                            <div class="col-lg-8">
-                                                <form class="form-inline">
-                                                    <div class="form-group mx-sm-3 mb-2">
-                                                        <label for="status-select" class="mr-2">Status</label>
-                                                        <select class="custom-select" id="status-select">
-                                                            <option selected="">Choose...</option>
-                                                            <option value="1">Paid</option>
-                                                            <option value="2">Awaiting Authorization</option>
-                                                            <option value="3">Payment failed</option>
-                                                            <option value="4">Cash On Delivery</option>
-                                                            <option value="5">Fulfilled</option>
-                                                            <option value="6">Unfulfilled</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group mb-2">
-                                                        <label for="inputPassword2" class="sr-only">Search</label>
-                                                        <input type="search" class="form-control" id="inputPassword2" placeholder="Search...">
-                                                    </div>
-                                                </form>                            
-                                            </div>
-                                            <!-- end col-->
-                                        </div>
+                                        <h4 class="header-title mb-3">졸업인증신청 목록</h4>
                 
                                         <div class="table-responsive">
                                             <table class="table table-centered mb-0">
@@ -109,12 +87,24 @@ text-align: center;
                                                     <c:forEach items="${list}" var="aVo" varStatus="listStat">
 	                                                    <tr>
 	                                                    	<td>${listStat.count}</td>
-	                                                    	<td><a href='read${pageMaker.makeSearch(pageMaker.cri.page) }&applyNo=${aVo.applyNo}'>
+	                                                    	<td><a href='read?applyNo=${aVo.applyNo}'>
 	                                                    	${aVo.subName}</a></td>
 	                                                    	<td>
 	                                                    	<fmt:formatDate pattern="yyyy-MM-dd" value="${aVo.applyDate}" />
 	                                                    	</td>
-	                                                    	<td>${aVo.applyState}</td>	
+	                                                    	<td>
+	                                                    	
+	                                                    	<c:if test="${aVo.applyState eq '승인' }">
+	                                                    	<span class="badge badge-success badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+	                                                    	<c:if test="${aVo.applyState eq '승인대기' }">
+	                                                    	<span class="badge badge-warning badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+	                                                    	<c:if test="${aVo.applyState eq '거절' }">
+	                                                    	<span class="badge badge-danger badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+	                                                    	
+	                                                    	</td>	
 	                                                    </tr>
                                                     </c:forEach>
                                                     </c:if>
@@ -131,28 +121,6 @@ text-align: center;
                                     
                                     <!-- start card footer -->
                                     <div class="card-footer">
-                                    	<nav>
-											<ul class="pagination">
-												<c:if test="${pageMaker.prev}">
-													<li class="page-item"><a class="page-link" aria-label="Previous"
-														href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }"><span aria-hidden="true">«</span>
-                                                                <span class="sr-only">Previous</span></a></li>
-												</c:if>
-												<c:forEach begin="${pageMaker.startPage }"
-													end="${pageMaker.endPage }" var="idx">
-													<li class="page-item"
-														<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-														<a class="page-link" href="list${pageMaker.makeSearch(idx)}">${idx}</a>
-													</li>
-												</c:forEach>
-												<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-													<li><a class="page-link"
-														href="list${pageMaker.makeSearch(pageMaker.endPage +1) }"><span aria-hidden="true">»</span>
-                                                                <span class="sr-only">Next</span></a></li>
-												</c:if>
-											</ul>
-										</nav>
-										
 										<div style="text-align: right;">
 										<button type="button" class="btn btn-primary" onclick="location.href='register'">등록</button>
 										</div>
@@ -214,6 +182,10 @@ text-align: center;
 
   </body>
 <script>
+var msg = "${msg}";
 
+if(msg != ""){
+	alert(msg);
+}
 </script>
 </html>

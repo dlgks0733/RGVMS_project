@@ -3,6 +3,7 @@ package com.rgvms.service;
 import java.util.List;
 
 import com.rgvms.domain.Criteria;
+import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
 import com.rgvms.dto.LoginDTO;
@@ -38,13 +39,13 @@ public interface UserService {
 
 	// 10 . MY PAGE - 내 정보 수정
 	public void myInfoModify(UserVO uVo) throws Exception;
-	
+
 	// 11. MY PAGE - 비밀번호 체크
-	//public boolean checkPw(int i, String userPw) throws Exception;
+	// public boolean checkPw(int i, String userPw) throws Exception;
 
 	// 12. 페이징처리
 	public List<UserVO> listCriteria(Criteria cri) throws Exception;
-	
+
 	public int countPaging(Criteria cri) throws Exception;
 
 	// 13. 검색처리
@@ -57,5 +58,11 @@ public interface UserService {
 
 	// 15. 관리자 :: 대시보드 - 졸업예정자 수
 	public int graduateCount() throws Exception;
+
+	// 16. 관리자 :: 대시보드 - 졸업대상자 수
+	public int graduateToBeCount() throws Exception;
+	
+	// 17. 관리자 :: 대시보드 - 최근 MIS 3개 정보
+	public List<MisVO> misInfo() throws Exception;
 
 }

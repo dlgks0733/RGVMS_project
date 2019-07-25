@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.rgvms.domain.Criteria;
+import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
 import com.rgvms.dto.LoginDTO;
@@ -136,6 +137,18 @@ public class UserDAOImpl implements UserDAO {
 	public int graduateCount() throws Exception {
 		
 		return session.selectOne(namespace+".graduateCount");
+	}
+
+	@Override
+	public int graduateToBeCount() throws Exception {
+		
+		return session.selectOne(namespace=".graduateToBeCount");
+	}
+
+	@Override
+	public List<MisVO> misInfo() throws Exception {
+		
+		return session.selectList(namespace+".misInfo");
 	}
 	
 	// 13. 비밀번호 체크

@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>관리자 페이지</title>
+        <title>RGVMS :: 졸업인증신청 목록</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -55,8 +55,8 @@ text-align: center;
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">RGVMS</a></li>
-                                            <li class="breadcrumb-item active">졸업인증신청</li>
+                                            <li class="breadcrumb-item"><a href="/admin/main">RGVMS</a></li>
+                                            <li class="breadcrumb-item active">졸업인증신청 전체목록</li>
                                         </ol>
                                     </div>
                                     <h4 class="page-title">졸업인증신청</h4>
@@ -71,103 +71,79 @@ text-align: center;
                                 <div class="card">
                                     
                                     <div class="card-body">
-
-                                        <h4 class="header-title mb-3">졸업인증신청 목록</h4>
-
-                                        <ul class="nav nav-tabs nav-bordered mb-3">
-                                            <li class="nav-item">
-                                                <a href="#home-b1" data-toggle="tab" aria-expanded="false" class="nav-link active">
-                                                    <i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
-                                                    <span class="d-none d-lg-block">승인 대기</span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#profile-b1" data-toggle="tab" aria-expanded="true" class="nav-link">
-                                                    <i class="mdi mdi-account-circle d-lg-none d-block mr-1"></i>
-                                                    <span class="d-none d-lg-block">전체</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="home-b1">
-                                            	<table class="table table-centered mb-0">
-	                                                <thead class="thead-light">
-	                                                    <tr>
-	                                                        <th>NO</th>
-	                                                        <th>학번</th>
-	                                                        <th>이름</th>
-	                                                        <th>항목명</th>
-	                                                        <th>신청일</th>
-	                                                        <th>신청상태</th>
-	                                                    </tr>
-	                                                </thead>
-	                                                <tbody>
-	                                                    <c:if test="${!empty waitList}">
-	                                                    <c:forEach items="${waitList}" var="aVo" varStatus="listStat">
-		                                                    <tr>
-		                                                    	<td>${listStat.count}</td>
-		                                                    	<td>${aVo.userNo}</td>
-		                                                    	<td><a href='read${pageMaker.makeSearch(pageMaker.cri.page) }&applyNo=${aVo.applyNo}'>${aVo.userName}</a></td>
-		                                                    	<td>${aVo.subName}</td>
-		                                                    	<td>
-		                                                    	<fmt:formatDate pattern="yyyy-MM-dd" value="${aVo.applyDate}" />
-		                                                    	</td>
-		                                                    	<td>${aVo.applyState}</td>	
-		                                                    </tr>
-	                                                    </c:forEach>
-	                                                    </c:if>
-	                                                    <c:if test="${empty waitList}">
-	                                                    	<tr>
-	                                                    		<td colspan="6">내역이 없습니다.</td>
-	                                                    	</tr>
-	                                                    </c:if>
-	                                                </tbody>
-                                            	</table>
+                                        <div class="row mb-2">
+                                            <div class="col-lg-8">
+                                            <form class="form-inline">
+                                                    <div class="form-group mx-sm-3 mb-2">
+                                                        <select class="custom-select" id="status-select" name="searchType">
+                                                            <option value="no" <c:out value="${cri.searchType eq 'no'?'selected':''}"/>>학번</option>
+                                                            <option value="name" <c:out value="${cri.searchType eq 'name'?'selected':''}"/>>이름</option>
+                                                            <option value="nn" <c:out value="${cri.searchType eq 'nn'?'selected':''}"/>>학번 또는 이름</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group mb-2">
+                                                        <label for="inputPassword2" class="sr-only">Search</label>
+                                                        <input type="text" name="keyword" class="form-control" id="keywordInput"  placeholder="키워드를 입력해주세요.">&nbsp;&nbsp;
+                                                        <input type="button" class="form-control btn-primary" id="searchBtn" value="검색">
+                                                    </div>
+                                            </form>
                                             </div>
-                                            <div class="tab-pane show" id="profile-b1">
-                                            	<table class="table table-centered mb-0">
-	                                                <thead class="thead-light">
-	                                                    <tr>
-	                                                        <th>NO</th>
-	                                                        <th>학번</th>
-	                                                        <th>이름</th>
-	                                                        <th>항목명</th>
-	                                                        <th>신청일</th>
-	                                                        <th>신청상태</th>
-	                                                    </tr>
-	                                                </thead>
-	                                                <tbody>
-	                                                	<c:if test="${!empty allList}">
-	                                                    <c:forEach items="${allList}" var="aVo" varStatus="listStat">
-		                                                    <tr>
-		                                                    	<td>${listStat.count}</td>
-		                                                    	<td>${aVo.userNo}</td>
-		                                                    	<td><a href='read${pageMaker.makeSearch(pageMaker.cri.page) }&applyNo=${aVo.applyNo}'>${aVo.userName}</a></td>
-		                                                    	<td>${aVo.subName}</td>
-		                                                    	<td>
-		                                                    	<fmt:formatDate pattern="yyyy-MM-dd" value="${aVo.applyDate}" />
-		                                                    	</td>
-		                                                    	<td>${aVo.applyState}</td>	
-		                                                    </tr>
-	                                                    </c:forEach>
-	                                                    </c:if>
-	                                                    <c:if test="${empty allList}">
-	                                                    	<tr>
-	                                                    		<td colspan="6">내역이 없습니다.</td>
-	                                                    	</tr>
-	                                                    </c:if>
-	                                                </tbody>
-                                            	</table>
-                                            </div>
+                                           <!-- end col-->
                                         </div>
-
+                
+                                        <div class="table-responsive">
+                                            <table class="table table-centered mb-0">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>NO</th>
+                                                        <th>학번</th>
+                                                        <th>이름</th>
+                                                        <th>항목명</th>
+                                                        <th>신청일</th>
+                                                        <th>신청상태</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <c:if test="${!empty allList}">
+                                                <c:forEach items="${allList}" var="aVo" varStatus="status">
+                                                	<tr>
+                                                		<td>${(pageMaker.totalCount - status.index) -  (pageMaker.cri.page-1) * 10}</td>
+                                                		<td>${aVo.userNo}
+                                                		</td>
+                                                		<td>${aVo.userName}</td>
+                                                		<td><a href='read${pageMaker.makeSearch(pageMaker.cri.page)}&applyNo=${aVo.applyNo}'>${aVo.subName}</a></td>
+                                                		<td>
+                                                		<fmt:formatDate value="${aVo.applyDate}" type="date" pattern="yyyy-MM-dd" var="applyDate" />
+                                                		${applyDate}
+                                                		</td>
+                                                		<td>
+                                                			<c:if test="${aVo.applyState eq '승인' }">
+	                                                    	<span class="badge badge-success badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+	                                                    	<c:if test="${aVo.applyState eq '승인대기' }">
+	                                                    	<span class="badge badge-warning badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+	                                                    	<c:if test="${aVo.applyState eq '거절' }">
+	                                                    	<span class="badge badge-danger badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+                                                		</td>
+                                                	</tr>
+                                                </c:forEach>
+                                                </c:if>
+                                                <c:if test="${empty allList}">
+                                                	<tr>
+                                                		<td colspan="6">내역이 없습니다.</td>
+                                                	</tr>
+                                                </c:if>	
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div> <!-- end card-body-->
                                     
                                     <!-- start card footer -->
                                     <div class="card-footer">
                                     	<nav>
-											<ul class="pagination">
+											<ul class="pagination justify-content-center">
 												<c:if test="${pageMaker.prev}">
 													<li class="page-item"><a class="page-link" aria-label="Previous"
 														href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }"><span aria-hidden="true">«</span>
@@ -254,6 +230,30 @@ $(document).ready(function() {
 	  $("input:radio:first").prop("checked", true).trigger("click");
 	  
 	});
+
+var msg = "${msg}";
+
+if(msg != ""){
+	alert(msg);
+}
+
+
+$(document).ready(
+		function() {
+
+			$('#searchBtn').on(
+					"click",
+					function(event) {
+
+						self.location = "list"
+								+ '${pageMaker.makeQuery(1)}'
+								+ "&searchType="
+								+ $("select option:selected").val()
+								+ "&keyword=" + $('#keywordInput').val();
+
+					});
+
+		});	
 
 </script>       
 

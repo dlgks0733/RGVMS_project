@@ -1,11 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
    	
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>관리자 페이지</title>
+        <title>RGVMS :: 졸업인증신청 상세보기</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -24,7 +25,11 @@
         <link href="/resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" id="main-style-container" />
 
     </head>
-
+<style>
+input.form-control[disabled], textarea.form-control[disabled] { 
+  background-color: #fff;
+}
+</style>
     <body class="loading">
         <!-- Begin page -->
         <div class="wrapper">
@@ -49,12 +54,12 @@
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Apps</a></li>
-                                            <li class="breadcrumb-item active">Calendar</li>
+                                            <li class="breadcrumb-item"><a href="/admin/main">RGVMS</a></li>
+                                            <li class="breadcrumb-item"><a href="/admin/apply/list">졸업인증신청 목록</a></li>
+                                            <li class="breadcrumb-item active">졸업인증신청 상세보기</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">Calendar</h4>
+                                    <h4 class="page-title">졸업인증신청</h4>
                                 </div>
                             </div>
                         </div>     
@@ -75,7 +80,7 @@
 
                                 <div class="card">
                                     <div class="card-body">
-									<h4 class="header-title">졸업인증신청</h4>
+									<h4 class="header-title">졸업인증신청 상세보기</h4>
 									<p class="text-muted font-13">신청 후에 수정과 삭제는 불가합니다.</p>
 
 										<div class="form-row">
@@ -120,7 +125,8 @@
 											</div>
                                                 <div class="form-group col-md-6">
                                                     <label for="inputCity" class="col-form-label">취득일</label>
-                                                    <input type="text" name="acDate" id="acDate" class="form-control" value="${applyVO.acDate}" disabled="disabled">
+                                                    <fmt:formatDate value="${applyVO.acDate}" type="date" pattern="yyyy-MM-dd" var="acDate" />
+                                                    <input type="text" name="acDate" id="acDate" class="form-control" value="${acDate}" disabled="disabled">
                                                 </div>
 										</div>
 										
@@ -131,7 +137,8 @@
 											</div>
                                                 <div class="form-group col-md-6">
                                                     <label for="inputCity" class="col-form-label">신청일</label>
-                                                    <input type="text" name="applyDate" id="applyDate" class="form-control" value="${applyVO.applyDate}" disabled="disabled">
+                                                    <fmt:formatDate value="${applyVO.applyDate}" type="date" pattern="yyyy-MM-dd" var="applyDate" />
+                                                    <input type="text" name="applyDate" id="applyDate" class="form-control" value="${applyDate}" disabled="disabled">
                                                 </div>
 										</div>
 										
@@ -144,7 +151,7 @@
 										<div class="form-group" id="reason">
 											<label for="inputAddress2" class="col-form-label">사유</label> 
 											<select class="custom-select" id="selectReason" name="reason">
-                                                    <option selected="승인되었습니다.">승인되었습니다.</option>
+                                                    <option selected value="승인되었습니다.">승인되었습니다.</option>
                                                     <option value="불충분한 양식으로 거절되었습니다.">불충분한 양식으로 거절되었습니다.</option>
                                                     <option value="학과사무실로 연락주시길 바랍니다.">학과사무실로 연락주시길 바랍니다.</option>
                                                     <option value="1">직접입력</option>
@@ -164,7 +171,7 @@
 										</div>
 										</c:if>
 																
-																					
+										<c:if test="${!empty fileVO}">
 										<div class="form-group">
 						                  <label for="exampleInputEmail1" class="col-form-label">첨부파일<span class="must-mark">*</span></label>
 						                </div>
@@ -200,7 +207,10 @@
 										</div>
 									</li>
 									</c:forEach>
-									</ul>     
+									</ul>
+									</c:if>
+									<c:if test="${empty fileVO}">
+									</c:if>
 						               
 						                  
 										<div style="text-align: right;">

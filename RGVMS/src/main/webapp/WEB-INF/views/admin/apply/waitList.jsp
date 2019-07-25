@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>RGVMS :: 졸업인증평가 목록</title>
+        <title>RGVMS :: 졸업인증신청 목록</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -56,10 +56,10 @@ text-align: center;
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="/admin/main">RGVMS</a></li>
-                                            <li class="breadcrumb-item active">졸업인증평가 목록</li>
+                                            <li class="breadcrumb-item active">졸업인증신청 승인대기 목록</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">졸업인증평가</h4>
+                                    <h4 class="page-title">졸업인증신청</h4>
                                 </div>
                             </div>
                         </div>     
@@ -71,29 +71,6 @@ text-align: center;
                                 <div class="card">
                                     
                                     <div class="card-body">
-                                        <div class="row mb-2">
-                                            <div class="col-lg-8">
-                                            <form class="form-inline">
-                                                    <div class="form-group mx-sm-3 mb-2">
-                                                        <select class="custom-select" id="status-select" name="searchType">
-                                                            <option value="no" <c:out value="${cri.searchType eq 'no'?'selected':''}"/>>학번</option>
-                                                            <option value="name" <c:out value="${cri.searchType eq 'name'?'selected':''}"/>>이름</option>
-                                                            <option value="nn" <c:out value="${cri.searchType eq 'nn'?'selected':''}"/>>학번 또는 이름</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group mb-2">
-                                                        <label for="inputPassword2" class="sr-only">Search</label>
-                                                        <input type="text" name="keyword" class="form-control" id="keywordInput"  placeholder="키워드를 입력해주세요.">&nbsp;&nbsp;
-                                                        <input type="button" class="form-control btn-primary" id="searchBtn" value="검색">
-                                                    </div>
-                                            </form>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="text-lg-right">
-                                                    <button type="button" class="btn btn-success mb-2">Excel</button>
-                                                </div>
-                                            </div><!-- end col-->
-                                        </div>
                 
                                         <div class="table-responsive">
                                             <table class="table table-centered mb-0">
@@ -102,24 +79,41 @@ text-align: center;
                                                         <th>NO</th>
                                                         <th>학번</th>
                                                         <th>이름</th>
-                                                        <th>총점</th>
+                                                        <th>항목명</th>
+                                                        <th>신청일</th>
+                                                        <th>신청상태</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <c:if test="${!empty esList}">
-                                                <c:forEach items="${esList}" var="tVo" varStatus="status">
+                                                <c:if test="${!empty waitList}">
+                                                <c:forEach items="${waitList}" var="aVo" varStatus="status">
                                                 	<tr>
-                                                		<td>${(pageMaker.totalCount - status.index) -  (pageMaker.cri.page-1) * 10}</td>
-                                                		<td><a href='read${pageMaker.makeSearch(pageMaker.cri.page)}&userNo=${tVo.userNo}'>${tVo.userNo}</a>
+                                                		<td>${status.count}</td>
+                                                		<td>${aVo.userNo}
                                                 		</td>
-                                                		<td>${tVo.userName}</td>
-                                                		<td>${tVo.total}</td>
+                                                		<td>${aVo.userName}</td>
+                                                		<td><a href='read?applyNo=${aVo.applyNo}'>${aVo.subName}</a></td>
+                                                		<td>
+                                                		<fmt:formatDate value="${aVo.applyDate}" type="date" pattern="yyyy-MM-dd" var="applyDate" />
+                                                		${applyDate}
+                                                		</td>
+                                                		<td>
+                                                			<c:if test="${aVo.applyState eq '승인' }">
+	                                                    	<span class="badge badge-success badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+	                                                    	<c:if test="${aVo.applyState eq '승인대기' }">
+	                                                    	<span class="badge badge-warning badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+	                                                    	<c:if test="${aVo.applyState eq '거절' }">
+	                                                    	<span class="badge badge-danger badge-pill">${aVo.applyState}</span>
+	                                                    	</c:if>
+                                                		</td>
                                                 	</tr>
                                                 </c:forEach>
                                                 </c:if>
-                                                <c:if test="${empty esList}">
+                                                <c:if test="${empty waitList}">
                                                 	<tr>
-                                                		<td colspan="4">내역이 없습니다.</td>
+                                                		<td colspan="6">내역이 없습니다.</td>
                                                 	</tr>
                                                 </c:if>	
                                                 </tbody>
@@ -129,31 +123,7 @@ text-align: center;
                                     
                                     <!-- start card footer -->
                                     <div class="card-footer">
-                                    	<nav>
-											<ul class="pagination justify-content-center">
-												<c:if test="${pageMaker.prev}">
-													<li class="page-item"><a class="page-link" aria-label="Previous"
-														href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }"><span aria-hidden="true">«</span>
-                                                                <span class="sr-only">Previous</span></a></li>
-												</c:if>
-												<c:forEach begin="${pageMaker.startPage }"
-													end="${pageMaker.endPage }" var="idx">
-													<li class="page-item"
-														<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-														<a class="page-link" href="list${pageMaker.makeSearch(idx)}">${idx}</a>
-													</li>
-												</c:forEach>
-												<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-													<li><a class="page-link"
-														href="list${pageMaker.makeSearch(pageMaker.endPage +1) }"><span aria-hidden="true">»</span>
-                                                                <span class="sr-only">Next</span></a></li>
-												</c:if>
-											</ul>
-										</nav>
-										
                                     </div>
-                                    
-                                    
                                     <!-- end card footer -->
                                     
                                 </div>
@@ -220,32 +190,12 @@ $(document).ready(function() {
 	  
 	});
 
+var msg = "${msg}";
 
-$(document).ready(
-		function() {
+if(msg != ""){
+	alert(msg);
+}
 
-			$('#searchBtn').on(
-					"click",
-					function(event) {
-
-						self.location = "list"
-								+ '${pageMaker.makeQuery(1)}'
-								+ "&searchType="
-								+ $("select option:selected").val()
-								+ "&keyword=" + $('#keywordInput').val();
-
-					});
-			
-			$('.btn-success').on(
-					"click",
-					function(event) {
-
-						self.location = "/admin/estimation/excelEsListDown";
-
-					});
-
-
-		});	
 
 </script>       
 

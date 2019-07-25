@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.rgvms.domain.Criteria;
+import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
 import com.rgvms.dto.LoginDTO;
@@ -118,8 +119,20 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int graduateCount() throws Exception {
-		// TODO Auto-generated method stub
+		
 		return dao.graduateCount();
+	}
+
+	@Override
+	public int graduateToBeCount() throws Exception {
+		
+		return dao.graduateToBeCount();
+	}
+
+	@Override
+	public List<MisVO> misInfo() throws Exception {
+		
+		return dao.misInfo();
 	}
 	
 	//7. 비밀번호 체크

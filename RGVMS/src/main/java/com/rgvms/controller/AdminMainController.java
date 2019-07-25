@@ -24,6 +24,7 @@ public class AdminMainController {
 		logger.info("Admin Main.......");
 		model.addAttribute("applyCount", service.applyCount());
 		model.addAttribute("graduateCount", service.graduateCount());
+		model.addAttribute("graduateToBeCount", service.graduateToBeCount());
 		
 		
 	}

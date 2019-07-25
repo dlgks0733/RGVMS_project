@@ -4,7 +4,7 @@
     <div class="slimscroll-menu" id="left-side-menu-container">
 
         <!-- LOGO -->
-        <a href="index.html" class="logo text-center">
+        <a href="/admin/main" class="logo text-center">
             <span class="logo-lg">
                 <img src="/resources/dist/assets/images/logo.png" alt="" height="16" id="side-main-logo">
             </span>
@@ -19,7 +19,7 @@
             <li class="side-nav-title side-nav-item">Navigation</li>
 
             <li class="side-nav-item">
-                <a href="javascript: void(0);" class="side-nav-link">
+                <a href="/admin/main" class="side-nav-link">
                     <i class="dripicons-meter"></i>
                     <span class="badge badge-success float-right"></span>
                     <span> Dashboards </span>
@@ -34,14 +34,21 @@
                 </a>
             </li>
             
-            <li class="side-nav-item">
-                <a href="/admin/apply/list" class="side-nav-link">
+			<li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
                     <i class="dripicons-document"></i>
-                    <span class="badge badge-success float-right"></span>
                     <span> 졸업인증신청 관리 </span>
+                    <span class="menu-arrow"></span>
                 </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="/admin/apply/waitList">승인대기 신청내역</a>
+                    </li>
+                    <li>
+                        <a href="/admin/apply/list">전체 신청내역</a>
+                    </li>
+                </ul>
             </li>
-
 
 			<li class="side-nav-item">
                 <a href="/admin/estimation/list" class="side-nav-link">

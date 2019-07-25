@@ -17,7 +17,7 @@ public interface ApplyDAO {
 	public int insert(ApplyVO aVo) throws Exception;
 	
 	// 3. 학생 :: 졸업인증신청 관리 - 한 학생의 신청 내역
-	public List<ApplyVO> stuApplyList(int userNo, SearchCriteria cri) throws Exception;
+	public List<ApplyVO> stuApplyList(int userNo) throws Exception;
 	
 	// 4. 리스트 카운트
 	public int listSearchCount(SearchCriteria cri) throws Exception;
@@ -28,8 +28,11 @@ public interface ApplyDAO {
 	// 6. 관리자 :: 졸업인증신청 관리 - 모든 학생 신청 내역(전체)
 	public List<ApplyVO> adApplyList(SearchCriteria cri) throws Exception;
 	
+	// 관리자 :: 졸업인증신청 관리 - 모든학생 신청내역(전체) 리스트 카운트
+	public int adApplyListSearchCount(SearchCriteria cri) throws Exception;
+	
 	// 7. 관리자 :: 졸업인증신청 관리 - 모든 학생 신청(승인대기)
-	public List<ApplyVO> waitList(SearchCriteria cri) throws Exception;
+	public List<ApplyVO> waitList() throws Exception;
 	
 	// 7. 관리자 :: 졸업인증신청 관리 - 상세조회
 	public ApplyVO adApplySelect(int applyNo) throws Exception;

@@ -25,7 +25,12 @@
         <link href="/resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" id="main-style-container" />
 
     </head>
+<style>
+td, th{
+text-align: center;
+}
 
+</style>
     <body class="loading">
         <!-- Begin page -->
         <div class="wrapper">
@@ -89,6 +94,7 @@
 			                                                    </tr>
 			                                                </thead>
 			                                                <tbody>
+			                                                	<c:if test="${!empty searchSubList}">
 			                                                    <c:forEach items="${searchSubList}" var="sVo" varStatus="listStat">
 			                                                    <tr>
 			                                                    	<td>
@@ -101,6 +107,12 @@
 			                                                    	<td>${sVo.score}</td>
 			                                                    </tr>
 			                                                    </c:forEach>
+			                                                    </c:if>
+			                                                    <c:if test="${empty searchSubList}">
+			                                                    <tr>
+			                                                    	<td colspan="5">내역이 없습니다.</td>
+			                                                    </tr>
+			                                                    </c:if>
 			                                                </tbody>
 			                                            </table>
                                         			</div>

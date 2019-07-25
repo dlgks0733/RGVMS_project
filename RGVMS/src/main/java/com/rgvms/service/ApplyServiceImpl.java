@@ -61,9 +61,9 @@ public class ApplyServiceImpl implements ApplyService {
 	}
 
 	@Override
-	public List<ApplyVO> stuApplyList(int userNo, SearchCriteria cri) throws Exception {
+	public List<ApplyVO> stuApplyList(int userNo) throws Exception {
 		
-		return dao.stuApplyList(userNo, cri);
+		return dao.stuApplyList(userNo);
 	}
 
 	@Override
@@ -109,9 +109,9 @@ public class ApplyServiceImpl implements ApplyService {
 	}
 
 	@Override
-	public List<ApplyVO> waitList(SearchCriteria cri) throws Exception {
+	public List<ApplyVO> waitList() throws Exception {
 		
-		return dao.waitList(cri);
+		return dao.waitList();
 	}
 
 	@Override
@@ -148,6 +148,12 @@ public class ApplyServiceImpl implements ApplyService {
 	public List<TotalDTO> excelEsList() throws Exception {
 		
 		return dao.excelEsList();
+	}
+
+	@Override
+	public int adApplyListSearchCount(SearchCriteria cri) throws Exception {
+		
+		return dao.adApplyListSearchCount(cri);
 	}
 	
 	

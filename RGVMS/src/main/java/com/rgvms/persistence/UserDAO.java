@@ -3,6 +3,7 @@ package com.rgvms.persistence;
 import java.util.List;
 
 import com.rgvms.domain.Criteria;
+import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
 import com.rgvms.dto.LoginDTO;
@@ -60,5 +61,12 @@ public interface UserDAO {
 	
 	// 15. 관리자 :: 대시보드 - 졸업예정자 수
 	public int graduateCount() throws Exception;
+	
+	// 16. 관리자 :: 대시보드 - 졸업대상자 수
+	public int graduateToBeCount() throws Exception;
+	
+	// 17. 관리자 :: 대시보드 - 최근 MIS 3개 정보
+	public List<MisVO> misInfo() throws Exception;
+	
 
 }

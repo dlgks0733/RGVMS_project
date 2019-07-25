@@ -83,11 +83,11 @@ public class AdminEstimationController {
 
 		// 테이블 헤더용 스타일
 		CellStyle headStyle = wb.createCellStyle();
-		
+
 		Font headerFont = wb.createFont();
 		headerFont.setFontName("맑은 고딕 Semilight");
 		headerFont.setBold(true);
-		
+
 		Font bodyFont = wb.createFont();
 		bodyFont.setFontName("맑은 고딕 Semilight");
 
@@ -106,7 +106,7 @@ public class AdminEstimationController {
 
 		// 헤더 폰트 셋팅
 		headStyle.setFont(headerFont);
-		
+
 		// 데이터용 경계 스타일 테두리만 지정
 		CellStyle bodyStyle = wb.createCellStyle();
 		bodyStyle.setBorderTop(BorderStyle.THIN);
@@ -116,7 +116,7 @@ public class AdminEstimationController {
 
 		// 바디 폰트 셋팅
 		bodyStyle.setFont(bodyFont);
-		
+
 		// 헤더 생성
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
@@ -137,7 +137,7 @@ public class AdminEstimationController {
 			row = sheet.createRow(rowNo++);
 			cell = row.createCell(0);
 			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(rowNo-1);
+			cell.setCellValue(rowNo - 1);
 			cell = row.createCell(1);
 			cell.setCellStyle(bodyStyle);
 			cell.setCellValue(tDto.getUserNo());
@@ -155,40 +155,38 @@ public class AdminEstimationController {
 		String fileName = "졸업인증평가_목록.xls";
 		response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "utf-8") + ";");
 
-
 		// 엑셀 출력
 		wb.write(response.getOutputStream());
 		wb.close();
 
 	}
-	
+
 	@RequestMapping(value = "/excelEsSelectDown", method = RequestMethod.GET)
 	public void excelEsSelectDown(HttpServletResponse response, @RequestParam("userNo") int userNo) throws Exception {
 
 		TotalDTO tDTO = service.esSelect(userNo);
-		
+
 		List<ApplyVO> acceptList = service.acceptList(userNo);
-		
+
 		// 워크북 생성
 		Workbook wb = new HSSFWorkbook();
-		Sheet sheet = wb.createSheet("졸업인증평가_"+ tDTO.getUserNo() + "_" + tDTO.getUserName() +"_총점상세목록");
+		Sheet sheet = wb.createSheet("졸업인증평가_" + tDTO.getUserNo() + "_" + tDTO.getUserName() + "_총점상세목록");
 		Row row = null;
-		Row row1 = null;
+		// Row row1 = null;
 		Cell cell = null;
 		int rowNo = 0;
 
 		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 4));
 		sheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 3));
 		sheet.addMergedRegion(new CellRangeAddress(8, 8, 0, 4));
-		
+
 		Font headerFont = wb.createFont();
 		headerFont.setFontName("맑은 고딕 Semilight");
 		headerFont.setBold(true);
-		
+
 		Font bodyFont = wb.createFont();
 		bodyFont.setFontName("맑은 고딕 Semilight");
-		
-		
+
 		// 테이블 헤더용 스타일
 		CellStyle headStyle = wb.createCellStyle();
 
@@ -207,43 +205,40 @@ public class AdminEstimationController {
 
 		// 폰트 지정
 		headStyle.setFont(headerFont);
-		
+
 		// 데이터용 경계 스타일 테두리만 지정
 		CellStyle bodyStyle = wb.createCellStyle();
 		bodyStyle.setBorderTop(BorderStyle.THIN);
 		bodyStyle.setBorderBottom(BorderStyle.THIN);
 		bodyStyle.setBorderLeft(BorderStyle.THIN);
 		bodyStyle.setBorderRight(BorderStyle.THIN);
-		
+
 		bodyStyle.setAlignment(HorizontalAlignment.CENTER);
-		
+
 		bodyStyle.setFont(bodyFont);
-		
-		
-		
-		
+
 		// 헤더 생성
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("학생정보");
-		row1 = sheet.createRow(rowNo++);
-		cell = row1.createCell(0);
+		row = sheet.createRow(rowNo++);
+		cell = row.createCell(0);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("학번");
-		cell = row1.createCell(1);
+		cell = row.createCell(1);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("이름");
-		cell = row1.createCell(2);
+		cell = row.createCell(2);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("학년");
-		cell = row1.createCell(3);
+		cell = row.createCell(3);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("학적상태");
-		cell = row1.createCell(4);
+		cell = row.createCell(4);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("총점");
-		
+
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(bodyStyle);
@@ -260,8 +255,7 @@ public class AdminEstimationController {
 		cell = row.createCell(4);
 		cell.setCellStyle(bodyStyle);
 		cell.setCellValue(tDTO.getTotal());
-		
-		
+
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(bodyStyle);
@@ -278,28 +272,26 @@ public class AdminEstimationController {
 		cell = row.createCell(4);
 		cell.setCellStyle(bodyStyle);
 		cell.setCellValue("");
-		
-		
+
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("MIS 총점");
-		
-		row1 = sheet.createRow(rowNo++);
-		cell = row1.createCell(0);
+
+		row = sheet.createRow(rowNo++);
+		cell = row.createCell(0);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("분류");
-		cell = row1.createCell(1);
+		cell = row.createCell(1);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("영역");
-		cell = row1.createCell(2);
+		cell = row.createCell(2);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("항목명");
-		cell = row1.createCell(3);
+		cell = row.createCell(3);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("총점");
-		
-		
+
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(bodyStyle);
@@ -313,9 +305,7 @@ public class AdminEstimationController {
 		cell = row.createCell(3);
 		cell.setCellStyle(bodyStyle);
 		cell.setCellValue(tDTO.getMisTotal());
-		
-		
-		
+
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(bodyStyle);
@@ -332,61 +322,61 @@ public class AdminEstimationController {
 		cell = row.createCell(4);
 		cell.setCellStyle(bodyStyle);
 		cell.setCellValue("");
-		
+
 		row = sheet.createRow(rowNo++);
 		cell = row.createCell(0);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("인증항목 총점");
-		row1 = sheet.createRow(rowNo++);
-		cell = row1.createCell(0);
+		row = sheet.createRow(rowNo++);
+		cell = row.createCell(0);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("NO");
-		cell = row1.createCell(1);
+		cell = row.createCell(1);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("분류");
-		cell = row1.createCell(2);
+		cell = row.createCell(2);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("영역");
-		cell = row1.createCell(3);
+		cell = row.createCell(3);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("항목명");
-		cell = row1.createCell(4);
+		cell = row.createCell(4);
 		cell.setCellStyle(headStyle);
 		cell.setCellValue("취득점수");
-		// 데이터 부분 생성
-		for (ApplyVO aVo : acceptList) {
-			row1 = sheet.createRow(rowNo++);
-			cell = row1.createCell(0);
-			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(rowNo-10);
-			cell = row1.createCell(1);
-			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(aVo.getCateg());
-			cell = row1.createCell(2);
-			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(aVo.getArea());
-			cell = row1.createCell(3);
-			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(aVo.getSubName());
-			cell = row1.createCell(4);
-			cell.setCellStyle(bodyStyle);
-			cell.setCellValue(aVo.getAcScore());
 
+		if (acceptList.isEmpty() == true) {
+			sheet.addMergedRegion(new CellRangeAddress(10, 10, 0, 4));
+			row = sheet.createRow(rowNo++);
+			cell = row.createCell(0);
+			cell.setCellStyle(bodyStyle);
+			cell.setCellValue("내역이 없습니다.");
+		} else {
+			// 데이터 부분 생성
+			for (ApplyVO aVo : acceptList) {
+				row = sheet.createRow(rowNo++);
+				cell = row.createCell(0);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(rowNo - 10);
+				cell = row.createCell(1);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(aVo.getCateg());
+				cell = row.createCell(2);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(aVo.getArea());
+				cell = row.createCell(3);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(aVo.getSubName());
+				cell = row.createCell(4);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(aVo.getAcScore());
 
+			}
 		}
 
-		
-		
-		
-		
-		
-		
-		
 		// 컨텐츠 타입과 파일명 지정
 		response.setContentType("ms-vnd/excel");
-		String fileName = "졸업인증평가_"+ tDTO.getUserNo() + "_" + tDTO.getUserName() +"_총점상세목록.xls";
+		String fileName = "졸업인증평가_" + tDTO.getUserNo() + "_" + tDTO.getUserName() + "_총점상세목록.xls";
 		response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "utf-8") + ";");
-
 
 		// 엑셀 출력
 		wb.write(response.getOutputStream());

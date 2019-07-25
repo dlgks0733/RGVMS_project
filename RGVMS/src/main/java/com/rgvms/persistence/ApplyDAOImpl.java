@@ -37,12 +37,10 @@ public class ApplyDAOImpl implements ApplyDAO {
 	}
 
 	@Override
-	public List<ApplyVO> stuApplyList(int userNo, SearchCriteria cri) throws Exception {
+	public List<ApplyVO> stuApplyList(int userNo) throws Exception {
 		
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("userNo", userNo);
-		paramMap.put("cri", cri);
-		return session.selectList(namespace+".stuApplyList", paramMap);
+		
+		return session.selectList(namespace+".stuApplyList", userNo);
 	}
 
 	@Override
@@ -64,9 +62,9 @@ public class ApplyDAOImpl implements ApplyDAO {
 	}
 	
 	@Override
-	public List<ApplyVO> waitList(SearchCriteria cri) throws Exception {
+	public List<ApplyVO> waitList() throws Exception {
 		
-		return session.selectList(namespace+".waitList", cri);
+		return session.selectList(namespace+".waitList");
 	}
 
 	@Override
@@ -129,6 +127,12 @@ public class ApplyDAOImpl implements ApplyDAO {
 	public List<TotalDTO> excelEsList() throws Exception {
 		
 		return session.selectList(namespace+".excelEsList");
+	}
+
+	@Override
+	public int adApplyListSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".adApplyListSearchCount", cri);
 	}
 
 	

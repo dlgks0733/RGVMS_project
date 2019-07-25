@@ -21,6 +21,9 @@ ul{
    list-style:none;
    padding-left:0px;
    }
+input.form-control[disabled], textarea.form-control[disabled] { 
+  background-color: #fff;
+}
 </style>
 <!-- END File Upload Style -->
 
@@ -117,7 +120,8 @@ ul{
 											</div>
                                                 <div class="form-group col-md-6">
                                                     <label for="inputCity" class="col-form-label">취득일</label>
-                                                    <input type="text" name="acDate" id="acDate" class="form-control" value="${applyVO.acDate}" disabled="disabled">
+                                                    <fmt:formatDate value="${applyVO.acDate}" type="date" pattern="yyyy-MM-dd" var="acDate" />
+                                                    <input type="text" name="acDate" id="acDate" class="form-control" value="${acDate}" disabled="disabled">
                                                 </div>
 										</div>
 										
@@ -128,7 +132,8 @@ ul{
 											</div>
                                                 <div class="form-group col-md-6">
                                                     <label for="inputCity" class="col-form-label">신청일</label>
-                                                    <input type="text" name="applyDate" id="applyDate" class="form-control" value="${applyVO.acDate}" disabled="disabled">
+                                                    <fmt:formatDate value="${applyVO.applyDate}" type="date" pattern="yyyy-MM-dd" var="applyDate" />
+                                                    <input type="text" name="applyDate" id="applyDate" class="form-control" value="${applyDate}" disabled="disabled">
                                                 </div>
 										</div>
 										
@@ -142,11 +147,13 @@ ul{
 											<textarea class="form-control" name="reason" id="reason" rows="5" disabled="disabled">${applyVO.reason}</textarea>
 										</div>
 										
+										<c:if test="${!empty fileVO}">
 										<div class="form-group">
 						                  <label for="exampleInputEmail1" class="col-sm-2 control-label">첨부파일<span class="must-mark">*</span></label>
 						                </div>
 									
 									<ul class="dropzone-previews">
+									
 									
 									<c:forEach items="${fileVO}" var="fileVO" varStatus="status">
 									<li class="dropzone-previews mt-3">
@@ -178,26 +185,11 @@ ul{
 									</li>
 									</c:forEach>
 									</ul>
+									</c:if>
+									<c:if test="${empty fileVO}">
+									</c:if>
 
 
-									<!-- <div class="dropzone" id='mydropzone'>
-						                   <label for="fileUpload">여기</label>를 클릭해주세요
-                                           <input  type="file" id="fileUpload" class="filedropzone"/>
-						                        
-						               <div class="fileDrop" >
-						               <input type="hidden" id="uploadCount">
-						               <div class="dz-message needsclick">
-                                            <i class="h1 text-muted dripicons-cloud-upload"></i>
-                                            <h3>Drop files here or click to upload.</h3>
-                                            <span class="text-muted font-13">첨부파일을 업로드하려면 여기에 첨부파일 파일을 끌어 넣거나 클릭해주세요</span>
-                                        </div>
-						                           
-						                        <div>
-						                           <ul class="mailbox-attachments clearfix uploadedList">
-						                           </ul>
-						                        </div>
-						                  </div>
-						                  </div> -->
 						                  
 										<div style="text-align: right;">
 										<button type="button" class="btn btn-primary">목록</button>

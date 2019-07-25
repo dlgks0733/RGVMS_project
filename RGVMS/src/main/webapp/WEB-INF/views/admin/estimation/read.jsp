@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>관리자 페이지</title>
+        <title>RGVMS :: 졸업인증신청 상세보기</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -54,11 +54,12 @@ text-align: center;
                                 <div class="page-title-box">
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">RGVMS</a></li>
-                                            <li class="breadcrumb-item active">졸업인증평가 상세조회</li>
+                                            <li class="breadcrumb-item"><a href="/admin/main">RGVMS</a></li>
+                                            <li class="breadcrumb-item"><a href="/admin/estimation/list">졸업인증평가 목록</a></li>
+                                            <li class="breadcrumb-item active">졸업인증평가 상세보기</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">졸업인증평가 상세조회</h4>
+                                    <h4 class="page-title">졸업인증평가 상세보기</h4>
                                 </div>
                             </div>
                         </div>     
@@ -80,7 +81,7 @@ text-align: center;
                                 	<h4> 학번 : ${totalDTO.userNo} &nbsp;&nbsp;&nbsp; 이름 : ${totalDTO.userName} &nbsp;&nbsp;&nbsp; 학년 : ${totalDTO.grade} &nbsp;&nbsp;&nbsp; 학적상태 : ${totalDTO.state} &nbsp;&nbsp;&nbsp; 총점 : ${totalDTO.total} 점</h4>
                                     </div>
                                     <div class="card-body">
-					                 	<h4>MIS</h4> > 내역보기<br>
+					                 	<h4>MIS</h4><br>
 				                 		<table class="table table-bordered table-centered mb-0">
                                               <thead>
                                                   <tr>
@@ -112,6 +113,7 @@ text-align: center;
                                                   </tr>
                                               </thead>
                                               <tbody>
+                                              	<c:if test="${!empty acceptList}">
                                               	<c:forEach items="${acceptList}" var="aVo" varStatus="status">
                                                   <tr>
                                                   	<td>${status.count}</td>
@@ -121,6 +123,12 @@ text-align: center;
                                                   	<td>${aVo.acScore}</td>
                                                   </tr>
                                                 </c:forEach>
+                                                </c:if>
+                                                <c:if test="${empty acceptList}">
+                                                	<tr>
+                                                		<td colspan="5">내역이 없습니다.</td>
+                                                	</tr>
+                                                </c:if>
                                               </tbody>
                                         </table>
 									</div><!-- end card body-->

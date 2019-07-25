@@ -78,7 +78,7 @@ ul{
 									<h4 class="header-title">졸업인증신청</h4>
 									<p class="text-muted font-13">신청 후에 수정과 삭제는 불가합니다.</p>
 
-									<form name="frm" method="post" role="form" onsubmit="return validate();">
+									<form name="frm" method="post" role="form">
 									<input type="hidden" name="subNo" id="subNo">
 									<input type="hidden" name="userNo" id="userNo" value="${login.userNo}">
 										<div class="form-row">
@@ -130,30 +130,6 @@ ul{
 											<textarea class="form-control" name="content" id="content" rows="5"></textarea>
 										</div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-										
-										
-										
-										
-										
-										
-										
-										
-										
-										
 										
                               <div class="form-group">
                                     <label for="exampleInputEmail1" class="col-sm-2 control-label">첨부파일<span class="must-mark">*</span></label>
@@ -242,7 +218,7 @@ ul{
 $("#subPopup").click(function(){
 	var url = "searchPopup";
     var name = "항목 검색";
-    var option = "width = 600, height = 500, top = 100, left = 200, location = no";
+    var option = "width = 700, height = 500, top = 100, left = 200, location = no";
     window.open(url, name, option);
 });
 
@@ -251,19 +227,27 @@ function validate(){
 	var subNo = $("#subNo").val();
 	var userNo = $("#userNo").val();
 	var acScore = $("#acScore").val();
+	var acDate = $("#acDate").val();
 	
 	if(subNo == ""){
-		alert("오류 :: 다시 시도해주세요.");
-		return false;
-	}
-	if(userNo == ""){
-		alert("오류 :: 다시 시도해주세요.");
+		alert("항목명을 입력해주세요.");
+		document.getElementById("subName").focus();
 		return false;
 	}
 	if(acScore == ""){
 		alert("취득 점수를 입력해주세요.");
+		document.getElementById("acScore").focus();
+		
 		return false;
 	}
+	if(acDate == ""){
+		alert("취득일자를 입력해주세요.");
+		document.getElementById("acDate").focus();
+		
+		return false;
+	}
+	
+	return true;
 	
 }
 
@@ -302,7 +286,13 @@ function validate(){
 
                    formObj.submit(function(event) {
                            event.preventDefault();
+                           //유효성 검사
+                           
+                           var val = validate();
 
+                           if(val){
+                        	   
+                        	   
                            var that = $(this);
 
                            var str = "";
@@ -322,7 +312,11 @@ function validate(){
                            console.log(str);
                            
                            that.get(0).submit();
-                        });
+                        
+                           }//if문 종료
+                           
+                   });
+                   
 
                   $(".btn-cancel").on(
                               "click",

@@ -143,8 +143,56 @@ SELECT COUNT(*) FROM TBL_APPLY WHERE APPLY_STATE = '승인대기'
 </select>
 
 <!-- 관리자 :: 대시보드 - 졸업예정자 수 -->
-<select id="graduateCount" resultType="int">
+<select id="graduateToBeCount" resultType="int">
 SELECT COUNT(*) FROM TBL_USER WHERE STATE = '재학' AND GRADE = 4
+</select>
+
+<!-- 관리자 :: 대시보드 - 졸업대상자 수 -->
+<select id="graduateCount" resultType="int">
+<![CDATA[
+SELECT COUNT(*)
+  FROM(
+SELECT USER_NO
+	 , SUM(SUBTOTAL) AS SUBTOTAL
+	 , SUM(MISTOTAL) AS MISTOTAL
+  FROM(
+SELECT USER_NO
+ 	 , 0 AS SUBTOTAL
+ 	 , COUNT(MIS_ATT_NO)*3 AS MISTOTAL 
+  FROM TBL_MIS_ATT 
+GROUP BY USER_NO
+UNION
+SELECT USER_NO
+	 , SUM(AC_SCORE) AS SUBTOTAL
+	 , 0 AS MISTOTAL
+  FROM TBL_APPLY
+GROUP BY USER_NO
+UNION
+SELECT USER_NO
+	 , 0 AS SUBTOTAL
+	 , 0 AS MISTOTAL 
+  FROM TBL_USER WHERE AUTHORITY != 1 
+GROUP BY USER_NO)
+GROUP BY USER_NO) A, TBL_USER U
+WHERE A.USER_NO = U.USER_NO
+  AND (SUBTOTAL+MISTOTAL) >= 1200
+ORDER BY U.USER_NO ASC
+]]>
+</select>
+
+<!-- 관리자 :: 대시보드 - 최근 3개 MIS 정보 -->
+<select id="misInfo" resultType="com.rgvms.domain.MisVO">
+<![CDATA[
+SELECT * FROM
+(
+SELECT M.MIS_NO, M.TIMES, M.TITLE, COUNT(A.MIS_NO) AS CNT 
+  FROM TBL_MIS M, TBL_MIS_ATT A
+ WHERE M.MIS_NO = A.MIS_NO
+GROUP BY M.MIS_NO, M.TIMES, M.TITLE
+ORDER BY TIMES DESC
+)
+WHERE ROWNUM <= 3
+]]>
 </select>
 	
 </mapper>
