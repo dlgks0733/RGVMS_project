@@ -24,25 +24,89 @@
 <link href="/resources/dist/assets/css/app.min.css" rel="stylesheet" type="text/css" id="main-style-container" />
 
 <!-- javaScript validate() -->
-<script>
+<script type="text/javascript">
 function validate() {
-	
-	var userPw = document.getElementById("userPw");
+	/* var userPw = document.getElementById("userPw");
+	var userPwCnf = document.getElementById("userPwCnf");
 	var grade = document.getElementById("grade");
 	var state = document.getElementById("state");
-	var userName = document.getElementById("userName");
+	var userName = document.getElemeㅕntById("userName"); */
 	
-	if(grade.inter[0].checked == false &&
+	var userPw = $("#userPw").val();
+	var userPwCnf = $("#userPwCnf").val();
+	/* var grade = $("#grade").val();
+	var state = $("#state").val(); */
+	var userName = $("#userName").val();
+	
+	// 패스워드가 적합한지 검사할 정규식
+	var re = /^[a-zA-Z0-9]{4,20}$/;
+	
+	//학년 유효성 검사
+	/* if(grade.inter[0].checked == false &&
 	   grade.inter[1].checked == false &&
 	   grade.inter[2].checked == false &&
 	   grade.inter[3].checked == false &&
 	   grade.inter[4].checked == false
 	   ) {
 		
-		alert()
+		alert("학년을 선택해주세요.");
+		$("#grade").focus();
 		
+		return false;
+	} */
+	
+	//학적상태 유효성 검사
+	/* if(state.inter[0].checked == false &&
+	   state.inter[1].checked == false &&
+	   state.inter[2].checked == false &&
+	   state.inter[3].checked == false 
+	) {
+		
+		alert("학적상태를 입력해주세요.");
+		$("#state").focus();
+		
+		return false;
+	} */
+	
+    if(userName == ""){
+        alert("이름을 입력해주세요");
+        $("#userName").focus();
+        
+        return false;
+    }
+	
+	//비밀번호 길이 유효성 검사
+	if(userPw.length < 4 || userPw.legnth > 20
+			|| !check(re, userPw, "4자리 ~ 20자리 이내로 영문 대소문자와 숫자를 포함해주세요.") ) {
+		
+		alert("4자리 ~ 20자리 이내로 입력해주세요.");
+		/* $("#userPw").value = "";
+		$("#userPw").focus(); */
+		
+		return false;
 	}
 	
+	//비밀번호 변경과 확인 유효성 검사
+	if(userPw != userPwCnf) {
+		
+		alert("비밀번호가 서로 다릅니다. 비밀번호를 확인해주세요.");
+		$("#userPwCnf").value = "";
+		$("#userPwCnf").focus();
+		
+		return false;
+	}
+	
+	return true;
+}
+
+function check(re, what, message) {
+    if(re.test(what.value)) {
+        return true;
+    }
+    alert(message);
+    what.value = "";
+    what.focus();
+    //return false;
 }
 </script>
 </head>
@@ -83,18 +147,18 @@ function validate() {
 					<div class="row" style=" justify-content: center;">
 						<div class="col-lg-7">
 							<div class="card">
-								<div class="card-body">
-									<form class="needs-validation" onsubmit="return validate();" action="myInfoUpdate" method="post">
+								<div class="card-body"><!-- onsubmit="return validate();" -->
+									<form action="myInfoUpdate" method="post" onsubmit="return validate();">
 										<div class="form-group mb-3">
 											<label for="userNo">학번</label>
-											<input type="text" class="form-control" name="userNo"
+											<input type="text" class="form-control" name="userNo" id="userNo"
 											value="${userVO.userNo}" readonly="readonly"/>
 										</div>
 										
 										<div class="box">
 											<div class="form-group mb-3">
 												<label for="grade">학년</label>
-												<select class="form-control select2" name="grade" id="gradeSelect">
+												<select class="form-control select2" name="grade" id="grade">
 													<option value="4"
 														<c:out value="${userVO.grade eq '4'?'selected':'' }"/>>4</option>
 	                                                <option value="3"
@@ -107,7 +171,7 @@ function validate() {
 											</div>
 											<div class="form-group mb-3">
 												<label for="state">학적상태</label>
-												<select class="form-control select2" name="state" id="stateSelect">
+												<select class="form-control select2" name="state" id="state">
 													<option value="재학"
 														<c:out value="${userVO.state eq '재학'?'selected':'' }"/>>재학</option>
 													<option value="휴학"
@@ -121,24 +185,21 @@ function validate() {
 										</div>
 										
 										<div class="form-group mb-3">
-											<label for="userName">이름</label> <input
-												type="text" class="form-control" name="userName" value="${userVO.userName}"/>
+											<label for="userName">이름</label>
+											<input type="text" class="form-control" id="userName" name="userName" value="${userVO.userName}"/>
 										</div>
 										
 										<div class="form-group mb-3">
-											<label for="userPw">비밀번호변경</label>
-											<input type="text" class="form-control" name="userPw" value="${userVO.userPw}" placeholder="새 비밀번호를 입력하세요."/>
-											<h6>비밀번호는 4자리 이상으로 만들어주세요.</h6>
+											<label for="userPw">비밀번호변경</label><span class="text-danger">*</span>
+											<input type="text" class="form-control" id="userPw" name="userPw" value="${userVO.userPw}" placeholder="새 비밀번호를 입력하세요."/>
+											<h6> 4자리 ~ 20자리로 영문 대소문자와 숫자를 포함하여 만들어주세요.</h6>
 										</div>
 										
 										<div class="form-group mb-3">
-											<label for="userPw">비밀번호변경</label>
-											<input type="text" class="form-control" name="userPw" placeholder="새 비밀번호를 입력하세요."/>
-											<h6>비밀번호는 4자리 이상으로 만들어주세요.</h6>
+											<label for="userPwCnf">비밀번호확인</label><span class="text-danger">*</span>
+											<input type="text" class="form-control" id="userPwCnf" name="userPwCnf" placeholder="새 비밀번호 확인을 위해 다시 입력해주세요."/>
 										</div>
 
-										<input type="hidden" class="form-control" name="userPw" value="1234">
-										<input type="hidden" class="form-control" name="authority" value="0">
 										
 										<div style="text-align: right;">
 											<button class="btn btn-primary" type="submit">수정</button>

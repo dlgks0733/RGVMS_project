@@ -90,7 +90,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void myInfoUpdate(UserVO uVo) throws Exception {
 		// TODO Auto-generated method stub
-		session.update(namespaceMyPage + ".myInforUpdate", uVo);
+		session.update(namespaceMyPage + ".myInfoUpdate", uVo);
 	}
 
 	@Override

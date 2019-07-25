@@ -19,25 +19,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="myInfoUpdate">
 		UPDATE
 		TBL_USER
-		SET user_No = #{userNo},
-			grade = #{grade},
+		SET grade = #{grade},
 			user_Name = #{userName},
 			state = #{state},
-			user_Pw = #{userPw},
-			authority = #{authority},
-			reg_num = #{regNum}
+			user_Pw = #{userPw}
 		WHERE
 			user_No = #{userNo}
 	</update>
 	
 	<!-- 3. 비밀번호 체크 -->
-	<select id="checkPw" resultType="int">
+	<!-- <select id="checkPw" resultType="int">
 		SELECT
 		count(*)
 		FROM
 		TBL_USER
 		WHERE user_id = #{userNo}
 		AND user_pw = #{userPw}
-	</select>
+	</select> -->
 
 </mapper>
