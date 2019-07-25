@@ -49,7 +49,7 @@ function subRegister() {
 <!-- 개정안 부칙 팝업창띄우기 -->
 <script type="text/javascript">
 function subRevised() {
-	location.href="/admin/subject/revised";
+	location.href="/admin/subject/revised.jsp";
 }
 </script>
 
@@ -136,7 +136,7 @@ function subRevised() {
 										<!-- end col-->
 									</div>
 
-									<form id="form" method="post">
+									<form id="form">
 										<div class="table-responsive">
 											<table class="table table-centered mb-0">
 												<thead class="thead-light">
@@ -222,7 +222,7 @@ function subRevised() {
 										<!-- 페이징처리 -->
 										
 										<div style="margin-top:2%;">
-											<button type="button" class="btn btn-outline-secondary mb-2" onclick="subRevised()">졸업인증제 개정안 부칙</button>
+											<a href="/admin/subject/revised.jsp" target="_blank">졸업인증제 개정안 부칙</a>
 										</div>
 										<div style="text-align: right;">
 											<button type="button" class="btn btn-primary mb-2" onclick="subRegister()">인증항목등록</button>
