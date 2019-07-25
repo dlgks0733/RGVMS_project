@@ -21,6 +21,11 @@
 body.loading {
 	visibility: hidden;
 }
+
+tr, td {
+	text-align:center;
+	font-family:"맑은고딕";
+}
 </style>
 
 <!-- third party css -->
@@ -76,8 +81,9 @@ function postRemove() {
 								<div class="page-title-right">
 									<ol class="breadcrumb m-0">
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">학생관리</a></li>
-										<!-- <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li> -->
+											href="/admin/main">RGVMS</a></li>
+										<li class="breadcrumb-item">
+										<a href="/admin/user/list">학생관리</a></li>
 										<li class="breadcrumb-item active">학생목록</li>
 									</ol>
 								</div>
@@ -118,8 +124,10 @@ function postRemove() {
 													<label for="inputPassword2" class="sr-only">Search</label>
 													<input type="text" class="form-control" name="keyword"
 														value="${cri.keyword}" placeholder="검색어를 입력하세요." id="keywordInput">
-													<button id='searchBtn' type="button" class="btn btn-light mb-2"
-														style="vertical-align: bottom;">검색</button>
+													<!-- <button id='searchBtn' type="button" class="btn btn-light mb-2"
+														style="vertical-align: bottom;">검색</button> -->
+													&nbsp;&nbsp;
+													<input type="button" class="form-control btn-primary" id="searchBtn" value="검색">
 												</div>
 											</form>
 										</div>
@@ -148,6 +156,7 @@ function postRemove() {
 												</thead>
 
 												<tbody>
+													<c:if test="${!empty list}">
 													<!-- 리스트 내용 -->
 													<c:forEach items="${list}" var="userVO" varStatus="status">
 														<tr>
@@ -170,15 +179,22 @@ function postRemove() {
 																	<i class="mdi mdi-delete"></i></a></td>
 														</tr>
 													</c:forEach>
+													</c:if>
+													<c:if test="${empty list}">
+													<tr>
+                                                		<td colspan="6">등록된 학생이 없습니다.</td>
+                                                	</tr>
+													</c:if>
 												</tbody>
 											</table>
 										</div>
 
-
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										
 										<!-- 페이징처리 -->
 										<div class="box-footer">
 											<div class="text-center">
-												<ul class="pagination" style="text-align: center;">
+												<ul class="pagination justify-content-center">
 													<c:if test="${pageMaker.prev}">
 														<li class="page-item"><a class="page-link"
 															href="/admin/user/list${pageMaker.makeSearch(pageMaker.startPage - 1) }">
@@ -206,7 +222,7 @@ function postRemove() {
 										<!-- 페이징처리 -->
 										
 										<div style="text-align: right;">
-											<button type="button" class="btn btn-light mb-2"
+											<button type="button" class="btn btn-primary mb-2"
 												onclick="userRegister()">학생등록</button>
 										</div>
 									</form>

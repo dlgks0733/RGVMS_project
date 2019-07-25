@@ -21,6 +21,11 @@
 body.loading {
 	visibility: hidden;
 }
+
+tr, td {
+	text-align:center;
+	font-family:"맑은고딕";
+}
 </style>
 
 <!-- third party css -->
@@ -36,18 +41,18 @@ body.loading {
 	
 <!-- javaScript -->
 <script type="text/javascript">
-	function subRegister() {
-		location.href="/admin/subject/register";
-	}
+function subRegister() {
+	location.href="/admin/subject/register";
+}
 </script>
 
 <!-- 개정안 부칙 팝업창띄우기 -->
 <script type="text/javascript">
-	function subRevised() {
-		location.href="/admin/subject/revised";
-	}
-	
+function subRevised() {
+	location.href="/admin/subject/revised";
+}
 </script>
+
 </head>
 
 <body class="loading">
@@ -75,7 +80,9 @@ body.loading {
 								<div class="page-title-right">
 									<ol class="breadcrumb m-0">
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">인증항목관리</a></li>
+											href="/admin/main">RGVMS</a></li>
+										<li class="breadcrumb-item">
+										<a href="/admin/subject/list">인증항목관리</a></li>
 										<li class="breadcrumb-item active">인증항목목록</li>
 									</ol>
 								</div>
@@ -119,8 +126,10 @@ body.loading {
 													<label for="inputPassword2" class="sr-only">Search</label>
 													<input type="text" class="form-control" name="keyword"
 														value="${cri.keyword}" placeholder="검색어를 입력하세요." id="keywordInput">
-													<button id="searchBtn" type="button" class="btn btn-light mb-2"
-														style="vertical-align: bottom;">검색</button>
+													<!-- <button id="searchBtn" type="button" class="btn btn-light mb-2"
+														style="vertical-align: bottom;">검색</button> -->
+													&nbsp;&nbsp;
+													<input type="button" class="form-control btn-primary" id="searchBtn" value="검색">
 												</div>
 											</form>
 										</div>
@@ -149,6 +158,7 @@ body.loading {
 												</thead>
 
 												<tbody>
+													<c:if test="${!empty list}">
 													<!-- 리스트 내용 -->
 													<c:forEach items="${list}" var="subjectVO" varStatus="status">
 														<tr>
@@ -158,7 +168,7 @@ body.loading {
                                                                 <label class="custom-control-label" for="customCheck2">&nbsp;</label>
                                                             </div>
                                                         </td> -->
-                                                        <td>${(pageMaker.totalCount - status.index) -  (pageMaker.cri.page-1) * 10}</td>
+                                                        	<td>${(pageMaker.totalCount - status.index) -  (pageMaker.cri.page-1) * 10}</td>
 															<%-- <td>${status.count}</td> --%>
 															<td>${subjectVO.categ}</td>
 															<td>${subjectVO.area}</td>
@@ -169,14 +179,22 @@ body.loading {
 															<td>${subjectVO.publication}</td>
 														</tr>
 													</c:forEach>
+													</c:if>
+													<c:if test="${empty list}">
+                                                	<tr>
+                                                		<td colspan="6">내역이 없습니다.</td>
+                                                	</tr>
+                                                </c:if>
 												</tbody>
 											</table>
 										</div>
 										
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										
 										<!-- 페이징처리 -->
 										<div class="box-footer">
 											<div class="text-center">
-												<ul class="pagination" style="text-align: center;">
+												<ul class="pagination justify-content-center">
 													<c:if test="${pageMaker.prev}">
 														<li class="page-item"><a class="page-link"
 															href="/admin/subject/list${pageMaker.makeSearch(pageMaker.startPage - 1) }">

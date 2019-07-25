@@ -69,6 +69,7 @@ function validate() {
 		return false;
 	} */
 	
+	//이름 유효성 검사
     if(userName == ""){
         alert("이름을 입력해주세요");
         $("#userName").focus();

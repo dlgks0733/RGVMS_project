@@ -37,6 +37,74 @@ input.form-control[readonly], textarea.form-control[readonly] {
 	type="text/css" />
 <link href="/resources/dist/assets/css/app.min.css" rel="stylesheet"
 	type="text/css" id="main-style-container" />
+	
+<!-- javaScript validate() -->
+<script type="text/javascript">
+function validate(){
+	
+	var categ = $("#categ").val();
+	var area = $("#area").val();
+	var subName = $("#subName").val();
+	var score = $("#score").val();
+	var publication = $("#publication").val();
+	var guide = $("#guide").val();
+	
+	//분류 셀렉박스 유효성 검사
+	if(frm.categ.value == ""
+	){
+		alert("분류를 선택해주세요.");
+		$("#categ").focus();
+		
+		return false;
+	}
+	
+	//영역 셀렉박스 유효성 검사
+	if(frm.area.value == ""
+	){
+		alert("영역을 선택해주세요.");
+		$("#area").focus();
+		
+		return false;
+	}
+
+	//평가항목 유효성 검사
+	if(subName == "") {
+		
+		alert("평가항목을 입력해주세요.");
+		$("#subName").focus();
+		
+		return false;
+	}
+	
+	//평가점수 유효성 검사
+	if(score == "") {
+		
+		alert("평가점수를 입력해주세요.");
+		$("#score").focus();
+		
+		return false;
+	}
+	
+	//발행처 유효성 검사
+	if(publication == "") {
+		
+		alert("발행처를 적어주세요.");
+		$("#publication").focus();
+		
+		return false;
+	}
+	
+	//안내사항 유효성 검사
+	if(guide == "") {
+		
+		alert("안내사항을 적어주세요.");
+		$("#guide").focus();
+		
+		return false;
+	}
+}
+</script>
+
 
 </head>
 
@@ -64,8 +132,10 @@ input.form-control[readonly], textarea.form-control[readonly] {
 								<div class="page-title-right">
 									<ol class="breadcrumb m-0">
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">인증항목관리</a></li>
-										<li class="breadcrumb-item active">인증항목등록</li>
+											href="/admin/main">RGVMS</a></li>
+										<li class="breadcrumb-item"><a
+											href="/admin/subject/list">인증항목목록</a></li>
+										<li class="breadcrumb-item active">인증항목수정</li>
 									</ol>
 								</div>
 								<h4 class="page-title">인증항목등록</h4>
@@ -81,13 +151,13 @@ input.form-control[readonly], textarea.form-control[readonly] {
 									<div class="card-body">
 										<!-- <h4 class="header-title mb-3">항목정보입력란</h4> -->
 
-										<form role="form">
+										<form role="form" onsubmit="return validate();">
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
 														<label for="categ">분류 <span
 															class="text-danger">*</span></label>
-														<select data-toggle="select2" name="categ" id="categSelect">
+														<select data-toggle="select2" name="categ" id="categ">
 															<option value="필수"
 															<c:out value="${subjectVO.categ eq '필수'?'selected':'' }"/>>필수</option>
 															<option value="선택"
@@ -101,7 +171,7 @@ input.form-control[readonly], textarea.form-control[readonly] {
 														<label for="billing-last-name">영역 <span
 															class="text-danger">*</span></label>
 															
-															<select data-toggle="select2" name="area" id="areaSelect">
+															<select data-toggle="select2" name="area" id="area">
 																<option value="외국어"
 																<c:out value="${subjectVO.area eq '외국어'?'selected':'' }"/>>외국어</option>
 																<option value="학생활동봉사"
@@ -129,14 +199,14 @@ input.form-control[readonly], textarea.form-control[readonly] {
 														<label for="sub-Name">평가항목 <span
 															class="text-danger">*</span></label>
 														<input class="form-control" type="text"
-															name="subName" value="${subjectVO.subName}">
+															name="subName" value="${subjectVO.subName}" id="subName">
 													</div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
 														<label for="score">평가점수 <span
 															class="text-danger">*</span></label>
-														<input class="form-control" type="text" name="score"
+														<input class="form-control" type="text" name="score" id="score"
 															value="${subjectVO.score}" />
 													</div>
 												</div>
@@ -154,7 +224,7 @@ input.form-control[readonly], textarea.form-control[readonly] {
 														<label for="publication">발행처 <span
 															class="text-danger">*</span></label>
 														<input class="form-control" type="text"
-															name="publication" value="${subjectVO.publication}"/>
+															name="publication" value="${subjectVO.publication}" id="publication"/>
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -167,7 +237,7 @@ input.form-control[readonly], textarea.form-control[readonly] {
 												<div class="col-12">
 													<div class="form-group mt-3">
 														<label for="example-textarea">추가 안내사항</label>
-														<textarea class="form-control" name="guide" id="example-textarea"
+														<textarea class="form-control" name="guide" id="example-textarea" id="guide"
 															rows="3">${subjectVO.guide}</textarea>
 														<input type="hidden" class="form-control" name="subNo" value="${subjectVO.subNo }">
 													</div>

@@ -35,6 +35,73 @@ body.loading {
 	type="text/css" />
 <link href="/resources/dist/assets/css/app.min.css" rel="stylesheet"
 	type="text/css" id="main-style-container" />
+	
+<!-- javaScript validate() -->
+<script type="text/javascript">
+function validate(){
+	
+	var categ = $("#categ").val();
+	var area = $("#area").val();
+	var subName = $("#subName").val();
+	var score = $("#score").val();
+	var publication = $("#publication").val();
+	var guide = $("#guide").val();
+	
+	//분류 셀렉박스 유효성 검사
+	if(frm.categ.value == ""
+	){
+		alert("분류를 선택해주세요.");
+		$("#categ").focus();
+		
+		return false;
+	}
+	
+	//영역 셀렉박스 유효성 검사
+	if(frm.area.value == ""
+	){
+		alert("영역을 선택해주세요.");
+		$("#area").focus();
+		
+		return false;
+	}
+	
+	//평가항목 유효성 검사
+	if(subName == "") {
+		
+		alert("평가항목을 입력해주세요.");
+		$("#subName").focus();
+		
+		return false;
+	}
+	
+	//인증점수 유효성 검사
+	if(score == "") {
+		
+		alert("평가점수를 입력해주세요.");
+		$("#score").focus();
+		
+		return false;
+	}
+	
+	//발행처 유효성 검사
+	if(publication == "") {
+		
+		alert("발행처를 입력해주세요.");
+		$("#publication").focus();
+		
+		return false;
+	}
+	
+	//안내사항 유효성 검사
+	if(guide == "") {
+		
+		alert("안내사항을 입력해주세요.");
+		$("#guide").focus();
+		
+		return false;
+	}
+}
+</script>
 
 </head>
 
@@ -61,10 +128,9 @@ body.loading {
 							<div class="page-title-box">
 								<div class="page-title-right">
 									<ol class="breadcrumb m-0">
+										<li class="breadcrumb-item">인증항목관리</li>
 										<li class="breadcrumb-item"><a
-											href="javascript: void(0);">인증항목관리</a></li>
-										<!-- <li class="breadcrumb-item"><a
-											href="javascript: void(0);"></a></li> -->
+											href="/admin/subject/list">인증항목목록</a></li>
 										<li class="breadcrumb-item active">인증항목등록</li>
 									</ol>
 								</div>
@@ -81,14 +147,14 @@ body.loading {
 									<div class="card-body">
 										<!-- <h4 class="header-title mb-3">항목정보입력란</h4> -->
 
-										<form action="/admin/subject/register" method="post">
+										<form name="frm" action="/admin/subject/register" method="post" onsubmit="return validate();">
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
 														<label for="categ">분류 <span
 															class="text-danger">*</span></label>
-														<select data-toggle="select2" name="categ">
-															<option>선택하세요..</option>
+														<select data-toggle="select2" name="categ" id="categ">
+															<option value="">선택하세요..</option>
 															<option value="필수">필수</option>
 															<option value="선택">선택</option>
 														</select>
@@ -99,8 +165,8 @@ body.loading {
 													<div class="form-group">
 														<label for="area">영역 <span
 															class="text-danger">*</span></label> 
-														<select data-toggle="select2" name="area">
-															<option>선택하세요..</option>
+														<select data-toggle="select2" name="area" id="area">
+															<option value="">선택하세요..</option>
 															<option value="외국어">외국어</option>
 															<option value="학생활동봉사">학생활동/봉사</option>
 															<option value="정보화">정보화</option>
@@ -118,17 +184,17 @@ body.loading {
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="sub-Name">평가항목 <span
+														<label for="subName">평가항목 <span
 															class="text-danger">*</span></label>
 														<input class="form-control" type="text"
-															placeholder="평가항목을 입력하세요. 예)TOEIC, 정보처리기사 1급" name="subName">
+															placeholder="평가항목을 입력하세요. 예)TOEIC, 정보처리기사 1급" name="subName" id="subName">
 													</div>
 												</div>
 												<div class="col-md-2">
 													<div class="form-group">
 														<label for="score">평가점수 <span
 															class="text-danger">*</span></label>
-														<input class="form-control" type="text" name="score"/>
+														<input class="form-control" type="text" name="score" id="score"/>
 													</div>
 												</div>
 												<div class="col-md-2">
@@ -145,7 +211,7 @@ body.loading {
 														<label for="publication">발행처 <span
 															class="text-danger">*</span></label>
 														<input class="form-control" type="text" placeholder="예)한국산업인력공단, 한국토익위원회"
-															name="publication"/>
+															name="publication" id="publication"/>
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -158,7 +224,7 @@ body.loading {
 												<div class="col-12">
 													<div class="form-group mt-3">
 														<label for="guide">추가 안내사항</label>
-														<textarea class="form-control" name="guide"
+														<textarea class="form-control" name="guide" id="guide"
 															rows="5" placeholder="안내사항을 적어주세요."></textarea>
 													</div>
 												</div>
@@ -240,20 +306,5 @@ body.loading {
 	<script src="/resources/dist/assets/js/pages/demo.calendar.js"></script>
 	<!-- end demo js-->
 
-
-	<!-- <script>
-		$(document).ready(function() {
-	  		$("#detached-check input:radio").click(function() {
-
-	    			alert("clicked");
-	    
-	   		});
-	  
-	 		 $("input:radio:first").prop("checked", true).trigger("click");
-	  
-			});
-
-	</script>
- -->
 </body>
 </html>
