@@ -61,12 +61,12 @@ body.loading {
 													<select name="searchType" class="custom-select" id="status-select">
 														<option value=""
 															<c:out value="${cri.searchType == null?'selected':''}"/>>
-															--</option>
+															전체</option>
 														<option value="t"
 															<c:out value="${cri.searchType eq 't'?'selected':''}"/>>제목
 														</option>
 														<option value="m"
-															<c:out value="${cri.searchType eq 'm'?'selected':''}"/>>시행일
+															<c:out value="${cri.searchType eq 'm'?'selected':''}"/>>회차
 														</option>
 													</select>
 												</div>
