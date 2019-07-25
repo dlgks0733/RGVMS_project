@@ -49,11 +49,11 @@ function subRegister() {
 <!-- 개정안 부칙 팝업창띄우기 -->
 <script type="text/javascript">
 function popupOpen() {
-	var popUrl = "/admin/subject/revised.html";	//팝업창에 출력될 페이지 URL
+	var popUrl = "revised.html";//팝업창에 출력될 페이지 URL
+	
+	var popOption = "width=450, height=500, resizable=no, scrollbars=yes, status=no;";//팝업창 옵션(optoin)
 
-	var popOption = "width=450, height=360, resizable=no, scrollbars=yes, status=no;";    //팝업창 옵션(optoin)
-
-		window.open(popUrl,"",popOption);
+		window.open(popUrl,"졸업인증제 개정안",popOption);
 }
 </script>
 
@@ -315,7 +315,9 @@ function popupOpen() {
 								+ "&keyword=" + $('#keywordInput').val();
 	
 					});
+	
 			});
+	
 	</script>
 
 </body>
