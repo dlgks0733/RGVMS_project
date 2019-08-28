@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.rgvms.domain.UserVO;
 import com.rgvms.service.ApplyService;
+import com.rgvms.service.StatisticsService;
 import com.rgvms.service.UserService;
 
 @Controller
@@ -23,6 +24,8 @@ public class UserMainController {
 	
 	@Inject
 	private UserService userService;
+	
+	@Inject StatisticsService sService;
 
 	private static Logger logger = LoggerFactory.getLogger(AdminApplyController.class);
 
@@ -37,6 +40,7 @@ public class UserMainController {
 
 		model.addAttribute(service.esSelect(userNo));
 		model.addAttribute("mainApplyWaitList", userService.mainApplyWaitList(userNo));
+		model.addAttribute("certList", sService.mainList());
 
 	}
 

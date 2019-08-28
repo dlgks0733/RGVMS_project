@@ -162,7 +162,7 @@
                                             <div class="col-sm-12 col-xl-4">
                                                 <div class="card shadow-none m-0 border-left">
                                                     <div class="card-body text-center">
-                                                        <i class="mdi mdi-calendar-text-outline" style="font-size: 24px;"></i>
+                                                        <i class="mdi mdi-certificate" style="font-size: 24px;"></i>
                                                         <h5><a href="/admin/statistics/list">${cVo.subName}</a></h5>
                                                         취득인원
                                                         <h5><span>${cVo.cnt} 명</span></h5>

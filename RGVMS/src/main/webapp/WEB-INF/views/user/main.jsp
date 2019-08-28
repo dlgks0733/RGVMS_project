@@ -127,6 +127,50 @@ text-align: center;
                                </div>
                             </div>
                            </div>
+                           
+                        
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card widget-inline">
+                                    <div class="card-body p-0">
+                                        <div class="row no-gutters">
+                                        	<c:if test="${!empty certList}">
+                                        	<c:forEach items="${certList}" var="cVo">
+                                            <div class="col-sm-12 col-xl-4">
+                                                <div class="card shadow-none m-0 border-left">
+                                                    <div class="card-body text-center">
+                                                        <i class="mdi mdi-certificate" style="font-size: 24px;"></i>
+                                                        <h5><a href="#">${cVo.subName}</a></h5>
+                                                        취득인원
+                                                        <h5><span>${cVo.cnt} 명</span></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </c:forEach>
+                                            </c:if>
+                                            
+                                            <c:if test="${empty certList}">
+                                            </c:if>
+                
+                                        </div> <!-- end row -->
+                                        
+                                    </div>
+                                </div> 
+                                <!-- end card-box-->
+                            </div> <!-- end col-->
+                        </div>
+                        
+                        
+                           
+                        
+                        
+                        <div class="row">
+                            <div class="col-12">
+                               <div class="card widget-inline">
+                               </div>
+                            </div>
+                           </div>   
                         
                         
                         <div class="row">
