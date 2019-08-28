@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.rgvms.domain.ApplyVO;
 import com.rgvms.domain.Criteria;
+import com.rgvms.domain.GoalVO;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
@@ -140,6 +141,24 @@ public class UserServiceImpl implements UserService {
 	public List<ApplyVO> mainApplyWaitList(int userNo) throws Exception {
 		
 		return dao.mainApplyWaitList(userNo);
+	}
+
+	@Override
+	public void goalInsert(GoalVO gVo) throws Exception {
+		dao.goalInsert(gVo);
+		
+	}
+
+	@Override
+	public List<GoalVO> goalList(int userNo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.goalList(userNo);
+	}
+
+	@Override
+	public GoalVO goalRead(int goalNo) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.goalSelect(goalNo);
 	}
 	
 	//7. 비밀번호 체크

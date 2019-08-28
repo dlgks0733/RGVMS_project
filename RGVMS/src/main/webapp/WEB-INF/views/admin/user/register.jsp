@@ -92,7 +92,7 @@ function validate(){
                         
                     <!-- start page title -->
 					<div class="row" style=" justify-content: center;">
-						<div class="col-7">
+						<div class="col-lg-7">
 							<div class="page-title-box">
 								<div class="page-title-right">
 									<ol class="breadcrumb m-0">

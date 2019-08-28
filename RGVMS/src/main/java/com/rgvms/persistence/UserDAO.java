@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.rgvms.domain.ApplyVO;
 import com.rgvms.domain.Criteria;
+import com.rgvms.domain.GoalVO;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
@@ -71,5 +72,14 @@ public interface UserDAO {
 	
 	// 18. 학생 :: 대시보드 - 최근 승인 대기 신청내역 3개 리스트
 	public List<ApplyVO> mainApplyWaitList(int userNo) throws Exception;
+	
+	// 19. 학생 :: MY PAGE - 내 목표 설정(등록)
+	public void goalInsert(GoalVO gVo) throws Exception;
+	
+	// 20. 학생 :: MY PAGE - 내 목표 리스트
+	public List<GoalVO> goalList(int userNo) throws Exception;
 
+	// 21. 학생 :: MY PAGE - 내 목표 상세보기
+	public GoalVO goalSelect(int goalNo) throws Exception;
+	
 }

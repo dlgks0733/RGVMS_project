@@ -41,7 +41,7 @@ public class AdminEstimationController {
 	@Inject
 	private ApplyService service;
 
-	private static Logger logger = LoggerFactory.getLogger(AdminApplyContorller.class);
+	private static Logger logger = LoggerFactory.getLogger(AdminApplyController.class);
 
 	// 관리자 :: 졸업인증신청 관리 - 신청 목록
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -171,6 +171,8 @@ public class AdminEstimationController {
 		// 워크북 생성
 		Workbook wb = new HSSFWorkbook();
 		Sheet sheet = wb.createSheet("졸업인증평가_" + tDTO.getUserNo() + "_" + tDTO.getUserName() + "_총점상세목록");
+		sheet.setColumnWidth((short)1, (short)5000);
+		sheet.setColumnWidth((short)3, (short)5000);
 		Row row = null;
 		// Row row1 = null;
 		Cell cell = null;

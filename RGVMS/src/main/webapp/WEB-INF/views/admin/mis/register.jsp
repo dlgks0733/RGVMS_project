@@ -136,10 +136,11 @@ body.loading {
 																<thead class="thead-light">
 																	<tr>
 																		<th class="all" style="width: 20px;">
-																			<div class="custom-control custom-checkbox">
+																			<!-- <div class="custom-control custom-checkbox">
 																				<input type="checkbox" class="custom-control-input" id="customCheck1" name="allChcek"> 																					
 																					<label class="custom-control-label" for="customCheck1">&nbsp;</label>
-																			</div>
+																			</div> -->
+																			<input type="checkbox" id="allCheck1" name="allCheck1">
 																		</th>
 																		<th>학년</th>
 																		<th>학번</th>
@@ -182,10 +183,11 @@ body.loading {
 																	<thead class="thead-light">
 																		<tr>
 																			<th class="all" style="width: 20px;">
-																				<div class="custom-control custom-checkbox">
+																				<!-- <div class="custom-control custom-checkbox">
 																					<input type="checkbox" class="custom-control-input" id="customCheck1" name="check2"> 
 																						<label class="custom-control-label" for="customCheck1">&nbsp;</label>
-																				</div>
+																				</div> -->
+																				<input type="checkbox" id="allCheck2" name="allCheck2">
 																			</th>
 																			<th>학년</th>
 																			<th>학번</th>
@@ -341,6 +343,7 @@ $(document).ready(
 					
 					$("#attList > tbody").append(row);
 					
+					$("#allCheck1").prop("checked", false);
 					
 					
 					
@@ -373,6 +376,9 @@ $(document).ready(
 								$(this).prop("checked", false);
 								tr.remove();
 								$("#stuList > tbody").append(row);
+								
+								$("#allCheck2").prop("checked", false);
+								
 							});
 				});
 		
@@ -427,5 +433,38 @@ $("#grade").change(function(){
 	}
 	
 });
-   </script>
+
+// allCheck1 Function
+$(document).ready(function(){
+    //최상단 체크박스 클릭
+    $("#allCheck1").click(function(){
+        //클릭되었으면
+        if($("#allCheck1").prop("checked")){
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=check]").prop("checked",true);
+            //클릭이 안되있으면
+        }else{
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[name=check]").prop("checked",false);
+        }
+    });
+});
+
+//allCheck2 Function
+$(document).ready(function(){
+    //최상단 체크박스 클릭
+    $("#allCheck2").click(function(){
+        //클릭되었으면
+        if($("#allCheck2").prop("checked")){
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=check2]").prop("checked",true);
+            //클릭이 안되있으면
+        }else{
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[name=check2]").prop("checked",false);
+        }
+    });
+});
+
+  </script>
 </html>

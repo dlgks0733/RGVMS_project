@@ -36,7 +36,11 @@ ul{
 	type="text/css" id="main-style-container" />
 
 </head>
-
+<style>
+#acDate { 
+  background-color: #fff;
+}
+</style>
 <body class="loading">
 	<div id="detached-topbar-placeholder"></div>
 	<!-- Begin page -->

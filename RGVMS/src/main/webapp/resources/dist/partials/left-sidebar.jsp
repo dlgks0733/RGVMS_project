@@ -53,14 +53,24 @@
                     </li>
                 </ul>
             </li>
-
-			<li class="side-nav-item">
-                <a href="/admin/estimation/list" class="side-nav-link">
+            
+            <li class="side-nav-item">
+                <a href="javascript: void(0);" class="side-nav-link">
                     <i class="dripicons-document"></i>
                     <span class="badge badge-success float-right"></span>
                     <span> 졸업인증평가 관리 </span>
+                    <span class="menu-arrow"></span>
                 </a>
+                <ul class="side-nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="/admin/estimation/list">졸업인증평가 관리</a>
+                    </li>
+                    <li>
+                        <a href="/admin/statistics/list">졸업인증 취득현황</a>
+                    </li>
+                </ul>
             </li>
+            
             <li class="side-nav-item">
                 <a href="javascript: void(0);" class="side-nav-link">
                     <i class="dripicons-view-apps"></i>

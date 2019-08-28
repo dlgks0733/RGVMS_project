@@ -84,7 +84,7 @@ text-align: center;
                                             <div class="col-sm-12 col-xl-3">
                                                 <div class="card shadow-none m-0 border-left">
                                                     <div class="card-body text-center">
-                                                        <i class="dripicons-user-group text-muted" style="font-size: 24px;"></i>
+                                                        <i class="mdi mdi-pencil-outline" style="font-size: 24px;"></i>
                                                         <h3><span><a href="/user/mypage/myScore">${totalDTO.subTotal}</a></span></h3>
                                                         <p class="text-muted font-15 mb-0">인증항목 총점</p>
                                                     </div>
@@ -95,8 +95,8 @@ text-align: center;
                                             <div class="col-sm-12 col-xl-3">
                                                 <div class="card shadow-none m-0 border-left">
                                                     <div class="card-body text-center">
-                                                    	<i class="mdi mdi-school" style="font-size: 24px;"></i>
-                                                        <h3><span><a href="/user/mypage/myScore">${totalDTO.misTotal}</a></span></h3>
+                                                    	<i class="mdi mdi-calendar-text-outline" style="font-size: 24px;"></i>
+                                                        <h3><span><a href="/user/mypage/myScore">${totalDTO.misTotal} / 200</a></span></h3>
                                                         <p class="text-muted font-15 mb-0">MIS 총점</p>
                                                     </div>
                                                 </div>
@@ -106,7 +106,7 @@ text-align: center;
                                                 <div class="card shadow-none m-0 border-left">
                                                     <div class="card-body text-center">
                                                     	<i class="mdi mdi-school" style="font-size: 24px;"></i>
-                                                        <h3><span><a href="/user/mypage/myScore">${totalDTO.total}</a></span></h3>
+                                                        <h3><span><a href="/user/mypage/myScore">${totalDTO.total} / 1200</a></span></h3>
                                                         <p class="text-muted font-15 mb-0">총점</p>
                                                     </div>
                                                 </div>

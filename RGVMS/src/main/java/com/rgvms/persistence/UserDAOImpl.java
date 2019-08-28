@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rgvms.domain.ApplyVO;
 import com.rgvms.domain.Criteria;
+import com.rgvms.domain.GoalVO;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
@@ -155,6 +156,24 @@ public class UserDAOImpl implements UserDAO {
 	public List<ApplyVO> mainApplyWaitList(int userNo) throws Exception {
 
 		return session.selectList(namespace + ".mainApplyWaitList", userNo);
+	}
+
+	@Override
+	public void goalInsert(GoalVO gVo) throws Exception {
+		session.insert(namespaceMyPage+".goalInsert", gVo);
+		
+	}
+
+	@Override
+	public List<GoalVO> goalList(int userNo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespaceMyPage+".goalList", userNo);
+	}
+
+	@Override
+	public GoalVO goalSelect(int goalNo) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespaceMyPage+".goalSelect", goalNo);
 	}
 
 	// 13. 비밀번호 체크

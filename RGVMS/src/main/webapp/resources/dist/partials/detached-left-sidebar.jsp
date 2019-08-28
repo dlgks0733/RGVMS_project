@@ -44,7 +44,10 @@
                     <a href="/user/mypage/myScore">내 점수</a>
                 </li>
                 <li>
-                        <a href="/user/mypage/myInfo">내 정보</a>
+                    <a href="/user/mypage/myInfo">내 정보</a>
+                </li>
+                <li>
+                    <a href="/user/mypage/myGoal">내 목표</a>
                 </li>
             </ul>
         </li>

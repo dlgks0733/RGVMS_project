@@ -24,12 +24,12 @@ import com.rgvms.service.ApplyService;
 
 @Controller
 @RequestMapping("admin/apply/*")
-public class AdminApplyContorller {
+public class AdminApplyController {
 
 	@Inject
 	private ApplyService service;
 
-	private static Logger logger = LoggerFactory.getLogger(AdminApplyContorller.class);
+	private static Logger logger = LoggerFactory.getLogger(AdminApplyController.class);
 
 	// 관리자 :: 졸업인증신청 관리 - 신청 목록
 	@RequestMapping(value = "/list", method = RequestMethod.GET)

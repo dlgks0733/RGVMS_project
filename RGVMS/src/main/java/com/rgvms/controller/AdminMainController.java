@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.rgvms.service.StatisticsService;
 import com.rgvms.service.UserService;
 
 @Controller
@@ -17,7 +18,9 @@ public class AdminMainController {
 	@Inject
 	private UserService service;
 	
-	private static Logger logger = LoggerFactory.getLogger(AdminApplyContorller.class);
+	@Inject StatisticsService sService;
+	
+	private static Logger logger = LoggerFactory.getLogger(AdminApplyController.class);
 	
 	@RequestMapping("/main")
 	public void main(Model model) throws Exception {
@@ -27,6 +30,8 @@ public class AdminMainController {
 		model.addAttribute("graduateToBeCount", service.graduateToBeCount());
 		
 		model.addAttribute("misList", service.misInfo());
+		
+		model.addAttribute("certList", sService.mainList());
 		
 		
 	}

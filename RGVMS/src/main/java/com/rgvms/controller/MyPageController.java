@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rgvms.domain.GoalVO;
 import com.rgvms.domain.UserVO;
 import com.rgvms.service.ApplyService;
 import com.rgvms.service.UserService;
 
 @Controller
 @RequestMapping("/user/mypage/*")
-public class myPageController {
+public class MyPageController {
 
 	@Inject
 	private UserService service;
@@ -27,7 +28,7 @@ public class myPageController {
 	@Inject
 	private ApplyService ApplyService;
 
-	private static Logger logger = LoggerFactory.getLogger(myPageController.class);
+	private static Logger logger = LoggerFactory.getLogger(MyPageController.class);
 	
 	//1. 내정보확인 페이지
 	@RequestMapping(value = "/myInfo", method=RequestMethod.GET)
@@ -80,5 +81,44 @@ public class myPageController {
 		model.addAttribute(ApplyService.esSelect(userNo));
 		model.addAttribute("acceptList", ApplyService.acceptList(userNo));
 	}
+	
+	// 5. 내 목표 - 리스트
+	@RequestMapping(value = "/myGoal", method = RequestMethod.GET)
+	public void myGoal(Model model, HttpServletRequest request) throws Exception{
+		logger.info("myGoal page....");
+		
+		HttpSession session = request.getSession();
+		UserVO uVo = (UserVO) session.getAttribute("login");
+		int userNo = uVo.getUserNo();
+		
+		model.addAttribute("goalList", service.goalList(userNo));
+		
+	}
+	
+	// 6. 내 목표 - 등록 페이지
+	@RequestMapping(value = "/myGoalRegister", method = RequestMethod.GET)
+	public void myGoalRegisterGET() throws Exception {
+		logger.info("myGoal RegisterGET.....");
+	}
+	
+	@RequestMapping(value = "/myGoalRegister", method = RequestMethod.POST)
+	public String myGoalRegisterPOST(GoalVO gVo, RedirectAttributes rttr) throws Exception {
+		logger.info("myGoal RegisterPOST.....");
+		
+		service.goalInsert(gVo);
+		
+		rttr.addFlashAttribute("msg", "처리가 완료되었습니다.");
+		
+		return "redirect:/user/mypage/myGoal";
+	}
+	
+	@RequestMapping(value = "/myGoalRead", method = RequestMethod.GET)
+	public void myGoalRead(@RequestParam("goalNo") int goalNo, Model model) throws Exception {
+		
+		logger.info("myGoalRead.....");
+		model.addAttribute(service.goalRead(goalNo));
+		
+	}
+	
 	
 }

@@ -24,7 +24,7 @@ public class UserMainController {
 	@Inject
 	private UserService userService;
 
-	private static Logger logger = LoggerFactory.getLogger(AdminApplyContorller.class);
+	private static Logger logger = LoggerFactory.getLogger(AdminApplyController.class);
 
 	@RequestMapping("/main")
 	public void main(HttpServletRequest request, Model model) throws Exception {

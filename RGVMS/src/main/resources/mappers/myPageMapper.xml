@@ -38,4 +38,57 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND user_pw = #{userPw}
 	</select> -->
 
+	<!-- 내 목표 설정(등록) -->
+	<insert id="goalInsert">
+		INSERT INTO TBL_GOAL(
+							 GOAL_NO
+						   , GOAL_NAME
+						   , GOAL_SCORE
+						   , RESOLUTION
+						   , USER_NO
+						   , TARGET_DATE
+						   )
+		VALUES(
+			   SEQ_GOAL.NEXTVAL
+			 , #{goalName}
+			 , #{goalScore}
+			 , #{resolution}
+			 , #{userNo}
+			 , #{targetDate}
+			 )
+	</insert>
+	
+	<!-- 목표 리스트 -->
+	<select id="goalList" resultType="com.rgvms.domain.GoalVO">
+		SELECT GOAL_NO
+			 , 100 - (TRUNC(TARGET_DATE - SYSDATE) + 1) AS "PROGRESS"
+     		 , TRUNC(TARGET_DATE - SYSDATE) + 1 AS "dDay"
+     		 , GOAL_NAME
+     		 , GOAL_STATE
+     		 , START_DATE
+     		 , RESOLUTION
+     		 , USER_NO
+     		 , TARGET_DATE
+     		 , END_DATE
+     	  FROM TBL_GOAL
+    	 WHERE USER_NO = #{userNo}
+    	 ORDER BY GOAL_NO DESC
+	</select>
+	
+	<!-- 목표 상세보기 -->
+	<select id="goalSelect" resultType="com.rgvms.domain.GoalVO">
+		SELECT GOAL_NO
+			 , 100 - (TRUNC(TARGET_DATE - SYSDATE) + 1) AS "PROGRESS"
+     		 , TRUNC(TARGET_DATE - SYSDATE) + 1 AS "dDay"
+     		 , GOAL_NAME
+     		 , GOAL_STATE
+     		 , START_DATE
+     		 , RESOLUTION
+     		 , USER_NO
+     		 , TARGET_DATE
+     		 , END_DATE
+     	  FROM TBL_GOAL
+     	 WHERE GOAL_NO = #{goalNo}
+	</select>
+
 </mapper>
