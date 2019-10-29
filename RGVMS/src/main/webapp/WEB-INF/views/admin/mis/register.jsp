@@ -401,7 +401,6 @@ $("#grade").change(function(){
 	
 	if(search == '4'){
 		tr4.show();
-		
 		//기존  3,2,1은 hide
 		tr3.hide();
 		tr2.hide();
