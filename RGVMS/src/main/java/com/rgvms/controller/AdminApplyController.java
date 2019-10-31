@@ -1,10 +1,7 @@
 package com.rgvms.controller;
 
-import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rgvms.domain.PageMaker;
 import com.rgvms.domain.SearchCriteria;
-import com.rgvms.domain.SubjectVO;
-import com.rgvms.domain.UserVO;
 import com.rgvms.service.ApplyService;
 
 @Controller

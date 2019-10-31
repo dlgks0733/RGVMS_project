@@ -29,7 +29,9 @@
 td, th{
 text-align: center;
 }
-
+body[data-layout=detached] .wrapper {
+    overflow: hidden !important;
+}
 </style>
     <body class="loading">
         <div id="detached-topbar-placeholder"></div>
