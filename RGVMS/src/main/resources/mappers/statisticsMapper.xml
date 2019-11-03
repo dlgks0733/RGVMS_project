@@ -8,14 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 'n'.toString()">
-				and S.SUB_NAME like '%' || #{keyword} || '%'
+				and S.SUB_NAME LIKE UPPER('%'||REPLACE(''|| #{keyword}|| '', ' ', '')||'%')
 			</if>
-			<if test="searchType == 'y'.toString()">
+			<!-- <if test="searchType == 'y'.toString()">
 				and A.AC_DATE like '%' || #{keyword} || '%'
 			</if>
 			<if test="searchType == 'g'.toString()">
 				and U.GRADE like '%' || #{keyword} || '%'
-			</if>
+			</if> -->
 		</if>
 	</sql>
 
@@ -61,6 +61,7 @@ SELECT S.SUB_NO
      , TBL_USER U
  WHERE A.SUB_NO(+) = S.SUB_NO
    AND A.USER_NO = U.USER_NO
+	<include refid="search"></include>
 GROUP BY S.SUB_NO
 ORDER BY CNT DESC)
 </select>

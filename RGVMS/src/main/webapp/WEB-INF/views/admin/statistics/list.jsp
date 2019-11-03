@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>RGVMS :: 졸업인증평가 목록</title>
+        <title>RGVMS :: 인증항목 취득현황 목록</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -59,10 +59,10 @@ text-align: center;
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="/admin/main">RGVMS</a></li>
-                                            <li class="breadcrumb-item active">졸업인증평가 목록</li>
+                                            <li class="breadcrumb-item active">인증항목 취득현황 목록</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">졸업인증평가</h4>
+                                    <h4 class="page-title">인증항목 취득현황</h4>
                                 </div>
                             </div>
                         </div>     
@@ -79,9 +79,10 @@ text-align: center;
                                             <form class="form-inline">
                                                     <div class="form-group mx-sm-3 mb-2">
                                                         <select class="custom-select" id="searchType" name="searchType">
+                                                        	<option value="" <c:out value="${cri.searchType == null?'selected':''}"/>>전체</option>
                                                             <option value="n" <c:out value="${cri.searchType eq 'n'?'selected':''}"/>>항목 명</option>
-                                                            <option value="g" <c:out value="${cri.searchType eq 'g'?'selected':''}"/>>학년</option>
-                                                            <option value="y" <c:out value="${cri.searchType eq 'y'?'selected':''}"/>>연도</option>
+                                                            <%-- <option value="g" <c:out value="${cri.searchType eq 'g'?'selected':''}"/>>학년</option>
+                                                            <option value="y" <c:out value="${cri.searchType eq 'y'?'selected':''}"/>>연도</option> --%>
                                                         </select>
                                                     </div>
                                                     <div class="form-group mb-2">

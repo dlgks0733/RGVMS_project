@@ -17,9 +17,8 @@
         <li class="side-nav-title side-nav-item">Navigation</li>
 
         <li class="side-nav-item">
-            <a href="javascript: void(0);" class="side-nav-link">
+            <a href="/user/main" class="side-nav-link">
                 <i class="dripicons-meter"></i>
-                <span class="badge badge-success float-right">3</span>
                 <span> Dashboards </span>
             </a>
         </li>
@@ -46,9 +45,9 @@
                 <li>
                     <a href="/user/mypage/myInfo">내 정보</a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="/user/mypage/myGoal">내 목표</a>
-                </li>
+                </li> -->
             </ul>
         </li>
 

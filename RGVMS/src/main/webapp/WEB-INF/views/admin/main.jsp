@@ -88,7 +88,7 @@
                                                 <div class="card shadow-none m-0 border-left">
                                                     <div class="card-body text-center">
                                                     	<i class="mdi mdi-school" style="font-size: 24px;"></i>
-                                                        <h3><span><a href="/admin/user/list">${graduateToBeCount} 명</a></span></h3>
+                                                        <h3><span><a href="/admin/estimation/list">${graduateToBeCount} 명</a></span></h3>
                                                         <p class="text-muted font-15 mb-0">졸업대상자 수</p>
                                                     </div>
                                                 </div>

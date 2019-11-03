@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>RGVMS :: 졸업인증신청 상세보기</title>
+        <title>RGVMS :: 졸업인증점수현황 상세보기</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -55,11 +55,11 @@ text-align: center;
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="/admin/main">RGVMS</a></li>
-                                            <li class="breadcrumb-item"><a href="/admin/estimation/list">졸업인증평가 목록</a></li>
-                                            <li class="breadcrumb-item active">졸업인증평가 상세보기</li>
+                                            <li class="breadcrumb-item"><a href="/admin/estimation/list">졸업인증점수 현황 목록</a></li>
+                                            <li class="breadcrumb-item active">졸업인증점수 상세보기</li>
                                         </ol>
                                     </div>
-                                    <h4 class="page-title">졸업인증평가 상세보기</h4>
+                                    <h4 class="page-title">졸업인증점수 상세보기</h4>
                                 </div>
                             </div>
                         </div>     

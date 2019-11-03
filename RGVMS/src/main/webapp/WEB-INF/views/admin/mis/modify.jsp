@@ -86,15 +86,15 @@ body.loading {
 										<div class="form-group row mb-3">
 											<label for="times" class="col-3 col-form-label">회차</label>
 											<div class="col-1">
-												<input type="text" class="form-control" name="times"
-													value="${misVO.times}">
+												<input type="text" class="form-control" name="times" id="times"
+													value="${misVO.times}" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>
 											</div>
 										</div>
 
 										<div class="form-group row mb-3">
 											<label for="title" class="col-3 col-form-label">제목</label>
 											<div class="col-3">
-												<input type="text" class="form-control" name="title"
+												<input type="text" class="form-control" name="title" id="title"
 													value="${misVO.title}">
 											</div>
 										</div>
@@ -112,22 +112,13 @@ body.loading {
 
 										<div class="form-group row mb-3">
 											<label for="grade" class="col-3 col-form-label">학년</label>
-											<div class="col-1">
+											<div class="col-2">
 												<select class="form-control" name="grade" id="grade">
-													<option value="all"
-														<c:out value="${UserVO.grade eq '4'? 'selectes':''}"/>
-														<c:out value="${UserVO.grade eq '3'? 'selectes':''}"/>
-														<c:out value="${UserVO.grade eq '2'? 'selectes':''}"/>
-														<c:out value="${UserVO.grade eq '1'? 'selectes':''}"/> >전체</option>
-													<option value="4"
-														<c:out value="${UserVO.grade eq '4'? 'selectes':''}"/>>4</option>
-													<option value="3"
-														<c:out value="${UserVO.grade eq '3'? 'selectes':''}"/>>3</option>
-													<option value="2"
-														<c:out value="${UserVO.grade eq '2'? 'selectes':''}"/>>2</option>
-													<option value="1"
-														<c:out value="${UserVO.grade eq '1'? 'selectes':''}"/>>1</option>
-
+													<option value="all">전체</option>
+													<option value="4">4</option>
+													<option value="3">3</option>
+													<option value="2">2</option>
+													<option value="1">1</option>
 												</select>
 											</div>
 										</div>
@@ -150,7 +141,7 @@ body.loading {
 																	<tr>
 																		<th class="all" style="width: 20px;">
 																			<div class="custom-control custom-checkbox">
-																				<input type="checkbox" id="check" name="check"> 
+																				<input type="checkbox" id="allCheck1" class="allCheck1" name="allCheck1"> 
 																					
 																			</div>
 																		</th>
@@ -166,7 +157,7 @@ body.loading {
 																	<c:forEach items="${stuOtherList}" var="uVo"
 																		varStatus="listStat">
 																		<tr class="stu${uVo.grade}">
-																			<td><input type="checkbox" name="check" value="${uVo.userNo}"  class="checkBox"></td>
+																			<td><input type="checkbox" name="check" value="${uVo.userNo}" class="checkBox"></td>
 																			<td class="tdGrade">${uVo.grade}</td>
 																			<td>${uVo.userNo}</td>
 																			<td>${uVo.userName}</td>
@@ -195,9 +186,8 @@ body.loading {
 																		<tr>
 																			<th class="all" style="width: 20px;">
 																				<div class="custom-control custom-checkbox">
-																					<input type="checkbox" class="custom-control-input"
-																						id="check2" name="check2"> <label
-																						class="custom-control-label" for="customCheck1">&nbsp;</label>
+																					<input type="checkbox" class="allCheck2"
+																						id="allCheck2" name="allCheck2">
 																				</div>
 																			</th>
 																			<!-- <th class="all">NO</th> -->
@@ -237,8 +227,7 @@ body.loading {
 										<div style="text-align: right;">
 											<button type="button" class="btn btn-danger">삭제</button>
 											<button type="button" class="btn btn-primary" id="btn_submit">수정</button>
-											<button type="button" onclick="location.href='list'"
-												class="btn btn-light">취소</button>
+											<button type="button" class="btn btn-light">목록</button>
 										</div>
 									</div>
 									<!-- end card body-->
@@ -341,7 +330,7 @@ body.loading {
 					
 					$("#attList > tbody").append(row);
 					
-					
+					$("#allCheck1").prop("checked", false);
 					
 					
 				})
@@ -373,6 +362,7 @@ body.loading {
 							$(this).prop("checked", false);
 							tr.remove();
 							$("#stuOtherList > tbody").append(row);
+							$("#allCheck2").prop("checked", false);
 							});
 						});
 	</script>
@@ -385,6 +375,12 @@ body.loading {
 		
 				console.log(formObj);
 		
+				$(".btn-light").on("click", function(){
+					formObj.attr("method", "get");
+					formObj.attr("action", "/admin/mis/list");
+					formObj.submit();
+				});
+				
 				//삭제
 				$(".btn-danger").on("click",function() {
 							formObj.attr("action", "/admin/mis/remove");
@@ -401,9 +397,34 @@ body.loading {
 					var chkbox = $(".checkBox2");
 				
 
+					var times = $("#times").val();
+					var title = $("#title").val();
+					var misDate = $("#misDate").val();
+					
+					if(times == "") {
+						alert("회차를 입력해주세요.");
+						document.getElementById("times").focus();
+						return false;
+					}
+					if(title == ""){
+						alert("제목을 입력해주세요.");
+						document.getElementById("title").focus();
+						return false;
+					}
+					if(misDate == ""){
+						alert("날짜를 입력해주세요.");
+						document.getElementById("misDate").focus();
+						return false;
+					}
+
 					for(i=0;i<chkbox.length;i++) {
 					        send_array[send_cnt] = chkbox[i].value;
 					        send_cnt++;
+					}
+					
+					if(send_cnt == 0){
+						alert("학생을 추가해주세요.");
+						return false;
 					}
 
 					$("#arrayUser").val(send_array);
@@ -417,6 +438,7 @@ body.loading {
  
 <script>
 
+//학년 체크 -> 학년 별 올 체크 기능 구현 (이한)
 $("#grade").change(function(){
 	
 	var search = $("#grade option:selected").val();
@@ -429,37 +451,123 @@ $("#grade").change(function(){
 	if(search == '4'){
 		tr4.show();
 		
+		// All Check 구현을 위한 name 변경 작업
+		tr4.find("input").attr("name", "check");
+		
 		//기존  3,2,1은 hide
 		tr3.hide();
+		tr3.find("input").attr("name", "hideCheck");
+		
 		tr2.hide();
+		tr2.find("input").attr("name", "hideCheck");
+		
 		tr1.hide();
+		tr1.find("input").attr("name", "hideCheck");
 	}else if(search == '3'){
 		tr3.show();
+		tr3.find("input").attr("name", "check");
 		
 		tr4.hide();
+		tr4.find("input").attr("name", "hideCheck");
+		
 		tr2.hide();
+		tr2.find("input").attr("name", "hideCheck");
+		
 		tr1.hide();
+		tr1.find("input").attr("name", "hideCheck");
 	}else if(search == '2'){
 		tr2.show();
+		tr2.find("input").attr("name", "check");
 		
 		tr4.hide();
+		tr4.find("input").attr("name", "hideCheck");
+		
 		tr3.hide();
+		tr3.find("input").attr("name", "hideCheck");
+		
 		tr1.hide();
+		tr1.find("input").attr("name", "hideCheck");
 	}else if(search == '1'){
 		tr1.show();
+		tr1.find("input").attr("name", "check");
 		
 		tr4.hide();
+		tr4.find("input").attr("name", "hideCheck");
+		
 		tr3.hide();
+		tr3.find("input").attr("name", "hideCheck");
+		
 		tr2.hide();
+		tr2.find("input").attr("name", "hideCheck");
 	}else if(search == 'all'){
 		
 		tr4.show();
+		tr4.find("input").attr("name", "check");
+		
 		tr3.show();
+		tr3.find("input").attr("name", "check");
+		
 		tr2.show();
+		tr2.find("input").attr("name", "check");
+		
 		tr1.show();
+		tr1.find("input").attr("name", "check");
 	}
 	
 });
+
+
+//allCheck1 Function
+$(document).ready(function(){
+    //최상단 체크박스 클릭
+    $("#allCheck1").click(function(){
+        //클릭되었으면
+        if($("#allCheck1").prop("checked")){
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=check]").prop("checked",true);
+            //클릭이 안되있으면
+        }else{
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[name=check]").prop("checked",false);
+        }
+    });
+});
+
+//allCheck2 Function
+$(document).ready(function(){
+    //최상단 체크박스 클릭
+    $("#allCheck2").click(function(){
+        //클릭되었으면
+        if($("#allCheck2").prop("checked")){
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            $("input[name=check2]").prop("checked",true);
+            //클릭이 안되있으면
+        }else{
+            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            $("input[name=check2]").prop("checked",false);
+        }
+    });
+});
+
+
+//회차 - 숫자만 입력 (이한)
+function onlyNumber(event){
+	event = event || window.event;
+	var keyID = (event.which) ? event.which : event.keyCode;
+	if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+		return;
+	else
+		return false;
+}
+// 회차 - 문자열 제거 (이한)
+function removeChar(event) {
+	event = event || window.event;
+	var keyID = (event.which) ? event.which : event.keyCode;
+	if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+		return;
+	else
+		event.target.value = event.target.value.replace(/[^0-9]/g, "");
+}
    </script>
 	
 </html>

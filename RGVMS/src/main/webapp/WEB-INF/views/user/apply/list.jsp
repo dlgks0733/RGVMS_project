@@ -1,7 +1,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -88,7 +88,7 @@ body[data-layout=detached] .wrapper {
                                                 	<c:if test="${!empty list}">
                                                     <c:forEach items="${list}" var="aVo" varStatus="listStat">
 	                                                    <tr>
-	                                                    	<td>${listStat.count}</td>
+	                                                    	<td>${(fn:length(list) - listStat.index)}</td>
 	                                                    	<td><a href='read?applyNo=${aVo.applyNo}'>
 	                                                    	${aVo.subName}</a></td>
 	                                                    	<td>

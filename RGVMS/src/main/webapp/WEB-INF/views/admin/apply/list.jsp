@@ -76,9 +76,10 @@ text-align: center;
                                             <form class="form-inline">
                                                     <div class="form-group mx-sm-3 mb-2">
                                                         <select class="custom-select" id="status-select" name="searchType">
+                                                        	<option value="" <c:out value="${cri.searchType == null?'selected':''}"/>>전체</option>
                                                             <option value="no" <c:out value="${cri.searchType eq 'no'?'selected':''}"/>>학번</option>
                                                             <option value="name" <c:out value="${cri.searchType eq 'name'?'selected':''}"/>>이름</option>
-                                                            <option value="nn" <c:out value="${cri.searchType eq 'nn'?'selected':''}"/>>학번 또는 이름</option>
+                                                            <%-- <option value="nn" <c:out value="${cri.searchType eq 'nn'?'selected':''}"/>>학번 또는 이름</option> --%>
                                                         </select>
                                                     </div>
                                                     <div class="form-group mb-2">
@@ -152,7 +153,7 @@ text-align: center;
 												<c:forEach begin="${pageMaker.startPage }"
 													end="${pageMaker.endPage }" var="idx">
 													<li class="page-item"
-														<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+														<c:out value="${pageMaker.cri.page == idx? 'class=page-item active':''}"/>>
 														<a class="page-link" href="list${pageMaker.makeSearch(idx)}">${idx}</a>
 													</li>
 												</c:forEach>

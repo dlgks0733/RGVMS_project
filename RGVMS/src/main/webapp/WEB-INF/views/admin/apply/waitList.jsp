@@ -92,7 +92,7 @@ text-align: center;
                                                 		<td>${aVo.userNo}
                                                 		</td>
                                                 		<td>${aVo.userName}</td>
-                                                		<td><a href='read?applyNo=${aVo.applyNo}'>${aVo.subName}</a></td>
+                                                		<td><a href='waitRead?applyNo=${aVo.applyNo}'>${aVo.subName}</a></td>
                                                 		<td>
                                                 		<fmt:formatDate value="${aVo.applyDate}" type="date" pattern="yyyy-MM-dd" var="applyDate" />
                                                 		${applyDate}

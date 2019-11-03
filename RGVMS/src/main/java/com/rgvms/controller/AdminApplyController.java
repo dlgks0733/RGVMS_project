@@ -55,25 +55,43 @@ public class AdminApplyController {
 	// 관리자 :: 졸업인증신청 관리 - 신청 승인
 	@RequestMapping(value = "/accept", method = RequestMethod.POST)
 	public String accept(@RequestParam("applyNo") int applyNo, @RequestParam("reason") String reason,
+			@RequestParam("mapping") String mapping,
 			@ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 		logger.info("Accept Apply");
 		service.accept(applyNo, reason);
 
 		rttr.addFlashAttribute("msg", "처리 완료되었습니다.");
+		
+		String url = "";
+		if(mapping.equals("list")) {
+			url = mapping;
+		}
+		if(mapping.equals("waitList")){
+			url = mapping;
+		}
 
-		return "redirect:/admin/apply/waitList";
+		return "redirect:/admin/apply/" + url;
 	}
 
 	// 관리자 :: 졸업인증신청 관리 - 신청 거절
 	@RequestMapping(value = "/deny", method = RequestMethod.POST)
 	public String deny(@RequestParam("applyNo") int applyNo, @RequestParam("reason") String reason,
+			@RequestParam("mapping") String mapping,
 			@ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 		logger.info("Deny Apply");
 		service.deny(applyNo, reason);
 
 		rttr.addFlashAttribute("msg", "처리 완료되었습니다.");
+		
+		String url = "";
+		if(mapping.equals("list")) {
+			url = mapping;
+		}
+		if(mapping.equals("waitList")) {
+			url = mapping;
+		}
 
-		return "redirect:/admin/apply/waitList";
+		return "redirect:/admin/apply/" + url;
 	}
 
 	// 관리자 :: 졸업인증신청 관리 - 승인대기 신청내역 목록
@@ -81,6 +99,16 @@ public class AdminApplyController {
 	public void waitList(Model model) throws Exception {
 		logger.info("Admin Apply WaitList");
 		model.addAttribute("waitList", service.waitList());
+		
+	}
+	
+	// 관리자 :: 졸업인증신청 관리 - 승인대기 신청 상세 조회
+	@RequestMapping(value = "/waitRead", method = RequestMethod.GET)
+	public void waitRead(@RequestParam("applyNo") int applyNo, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
+		logger.info("Admin Apply Wait Read Page..");
+		model.addAttribute(service.adApplyRead(applyNo));
+		logger.info("waitReadPage.fileVO: " + service.fileList(applyNo).size());
+		model.addAttribute("fileVO", service.fileList(applyNo));
 		
 	}
 

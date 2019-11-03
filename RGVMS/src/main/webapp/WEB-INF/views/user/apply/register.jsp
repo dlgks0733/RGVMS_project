@@ -87,18 +87,18 @@ ul{
 									<input type="hidden" name="userNo" id="userNo" value="${login.userNo}">
 										<div class="form-row">
 											<div class="form-group col-md-6">
-												<label for="inputEmail4" class="col-form-label">분류</label>
+												<label for="inputEmail4" class="col-form-label">분류</label><span class="text-danger">*</span>
 												 <input type="text" name="categ" id="categ" class="form-control" disabled="disabled">
 											</div>
 											<div class="form-group col-md-6">
-												<label for="inputPassword4" class="col-form-label">영역</label>
+												<label for="inputPassword4" class="col-form-label">영역</label><span class="text-danger">*</span>
 												<input type="text" name="area" id="area" class="form-control" disabled="disabled">
 											</div>
 										</div>
 
 										<div class="form-row">
 											<div class="form-group col-md-6">
-												<label for="inputEmail4" class="col-form-label">항목명</label>
+												<label for="inputEmail4" class="col-form-label">항목명</label><span class="text-danger">*</span>
 												<div class="input-group">
 													<input type="text" class="form-control" name="subName" id="subName" readonly="readonly" placeholder="항목명을 검색해주세요.">
 													<div class="input-group-append">
@@ -107,7 +107,7 @@ ul{
 												</div>
 											</div>
 											<div class="form-group col-md-6">
-												<label for="inputPassword4" class="col-form-label">점수</label>
+												<label for="inputPassword4" class="col-form-label">점수</label><span class="text-danger">*</span>
 												<input type="text" name="acScore" id="acScore" class="form-control" readonly="readonly">
 											</div>
 										</div>
@@ -124,7 +124,7 @@ ul{
 												 <input type="text" class="form-control" name="serialNum" id="serialNum" placeholder="자격증일 경우만 입력해주세요.">
 											</div>
                                                 <div class="form-group col-md-6">
-                                                    <label for="inputCity" class="col-form-label">취득일자</label>
+                                                    <label for="inputCity" class="col-form-label">취득일자</label><span class="text-danger">*</span>
                                                     <input type="text" name="acDate" id="acDate" class="form-control" data-provide="datepicker" readonly="readonly" data-date-autoclose="true">
                                                 </div>
 										</div>

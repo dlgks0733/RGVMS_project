@@ -63,10 +63,10 @@
                 </a>
                 <ul class="side-nav-second-level" aria-expanded="false">
                     <li>
-                        <a href="/admin/estimation/list">졸업인증평가 관리</a>
+                        <a href="/admin/estimation/list">졸업인증점수 현황</a>
                     </li>
                     <li>
-                        <a href="/admin/statistics/list">졸업인증 취득현황</a>
+                        <a href="/admin/statistics/list">인증항목 취득현황</a>
                     </li>
                 </ul>
             </li>

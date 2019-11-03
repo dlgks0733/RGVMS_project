@@ -81,15 +81,15 @@ body.loading {
 										<div class="form-group row mb-3">
 											<label for="times" class="col-3 col-form-label">회차</label>
 											<div class="col-1">
-												<input type="text" class="form-control" name="times"
-													placeholder="">
+												<input type="text" class="form-control" name="times" id="times"
+													placeholder="" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>
 											</div>
 										</div>
 
 										<div class="form-group row mb-3">
 											<label for="title" class="col-3 col-form-label">제목</label>
 											<div class="col-3">
-												<input type="text" class="form-control" name="title"
+												<input type="text" class="form-control" name="title" id="title"
 													placeholder="">
 											</div>
 										</div>
@@ -100,7 +100,7 @@ body.loading {
 											<div class="col-3">
 												<input type="text" class="form-control date"
 													name="misDate" data-toggle="date-picker"
-													data-single-date-picker="true">
+													data-single-date-picker="true" id="misDate">
 											</div>
 										</div>
 
@@ -289,10 +289,34 @@ $(document).ready(
 			var send_cnt = 0;
 			var chkbox = $(".checkBox2");
 			
+			var times = $("#times").val();
+			var title = $("#title").val();
+			var misDate = $("#misDate").val();
+			
+			if(times == "") {
+				alert("회차를 입력해주세요.");
+				document.getElementById("times").focus();
+				return false;
+			}
+			if(title == ""){
+				alert("제목을 입력해주세요.");
+				document.getElementById("title").focus();
+				return false;
+			}
+			if(misDate == ""){
+				alert("날짜를 입력해주세요.");
+				document.getElementById("misDate").focus();
+				return false;
+			}
 
 			for(i=0;i<chkbox.length;i++) {
 			        send_array[send_cnt] = chkbox[i].value;
 			        send_cnt++;
+			}
+			
+			if(send_cnt == 0){
+				alert("학생을 추가해주세요.");
+				return false;
 			}
 
 			$("#arrayUser").val(send_array);
@@ -303,6 +327,7 @@ $(document).ready(
 
 
 	<script>
+	
 		$(document).ready(function() {
 			
 			$("#detached-check input:radio").click(function() {
@@ -326,6 +351,8 @@ $(document).ready(
 					var td = tr.children();
 					
 					var userNo = $(this).val();
+					
+					
 					var grade = td.eq(1).text();
 					var id = td.eq(2).html();
 					var userName = td.eq(3).text();
@@ -344,7 +371,6 @@ $(document).ready(
 					$("#attList > tbody").append(row);
 					
 					$("#allCheck1").prop("checked", false);
-					
 					
 					
 				})
@@ -389,7 +415,7 @@ $(document).ready(
 
 <!-- 학년 체크 -->
 <script>
-
+// 학년 체크 -> 학년 별 올 체크 기능 구현 (이한)
 $("#grade").change(function(){
 	
 	var search = $("#grade option:selected").val();
@@ -401,34 +427,68 @@ $("#grade").change(function(){
 	
 	if(search == '4'){
 		tr4.show();
+		
+		// All Check 구현을 위한 name 변경 작업
+		tr4.find("input").attr("name", "check");
+		
 		//기존  3,2,1은 hide
 		tr3.hide();
+		tr3.find("input").attr("name", "hideCheck");
+		
 		tr2.hide();
+		tr2.find("input").attr("name", "hideCheck");
+		
 		tr1.hide();
+		tr1.find("input").attr("name", "hideCheck");
 	}else if(search == '3'){
 		tr3.show();
+		tr3.find("input").attr("name", "check");
 		
 		tr4.hide();
+		tr4.find("input").attr("name", "hideCheck");
+		
 		tr2.hide();
+		tr2.find("input").attr("name", "hideCheck");
+		
 		tr1.hide();
+		tr1.find("input").attr("name", "hideCheck");
 	}else if(search == '2'){
 		tr2.show();
+		tr2.find("input").attr("name", "check");
 		
 		tr4.hide();
+		tr4.find("input").attr("name", "hideCheck");
+		
 		tr3.hide();
+		tr3.find("input").attr("name", "hideCheck");
+		
 		tr1.hide();
+		tr1.find("input").attr("name", "hideCheck");
 	}else if(search == '1'){
 		tr1.show();
+		tr1.find("input").attr("name", "check");
 		
 		tr4.hide();
+		tr4.find("input").attr("name", "hideCheck");
+		
 		tr3.hide();
+		tr3.find("input").attr("name", "hideCheck");
+		
 		tr2.hide();
+		tr2.find("input").attr("name", "hideCheck");
 	}else if(search == 'all'){
 		
 		tr4.show();
+		tr4.find("input").attr("name", "check");
+		
 		tr3.show();
+		tr3.find("input").attr("name", "check");
+		
 		tr2.show();
+		tr2.find("input").attr("name", "check");
+		
 		tr1.show();
+		tr1.find("input").attr("name", "check");
 	}
 	
 });
@@ -464,6 +524,28 @@ $(document).ready(function(){
         }
     });
 });
+
+
+// 회차 - 숫자만 입력 (이한)
+function onlyNumber(event){
+	event = event || window.event;
+	var keyID = (event.which) ? event.which : event.keyCode;
+	if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+		return;
+	else
+		return false;
+}
+// 회차 - 문자열 제거 (이한)
+function removeChar(event) {
+	event = event || window.event;
+	var keyID = (event.which) ? event.which : event.keyCode;
+	if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+		return;
+	else
+		event.target.value = event.target.value.replace(/[^0-9]/g, "");
+}
+
+
 
   </script>
 </html>

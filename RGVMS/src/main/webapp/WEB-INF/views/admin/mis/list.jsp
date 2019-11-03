@@ -107,6 +107,7 @@ text-align: center;
 													</tr>
 												</thead>
 												<tbody>
+													<c:if test="${!empty list}">
 													<c:forEach items="${list}" var="misVO" varStatus="status">
 														<tr>
 															<td>${(pageMaker.totalCount - status.index) -  (pageMaker.cri.page-1) * 10 }</td>
@@ -117,6 +118,12 @@ text-align: center;
 															<td><fmt:formatDate pattern="yyyy-MM-dd" value ="${misVO.misRegdate}" /></td>
 														</tr>
 													</c:forEach>
+													</c:if>
+													<c:if test="${empty list}">
+														<tr>
+															<td colspan="4">내역이 없습니다.</td>
+														</tr>
+													</c:if>
 												</tbody>
 											</table>
 										</div>

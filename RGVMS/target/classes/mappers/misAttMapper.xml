@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM 
 			TBL_USER 
 		WHERE STATE = '재학'
-		ORDER BY GRADE
+		ORDER BY GRADE ASC, USER_NO ASC
 	
 	</select>
 	

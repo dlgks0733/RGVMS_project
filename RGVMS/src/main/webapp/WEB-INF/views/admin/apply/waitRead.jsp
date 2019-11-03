@@ -309,20 +309,20 @@ $(document).ready(function() {
 	console.log(formObj);
 
 	$(".btn-success").on("click", function() {
-		formObj.attr("action", "/admin/apply/accept?mapping=list");
+		formObj.attr("action", "/admin/apply/accept?mapping=waitList");
 		formObj.attr("method", "post");
 		formObj.submit();
 	});
 
 	$(".btn-danger").on("click", function() {
-		formObj.attr("action", "/admin/apply/deny?mapping=list");
+		formObj.attr("action", "/admin/apply/deny?mapping=waitList");
 		formObj.attr("method", "post");
 		formObj.submit();
 	});
 
 	$(".btn-primary").on("click", function() {
 		formObj.attr("method", "get");
-		formObj.attr("action", "/admin/apply/list");
+		formObj.attr("action", "/admin/apply/waitList");
 		formObj.submit();
 	});
 
