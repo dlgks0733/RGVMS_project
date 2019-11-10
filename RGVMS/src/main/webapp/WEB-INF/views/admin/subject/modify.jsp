@@ -95,13 +95,13 @@ function validate(){
 	}
 	
 	//안내사항 유효성 검사
-	if(guide == "") {
+	/* if(guide == "") {
 		
 		alert("안내사항을 적어주세요.");
 		$("#guide").focus();
 		
 		return false;
-	}
+	} */
 }
 </script>
 
@@ -239,7 +239,12 @@ function validate(){
 														<label for="example-textarea">추가 안내사항</label>
 														<textarea class="form-control" name="guide" id="example-textarea" id="guide"
 															rows="3">${subjectVO.guide}</textarea>
-														<input type="hidden" class="form-control" name="subNo" value="${subjectVO.subNo }">
+															
+														<input type="hidden" class="form-control" name="subNo" value="${subjectVO.subNo}">
+														<input type="hidden" class="form-control" name="page" value="${cri.page}">
+														<input type="hidden" class="form-control" name="perPageNum" value="${cri.perPageNum}">
+														<input type="hidden" class="form-control" name="searchType" value="${cri.searchType}">
+														<input type="hidden" class="form-control" name="keyword" value="${cri.keyword}">
 													</div>
 												</div>
 											</div>
@@ -247,7 +252,7 @@ function validate(){
 
 											<div class="row mt-4">
 												<div class="col-sm-6">
-													<a href="/admin/subject/list?searchType=${cri.searchType}&keyword=${cri.keyword}"
+													<a href="/admin/subject/list?subNo=${subjectVO.subNo}&searchType=${cri.searchType}&keyword=${cri.keyword}&page=${cri.page}"
 														class="btn text-muted d-none d-sm-inline-block btn-link font-weight-semibold">
 														<i class="mdi mdi-arrow-left"></i> 목록으로 돌아가기
 													</a>

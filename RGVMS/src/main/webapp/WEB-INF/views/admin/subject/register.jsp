@@ -93,13 +93,13 @@ function validate(){
 	}
 	
 	//안내사항 유효성 검사
-	if(guide == "") {
+	/* if(guide == "") {
 		
 		alert("안내사항을 입력해주세요.");
 		$("#guide").focus();
 		
 		return false;
-	}
+	} */
 }
 </script>
 

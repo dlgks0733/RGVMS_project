@@ -176,6 +176,10 @@ input.form-control[readonly], textarea.form-control[readonly] {
 															
 														<input type="hidden" class="form-control" name="regdate" value="${subjectVO.regdate }">
 														<input type="hidden" class="form-control" name="subNo" value="${subjectVO.subNo }">
+														<input type="hidden" class="form-control" name="page" value="${cri.page}">
+														<input type="hidden" class="form-control" name="perPageNum" value="${cri.perPageNum}">
+														<input type="hidden" class="form-control" name="searchType" value="${cri.searchType}">
+														<input type="hidden" class="form-control" name="keyword" value="${cri.keyword}">
 													</div>
 												</div>
 											</div>

@@ -48,12 +48,15 @@ function subRegister() {
 
 <!-- 개정안 부칙 팝업창띄우기 -->
 <script type="text/javascript">
-function popupOpen() {
+
+	var openWin;
+
+	function popupOpen() {
 	var popUrl = "revised.html";//팝업창에 출력될 페이지 URL
 	
 	var popOption = "width=450, height=500, resizable=no, scrollbars=yes, status=no;";//팝업창 옵션(optoin)
 
-		window.open(popUrl,"졸업인증제 개정안",popOption);
+		openWin = window.open(popUrl,"졸업인증제 개정안",popOption);
 }
 </script>
 
@@ -225,15 +228,20 @@ function popupOpen() {
 										</div>
 										<!-- 페이징처리 -->
 										
-										<div style="margin-top:2%;">
+										<!-- <div style="margin-top:2%;">
 											<a href="javascript:popupOpen();">
 											<button type="button" class="btn btn-outline-secondary mb-2">졸업인증제 개정안 부칙</button></a>
-										</div>
+										</div> -->
 										<div style="text-align: right;">
 											<button type="button" class="btn btn-primary mb-2" onclick="subRegister()">인증항목등록</button>
 										</div>
 									</form>
 									<!-- form -->
+									
+									<div style="margin-top:2%;">
+											<a href="javascript:popupOpen();">
+											<button type="button" class="btn btn-outline-secondary mb-2">졸업인증제 개정안 부칙</button></a>
+									</div>
 
 								</div>
 								<!-- end card-body-->
@@ -296,7 +304,19 @@ function popupOpen() {
 	var result = '${msg}';
 
 	if (result == 'SUCCESS') {
-		alert("처리가 완료되었습니다.");
+		alert("등록 완료되었습니다.");
+	}
+	
+	var result = '${msg}';
+	
+	if (result == 'MODIFY') {
+		alert("수정 완료되었습니다.");
+	}
+	
+	var result = '${msg}';
+	
+	if (result == 'REMOVE') {
+		alert("삭제 완료되었습니다.");
 	}
 	</script>
 
@@ -307,7 +327,7 @@ function popupOpen() {
 			$('#searchBtn').on(
 					"click",
 					function(event) {
-	
+			
 						self.location = "/admin/subject/list"
 							+ '${pageMaker.makeQuery(1)}'
 								+ "&searchType="

@@ -60,7 +60,6 @@ public class SubjectController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
-		
 		pageMaker.setTotalCount(service.listSearchCount(cri));
 		
 		model.addAttribute("pageMaker", pageMaker);
@@ -81,6 +80,9 @@ public class SubjectController {
 
 		logger.info("subject modifyGET....");
 		model.addAttribute(service.read(subNo));
+		model.addAttribute("cri", cri);
+		
+		logger.info(cri.toString());
 	}
 
 	//6. 인증항목 수정
@@ -91,11 +93,13 @@ public class SubjectController {
 		logger.info(cri.toString());
 
 		service.modify(sVo);
-
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 
-		rttr.addFlashAttribute("msg", "SUCCESS");
+		rttr.addFlashAttribute("msg", "MODIFY");
 
 		logger.info(rttr.toString());
 
@@ -112,11 +116,13 @@ public class SubjectController {
 		logger.info("subject removePOST..............");
 
 		service.remove(subNo);
-
-		rttr.addAttribute("SearchType", cri.getSearchType());
+		
+		rttr.addAttribute("page", cri.getPage());
+		rttr.addAttribute("perPageNum", cri.getPerPageNum());
+		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 
-		rttr.addFlashAttribute("msg", "SUCCESS");
+		rttr.addFlashAttribute("msg", "REMOVE");
 
 		return "redirect:/admin/subject/list";
 	}
