@@ -20,7 +20,7 @@ import com.rgvms.service.ApplyService;
 @Controller
 @RequestMapping("admin/apply/*")
 public class AdminApplyController {
-
+	
 	@Inject
 	private ApplyService service;
 
