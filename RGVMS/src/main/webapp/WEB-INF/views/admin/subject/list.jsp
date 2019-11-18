@@ -107,7 +107,7 @@ function subRegister() {
 										<div class="col-lg-8">
 											<form class="form-inline">
 												<div class="form-group mx-sm-3 mb-2">
-													<label for="status-select" class="mr-2">분류</label> <select
+													 <select
 														class="custom-select" id="status-select" name="searchType">
 														<option value=""
 															<c:out value="${cri.searchType == null?'selected':''}"/>>

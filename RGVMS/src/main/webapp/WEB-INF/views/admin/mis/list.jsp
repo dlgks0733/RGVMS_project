@@ -138,8 +138,7 @@ text-align: center;
 												</c:if>
 												<c:forEach begin="${pageMaker.startPage }"
 													end="${pageMaker.endPage }" var="idx">
-													<li class="page-item"
-														<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+													<li class="page-item <c:out value="${pageMaker.cri.page == idx? 'class= active':''}"/>">
 														<a class="page-link" href="list${pageMaker.makeSearch(idx)}">${idx}</a>
 													</li>
 												</c:forEach>
