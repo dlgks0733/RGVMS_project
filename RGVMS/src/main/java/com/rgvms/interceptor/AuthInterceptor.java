@@ -1,7 +1,5 @@
 package com.rgvms.interceptor;
 
-import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,9 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.web.util.WebUtils;
-
-import com.rgvms.domain.UserVO;
 
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
@@ -52,7 +47,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
          saveDest(request);
 
-         response.sendRedirect("/user/login");
+         response.sendRedirect("/");
          return false;
       }
       return true;

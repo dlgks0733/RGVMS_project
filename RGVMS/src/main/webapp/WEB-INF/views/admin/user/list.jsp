@@ -173,7 +173,7 @@ function postRemove() {
 															<td>${userVO.userName}</td>
 															<td>${userVO.state}</td>
 															<td><a class="action-icon"
-																href='/admin/user/modify${pageMaker.makeSearch(pageMaker.cri.page) }&userNo=${userVO.userNo}'>
+																href='/admin/user/modify${pageMaker.makeSearch(pageMaker.cri.page)}&userNo=${userVO.userNo}'>
 																	<i class="mdi mdi-square-edit-outline"></i>
 															</a> <a class="action-icon" href="/admin/user/remove?userNo=${userVO.userNo}">
 																	<i class="mdi mdi-delete"></i></a></td>
@@ -204,8 +204,7 @@ function postRemove() {
 						
 													<c:forEach begin="${pageMaker.startPage }"
 														end="${pageMaker.endPage }" var="idx">
-														<li class="page-item"
-															<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+														<li class="page-item <c:out value="${pageMaker.cri.page == idx? 'class= active':''}"/>">
 															<a class="page-link" href="/admin/user/list${pageMaker.makeSearch(idx)}">${idx}</a>
 														</li>
 													</c:forEach>
@@ -295,5 +294,20 @@ function postRemove() {
 		});
 
 	});
+	
+	var result = '${msg}';
+
+	if (result == 'SUCCESS') {
+		alert("학번: ${uVo.userNo} 이름: ${uVo.userName} \n등록되었습니다.");
+	}
+	
+	if (result == 'MODIFY') {
+		alert("학번: ${uVo.userNo} 이름: ${uVo.userName} \n수정되었습니다.");
+		
+	}
+	
+	if (result == 'REMOVE') {
+		alert("삭제되었습니다.");
+	}
 </script>
 </html>

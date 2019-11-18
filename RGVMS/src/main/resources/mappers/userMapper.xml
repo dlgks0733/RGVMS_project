@@ -48,9 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update">
 		UPDATE
 		TBL_USER
-		SET user_No = #{userNo}, grade = #{grade}, user_Name = #{userName},
-			state = #{state}, user_Pw = #{userPw}, authority = #{authority},
-			reg_num = #{regNum}
+		SET grade = #{grade}, user_Name = #{userName},
+			state = #{state}
 		WHERE user_No = #{userNo}
 	</update>
 	
@@ -207,6 +206,13 @@ SELECT A.APPLY_NO
    AND A.USER_NO = #{applyNo}
 ORDER BY A.APPLY_NO DESC
 ]]>
+</select>
+
+
+<select id="checkUserNo" resultType="int">
+SELECT COUNT(*)
+  FROM TBL_USER
+ WHERE user_no = #{userNo}
 </select>
 
 </mapper>

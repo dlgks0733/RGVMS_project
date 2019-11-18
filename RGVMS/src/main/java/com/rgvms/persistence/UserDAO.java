@@ -82,4 +82,7 @@ public interface UserDAO {
 	// 21. 학생 :: MY PAGE - 내 목표 상세보기
 	public GoalVO goalSelect(int goalNo) throws Exception;
 	
+	// 22. 관리자:: 학생 등록 - 학번 중복검사 AJAX.
+	public int checkUserNo(int userNo) throws Exception;
+	
 }

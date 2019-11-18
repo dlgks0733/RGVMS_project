@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.rgvms.domain.Criteria;
 import com.rgvms.domain.PageMaker;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.domain.UserVO;
@@ -43,7 +43,8 @@ public class UserController {
 		
 		service.register(uVo);
 		
-		rttr.addAttribute("user", "SUCCESS");
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		rttr.addFlashAttribute("uVo", uVo);
 		
 		return "redirect:/admin/user/list";
 	}
@@ -70,7 +71,7 @@ public class UserController {
 	
 	//4. 사용자(학생) 수정폼으로 이동
 	@RequestMapping(value = "/modify", method=RequestMethod.GET)
-	public void modifyGET(@RequestParam("userNo") int userNo, Model model) throws Exception {
+	public void modifyGET(@RequestParam("userNo") int userNo, Model model, @ModelAttribute("cri") SearchCriteria cri) throws Exception {
 		
 		logger.info("user modifyGET...............");
 		model.addAttribute(service.read(userNo));
@@ -78,7 +79,7 @@ public class UserController {
 	
 	//5. 사용자(학생) 수정
 	@RequestMapping(value = "/modify", method=RequestMethod.POST)
-	public String modifyPOST(UserVO uVo, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+	public String modifyPOST(UserVO uVo, @ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 		
 		logger.info("user modifyPOST..............");
 		
@@ -89,7 +90,8 @@ public class UserController {
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		
-		rttr.addFlashAttribute("user", "SUCCESS");
+		rttr.addFlashAttribute("msg", "MODIFY");
+		rttr.addFlashAttribute("uVo", uVo);
 		
 		return "redirect:/admin/user/list";
 	}
@@ -107,8 +109,27 @@ public class UserController {
 		rttr.addAttribute("SearchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
 		
-		rttr.addFlashAttribute("user", "SUCCESS");
+		rttr.addFlashAttribute("msg", "REMOVE");
 		
 		return "redirect:/admin/user/list";
+	}
+	
+	//7. 관리자 :: 학생 등록 - 학번 중복체크 AJAX.
+	@RequestMapping(value = "/checkUserNo", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean checkUserNo(@RequestParam("userNo") int userNo) throws Exception {
+		logger.info("Check User No");
+		boolean check = false;
+		int count = service.checkUserNo(userNo);
+		
+		if(count == 0) {
+			check = true;
+		} else {
+			check = false;
+		}
+		
+		logger.info("Check Val : " + check);
+		
+		return check;
 	}
 }

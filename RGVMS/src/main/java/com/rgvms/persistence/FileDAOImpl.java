@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import com.rgvms.domain.FileVO;
 
-import oracle.net.aso.s;
 
 @Repository
 public class FileDAOImpl implements FileDAO {

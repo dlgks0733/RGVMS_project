@@ -5,7 +5,6 @@ import java.util.List;
 import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
-import com.rgvms.domain.UserVO;
 
 public interface MisDAO {
 

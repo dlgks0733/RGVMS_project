@@ -150,10 +150,8 @@ text-align: center;
 														href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }"><span aria-hidden="true">«</span>
                                                                 <span class="sr-only">Previous</span></a></li>
 												</c:if>
-												<c:forEach begin="${pageMaker.startPage }"
-													end="${pageMaker.endPage }" var="idx">
-													<li class="page-item"
-														<c:out value="${pageMaker.cri.page == idx? 'class=page-item active':''}"/>>
+												<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+													<li class="page-item <c:out value="${pageMaker.cri.page == idx? 'class= active':''}"/>">
 														<a class="page-link" href="list${pageMaker.makeSearch(idx)}">${idx}</a>
 													</li>
 												</c:forEach>

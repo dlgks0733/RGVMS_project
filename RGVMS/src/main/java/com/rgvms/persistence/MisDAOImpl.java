@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
-import com.rgvms.domain.UserVO;
 
 @Repository
 public class MisDAOImpl implements MisDAO {

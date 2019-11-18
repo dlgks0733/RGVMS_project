@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>관리자 페이지</title>
+<title>RGVMS :: 인증항목 목록</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
 	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
@@ -180,7 +180,7 @@ function subRegister() {
 															<td>${subjectVO.categ}</td>
 															<td>${subjectVO.area}</td>
 															<td><a
-															href='/admin/subject/modify?subNo=${subjectVO.subNo}'>
+															href='/admin/subject/modify${pageMaker.makeSearch(pageMaker.cri.page)}&subNo=${subjectVO.subNo}'>
 															${subjectVO.subName} </a></td>
 															<td>${subjectVO.score}</td>
 															<td>${subjectVO.publication}</td>
@@ -211,8 +211,7 @@ function subRegister() {
 						
 													<c:forEach begin="${pageMaker.startPage }"
 														end="${pageMaker.endPage }" var="idx">
-														<li class="page-item"
-															<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+														<li class="page-item <c:out value="${pageMaker.cri.page == idx? 'class= active':''}"/>">
 															<a class="page-link" href="/admin/subject/list${pageMaker.makeSearch(idx)}">${idx}</a>
 														</li>
 													</c:forEach>
@@ -238,10 +237,10 @@ function subRegister() {
 									</form>
 									<!-- form -->
 									
-									<div style="margin-top:2%;">
+									<!-- <div style="margin-top:2%;">
 											<a href="javascript:popupOpen();">
 											<button type="button" class="btn btn-outline-secondary mb-2">졸업인증제 개정안 부칙</button></a>
-									</div>
+									</div> -->
 
 								</div>
 								<!-- end card-body-->
@@ -304,19 +303,16 @@ function subRegister() {
 	var result = '${msg}';
 
 	if (result == 'SUCCESS') {
-		alert("등록 완료되었습니다.");
+		alert("항목: ${sVo.subName} 평가점수: ${sVo.score} \n등록되었습니다.");
 	}
-	
-	var result = '${msg}';
 	
 	if (result == 'MODIFY') {
-		alert("수정 완료되었습니다.");
+		alert("항목: ${sVo.subName} 평가점수: ${sVo.score} \n수정되었습니다.");
+		
 	}
 	
-	var result = '${msg}';
-	
 	if (result == 'REMOVE') {
-		alert("삭제 완료되었습니다.");
+		alert("삭제되었습니다.");
 	}
 	</script>
 

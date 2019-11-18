@@ -1,6 +1,5 @@
 package com.rgvms.persistence;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.rgvms.domain.ApplyVO;

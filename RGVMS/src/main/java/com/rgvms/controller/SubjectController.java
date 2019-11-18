@@ -43,6 +43,7 @@ public class SubjectController {
 		service.register(sVo);
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
+		rttr.addFlashAttribute("sVo", sVo);
 
 		return "redirect:/admin/subject/list";
 
@@ -65,27 +66,19 @@ public class SubjectController {
 		model.addAttribute("pageMaker", pageMaker);
 	}
 
-	// 4. 인증항목 상세내역 x
-	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public void read(@RequestParam("subNo") int subNo, Model model) throws Exception {
 
-		logger.info("subject readGET..................");
-		model.addAttribute(service.read(subNo));
-	}
-
-	// 5. 인증항목 수정폼으로 이동
+	// 4. 인증항목 수정폼으로 이동
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public void modifyGET(@RequestParam("subNo") int subNo, @ModelAttribute("cri") SearchCriteria cri, Model model)
 			throws Exception {
 
 		logger.info("subject modifyGET....");
 		model.addAttribute(service.read(subNo));
-		model.addAttribute("cri", cri);
 		
 		logger.info(cri.toString());
 	}
 
-	//6. 인증항목 수정
+	//5. 인증항목 수정
 	@RequestMapping(value = "/modify", method = RequestMethod.POST)
 	public String modifyPOST(SubjectVO sVo, @ModelAttribute("cri") SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 
@@ -94,13 +87,11 @@ public class SubjectController {
 
 		service.modify(sVo);
 		
-		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-		rttr.addAttribute("searchType", cri.getSearchType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-
+		
+		
 		rttr.addFlashAttribute("msg", "MODIFY");
-
+		rttr.addFlashAttribute("sVo", sVo);
+		
 		logger.info(rttr.toString());
 
 		return "redirect:/admin/subject/list";
@@ -108,7 +99,7 @@ public class SubjectController {
 	
 	
 
-	// 7. 인증항목 삭제
+	// 6. 인증항목 삭제
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public String remove(@RequestParam("subNo") int subNo, SearchCriteria cri, RedirectAttributes rttr)
 			throws Exception {
@@ -117,12 +108,8 @@ public class SubjectController {
 
 		service.remove(subNo);
 		
-		rttr.addAttribute("page", cri.getPage());
-		rttr.addAttribute("perPageNum", cri.getPerPageNum());
-		rttr.addAttribute("searchType", cri.getSearchType());
-		rttr.addAttribute("keyword", cri.getKeyword());
-
 		rttr.addFlashAttribute("msg", "REMOVE");
+		
 
 		return "redirect:/admin/subject/list";
 	}

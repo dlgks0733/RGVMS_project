@@ -78,5 +78,8 @@ public interface UserService {
 
 	// 21. 학생 :: MY PAGE - 내 목표 상세보기
 	public GoalVO goalRead(int goalNo) throws Exception;
+	
+	// 22. 관리자 :: 학생 등록 - 학번 중복체크 AJAX.
+	public int checkUserNo(int userNo) throws Exception;
 
 }

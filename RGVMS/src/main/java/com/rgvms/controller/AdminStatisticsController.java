@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.rgvms.domain.PageMaker;
 import com.rgvms.domain.SearchCriteria;
 import com.rgvms.dto.StatisticsDTO;
-import com.rgvms.dto.TotalDTO;
 import com.rgvms.service.StatisticsService;
 
 @Controller

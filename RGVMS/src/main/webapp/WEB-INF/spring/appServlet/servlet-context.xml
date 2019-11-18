@@ -44,9 +44,41 @@
 		</interceptor>
 
 		<interceptor>
-			<mapping path="/review/register" />
-			<mapping path="/review/modifyPage" />
-			<mapping path="/review/removePage" />
+		
+			<mapping path="/admin/main" />
+			
+			<mapping path="/admin/apply/list" />
+			<mapping path="/admin/apply/read" />
+			<mapping path="/admin/apply/waitList" />
+			<mapping path="/admin/apply/waitRead" />
+			
+			<mapping path="/admin/estimation/list" />
+			<mapping path="/admin/estimation/read" />
+			
+			<mapping path="/admin/mis/list" />
+			<mapping path="/admin/mis/modify" />
+			<mapping path="/admin/mis/register" />
+			
+			<mapping path="/admin/statistics/list" />
+			
+			<mapping path="/admin/subject/list" />
+			<mapping path="/admin/subject/modify" />
+			
+			<mapping path="/admin/user/list" />
+			<mapping path="/admin/user/modify" />
+			<mapping path="/admin/user/register" />
+			
+			<mapping path="/user/main" />
+			
+			<mapping path="/user/apply/list" />
+			<mapping path="/user/apply/read" />
+			<mapping path="/user/apply/register" />
+			
+			<mapping path="/user/mypage/myInfo" />
+			<mapping path="/user/mypage/myInfoUpdate" />
+			<mapping path="/user/mypage/myScore" />
+			
+			
 			<beans:ref bean="authInterceptor" />
 		</interceptor>
 

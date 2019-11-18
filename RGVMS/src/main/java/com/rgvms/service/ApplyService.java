@@ -1,6 +1,5 @@
 package com.rgvms.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.rgvms.domain.ApplyVO;

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.rgvms.domain.Criteria;
 import com.rgvms.domain.MisVO;
 import com.rgvms.domain.SearchCriteria;
-import com.rgvms.domain.UserVO;
 import com.rgvms.persistence.MisDAO;
 
 @Service

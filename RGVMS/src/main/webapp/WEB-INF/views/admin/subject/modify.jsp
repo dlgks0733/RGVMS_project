@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>관리자 페이지</title>
+<title>RGVMS :: 인증항목 수정</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta
 	content="A fully featured admin theme which can be used to build CRM, CMS, etc."
@@ -138,7 +138,7 @@ function validate(){
 										<li class="breadcrumb-item active">인증항목수정</li>
 									</ol>
 								</div>
-								<h4 class="page-title">인증항목등록</h4>
+								<h4 class="page-title">인증항목수정</h4>
 							</div>
 						</div>
 					</div>

@@ -160,6 +160,11 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return dao.goalSelect(goalNo);
 	}
+
+	@Override
+	public int checkUserNo(int userNo) throws Exception {
+		return dao.checkUserNo(userNo);
+	}
 	
 	//7. 비밀번호 체크
 	/*@Override

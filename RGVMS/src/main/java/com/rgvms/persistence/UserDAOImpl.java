@@ -1,8 +1,6 @@
 package com.rgvms.persistence;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -174,6 +172,11 @@ public class UserDAOImpl implements UserDAO {
 	public GoalVO goalSelect(int goalNo) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespaceMyPage+".goalSelect", goalNo);
+	}
+
+	@Override
+	public int checkUserNo(int userNo) throws Exception {
+		return session.selectOne(namespace + ".checkUserNo", userNo);
 	}
 
 	// 13. 비밀번호 체크

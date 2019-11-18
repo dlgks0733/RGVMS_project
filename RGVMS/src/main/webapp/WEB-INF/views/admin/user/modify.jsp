@@ -27,32 +27,12 @@
 function validate(){
 	
 	var userNo = $("#userNo").val();
-	/* var grade = $("#grade").val();
-	var state = $("#state").val(); */
 	var userName = $("#userName").val();
 	
 	//학번 유효성 검사
 	if(userNo == "") {
 		alert("학번을 입력해주세요.");
 		$("#userNo").focus();
-		
-		return false;
-	}
-	
-	//학년 셀렉박스 유효성 검사
-	if(frm.grade.value == "" 
-	){
-		alert("분류를 선택해주세요.");
-		$("#grade").focus();
-		
-		return false;
-	}
-	
-	//학적상태 셀렉박스 유효성 검사
-	if(frm.state.value == ""
-	){
-		alert("영역을 선택해주세요.");
-		$("#state").focus();
 		
 		return false;
 	}
@@ -113,12 +93,11 @@ function validate(){
 								<div class="card-body">
 									<h4 class="header-title mb-3">학생정보입력란</h4>
 
-									<form class="needs-validation" role="form">
+									<form role="form" onsubmit="return validate();">
 										<div class="form-group mb-3">
 											<label for="userNo">학번</label> <input
-												type="text" class="form-control" name="userNo" value="${userVO.userNo}"
-												placeholder="학번을 입력해주세요."/>
-											<div class="valid-feedback">확인!</div>
+												type="text" class="form-control" name="userNo" id="userNo" value="${userVO.userNo}"
+												placeholder="학번을 입력해주세요." readonly="readonly"/>
 										</div>
 										
 										<div class="box">
@@ -134,7 +113,6 @@ function validate(){
 												<option value="1"
 													<c:out value="${userVO.grade eq '1'?'selected':'' }"/>>1</option>		
 	                                            </select>
-												<div class="invalid-feedback">학년을 선택해주세요.</div>
 											</div>
 											<div class="form-group mb-3">
 												<label for="state">학적상태</label>
@@ -148,37 +126,29 @@ function validate(){
 												<option value="수료"
 													<c:out value="${userVO.state eq '수료'?'selected':'' }"/>>수료</option>	
 	                                            </select>
-												<div class="invalid-feedback">학년을 선택해주세요.</div>
 											</div>
 										</div>
 										
 										<div class="form-group mb-3">
 											<label for="userName">이름</label> <input
-												type="text" class="form-control" name="userName" value="${userVO.userName}"
+												type="text" class="form-control" name="userName" id="userName" value="${userVO.userName}"
 												placeholder="이름을 입력해주세요."/>
-											<div class="valid-feedback">확인!</div>
 										</div>
 
-										<input type="hidden" class="form-control" name="userPw" value="1234">
-										<input type="hidden" class="form-control" name="authority" value="0">
-										<input type="hidden" class="form-control" name="regNum" value="${userVO.regNum }">
-										
 										<!-- 페이징과 검색처리를 위한 파라미터값 -->
-										<%-- <input type='hidden' name='page' value="${cri.page}">
-										<input type='hidden' name='perPageNum' value="${cri.perPageNum}"> --%>
-										<input type='hidden' name='searchType' value="${cri.searchType}">
-										<input type='hidden' name='keyword' value="${cri.keyword}">
+										<input type="hidden" class="form-control" name="page" value="${cri.page}">
+										<input type="hidden" class="form-control" name="perPageNum" value="${cri.perPageNum}">
+										<input type="hidden" class="form-control" name="searchType" value="${cri.searchType}">
+										<input type="hidden" class="form-control" name="keyword" value="${cri.keyword}">
 										
 										<div class="row mt-4">
 												<div class="col-sm-6">
 													<a href="/admin/user/list?
-															searchType=${cri.searchType}&keyword=${cri.keyword}"
+															searchType=${cri.searchType}&keyword=${cri.keyword}&page=${cri.page}&perPageNum=${cri.perPageNum}"
 															class="btn text-muted d-none d-sm-inline-block btn-link font-weight-semibold">
 														<i class="mdi mdi-arrow-left"></i> 목록으로 돌아가기
 													</a>
 												
-												<!-- searchType=page=${cri.page}&perPageNum=${cri.perPageNum}
-															&searchType=${cri.searchType}&keyword=${cri.keyword} -->
 												
 												</div>
 												<!-- end col -->

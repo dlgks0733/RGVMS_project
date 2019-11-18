@@ -18,12 +18,12 @@
 
         <ul class="list-unstyled topbar-right-menu float-right mb-0">
 
-            <li class="dropdown notification-list">
+            <!-- <li class="dropdown notification-list">
                 <a class="nav-link right-bar-toggle" href="javascript: void(0);">
                     <i class="dripicons-gear noti-icon"></i>
                 </a>
-            </li>
-            <li class="dropdown notification-list topbar-dropdown d-none d-lg-block">
+            </li> -->
+            <!-- <li class="dropdown notification-list topbar-dropdown d-none d-lg-block">
                 <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" id="topbar-languagedrop" href="#"
                     role="button" aria-haspopup="true" aria-expanded="false">
                     <img src="/resources/dist/assets/images/flags/us.jpg" alt="user-image" class="mr-1" height="12"> <span
@@ -32,34 +32,34 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu"
                     aria-labelledby="topbar-languagedrop">
 
-                    <!-- item-->
+                    item
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <img src="/resources/dist/assets/images/flags/germany.jpg" alt="user-image" class="mr-1" height="12"> <span
                             class="align-middle">German</span>
                     </a>
 
-                    <!-- item-->
+                    item
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <img src="/resources/dist/assets/images/flags/italy.jpg" alt="user-image" class="mr-1" height="12"> <span
                             class="align-middle">Italian</span>
                     </a>
 
-                    <!-- item-->
+                    item
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <img src="/resources/dist/assets/images/flags/spain.jpg" alt="user-image" class="mr-1" height="12"> <span
                             class="align-middle">Spanish</span>
                     </a>
 
-                    <!-- item-->
+                    item
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <img src="/resources/dist/assets/images/flags/russia.jpg" alt="user-image" class="mr-1" height="12"> <span
                             class="align-middle">Russian</span>
                     </a>
 
                 </div>
-            </li>
+            </li> -->
 
-            <li class="dropdown notification-list">
+            <!-- <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" id="topbar-notifydrop"
                     role="button" aria-haspopup="true" aria-expanded="false">
                     <i class="dripicons-bell noti-icon"></i>
@@ -68,7 +68,7 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg"
                     aria-labelledby="topbar-notifydrop">
 
-                    <!-- item-->
+                    item
                     <div class="dropdown-item noti-title">
                         <h5 class="m-0">
                             <span class="float-right">
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="slimscroll" style="max-height: 230px;">
-                        <!-- item-->
+                        item
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <div class="notify-icon bg-primary">
                                 <i class="mdi mdi-comment-account-outline"></i>
@@ -90,7 +90,7 @@
                             </p>
                         </a>
 
-                        <!-- item-->
+                        item
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <div class="notify-icon bg-info">
                                 <i class="mdi mdi-account-plus"></i>
@@ -100,7 +100,7 @@
                             </p>
                         </a>
 
-                        <!-- item-->
+                        item
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <div class="notify-icon">
                                 <img src="/resources/dist/assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle" alt="" />
@@ -111,7 +111,7 @@
                             </p>
                         </a>
 
-                        <!-- item-->
+                        item
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <div class="notify-icon bg-primary">
                                 <i class="mdi mdi-comment-account-outline"></i>
@@ -121,7 +121,7 @@
                             </p>
                         </a>
 
-                        <!-- item-->
+                        item
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <div class="notify-icon">
                                 <img src="/resources/dist/assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle" alt="" />
@@ -132,7 +132,7 @@
                             </p>
                         </a>
 
-                        <!-- item-->
+                        item
                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                             <div class="notify-icon bg-info">
                                 <i class="mdi mdi-heart"></i>
@@ -144,17 +144,17 @@
                         </a>
                     </div>
 
-                    <!-- All-->
+                    All
                     <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
                         View All
                     </a>
 
                 </div>
-            </li>
+            </li> -->
             
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop"
-                    href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    href="#" role="button" aria-haspopup="true" aria-expanded="false" style="width: 170px;">
                     <span class="account-user-avatar">
                         <img src="/resources/dist/assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                     </span>
@@ -166,33 +166,33 @@
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
                     aria-labelledby="topbar-userdrop">
                     <!-- item-->
-                    <div class=" dropdown-header noti-title">
+                    <!-- <div class=" dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Welcome !</h6>
-                    </div>
+                    </div> -->
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="mdi mdi-account-circle mr-1"></i>
                         <span>My Account</span>
-                    </a>
+                    </a> -->
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="mdi mdi-account-edit mr-1"></i>
                         <span>Settings</span>
-                    </a>
+                    </a> -->
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="mdi mdi-lifebuoy mr-1"></i>
                         <span>Support</span>
-                    </a>
+                    </a> -->
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <!-- <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="mdi mdi-lock-outline mr-1"></i>
                         <span>Lock Screen</span>
-                    </a>
+                    </a> -->
 
                     <!-- item-->
                     <a href="/logout" class="dropdown-item notify-item">
@@ -211,7 +211,7 @@
                 <span></span>
             </div>
         </a>
-        <div class="app-search">
+        <!-- <div class="app-search">
             <form>
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search...">
@@ -221,7 +221,7 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div> -->
     </div>
 </div>
 <!-- end Topbar -->

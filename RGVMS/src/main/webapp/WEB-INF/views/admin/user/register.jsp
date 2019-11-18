@@ -68,6 +68,61 @@ function validate(){
 	
 	return true;
 }
+
+//학번 - 숫자만 입력 (이한)
+function onlyNumber(event){
+	event = event || window.event;
+	var keyID = (event.which) ? event.which : event.keyCode;
+	if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+		return;
+	else
+		return false;
+}
+//학번 - 문자열 제거 (이한)
+function removeChar(event) {
+	event = event || window.event;
+	var keyID = (event.which) ? event.which : event.keyCode;
+	if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+		return;
+	else
+		event.target.value = event.target.value.replace(/[^0-9]/g, "");
+}
+
+// 학번 - 중복검사 AJAX. (이한)
+function checkUserNo() {
+	var userNo = $("#userNo").val();
+	
+	if(userNo == ""){
+		alert("학번을 입력해주세요.");
+		$("#userNo").focus();
+		return false;
+	}
+	else{
+		$.ajax({
+			url: "checkUserNo?userNo="+userNo,
+			type: "GET",
+			success: function(data){
+				console.log(data);
+				if(data == false){
+					$("#invalid-feedback").css("display","inline");
+					$("#valid-feedback").css("display", "none");
+					$("#registerBtn").prop("disabled", "disabled");
+				}
+				if(data == true){
+					$("#invalid-feedback").css("display","none");
+					$("#valid-feedback").css("display", "inline");
+					$("#registerBtn").prop("disabled", "");
+				}
+			},
+			error: function(){
+				console.log("error");
+			}
+		});		
+	}	
+
+}
+
+
 </script>
 
 </head>
@@ -115,11 +170,28 @@ function validate(){
 									<h4 class="header-title mb-3">학생정보입력란</h4>
 
 									<form name="frm" method="post" onsubmit="return validate();">
+										<!-- <div class="form-group mb-3">
+											<div class="col-lg-4">
+											<label for="userNo">학번</label>
+											<input type="text" class="form-control" name="userNo" id="userNo" placeholder="학번을 입력해주세요." onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'/>
+											</div>
+											<div class="col-lg-3">
+											<input type="button" value="중복확인">
+											</div>
+											<div class="invalid-feedback" id="checkUserNo" style="display: none;">*중복된 학번입니다.</div>
+										</div>	 -->
+										
 										<div class="form-group mb-3">
-											<label for="userNo">학번</label> <input
-												type="text" class="form-control" name="userNo" id="userNo"
-												placeholder="학번을 입력해주세요."/>
-										</div>
+		                                      <label>학번</label>
+		                                      <div class="input-group">
+		                                          <input type="text" class="form-control" name="userNo" id="userNo" placeholder="학번을 입력해주세요." onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'/>
+		                                          <div class="input-group-append">
+		                                              <button class="btn btn-info" id="checkBtn" type="button" onclick="checkUserNo()">중복확인</button>
+		                                          </div>
+		                                      </div>
+		                                      <div class="invalid-feedback" id="invalid-feedback" style="display: none;">*이미 존재하는 학번입니다.</div>
+		                                      <div class="valid-feedback" id="valid-feedback" style="display: none;">*사용 가능한 학번입니다.</div>
+                                        </div>
 										
 										<div class="box">
 											<div class="form-group mb-3">
@@ -154,7 +226,7 @@ function validate(){
 										<input type="hidden" class="form-control" name="authority" value="0">
 										
 										<div class="text-sm-right">
-											<button class="btn btn-primary" type="submit">등록</button>
+											<button class="btn btn-primary" id="registerBtn" disabled="disabled" type="submit">등록</button>
 										</div>
 									</form>
 

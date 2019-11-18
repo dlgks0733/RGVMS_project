@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>사용자 페이지</title>
+<title>RGVMS :: 내정보</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
 <meta content="Coderthemes" name="author" />
@@ -28,7 +28,9 @@
 input.form-control[readonly], textarea.form-control[readonly] { 
   background-color: #fff;
 }
-</style>
+body[data-layout=detached] .wrapper {
+    overflow: hidden !important;
+}
 </style>
 </head>
 
@@ -79,29 +81,11 @@ input.form-control[readonly], textarea.form-control[readonly] {
 										<div class="box">
 											<div class="form-group mb-3">
 												<label for="grade">학년</label>
-												<select class="form-control select2" name="grade" id="gradeSelect">
-													<option value="4"
-														<c:out value="${userVO.grade eq '4'?'selected':'' }"/>>4</option>
-	                                                <option value="3"
-														<c:out value="${userVO.grade eq '3'?'selected':'' }"/>>3</option>
-													<option value="2"
-														<c:out value="${userVO.grade eq '2'?'selected':'' }"/>>2</option>
-													<option value="1"
-														<c:out value="${userVO.grade eq '1'?'selected':'' }"/>>1</option>
-	                                            </select>
+												<input type="text" class="form-control" readonly="readonly" value="${userVO.grade}">
 											</div>
 											<div class="form-group mb-3">
 												<label for="state">학적상태</label>
-												<select class="form-control select2" name="state" id="stateSelect">
-													<option value="재학"
-														<c:out value="${userVO.state eq '재학'?'selected':'' }"/>>재학</option>
-													<option value="휴학"
-														<c:out value="${userVO.state eq '휴학'?'selected':'' }"/>>휴학</option>
-													<option value="졸업"
-														<c:out value="${userVO.state eq '졸업'?'selected':'' }"/>>졸업</option>
-													<option value="수료"
-														<c:out value="${userVO.state eq '수료'?'selected':'' }"/>>수료</option>
-	                                            </select>
+												<input type="text" class="form-control" readonly="readonly" value="${userVO.state}">
 											</div>
 										</div>
 										
@@ -111,8 +95,6 @@ input.form-control[readonly], textarea.form-control[readonly] {
 												readonly="readonly"/>
 										</div>
 
-										<input type="hidden" class="form-control" name="userPw" value="1234">
-										<input type="hidden" class="form-control" name="authority" value="0">
 										
 										<div style="text-align: right;">
 											<button class="btn btn-primary" type="submit">내정보 수정하기</button>

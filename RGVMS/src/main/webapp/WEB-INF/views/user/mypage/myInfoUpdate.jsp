@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>사용자 페이지</title>
+<title>RGVMS :: 내정보</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
 <meta content="Coderthemes" name="author" />
@@ -42,20 +42,12 @@ div.mainPw input, i {
 <script type="text/javascript">
 function validate() {
 
-	var con = confirm("수정할 경우 로그아웃이 됩니다.");
-	
-	//수정 후, 로그아웃
-	if(con){
-	
 	var userPw = $("#userPw").val();
 	var userPwCnf = $("#userPwCnf").val();
-	/* var grade = $("#grade").val();
-	var state = $("#state").val(); */
 	var userName = $("#userName").val();
 	
 	// 패스워드가 적합한지 검사할 정규식
 	var re = /^[a-zA-Z0-9]{4,20}$/;
-	/* var reg_pwd = /^.*(?=.{4,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/; */
 	
 	//이름 유효성 검사
     if(userName == ""){
@@ -76,15 +68,7 @@ function validate() {
 		return false;
 	}
 	
-	//비밀번호 영문 대소문자, 숫자 유효성 검사
-	/* if(!check(re, userPw, "6자리 ~ 20자리 이내로 영문 대소문자와 숫자를 포함해주세요.")) {
-		
-		$("#userPw").value = "";
-		$("#userPwCnf").value = "";
-		
-		return false;
-	} */
-	
+
 	if(!/^(?=.*[a-zA-Z])(?=.*[0-9]).{6,20}$/.test(userPw)){
 		
 		alert("6자리 ~ 20자리 이내로 영문 대소문자와 숫자를 포함해주세요.");
@@ -102,7 +86,27 @@ function validate() {
 		$("#userPwCnf").focus();
 		
 		return false;
-	}
+	} 
+	
+	//수정 후, 로그아웃
+	/* if(con){
+	
+	return true;
+	
+	} else{
+		
+		return false;
+	} */
+	
+	con();
+}
+
+function con(){
+	
+	var con = confirm("수정할 경우 로그아웃이 됩니다.");
+	
+	//수정 후, 로그아웃
+	if(con){
 	
 	return true;
 	
@@ -110,7 +114,6 @@ function validate() {
 		
 		return false;
 	}
-	
 }
 
 /* function check(re, what, message) {
